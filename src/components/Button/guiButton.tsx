@@ -1,26 +1,27 @@
-import React from 'react';
-import {CircularProgress} from '@mui/material';
-import theme, {useGuiButtonStyles} from '../themes';
-import clsx from 'clsx';
-import {Button} from '@mui/material';
-import {ReactComponent as ButtonTopLeft} from '../img/shapes_btnadd_1.svg';
-import {ReactComponent as ButtonTopLeftLeft} from '../img/shapes_btnadd_2.svg';
-import {ReactComponent as ButtonTopRightRight} from '../img/shapes_btnadd_6.svg';
-import {ReactComponent as ButtonBottomLeftLeft} from '../img/shapes_btnadd_7.svg';
-import {ReactComponent as ButtonBottomRightRight} from '../img/shapes_btnadd_3.svg';
-import {ReactComponent as ButtonBottomLeft} from '../img/shapes_btnadd_8.svg';
-import {ReactComponent as ButtonBottomRight} from '../img/shapes_btnadd_5.svg';
-import {ReactComponent as ButtonTopRight} from '../img/shapes_btnadd_4.svg';
+import React from "react";
+import { CircularProgress } from "@mui/material";
+import theme, { useGuiButtonStyles } from "../../themes/themes";
+import clsx from "clsx";
+import { Button } from "@mui/material";
+import { ReactComponent as ButtonTopLeft } from "./../../img/shapes_btnadd_1.svg";
+import { ReactComponent as ButtonTopLeftLeft } from "./../../img/shapes_btnadd_2.svg";
+import { ReactComponent as ButtonTopRightRight } from "./../../img/shapes_btnadd_6.svg";
+import { ReactComponent as ButtonBottomLeftLeft } from "./../../img/shapes_btnadd_7.svg";
+import { ReactComponent as ButtonBottomRightRight } from "./../../img/shapes_btnadd_3.svg";
+import { ReactComponent as ButtonBottomLeft } from "./../../img/shapes_btnadd_8.svg";
+import { ReactComponent as ButtonBottomRight } from "./../../img/shapes_btnadd_5.svg";
+import { ReactComponent as ButtonTopRight } from "./../../img/shapes_btnadd_4.svg";
+import { IButtonClass, IButton } from "./button.interface";
 
 const GuiButton = ({
   children,
-  color = 'default',
+  color = "default",
   disabled,
   fullWidth,
   wrapperClassName,
   className,
   wrapperStyle = {},
-  type = 'button',
+  type = "button",
   style,
   variant,
   onClick,
@@ -29,11 +30,17 @@ const GuiButton = ({
   loading,
   tabIndex,
   ...props
-}) => {
+}: IButton) => {
   const classes = useGuiButtonStyles();
-  const possibleColors = ['default', 'primary', 'secondary', 'success', 'error'];
-  color = possibleColors.includes(color) ? color : 'default';
-  const button_class = {
+  const possibleColors = [
+    "default",
+    "primary",
+    "secondary",
+    "success",
+    "error",
+  ];
+  color = possibleColors.includes(color) ? color : "default";
+  const button_class: IButtonClass = {
     default: classes.button_default,
     primary: classes.button_primary,
     secondary: classes.button_secondary,
@@ -41,7 +48,7 @@ const GuiButton = ({
     error: classes.button_error,
     disabled: classes.button_disabled,
   };
-  const border_color = {
+  const border_color: IButtonClass = {
     default: theme.palette.primary.main,
     primary: theme.palette.primary.main,
     secondary: theme.palette.secondary.main,
@@ -51,7 +58,7 @@ const GuiButton = ({
   };
   return (
     <div
-      style={{width: fullWidth && '100%', ...wrapperStyle}}
+      style={{ width: fullWidth && "100%", ...wrapperStyle }}
       className={clsx(classes.button_wrapper, wrapperClassName)}
     >
       <Button
@@ -66,7 +73,7 @@ const GuiButton = ({
         className={clsx(
           className,
           classes.button,
-          disabled ? button_class['disabled'] : button_class[color]
+          disabled ? button_class["disabled"] : button_class[color]
         )}
       >
         {border && (
@@ -77,7 +84,7 @@ const GuiButton = ({
                 borderColor
                   ? borderColor
                   : disabled
-                  ? border_color['disabled']
+                  ? border_color["disabled"]
                   : border_color[color]
               }
             />
@@ -87,7 +94,7 @@ const GuiButton = ({
                 borderColor
                   ? borderColor
                   : disabled
-                  ? border_color['disabled']
+                  ? border_color["disabled"]
                   : border_color[color]
               }
             />
@@ -97,7 +104,7 @@ const GuiButton = ({
                 borderColor
                   ? borderColor
                   : disabled
-                  ? border_color['disabled']
+                  ? border_color["disabled"]
                   : border_color[color]
               }
             />
@@ -107,7 +114,7 @@ const GuiButton = ({
                 borderColor
                   ? borderColor
                   : disabled
-                  ? border_color['disabled']
+                  ? border_color["disabled"]
                   : border_color[color]
               }
             />
@@ -117,17 +124,20 @@ const GuiButton = ({
                 borderColor
                   ? borderColor
                   : disabled
-                  ? border_color['disabled']
+                  ? border_color["disabled"]
                   : border_color[color]
               }
             />
             <ButtonBottomRightRight
-              className={clsx(classes.border, classes.bottom_right_right_border)}
+              className={clsx(
+                classes.border,
+                classes.bottom_right_right_border
+              )}
               fill={
                 borderColor
                   ? borderColor
                   : disabled
-                  ? border_color['disabled']
+                  ? border_color["disabled"]
                   : border_color[color]
               }
             />
@@ -137,7 +147,7 @@ const GuiButton = ({
                 borderColor
                   ? borderColor
                   : disabled
-                  ? border_color['disabled']
+                  ? border_color["disabled"]
                   : border_color[color]
               }
             />
@@ -147,7 +157,7 @@ const GuiButton = ({
                 borderColor
                   ? borderColor
                   : disabled
-                  ? border_color['disabled']
+                  ? border_color["disabled"]
                   : border_color[color]
               }
             />
