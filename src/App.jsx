@@ -1,14 +1,11 @@
-import React from 'react';
-import GuiButton from './components/Button';
+import React, {useState} from 'react';
+import AlertDialog from './components/AlertDialog/alertDialog';
 
 const App = () => {
+  const [open, openSet] = useState(true);
   return (
     <div>
-      <GuiButton color='primary'>Add new category</GuiButton>
-      <GuiButton color='secondary'>Add new category</GuiButton>
-      <GuiButton color='success'>Add new category</GuiButton>
-      <GuiButton color='error'>Add new category</GuiButton>
-      <GuiButton>Add new category</GuiButton>
+      <AlertDialog open={open} openSet={openSet} message='Are you sure?' heading='Delete' />
     </div>
   );
 };
