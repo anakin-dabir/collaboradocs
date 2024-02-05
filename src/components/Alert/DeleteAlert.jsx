@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Box} from '@mui/material';
-import GuiButton from '../Button';
+import GuiButton from '../GuiButton';
 import GuiDialog from './GuiDialog';
 import GuiTextField from '../TextField';
 import {ReactComponent as Divider} from './../../img/divider.svg';

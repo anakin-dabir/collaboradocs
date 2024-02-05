@@ -898,6 +898,8 @@ export const useGuiButtonStyles = makeStyles(() => ({
   button: {
     position: 'relative',
     background: 'none',
+    alignItems: 'center',
+    gap: '16px',
     border: 'none !important',
     boxShadow: 'none !important',
     clipPath: `
@@ -914,6 +916,7 @@ export const useGuiButtonStyles = makeStyles(() => ({
   button_disabled: {
     color: `${theme.palette.grey[400]} !important`,
     backgroundColor: `${alpha(theme.palette.common.white, 0.1)} !important`,
+    pointerEvents: 'none',
   },
   button_default: {
     color: '#16DBDB',
@@ -1634,7 +1637,6 @@ export const useGuiTooltipStyles = makeStyles(() => ({
     right: 0,
   },
 }));
-
 
 export const useTabsStyles = makeStyles(() => ({
   selected: {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Typography} from '@mui/material';
 import GuiDialog from './GuiDialog';
-import GuiButton from '../Button/guiButton';
+import GuiButton from '../GuiButton';
 import {ReactComponent as Divider} from './../../img/divider.svg';
 
 export default function ConfirmAlert({isOpen, onClose, onConfirm, heading = 'Leave Page'}) {
