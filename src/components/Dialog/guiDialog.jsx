@@ -2,7 +2,6 @@ import React from 'react';
 import {Box, Dialog} from '@mui/material';
 import {useGuiDialogStyles} from '../../themes';
 import clsx from 'clsx';
-import {styled} from '@mui/styles';
 import {ReactComponent as ModuleTopLeft} from './../../img/module_top_left.svg';
 import {ReactComponent as ModuleTopRight} from './../../img/module_top_right.svg';
 import {ReactComponent as ModuleBottomRight} from './../../img/module_bottom_right.svg';
@@ -17,14 +16,14 @@ const GuiDialog = ({
   fullWidth,
   maxWidth,
   onClose,
-  open,
+  isOpen,
   dropShadow = true,
   ...props
 }) => {
   const dialogClasses = useGuiDialogStyles();
   return (
     <Dialog
-      open={open}
+      open={isOpen}
       fullScreen={fullScreen}
       onClose={(e, reason) => {
         if (reason === 'escapeKeyDown') return;
