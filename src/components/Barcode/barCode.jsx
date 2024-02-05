@@ -1,8 +1,7 @@
 import React from "react";
 import Barcode from "react-barcode";
-import { IBarCode } from "./barCode.interface";
 
-export default function BarCode({ value }: IBarCode) {
+export default function BarCode({ value }) {
   return (
     <Barcode
       value={value}

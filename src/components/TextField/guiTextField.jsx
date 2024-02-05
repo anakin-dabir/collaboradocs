@@ -1,13 +1,12 @@
-import React, { useState, useCallback } from "react";
-import { TextField } from "@mui/material";
-import theme, { useGuiTextFieldStyles } from "../../themes/themes";
-import clsx from "clsx";
-import { ReactComponent as TextFieldTopLeft } from "./../../img/textFieldTopLeft.svg";
-import { ReactComponent as TextFieldTopRight } from "./../../img/textFieldTopRight.svg";
-import { ReactComponent as TextFieldBottomRight } from "./../../img/textFieldBottomRight.svg";
-import { ReactComponent as TextFieldBottomCenter } from "./../../img/textFieldBottomCenter.svg";
-import { ReactComponent as TextFieldBottomCenter2 } from "./../../img/textFieldBottomCenter2.svg";
-import { ITextField } from "./textField.interface";
+import React, {useState, useCallback} from 'react';
+import {TextField} from '@mui/material';
+import theme, {useGuiTextFieldStyles} from '../../themes';
+import clsx from 'clsx';
+import {ReactComponent as TextFieldTopLeft} from './../../img/textFieldTopLeft.svg';
+import {ReactComponent as TextFieldTopRight} from './../../img/textFieldTopRight.svg';
+import {ReactComponent as TextFieldBottomRight} from './../../img/textFieldBottomRight.svg';
+import {ReactComponent as TextFieldBottomCenter} from './../../img/textFieldBottomCenter.svg';
+import {ReactComponent as TextFieldBottomCenter2} from './../../img/textFieldBottomCenter2.svg';
 
 const GuiTextField = ({
   id,
@@ -40,11 +39,11 @@ const GuiTextField = ({
   onChange,
   inputProps,
   ...props
-}: ITextField) => {
-  const [containerHeight, containerHeightSet] = useState<number>(0);
+}) => {
+  const [containerHeight, containerHeightSet] = useState(0);
   const [focused, focusedSet] = useState(false);
   const classes = useGuiTextFieldStyles();
-  const input_ref = useCallback((node: {node: any}) => {
+  const input_ref = useCallback(node => {
     if (!node) return;
     const inputEl = node.node || node;
     const containerEl = inputEl.parentNode;
@@ -151,11 +150,11 @@ const GuiTextField = ({
         )}
         size={size}
         SelectProps={{...SelectProps, MenuProps: {classes}}}
-        onFocus={(event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        onFocus={event => {
           focusedSet(true);
           if (onFocus) onFocus(event);
         }}
-        onBlur={(event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        onBlur={event => {
           focusedSet(false);
           if (onBlur) onBlur(event);
         }}

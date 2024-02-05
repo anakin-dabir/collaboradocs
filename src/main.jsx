@@ -33,9 +33,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <ThemeProvider theme={theme}>
       <GlobalCss />
       <CssBaseline />
-      <PageContainer>
-        <App />
-      </PageContainer>
+      <App />
     </ThemeProvider>
   </StyledEngineProvider>
 );
