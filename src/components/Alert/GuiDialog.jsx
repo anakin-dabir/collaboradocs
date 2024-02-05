@@ -1,11 +1,13 @@
 import React from 'react';
-import {Box, Dialog} from '@mui/material';
-import {useGuiDialogStyles} from '../../themes';
+import {Box, Dialog, DialogTitle, Stack, Typography} from '@mui/material';
+import {useGuiDialogStyles, useHeadingStyles} from '../../themes';
 import clsx from 'clsx';
 import {ReactComponent as ModuleTopLeft} from './../../img/module_top_left.svg';
 import {ReactComponent as ModuleTopRight} from './../../img/module_top_right.svg';
 import {ReactComponent as ModuleBottomRight} from './../../img/module_bottom_right.svg';
 import {ReactComponent as ModuleBottomLeft} from './../../img/module_bottom_left.svg';
+import {ReactComponent as DividerBoth} from './../../img/divider_both.svg';
+import {ReactComponent as WarningIcon} from './../../img/warning.svg';
 
 const GuiDialog = ({
   className,
@@ -18,16 +20,19 @@ const GuiDialog = ({
   onClose,
   isOpen,
   dropShadow = true,
+  closeOnClickAway = true,
+  heading = 'Leave Page',
   ...props
 }) => {
   const dialogClasses = useGuiDialogStyles();
+  const headingClasses = useHeadingStyles();
   return (
     <Dialog
       open={isOpen}
       fullScreen={fullScreen}
       onClose={(e, reason) => {
         if (reason === 'escapeKeyDown') return;
-        if (reason === 'backdropClick') return;
+        if (reason === 'backdropClick' && !closeOnClickAway) return;
         onClose();
       }}
       maxWidth={maxWidth}
@@ -48,7 +53,22 @@ const GuiDialog = ({
           className={clsx(dialogClasses.border, dialogClasses.bottom_right_border)}
         />
         <ModuleTopRight className={clsx(dialogClasses.border, dialogClasses.top_right_border)} />
-        <Box className={dialogClasses.content}>{children}</Box>
+        <Box className={dialogClasses.content}>
+          <DialogTitle>
+            <Stack direction='row' mb={1.5} mt={2} alignItems='center'>
+              <Box mr={1}>
+                <WarningIcon />
+              </Box>
+              <Box>
+                <Typography className={headingClasses.heading}>{heading}</Typography>
+              </Box>
+            </Stack>
+            <Box>
+              <DividerBoth style={{width: '100%'}} />
+            </Box>
+          </DialogTitle>
+          {children}
+        </Box>
       </Box>
     </Dialog>
   );

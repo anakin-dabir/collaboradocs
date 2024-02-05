@@ -1,13 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import {Box, DialogTitle, Typography, FormHelperText, Stack} from '@mui/material';
-import {useHeadingStyles} from '../../themes';
+import React, {useState} from 'react';
+import {Box} from '@mui/material';
 import GuiButton from '../Button';
-import GuiDialog from '../Dialog';
+import GuiDialog from './GuiDialog';
 import GuiTextField from '../TextField';
-import Clickable from '../Clickable';
-import {ReactComponent as DividerBoth} from './../../img/divider_both.svg';
 import {ReactComponent as Divider} from './../../img/divider.svg';
-import {ReactComponent as WarningIcon} from './../../img/warning.svg';
 
 const DeleteDialog = ({
   open,
@@ -23,7 +19,6 @@ const DeleteDialog = ({
 }) => {
   const [stepOne, stepOneSet] = useState(true);
   const [stepTwo, stepTwoSet] = useState(false);
-  const headingClasses = useHeadingStyles();
 
   // const name_schema = yup.object({
   //   name: yup
@@ -65,20 +60,8 @@ const DeleteDialog = ({
         open={open}
         maxWidth='sm'
         fullWidth
+        heading={title}
       >
-        <DialogTitle>
-          <Stack direction='row'>
-            <Box mr={2}>
-              <WarningIcon />
-            </Box>
-            <Box>
-              <Typography className={headingClasses.heading}>{title}</Typography>
-            </Box>
-          </Stack>
-          <Box>
-            <DividerBoth style={{width: '100%'}} />
-          </Box>
-        </DialogTitle>
         <form
         // onSubmit={formik.handleSubmit}
         >
@@ -137,32 +120,28 @@ const DeleteDialog = ({
             </Box>
             {multiStep && stepTwo && (
               <Box>
-                <Clickable>
-                  <GuiButton type='submit' variant='outlined'>
-                    Delete
-                  </GuiButton>
-                </Clickable>
+                <GuiButton type='submit' variant='outlined'>
+                  Delete
+                </GuiButton>
               </Box>
             )}
             {stepOne && (
               <Box>
-                <Clickable>
-                  <GuiButton
-                    variant='outlined'
-                    type={multiStep ? 'button' : 'submit'}
-                    onClick={() => {
-                      if (!multiStep) {
-                        handleDelete();
-                        deleteModalCloseHandle();
-                        return;
-                      }
-                      stepOneSet(false);
-                      stepTwoSet(true);
-                    }}
-                  >
-                    Delete
-                  </GuiButton>
-                </Clickable>
+                <GuiButton
+                  variant='outlined'
+                  type={multiStep ? 'button' : 'submit'}
+                  onClick={() => {
+                    if (!multiStep) {
+                      handleDelete();
+                      deleteModalCloseHandle();
+                      return;
+                    }
+                    stepOneSet(false);
+                    stepTwoSet(true);
+                  }}
+                >
+                  Delete
+                </GuiButton>
               </Box>
             )}
           </Box>

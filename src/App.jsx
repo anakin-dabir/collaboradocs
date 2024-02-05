@@ -1,17 +1,16 @@
 import React, {useState} from 'react';
-import AlertDialog from './components/AlertDialog/AlertBox';
-import AppDrawer from './components/AppDrawer/appDrawer';
-import GuiBox from './components/Box';
-import GuiCheckbox from './components/Checkbox/guiCheckbox';
-import GuiChip from './components/Chip/guiChip';
-import ConfirmDialog from './components/ConfirmDialog/confirmDialog';
-import DeleteDialog from './components/DeleteDialog/deleteDialog';
+import SimpleAlert from './components/Alert/SimpleAlert';
+import ConfirmAlert from './components/Alert/ConfirmAlert';
 
 const App = () => {
   const [open, openSet] = useState(true);
   return (
     <div className='bg-black h-screen pt-10 pl-10'>
-      <AlertDialog isOpen={true} isOpenSet={() => openSet(false)} />
+      <ConfirmAlert
+        isOpen={open}
+        onClose={() => openSet(false)}
+        onConfirm={() => console.log('Left ..')}
+      />
     </div>
   );
 };

@@ -1635,21 +1635,6 @@ export const useGuiTooltipStyles = makeStyles(() => ({
   },
 }));
 
-export const useClickableStyles = makeStyles(() => ({
-  grow: {
-    transition: 'all .1s ease-in-out',
-    cursor: 'pointer',
-    width: 'fit-content',
-    display: 'flex',
-    '&:hover': {
-      transform: 'scale(1.1)',
-      zIndex: 1,
-    },
-    '& *': {
-      cursor: 'pointer',
-    },
-  },
-}));
 
 export const useTabsStyles = makeStyles(() => ({
   selected: {
