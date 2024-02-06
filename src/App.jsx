@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
-import {Stack} from '@mui/material';
+import {Stack, useTheme} from '@mui/material';
 import {ReactComponent as DividerBoth} from './img/divider_both.svg';
 import XButton from './components/XButton';
 import XStack from './components/XStack';
 import XTopbar from './components/XTopbar';
 import XSortIcon from './components/XSortIcon';
 import XToast from './components/XToast';
+import XCheckbox from './components/XCheckbox';
 
 const App = () => {
   const [open, openSet] = useState(false);
+  const theme = useTheme();
   const [loading, loadingSet] = useState(false);
   return (
     <>
@@ -29,8 +31,10 @@ const App = () => {
         <div className='mt-4 ml-10'>
           <XSortIcon down />
         </div>
+        <XCheckbox checked={open} onChange={() => openSet(pre => !pre)} />
+        <XCheckbox checked={loading} onChange={() => loadingSet(pre => !pre)} label='' />
       </div>
-      <XToast isOpen={open} onClose={() => openSet(false)} severity='info' />
+      <XToast isOpen={open} onClose={() => openSet(false)} severity='error' />
     </>
   );
 };

@@ -37,13 +37,15 @@ const XToast = ({
     if (isOpen) {
       const timer = setInterval(() => {
         progressSet(prevProgress => {
-          return prevProgress <= 0 ? 0 : prevProgress - 10;
+          const newProgress = prevProgress - 10;
+          return newProgress <= 0 ? 0 : newProgress;
         });
       }, 400);
       return () => {
-        progressSet(0);
         clearInterval(timer);
       };
+    } else {
+      progressSet(100);
     }
   }, [isOpen]);
   return (
@@ -55,7 +57,6 @@ const XToast = ({
         onClose={onClose}
         anchorOrigin={{vertical: 'top', horizontal: 'center'}}
         TransitionComponent={SlideTransition}
-        TransitionProps={{onExited: () => progressSet(100)}}
       >
         <Box
           sx={{
