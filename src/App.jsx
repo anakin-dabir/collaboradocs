@@ -17,7 +17,7 @@ const App = () => {
     <>
       {/* <XTopbar /> */}
       <div className=' h-screen pt-10 bg-black/90 !shadow-2xl'>
-        <div className='ml-20'>
+        <div className='ml-20 flex gap-10'>
           <XDateRangePicker selectedDate={selectedDate1} selectedDateSet={selectedDateSet1} />
           <XDatePicker selectedDate={selectedDate} selectedDateSet={selectedDateSet} />
         </div>
