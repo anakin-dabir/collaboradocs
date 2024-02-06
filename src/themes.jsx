@@ -532,12 +532,10 @@ export const theme = createTheme({
     MuiPickersPopper: {
       styleOverrides: {
         root: {
-          backgroundColor: 'rgba(7, 50, 79, 0.92) !important',
-          background: `
-                                  url(${menu_top_left}) top left,
-                                  url(${menu_top_right}) top right,
-                                  url(${menu_bottom_right}) bottom right,
-                                  url(${menu_bottom_left}) bottom left`,
+          background: `url(${menu_top_left}) top left,
+                       url(${menu_top_right}) top right,
+                       url(${menu_bottom_right}) bottom right,
+                       url(${menu_bottom_left}) bottom left rgba(7, 50, 79, 0.92)`,
           backgroundRepeat: 'no-repeat',
           clipPath: `polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)`,
         },
