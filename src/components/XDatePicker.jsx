@@ -19,7 +19,7 @@ export default function XDatePicker({
 }) {
   const [calenderOpen, calenderOpenSet] = useState(false);
   const [anchorEl, anchorElSet] = useState(null);
-
+  console.log(selectedDate);
   return (
     <div className={clsx('w-72', className)}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
