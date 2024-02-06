@@ -8,9 +8,7 @@ const App = () => {
   const [loading, loadingSet] = useState(false);
   return (
     <div className=' h-screen pt-10 pl-10 flex gap-2 bg-background-secondary'>
-      <div className='w-52'>
-        <SimpleAlert isOpen={true} />
-      </div>
+      <div className='w-52'></div>
     </div>
   );
 };

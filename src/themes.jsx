@@ -899,7 +899,8 @@ export const useGuiButtonStyles = makeStyles(() => ({
     position: 'relative',
     background: 'none',
     alignItems: 'center',
-    gap: '16px',
+    gap: '6px',
+    display: 'flex',
     border: 'none !important',
     boxShadow: 'none !important',
     clipPath: `
