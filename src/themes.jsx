@@ -123,7 +123,7 @@ export const theme = createTheme({
           polygon(
             12.5px 0,
             100% 0,
-            110% calc(100% - 15px),
+            110% calc(100% - 21px),
             calc(100% - 9px) 100%,
             0 130%,
             -100% 230%)`,
@@ -1614,11 +1614,16 @@ export const useGuiTooltipStyles = makeStyles(() => ({
     backgroundColor: colors.secondary_background,
     boxShadow: 'none',
     border: 'none',
-    color: theme.palette.primary.main,
-    textShadow: `0px 0px 6px ${theme.palette.primary.main}`,
+    color: theme.palette.error.light || theme.palette.primary.main,
+    // textShadow: `0px 0px 6px ${theme.palette.primary.main}`,
+  },
+  border_error: {
+    position: 'absolute',
+    fill: theme.palette.error.main,
   },
   border: {
     position: 'absolute',
+    // fill: '#18FFFF',
     filter: 'drop-shadow(0 0 10px #536DFE)',
   },
   top_left_border: {

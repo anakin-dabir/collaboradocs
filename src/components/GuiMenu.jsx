@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from 'react';
 import {
   Box,
   Grid,
@@ -8,22 +8,16 @@ import {
   Menu,
   MenuItem,
   Typography,
-} from "@mui/material";
-import {
-  useGuiTextFieldStyles,
-  useHeadingStyles,
-  useHebrewStyles,
-} from "../../themes/themes";
-import GuiTextField from "../../components/TextField";
-import GuiChip from "../../components/Chip";
-import GuiTooltip from "../Tooltip";
-import GuiBox from "../../components/Box";
-import { ReactComponent as ArrowDownIcon } from "./../../img/arrowDownIcon.svg";
-import { ReactComponent as SearchIcon } from "./../../img/searchIcon.svg";
-import { ReactComponent as CrossIcon } from "./../../img/crossIcon.svg";
-import { ReactComponent as CheckedIcon } from "./../../img/checked_icon.svg";
-import { IGuiMenu } from "./guiMenu.interface";
-import { IOption } from "../../types/options.interface";
+} from '@mui/material';
+import {useGuiTextFieldStyles, useHeadingStyles} from '../themes';
+import GuiTextField from './GuiTextField';
+import GuiChip from './Chip';
+import GuiTooltip from './GuiTooltip';
+import GuiBox from './Box';
+import {ReactComponent as ArrowDownIcon} from '../img/arrowDownIcon.svg';
+import {ReactComponent as SearchIcon} from '../img/searchIcon.svg';
+import {ReactComponent as CrossIcon} from '../img/crossIcon.svg';
+import {ReactComponent as CheckedIcon} from '../img/checked_icon.svg';
 
 export default function GuiMenu({
   options,
@@ -40,25 +34,23 @@ export default function GuiMenu({
   isUser = false,
   error = false,
   simpleBorder = false,
-  menuWidth = "22%",
-  textFieldClassName = "",
+  menuWidth = '22%',
+  textFieldClassName = '',
   rtl = false,
-  placeholder = "",
-  inputLabel = "",
-}: IGuiMenu) {
+  placeholder = '',
+  inputLabel = '',
+}) {
   const textFieldClasses = useGuiTextFieldStyles();
   const headingClasses = useHeadingStyles();
-  const hebrewClasses = useHebrewStyles();
-  const [localSelectedOption, localSelectedOptionSet] =
-    useState<IOption | null>(null);
-  const handleClick = (event: any) => {
+  const [localSelectedOption, localSelectedOptionSet] = useState(null);
+  const handleClick = event => {
     anchorElSet(event.currentTarget);
   };
   const handleClose = () => {
     anchorElSet(null);
-    searchSet("");
+    searchSet('');
   };
-  const handleListItemClick = (item: any) => {
+  const handleListItemClick = item => {
     localSelectedOptionSet(item);
     formik?.setFieldValue(name, item._id);
     selectedOptionSet?.(item._id);
@@ -68,21 +60,18 @@ export default function GuiMenu({
   };
   const handleDefaultOptionRemover = () => {
     localSelectedOptionSet(null);
-    formik?.setFieldValue(name, "");
-    selectedOptionSet?.("");
+    formik?.setFieldValue(name, '');
+    selectedOptionSet?.('');
   };
   useEffect(() => {
     if (!prefilledOption) return;
-    let name = "";
-    if (isSystemConstant)
-      name = options.find((el) => el.id === prefilledOption)?.value;
+    let name = '';
+    if (isSystemConstant) name = options.find(el => el.id === prefilledOption)?.value;
     else if (isUser) {
-      const option = options.find((el) => el._id === prefilledOption);
+      const option = options.find(el => el._id === prefilledOption);
       if (option)
-        name = option.lastName
-          ? `${option.firstName} ${option.lastName}`
-          : option.firstName;
-    } else name = options.find((el) => el._id === prefilledOption)?.name;
+        name = option.lastName ? `${option.firstName} ${option.lastName}` : option.firstName;
+    } else name = options.find(el => el._id === prefilledOption)?.name;
     if (name)
       localSelectedOptionSet({
         _id: prefilledOption,
@@ -91,42 +80,35 @@ export default function GuiMenu({
   }, [prefilledOption]);
   return (
     <>
-      <Box onClick={handleClick} position="relative">
-        {inputLabel && (
-          <InputLabel className={headingClasses.menu_label}>
-            {inputLabel}
-          </InputLabel>
-        )}
+      <Box onClick={handleClick} position='relative'>
+        {inputLabel && <InputLabel className={headingClasses.menu_label}>{inputLabel}</InputLabel>}
         <GuiTextField
-          autoComplete="off"
-          variant="outlined"
-          dir={rtl ? "rtl" : "ltr"}
+          autoComplete='off'
+          variant='outlined'
+          dir={rtl ? 'rtl' : 'ltr'}
           name={name}
           error={error}
           simpleBorder={simpleBorder}
           className={`${headingClasses.text_field_heading} ${textFieldClasses.border_off} ${textFieldClassName}`}
           inputProps={{
             startAdornment: localSelectedOption ? (
-              <InputAdornment position="start">
+              <InputAdornment position='start'>
                 {localSelectedOption.name.length > 15 ? (
-                  <GuiTooltip title={localSelectedOption.name} placement="top">
+                  <GuiTooltip title={localSelectedOption.name} placement='top'>
                     <Box>
                       <GuiChip
-                        label={localSelectedOption.name.slice(0, 15) + "..."}
+                        label={localSelectedOption.name.slice(0, 15) + '...'}
                         onDelete={handleDefaultOptionRemover}
                       />
                     </Box>
                   </GuiTooltip>
                 ) : (
-                  <GuiChip
-                    label={localSelectedOption.name}
-                    onDelete={handleDefaultOptionRemover}
-                  />
+                  <GuiChip label={localSelectedOption.name} onDelete={handleDefaultOptionRemover} />
                 )}
               </InputAdornment>
             ) : (
-              <InputAdornment position="start">
-                <Typography color="white">{placeholder}</Typography>
+              <InputAdornment position='start'>
+                <Typography color='white'>{placeholder}</Typography>
               </InputAdornment>
             ),
             endAdornment: (
@@ -137,7 +119,7 @@ export default function GuiMenu({
                       handleDefaultOptionRemover();
                       handleClose();
                     }}
-                    sx={{ padding: 0 }}
+                    sx={{padding: 0}}
                   >
                     <CrossIcon />
                   </IconButton>
@@ -150,7 +132,7 @@ export default function GuiMenu({
             readOnly: true,
             inputProps: {
               style: {
-                cursor: "pointer",
+                cursor: 'pointer',
               },
             },
           }}
@@ -176,14 +158,14 @@ export default function GuiMenu({
     `,
           },
         }}
-        MenuListProps={{ sx: { py: 0 } }}
+        MenuListProps={{sx: {py: 0}}}
       >
-        <GuiBox style={{ backgroundColor: "rgb(7,50,79)" }}>
+        <GuiBox style={{backgroundColor: 'rgb(7,50,79)'}}>
           <Box>
             <Box p={3}>
               <GuiTextField
                 value={search}
-                onChange={(e) => searchSet(e.target.value)}
+                onChange={e => searchSet(e.target.value)}
                 inputProps={{
                   endAdornment: (
                     <IconButton>
@@ -193,30 +175,22 @@ export default function GuiMenu({
                 }}
               />
             </Box>
-            <Box sx={{ maxHeight: "280px", overflowY: "auto" }} pb={3}>
+            <Box sx={{maxHeight: '280px', overflowY: 'auto'}} pb={3}>
               {options
-                .filter((el: any) => {
+                .filter(el => {
                   if (isSystemConstant)
-                    return el.value
-                      .toLowerCase()
-                      .includes(search.toLowerCase());
-                  else if (isUser)
-                    return el.email
-                      .toLowerCase()
-                      .includes(search.toLowerCase());
-                  else
-                    return el.name.toLowerCase().includes(search.toLowerCase());
+                    return el.value.toLowerCase().includes(search.toLowerCase());
+                  else if (isUser) return el.email.toLowerCase().includes(search.toLowerCase());
+                  else return el.name.toLowerCase().includes(search.toLowerCase());
                 })
-                .map((el: any) => {
-                  let name = "";
-                  let _id = "";
+                .map(el => {
+                  let name = '';
+                  let _id = '';
                   if (isSystemConstant) {
                     name = el.value;
                     _id = el.id;
                   } else if (isUser) {
-                    name = el.lastName
-                      ? `${el.firstName} ${el.lastName}`
-                      : el.firstName;
+                    name = el.lastName ? `${el.firstName} ${el.lastName}` : el.firstName;
                     _id = el._id;
                   } else {
                     name = el.name;
@@ -233,42 +207,32 @@ export default function GuiMenu({
                         })
                       }
                       sx={{
-                        width: "80%",
-                        margin: "auto",
-                        paddingBlock: "1.2rem",
+                        width: '80%',
+                        margin: 'auto',
+                        paddingBlock: '1.2rem',
                       }}
-                      className={
-                        _id === localSelectedOption?._id
-                          ? textFieldClasses.checked
-                          : ""
-                      }
+                      className={_id === localSelectedOption?._id ? textFieldClasses.checked : ''}
                     >
                       <Grid container>
                         <Grid item xs={10}>
                           {isUser ? (
-                            <GuiTooltip placement="left" title={el.email}>
+                            <GuiTooltip placement='left' title={el.email}>
                               <Box>{name.slice(0, 20)}...</Box>
                             </GuiTooltip>
                           ) : name.length > 20 ? (
-                            <GuiTooltip placement="left" title={name}>
+                            <GuiTooltip placement='left' title={name}>
                               <Box>
-                                <Typography fontSize={15} className={hebrewClasses.text}>
-                                  {name.slice(0, 20)}...
-                                </Typography>
+                                <Typography fontSize={15}>{name.slice(0, 20)}...</Typography>
                               </Box>
                             </GuiTooltip>
                           ) : (
                             <Box>
-                              <Typography fontSize={15} className={hebrewClasses.text}>
-                                {name}
-                              </Typography>
+                              <Typography fontSize={15}>{name}</Typography>
                             </Box>
                           )}
                         </Grid>
                         <Grid item xs={1}></Grid>
-                        <Box>
-                          {_id === localSelectedOption?._id && <CheckedIcon />}
-                        </Box>
+                        <Box>{_id === localSelectedOption?._id && <CheckedIcon />}</Box>
                       </Grid>
                     </MenuItem>
                   );
