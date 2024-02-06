@@ -8,7 +8,7 @@ import {ReactComponent as TextFieldBottomRight} from '../img/textFieldBottomRigh
 import {ReactComponent as TextFieldBottomCenter} from '../img/textFieldBottomCenter.svg';
 import {ReactComponent as TextFieldBottomCenter2} from '../img/textFieldBottomCenter2.svg';
 
-const XTextfield = ({
+const GuiTextField = ({
   id,
   size,
   value,
@@ -165,4 +165,4 @@ const XTextfield = ({
   );
 };
 
-export default XTextfield;
+export default GuiTextField;

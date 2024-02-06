@@ -1684,8 +1684,6 @@ export const useGuiChipStyles = makeStyles(() => ({
         0 6px
       )
     `,
-    marginRight: '8px',
-    marginBottom: '5px',
   },
   rootDisabled: {
     backgroundColor: theme.palette.grey[900],
@@ -1715,7 +1713,7 @@ export const useGuiChipStyles = makeStyles(() => ({
   },
   chip_container: {
     paddingInline: 10,
-    paddingBlock: 3,
+    paddingBlock: 4,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

@@ -1,44 +1,46 @@
-import React, { useState, KeyboardEvent } from "react";
-import { useSelector } from "react-redux";
-import { Box, Typography, InputAdornment, IconButton } from "@mui/material";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { DateRangePicker } from "@mui/x-date-pickers-pro";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { useHeadingStyles } from "../../themes/themes";
-import clsx from "clsx";
-import GuiTextField from "../TextField/guiTextField";
-import GuiCheckbox from "../Checkbox/guiCheckbox";
-import GuiButton from "../Button/guiButton";
-import { ReactComponent as FilterIcon } from "./../../img/filterIcon.svg";
-import { ReactComponent as CalendarIcon } from "./../../img/calendarIcon.svg";
-import { ReactComponent as CrossIcon } from "./../../img/crossIcon.svg";
-import menu_top_left from "./../../img/menu_top_left.svg";
-import menu_top_right from "./../../img/menu_top_right.svg";
-import menu_bottom_right from "./../../img/menu_bottom_right.svg";
-import menu_bottom_left from "./../../img/menu_bottom_left.svg";
-import { IPageHeader } from "./pageHeader.interface";
+import React, {useState, KeyboardEvent} from 'react';
+// import {useSelector} from 'react-redux';
+import {Box, Typography, InputAdornment, IconButton} from '@mui/material';
+import {LocalizationProvider} from '@mui/x-date-pickers';
+import {DateRangePicker} from '@mui/x-date-pickers-pro';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
+import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
+import {useHeadingStyles} from '../../themes';
+import clsx from 'clsx';
+import XTextfield from '../XTextfield';
+import XCheckbox from '../XCheckbox';
+import XButton from '../XButton';
+import {ReactComponent as FilterIcon} from './../../img/filterIcon.svg';
+import {ReactComponent as CalendarIcon} from './../../img/calendarIcon.svg';
+import {ReactComponent as CrossIcon} from './../../img/crossIcon.svg';
+import menu_top_left from './../../img/menu_top_left.svg';
+import menu_top_right from './../../img/menu_top_right.svg';
+import menu_bottom_right from './../../img/menu_bottom_right.svg';
+import menu_bottom_left from './../../img/menu_bottom_left.svg';
+import DividerBottom from './../../img/dividerBottom.png';
 
 function PageHeader({
-  title,
-  addBtnText,
+  title = 'Demo Title',
+  addBtnText = 'Demo Button',
   addBtnHandle,
   searchSet,
-  selectedDate,
+  selectedDate = ['12/11/2021', '12/11/2023'],
   selectedDateSet,
-  multipleFilters,
+  multipleFilters = false,
   searchPlaceholder,
   secondPlaceholder,
   pastPromo,
-  search="",
+  search = '',
   actions = true,
   stackBtn = false,
   stackBtnTexts,
-  stackBtnHandles
-}: IPageHeader) {
-  const { drawerOpen } = useSelector((state: any) => state.drawer);
+  stackBtnHandles,
+}) {
+  // const {drawerOpen} = useSelector(state => state.drawer);
+  const drawerOpen = true;
   const headingClasses = useHeadingStyles();
-  const [priceCalendarOpen, priceCalendarOpenSet] = useState<boolean>(false);
-  const handleSearchChange = (e: any) => {
+  const [priceCalendarOpen, priceCalendarOpenSet] = useState(false);
+  const handleSearchChange = e => {
     searchSet?.(e.target.value);
   };
   return (
@@ -58,7 +60,7 @@ function PageHeader({
             <img
               style={{width: '100%', marginBottom: '10px'}}
               className={clsx(headingClasses.position)}
-              src={require('./../../img/dividerBottom.png')}
+              src={DividerBottom}
               alt=''
             />
           </Box>
@@ -73,7 +75,7 @@ function PageHeader({
               }}
             >
               <Box sx={{width: '25%'}}>
-                <GuiTextField
+                <XTextfield
                   type='text'
                   value={search}
                   autoComplete='off'
@@ -128,7 +130,7 @@ function PageHeader({
                           ]);
                         }}
                         renderInput={() => (
-                          <GuiTextField
+                          <XTextfield
                             name='priceTimeFrame'
                             variant='outlined'
                             placeholder={secondPlaceholder}
@@ -140,7 +142,7 @@ function PageHeader({
                                   ].join('-')
                                 : ''
                             }
-                            onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => {
+                            onKeyDown={e => {
                               if (e.code === 'Backspace') selectedDateSet?.(['', '']);
                             }}
                             type='text'
@@ -154,7 +156,7 @@ function PageHeader({
                                   )}
                                   <IconButton
                                     onClick={() => {
-                                      priceCalendarOpenSet?.((prev: boolean) => !prev);
+                                      priceCalendarOpenSet?.(prev => !prev);
                                     }}
                                   >
                                     <CalendarIcon />
@@ -167,19 +169,19 @@ function PageHeader({
                       />
                     </LocalizationProvider>
                   </Box>
-                  <Box pr={10}>
-                    <GuiCheckbox
+                  {/* <Box pr={10}>
+                    <XCheckbox
                       value={pastPromo.value}
                       checked={pastPromo.checked}
                       onChange={pastPromo.onChange}
                     />
                     Show past promotions
-                  </Box>
+                  </Box> */}
                 </>
               )}
               {addBtnHandle && (
                 <Box>
-                  <GuiButton
+                  <XButton
                     style={{
                       paddingLeft: 40,
                       paddingRight: 40,
@@ -188,13 +190,13 @@ function PageHeader({
                     onClick={addBtnHandle}
                   >
                     {addBtnText}
-                  </GuiButton>
+                  </XButton>
                 </Box>
               )}
             </Box>
           </Box>
         )}
-        {stackBtnHandles && stackBtnTexts &&
+        {stackBtnHandles && stackBtnTexts && (
           <Box
             sx={{
               display: 'flex',
@@ -205,7 +207,7 @@ function PageHeader({
               marginTop: '-25px',
             }}
           >
-            <GuiButton
+            <XButton
               style={{
                 paddingLeft: 40,
                 paddingRight: 40,
@@ -214,8 +216,8 @@ function PageHeader({
               onClick={stackBtnHandles[0]}
             >
               {stackBtnTexts[0]}
-            </GuiButton>
-            <GuiButton
+            </XButton>
+            <XButton
               style={{
                 paddingLeft: 40,
                 paddingRight: 40,
@@ -224,9 +226,9 @@ function PageHeader({
               onClick={stackBtnHandles[1]}
             >
               {stackBtnTexts[1]}
-            </GuiButton>
+            </XButton>
           </Box>
-        }
+        )}
       </Box>
     </>
   );
