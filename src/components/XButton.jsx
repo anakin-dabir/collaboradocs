@@ -12,7 +12,7 @@ import {ReactComponent as ButtonBottomLeft} from '../img/shapes_btnadd_8.svg';
 import {ReactComponent as ButtonBottomRight} from '../img/shapes_btnadd_5.svg';
 import {ReactComponent as ButtonTopRight} from '../img/shapes_btnadd_4.svg';
 
-const GuiButton = ({
+const XButton = ({
   children,
   onClick,
   color = 'default',
@@ -160,4 +160,4 @@ const GuiButton = ({
   );
 };
 
-export default GuiButton;
+export default XButton;

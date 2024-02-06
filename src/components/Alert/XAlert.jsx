@@ -1,10 +1,10 @@
 import React from 'react';
 import {Box, Typography} from '@mui/material';
-import GuiDialog from './GuiDialog';
-import GuiButton from '../GuiButton';
 import {ReactComponent as Divider} from './../../img/divider.svg';
+import XButton from '../XButton';
+import XAlertBase from './XAlertBase';
 
-export default function SimpleAlert({
+export default function XAlert({
   isOpen,
   onClose,
   heading = 'Testing Alert',
@@ -13,7 +13,7 @@ export default function SimpleAlert({
 }) {
   return (
     <>
-      <GuiDialog onClose={onClose} open={isOpen} maxWidth='sm' fullWidth heading={heading}>
+      <XAlertBase onClose={onClose} open={isOpen} maxWidth='sm' fullWidth heading={heading}>
         <Box pl={3} pr={3} pb={7} pt={1}>
           <Typography>{message}</Typography>
         </Box>
@@ -22,12 +22,12 @@ export default function SimpleAlert({
         </Box>
         <Box display='flex' flexDirection='row' alignItems='center' justifyContent='right' p={3}>
           <Box>
-            <GuiButton variant='outlined' onClick={onClose}>
+            <XButton variant='outlined' onClick={onClose}>
               OK
-            </GuiButton>
+            </XButton>
           </Box>
         </Box>
-      </GuiDialog>
+      </XAlertBase>
     </>
   );
 }

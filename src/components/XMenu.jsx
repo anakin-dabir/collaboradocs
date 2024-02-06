@@ -19,7 +19,7 @@ import {ReactComponent as SearchIcon} from '../img/searchIcon.svg';
 import {ReactComponent as CrossIcon} from '../img/crossIcon.svg';
 import {ReactComponent as CheckedIcon} from '../img/checked_icon.svg';
 
-export default function GuiMenu({
+export default function XMenu({
   options,
   anchorEl,
   search,

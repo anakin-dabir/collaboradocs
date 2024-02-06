@@ -15,7 +15,7 @@ import switchTrack from './img/switchTrack.svg';
 import switch_checked_icon from './img/switch_checked_icon.svg';
 import switch_checked_track from './img/switch_checked_track.svg';
 import switch_disabled_track from './img/switch_disabled_track.svg';
-
+import '@fontsource/oxanium';
 const drawerWidth = 210;
 const appBarHeight = 64;
 
@@ -846,24 +846,20 @@ export const useAppStyles = makeStyles(() => ({
 
 export const useGuiSnackbarStyles = makeStyles(() => ({
   root: {
-    width: '31vw',
+    width: '25vw',
   },
   header: {
     background: 'rgb(6,47,74)',
   },
   progress: {
-    position: 'absolute',
-    bottom: '0.8px',
-    width: '98.5%',
-    padding: '8px',
-    display: 'flex',
-    justifyContent: 'center',
-    borderBottomLeftRadius: '5px',
-    borderBottomRightRadius: '5px',
+    padding: '4px',
   },
   closeIcon: {
     '& .MuiButtonBase-root': {
-      display: 'none',
+      // display: 'none',
+      position: 'absolute',
+      top: 17,
+      right: 10,
     },
   },
   border: {
@@ -871,7 +867,7 @@ export const useGuiSnackbarStyles = makeStyles(() => ({
   },
   top_center_border: {
     left: '38%',
-    top: '-11.2%',
+    top: '-11.4%',
   },
 }));
 
@@ -1355,6 +1351,9 @@ export const useGuiModuleStyles = makeStyles(() => ({
     backgroundColor: alpha(colors.secondary_background, 0.9),
     boxShadow: 'none',
     border: 'none',
+    filter: `drop-shadow(0px 0px 6px ${colors.primary_main})`,
+    // filter: 'drop-shadow(0 0 10px #536DFE)',
+    boxShadow: `1px 1px 10px ${colors.primary_main}`,
     clipPath: `
       polygon(
         12px 0,
@@ -1369,6 +1368,7 @@ export const useGuiModuleStyles = makeStyles(() => ({
   border: {
     position: 'absolute',
     filter: 'drop-shadow(0 0 10px #536DFE)',
+    fill: '#18FFFF',
   },
   top_left_border: {
     top: 0,

@@ -9,7 +9,7 @@ import {ReactComponent as ModuleBottomLeft} from './../../img/module_bottom_left
 import {ReactComponent as DividerBoth} from './../../img/divider_both.svg';
 import {ReactComponent as WarningIcon} from './../../img/warning.svg';
 
-const GuiDialog = ({
+const XAlertBase = ({
   className,
   style,
   fullScreen = false,
@@ -74,4 +74,4 @@ const GuiDialog = ({
   );
 };
 
-export default GuiDialog;
+export default XAlertBase;

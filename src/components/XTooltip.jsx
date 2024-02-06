@@ -8,7 +8,7 @@ import {ReactComponent as ModuleTopRight} from '../img/module_top_right.svg';
 import {ReactComponent as ModuleBottomRight} from '../img/module_bottom_right.svg';
 import {ReactComponent as ModuleBottomLeft} from '../img/module_bottom_left.svg';
 
-const GuiTooltip = ({
+const XTooltip = ({
   className = '',
   data = 'Random Testing tooltip',
   children,
@@ -65,4 +65,4 @@ const GuiTooltip = ({
   );
 };
 
-export default React.memo(GuiTooltip);
+export default React.memo(XTooltip);
