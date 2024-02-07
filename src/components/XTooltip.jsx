@@ -3,10 +3,10 @@ import Tooltip from '@mui/material/Tooltip';
 import {Box} from '@mui/material';
 import clsx from 'clsx';
 import {useGuiTooltipStyles} from '../themes';
-import {ReactComponent as ModuleTopLeft} from '../img/module_top_left.svg';
-import {ReactComponent as ModuleTopRight} from '../img/module_top_right.svg';
-import {ReactComponent as ModuleBottomRight} from '../img/module_bottom_right.svg';
-import {ReactComponent as ModuleBottomLeft} from '../img/module_bottom_left.svg';
+import {ReactComponent as ModuleTopLeft} from '../../public/module_top_left.svg';
+import {ReactComponent as ModuleTopRight} from '../../public/module_top_right.svg';
+import {ReactComponent as ModuleBottomRight} from '../../public/module_bottom_right.svg';
+import {ReactComponent as ModuleBottomLeft} from '../../public/module_bottom_left.svg';
 
 const XTooltip = ({
   className = '',

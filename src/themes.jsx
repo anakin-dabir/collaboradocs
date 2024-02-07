@@ -1,20 +1,20 @@
 import {makeStyles, withStyles} from '@mui/styles';
 import {createTheme, alpha} from '@mui/material/styles';
 import {cyan, orange, indigo, grey} from '@mui/material/colors';
-import gui_table_row_top_left from './img/gui_table_row_top_left.svg';
-import gui_table_row_top_right from './img/gui_table_row_top_right.svg';
-import menu_item_top_left from './img/menu_item_top_left.svg';
-import menu_item_top_right from './img/menu_item_top_right.svg';
-import menu_item_bottom_right from './img/menu_item_bottom_right.svg';
-import menu_item_bottom_center from './img/menu_item_bottom_center.svg';
-import menu_top_left from './img/menu_top_left.svg';
-import menu_top_right from './img/menu_top_right.svg';
-import menu_bottom_right from './img/menu_bottom_right.svg';
-import menu_bottom_left from './img/menu_bottom_left.svg';
-import switchTrack from './img/switchTrack.svg';
-import switch_checked_icon from './img/switch_checked_icon.svg';
-import switch_checked_track from './img/switch_checked_track.svg';
-import switch_disabled_track from './img/switch_disabled_track.svg';
+import gui_table_row_top_left from '../public/gui_table_row_top_left.svg';
+import gui_table_row_top_right from '../public/gui_table_row_top_right.svg';
+import menu_item_top_left from '../public/menu_item_top_left.svg';
+import menu_item_top_right from '../public/menu_item_top_right.svg';
+import menu_item_bottom_right from '../public/menu_item_bottom_right.svg';
+import menu_item_bottom_center from '../public/menu_item_bottom_center.svg';
+import menu_top_left from '../public/menu_top_left.svg';
+import menu_top_right from '../public/menu_top_right.svg';
+import menu_bottom_right from '../public/menu_bottom_right.svg';
+import menu_bottom_left from '../public/menu_bottom_left.svg';
+import switchTrack from '../public/switchTrack.svg';
+import switch_checked_icon from '../public/switch_checked_icon.svg';
+import switch_checked_track from '../public/switch_checked_track.svg';
+import switch_disabled_track from '../public/switch_disabled_track.svg';
 import '@fontsource/oxanium';
 const drawerWidth = 210;
 const appBarHeight = 64;
@@ -532,13 +532,11 @@ export const theme = createTheme({
     MuiPickersPopper: {
       styleOverrides: {
         root: {
-          backgroundImage: `url(${menu_top_left})`,
-          backgroundPosition: `top left`,
           backgroundColor: 'rgba(7, 50, 79, 0.92) !important',
-          // background: `url(${menu_top_left}) top left,
-          //              url(${menu_top_right}) top right,
-          //              url(${menu_bottom_right}) bottom right,
-          //              url(${menu_bottom_left}) bottom left`,
+          background: `url(${menu_top_left}) top left,
+                       url(${menu_top_right}) top right,
+                       url(${menu_bottom_right}) bottom right,
+                       url(${menu_bottom_left}) bottom left`,
           backgroundRepeat: 'no-repeat',
           clipPath: `polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)`,
         },

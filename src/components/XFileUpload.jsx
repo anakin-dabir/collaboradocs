@@ -1,7 +1,7 @@
 import React, {useCallback, useMemo} from 'react';
 import {Box, Stack, Typography} from '@mui/material';
 import {useDropzone} from 'react-dropzone';
-import {ReactComponent as GalleryIcon} from '../img/gallery.svg';
+import {ReactComponent as GalleryIcon} from '../../public/gallery.svg';
 import XStack from './XStack';
 import XButton from './XButton';
 import clsx from 'clsx';

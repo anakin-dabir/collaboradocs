@@ -4,9 +4,9 @@ import {Box, AppBar, Toolbar, Grid, Typography} from '@mui/material';
 import clsx from 'clsx';
 import {useAppStyles} from '../themes';
 import XTooltip from './XTooltip';
-import {ReactComponent as AppBarBottomRight} from '../img/app_bar_bottom_right.svg';
-import {ReactComponent as AppBarBottomCenter} from '../img/app_bar_bottom_center.svg';
-import {ReactComponent as AppBarTopRight} from '../img/app_bar_top_right.svg';
+import {ReactComponent as AppBarBottomRight} from '../../public/app_bar_bottom_right.svg';
+import {ReactComponent as AppBarBottomCenter} from '../../public/app_bar_bottom_center.svg';
+import {ReactComponent as AppBarTopRight} from '../../public/app_bar_top_right.svg';
 
 const XTopbar = () => {
   const classes = useAppStyles();
