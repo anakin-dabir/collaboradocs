@@ -3,7 +3,7 @@ import {Stack, useTheme} from '@mui/material';
 import XButton from './components/XButton';
 import XDateRangePicker from './components/XDateRangePicker';
 import XDatePicker from './components/XDatePicker';
-import image from '/src/assets/userIcon.svg?url';
+import image from '/src/assets/userIcon.svg';
 
 const App = () => {
   const [open, openSet] = useState(false);
