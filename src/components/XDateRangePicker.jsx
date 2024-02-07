@@ -22,7 +22,6 @@ const XDateRangePicker = ({
   return (
     <>
       <div className={clsx('w-72', className)}>
-        <div className={`bg-[url(${menu_top_left}) bg-right-top] `}></div>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DateRangePicker
             value={[selectedDate[0], selectedDate[1]] || null}
