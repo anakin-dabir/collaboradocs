@@ -26,12 +26,7 @@ const App = () => {
           <XDateRangePicker selectedDate={selectedDate1} selectedDateSet={selectedDateSet1} />
           <XDatePicker selectedDate={selectedDate} selectedDateSet={selectedDateSet} />
         </div>
-        <div
-          className={`w-96 h-96 bg-no-repeat [background: url(./assets/menu_top_left.svg) top left,
-                       url(./assets/menu_top_right.svg) top right,
-                       url(./assets/menu_bottom_right.svg) bottom right,
-                       url(./assets/menu_bottom_left.svg) bottom left]`}
-        ></div>
+        <div className='h-20 w-20 muiDatePicker p-4 ml-10'>Fuck you</div>
         {/* <XStack className='w-full mt-3 h-20' /> */}
         {/* <XStack className='w-full mt-3 h-20' /> */}
         {/* <div className='mt-4 pl-10'>

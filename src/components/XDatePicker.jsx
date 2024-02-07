@@ -23,7 +23,7 @@ export default function XDatePicker({
           value={selectedDate}
           inputFormat='MM/dd/yyyy'
           disableMaskedInput
-          PopperProps={{anchorEl, className: 'muiDatePicker'}}
+          PopperProps={{anchorEl, className: 'muiDatePicker text-nowrap'}}
           open={calenderOpen}
           onClose={() => calenderOpenSet(false)}
           onOpen={() => calenderOpenSet(true)}
