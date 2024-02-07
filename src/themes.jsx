@@ -529,6 +529,15 @@ export const theme = createTheme({
         },
       },
     },
+    MuiPickersPopper: {
+      styleOverrides: {
+        root: {
+          '& .MuiDayPicker-weekDayLabel': {
+            color: '#18ffff',
+          },
+        },
+      },
+    },
   },
 });
 
