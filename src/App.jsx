@@ -3,6 +3,7 @@ import {Stack, useTheme} from '@mui/material';
 import XButton from './components/XButton';
 import XDateRangePicker from './components/XDateRangePicker';
 import XDatePicker from './components/XDatePicker';
+import image, {ReactComponent as Image} from '/src/assets/userIcon.svg';
 
 const App = () => {
   const [open, openSet] = useState(false);
@@ -23,7 +24,8 @@ const App = () => {
           <XDateRangePicker selectedDate={selectedDate1} selectedDateSet={selectedDateSet1} />
           <XDatePicker selectedDate={selectedDate} selectedDateSet={selectedDateSet} />
         </div>
-
+        <Image />
+        <img src={image} alt='' />
         {/* <XStack className='w-full mt-3 h-20' /> */}
         {/* <XStack className='w-full mt-3 h-20' /> */}
         {/* <div className='mt-4 pl-10'>
