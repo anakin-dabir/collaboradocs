@@ -28,6 +28,7 @@ const XDateRangePicker = ({
             open={calenderOpen}
             onClose={() => calenderOpenSet(false)}
             onOpen={() => calenderOpenSet(true)}
+            PopperProps={{className: 'muiDatePicker'}}
             onChange={value => {
               selectedDateSet?.([
                 value[0]?.toLocaleDateString('en-US', {
