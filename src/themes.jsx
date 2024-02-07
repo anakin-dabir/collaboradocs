@@ -532,8 +532,8 @@ export const theme = createTheme({
     MuiPickersPopper: {
       styleOverrides: {
         root: {
-          backgroundColor:'rgba(7, 50, 79, 0.92) !important',
-          background: `url(${menu_top_left}) top left,
+          backgroundColor: 'rgba(7, 50, 79, 0.92) !important',
+          backgroundImage: `url(${menu_top_left}) top left,
                        url(${menu_top_right}) top right,
                        url(${menu_bottom_right}) bottom right,
                        url(${menu_bottom_left}) bottom left`,
