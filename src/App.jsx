@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {Stack, useTheme} from '@mui/material';
+import NewSvg from '/image.png';
+import XButton from './components/XButton';
 import XDateRangePicker from './components/XDateRangePicker';
 import XDatePicker from './components/XDatePicker';
-import NewSvg from '/public/vite.svg';
 
 const App = () => {
   const [open, openSet] = useState(false);
@@ -17,12 +18,18 @@ const App = () => {
   return (
     <>
       {/* <XTopbar /> */}
+      <XButton>Click</XButton>
       <div className=' h-screen pt-10 bg-black/90 !shadow-2xl'>
         <div className='ml-20 flex gap-10'>
           <XDateRangePicker selectedDate={selectedDate1} selectedDateSet={selectedDateSet1} />
           <XDatePicker selectedDate={selectedDate} selectedDateSet={selectedDateSet} />
         </div>
-        <img src={NewSvg} />
+        <div
+          style={{backgroundImage: `url(${NewSvg})`}}
+          className={`h-96 w-96 bg-[url(${NewSvg})] bg-no-repeat flex bg-center bg-cover`}
+        >
+          a
+        </div>
         {/* <XStack className='w-full mt-3 h-20' /> */}
         {/* <XStack className='w-full mt-3 h-20' /> */}
         {/* <div className='mt-4 pl-10'>
