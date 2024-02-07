@@ -3,7 +3,7 @@ import {Stack, useTheme, Box} from '@mui/material';
 import XButton from './components/XButton';
 import XDateRangePicker from './components/XDateRangePicker';
 import XDatePicker from './components/XDatePicker';
-import image from './assets/userIcon.svg';
+import image from './assets/userIcon.svg?url';
 import menuTopLeft from './assets/menu_top_left.svg';
 import menuTopRight from './assets/menu_top_right.svg';
 import menuBottomRight from './assets/menu_bottom_right.svg';
@@ -26,19 +26,12 @@ const App = () => {
           <XDateRangePicker selectedDate={selectedDate1} selectedDateSet={selectedDateSet1} />
           <XDatePicker selectedDate={selectedDate} selectedDateSet={selectedDateSet} />
         </div>
-        <img src={image} alt='' />
-        <Box
-          sx={{
-            backgroundImage: `url(${menuTopLeft}), url(${menuTopRight}), url(${menuBottomRight}), url(${menuBottomLeft})`,
-            backgroundPosition: 'top left, top right, bottom right, bottom left',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'auto',
-            backgroundColor: 'rgba(7, 50, 79, 0.92)', // Fallback color
-            height: '300px', // Set a height for the box
-          }}
-        >
-          {/* Your content here */}
-        </Box>
+        <div
+          className={`w-96 h-96 bg-no-repeat [background: url(./assets/menu_top_left.svg) top left,
+                       url(./assets/menu_top_right.svg) top right,
+                       url(./assets/menu_bottom_right.svg) bottom right,
+                       url(./assets/menu_bottom_left.svg) bottom left]`}
+        ></div>
         {/* <XStack className='w-full mt-3 h-20' /> */}
         {/* <XStack className='w-full mt-3 h-20' /> */}
         {/* <div className='mt-4 pl-10'>
