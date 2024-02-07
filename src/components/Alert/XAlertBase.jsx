@@ -2,12 +2,12 @@ import React from 'react';
 import {Box, Dialog, DialogTitle, Stack, Typography} from '@mui/material';
 import {useGuiDialogStyles, useHeadingStyles} from '../../themes';
 import clsx from 'clsx';
-import {ReactComponent as ModuleTopLeft} from './../../img/module_top_left.svg';
-import {ReactComponent as ModuleTopRight} from './../../img/module_top_right.svg';
-import {ReactComponent as ModuleBottomRight} from './../../img/module_bottom_right.svg';
-import {ReactComponent as ModuleBottomLeft} from './../../img/module_bottom_left.svg';
-import {ReactComponent as DividerBoth} from './../../img/divider_both.svg';
-import {ReactComponent as WarningIcon} from './../../img/warning.svg';
+import {ReactComponent as ModuleTopLeft} from '/src/assets/module_top_left.svg';
+import {ReactComponent as ModuleTopRight} from '/src/assets/module_top_right.svg';
+import {ReactComponent as ModuleBottomRight} from '/src/assets/module_bottom_right.svg';
+import {ReactComponent as ModuleBottomLeft} from '/src/assets/module_bottom_left.svg';
+import {ReactComponent as DividerBoth} from '/src/assets/divider_both.svg';
+import {ReactComponent as WarningIcon} from '/src/assets/warning.svg';
 
 const XAlertBase = ({
   className,

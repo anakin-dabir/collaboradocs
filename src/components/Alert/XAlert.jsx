@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box, Typography} from '@mui/material';
-import {ReactComponent as Divider} from './../../img/divider.svg';
+import {ReactComponent as Divider} from '/src/assets/divider.svg';
 import XButton from '../XButton';
 import XAlertBase from './XAlertBase';
 

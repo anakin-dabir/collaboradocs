@@ -2,7 +2,7 @@ import React from 'react';
 import {Box, Typography} from '@mui/material';
 import XAlertBase from './XAlertBase';
 import XButton from '../XButton';
-import {ReactComponent as Divider} from './../../img/divider.svg';
+import {ReactComponent as Divider} from '/src/assets/divider.svg';
 
 export default function XConfirmAlert({isOpen, onClose, onConfirm, heading = 'Leave Page'}) {
   return (

@@ -3,7 +3,7 @@ import {Box} from '@mui/material';
 import GuiButton from '../GuiButton';
 import GuiDialog from './GuiDialog';
 import GuiTextField from '../TextField';
-import {ReactComponent as Divider} from './../../img/divider.svg';
+import {ReactComponent as Divider} from '/src/assets/img/divider.svg';
 
 const DeleteDialog = ({
   open,
