@@ -2,11 +2,11 @@ import React, {useState, useCallback} from 'react';
 import {TextField} from '@mui/material';
 import theme, {useGuiTextFieldStyles} from '../themes';
 import clsx from 'clsx';
-import {ReactComponent as TextFieldTopLeft} from '../../public/textFieldTopLeft.svg';
-import {ReactComponent as TextFieldTopRight} from '../../public/textFieldTopRight.svg';
-import {ReactComponent as TextFieldBottomRight} from '../../public/textFieldBottomRight.svg';
-import {ReactComponent as TextFieldBottomCenter} from '../../public/textFieldBottomCenter.svg';
-import {ReactComponent as TextFieldBottomCenter2} from '../../public/textFieldBottomCenter2.svg';
+import {ReactComponent as TextFieldTopLeft} from '/public/textFieldTopLeft.svg';
+import {ReactComponent as TextFieldTopRight} from '/public/textFieldTopRight.svg';
+import {ReactComponent as TextFieldBottomRight} from '/public/textFieldBottomRight.svg';
+import {ReactComponent as TextFieldBottomCenter} from '/public/textFieldBottomCenter.svg';
+import {ReactComponent as TextFieldBottomCenter2} from '/public/textFieldBottomCenter2.svg';
 
 const GuiTextField = ({
   id,
