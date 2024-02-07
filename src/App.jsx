@@ -22,6 +22,7 @@ const App = () => {
           <XDateRangePicker selectedDate={selectedDate1} selectedDateSet={selectedDateSet1} />
           <XDatePicker selectedDate={selectedDate} selectedDateSet={selectedDateSet} />
         </div>
+        <img src={NewSvg} />
         {/* <XStack className='w-full mt-3 h-20' /> */}
         {/* <XStack className='w-full mt-3 h-20' /> */}
         {/* <div className='mt-4 pl-10'>
