@@ -4,10 +4,6 @@ import {LocalizationProvider} from '@mui/x-date-pickers';
 import {DateRangePicker} from '@mui/x-date-pickers-pro';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import XTextfield from './XTextfield';
-import menu_top_left from '/src/assets/menu_top_left.svg';
-import menu_top_right from '/src/assets/menu_top_right.svg';
-import menu_bottom_right from '/src/assets/menu_bottom_right.svg';
-import menu_bottom_left from '/src/assets/menu_bottom_left.svg';
 import {ReactComponent as CalendarIcon} from '/src/assets/calendarIcon.svg';
 import {ReactComponent as CrossIcon} from '/src/assets/crossIcon.svg';
 import clsx from 'clsx';
@@ -33,22 +29,6 @@ const XDateRangePicker = ({
             open={calenderOpen}
             onClose={() => calenderOpenSet(false)}
             onOpen={() => calenderOpenSet(true)}
-            PopperProps={{
-              // className: `[background:
-              //                     url(${menu_top_left}) top left,
-              //                     url(${menu_top_right}) top right,
-              //                     url(${menu_bottom_right}) bottom right,
-              //                     url(${menu_bottom_left}) bottom left]`,
-              sx: {
-                '&.MuiPickersPopper-root': {
-                  backgroundColor: 'rgba(7, 50, 79, 0.92) !important',
-                  backgroundImage: `url(${menu_top_left}), url(${menu_top_right}), url(${menu_bottom_right}), url(${menu_bottom_left})`,
-                  backgroundPosition: `top left, top right, bottom right, bottom left`,
-                  backgroundRepeat: 'no-repeat',
-                  clipPath: `polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)`,
-                },
-              },
-            }}
             onChange={value => {
               selectedDateSet?.([
                 value[0]?.toLocaleDateString('en-US', {
