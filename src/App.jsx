@@ -1,9 +1,13 @@
 import React, {useState} from 'react';
-import {Stack, useTheme} from '@mui/material';
+import {Stack, useTheme, Box} from '@mui/material';
 import XButton from './components/XButton';
 import XDateRangePicker from './components/XDateRangePicker';
 import XDatePicker from './components/XDatePicker';
-import image from '/src/assets/userIcon.svg';
+import image from './assets/userIcon.svg';
+import menuTopLeft from './assets/menu_top_left.svg';
+import menuTopRight from './assets/menu_top_right.svg';
+import menuBottomRight from './assets/menu_bottom_right.svg';
+import menuBottomLeft from './assets/menu_bottom_left.svg';
 
 const App = () => {
   const [open, openSet] = useState(false);
@@ -23,7 +27,18 @@ const App = () => {
           <XDatePicker selectedDate={selectedDate} selectedDateSet={selectedDateSet} />
         </div>
         <img src={image} alt='' />
-        <div className={`w-32 h-32 bg-[url('./assets/userIcon.svg')]`}>this is me</div>
+        <Box
+          sx={{
+            backgroundImage: `url(${menuTopLeft}), url(${menuTopRight}), url(${menuBottomRight}), url(${menuBottomLeft})`,
+            backgroundPosition: 'top left, top right, bottom right, bottom left',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'auto',
+            backgroundColor: 'rgba(7, 50, 79, 0.92)', // Fallback color
+            height: '300px', // Set a height for the box
+          }}
+        >
+          {/* Your content here */}
+        </Box>
         {/* <XStack className='w-full mt-3 h-20' /> */}
         {/* <XStack className='w-full mt-3 h-20' /> */}
         {/* <div className='mt-4 pl-10'>
