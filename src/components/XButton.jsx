@@ -3,14 +3,14 @@ import {CircularProgress} from '@mui/material';
 import theme, {useGuiButtonStyles} from '../themes';
 import clsx from 'clsx';
 import {Button} from '@mui/material';
-import {ReactComponent as ButtonTopLeft} from '/public/shapes_btnadd_1.svg';
-import {ReactComponent as ButtonTopLeftLeft} from '/public/shapes_btnadd_2.svg';
-import {ReactComponent as ButtonTopRightRight} from '/public/shapes_btnadd_6.svg';
-import {ReactComponent as ButtonBottomLeftLeft} from '/public/shapes_btnadd_7.svg';
-import {ReactComponent as ButtonBottomRightRight} from '/public/shapes_btnadd_3.svg';
-import {ReactComponent as ButtonBottomLeft} from '/public/shapes_btnadd_8.svg';
-import {ReactComponent as ButtonBottomRight} from '/public/shapes_btnadd_5.svg';
-import {ReactComponent as ButtonTopRight} from '/public/shapes_btnadd_4.svg';
+import {ReactComponent as ButtonTopLeft} from '/src/assets/shapes_btnadd_1.svg';
+import {ReactComponent as ButtonTopLeftLeft} from '/src/assets/shapes_btnadd_2.svg';
+import {ReactComponent as ButtonTopRightRight} from '/src/assets/shapes_btnadd_6.svg';
+import {ReactComponent as ButtonBottomLeftLeft} from '/src/assets/shapes_btnadd_7.svg';
+import {ReactComponent as ButtonBottomRightRight} from '/src/assets/shapes_btnadd_3.svg';
+import {ReactComponent as ButtonBottomLeft} from '/src/assets/shapes_btnadd_8.svg';
+import {ReactComponent as ButtonBottomRight} from '/src/assets/shapes_btnadd_5.svg';
+import {ReactComponent as ButtonTopRight} from '/src/assets/shapes_btnadd_4.svg';
 
 const XButton = ({
   children,

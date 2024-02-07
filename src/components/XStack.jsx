@@ -2,10 +2,10 @@ import React from 'react';
 import {Stack} from '@mui/material';
 import clsx from 'clsx';
 import {useGuiModuleStyles} from '../themes';
-import {ReactComponent as ModuleTopLeft} from '/public/module_top_left.svg';
-import {ReactComponent as ModuleTopRight} from '/public/module_top_right.svg';
-import {ReactComponent as ModuleBottomRight} from '/public/module_bottom_right.svg';
-import {ReactComponent as ModuleBottomLeft} from '/public/module_bottom_left.svg';
+import {ReactComponent as ModuleTopLeft} from '/src/assets/module_top_left.svg';
+import {ReactComponent as ModuleTopRight} from '/src/assets/module_top_right.svg';
+import {ReactComponent as ModuleBottomRight} from '/src/assets/module_bottom_right.svg';
+import {ReactComponent as ModuleBottomLeft} from '/src/assets/module_bottom_left.svg';
 
 const XStack = ({className = '', direction = 'column', children, ...props}) => {
   const gui2_classes = useGuiModuleStyles();

@@ -14,10 +14,10 @@ import GuiTextField from './GuiTextField';
 import GuiChip from './Chip';
 import GuiTooltip from './GuiTooltip';
 import GuiBox from './Box';
-import {ReactComponent as ArrowDownIcon} from '/public/arrowDownIcon.svg';
-import {ReactComponent as SearchIcon} from '/public/searchIcon.svg';
-import {ReactComponent as CrossIcon} from '/public/crossIcon.svg';
-import {ReactComponent as CheckedIcon} from '/public/checked_icon.svg';
+import {ReactComponent as ArrowDownIcon} from '/src/assets/arrowDownIcon.svg';
+import {ReactComponent as SearchIcon} from '/src/assets/searchIcon.svg';
+import {ReactComponent as CrossIcon} from '/src/assets/crossIcon.svg';
+import {ReactComponent as CheckedIcon} from '/src/assets/checked_icon.svg';
 
 export default function XMenu({
   options,

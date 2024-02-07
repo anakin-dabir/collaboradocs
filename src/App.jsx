@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Stack, useTheme} from '@mui/material';
-import NewSvg from '/image.png';
 import XButton from './components/XButton';
 import XDateRangePicker from './components/XDateRangePicker';
 import XDatePicker from './components/XDatePicker';
@@ -24,12 +23,7 @@ const App = () => {
           <XDateRangePicker selectedDate={selectedDate1} selectedDateSet={selectedDateSet1} />
           <XDatePicker selectedDate={selectedDate} selectedDateSet={selectedDateSet} />
         </div>
-        <div
-          style={{backgroundImage: `url(${NewSvg})`}}
-          className={`h-96 w-96 bg-[url(${NewSvg})] bg-no-repeat flex bg-center bg-cover`}
-        >
-          a
-        </div>
+
         {/* <XStack className='w-full mt-3 h-20' /> */}
         {/* <XStack className='w-full mt-3 h-20' /> */}
         {/* <div className='mt-4 pl-10'>
