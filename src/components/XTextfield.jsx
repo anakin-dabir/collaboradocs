@@ -1,49 +1,47 @@
-import React, {useState, useCallback} from 'react';
-import {TextField} from '@mui/material';
-import theme, {useGuiTextFieldStyles} from '../themes';
-import clsx from 'clsx';
-import {ReactComponent as TextFieldTopLeft} from '/src/assets/textFieldTopLeft.svg';
-import {ReactComponent as TextFieldTopRight} from '/src/assets/textFieldTopRight.svg';
-import {ReactComponent as TextFieldBottomRight} from '/src/assets/textFieldBottomRight.svg';
-import {ReactComponent as TextFieldBottomCenter} from '/src/assets/textFieldBottomCenter.svg';
-import {ReactComponent as TextFieldBottomCenter2} from '/src/assets/textFieldBottomCenter2.svg';
+import React, { useState, useCallback } from "react";
+import { TextField } from "@mui/material";
+import theme, { useGuiTextFieldStyles } from "../themes";
+import clsx from "clsx";
+import { ReactComponent as TextFieldTopLeft } from "/src/assets/textFieldTopLeft.svg";
+import { ReactComponent as TextFieldTopRight } from "/src/assets/textFieldTopRight.svg";
+import { ReactComponent as TextFieldBottomRight } from "/src/assets/textFieldBottomRight.svg";
+import { ReactComponent as TextFieldBottomCenter } from "/src/assets/textFieldBottomCenter.svg";
+import { ReactComponent as TextFieldBottomCenter2 } from "/src/assets/textFieldBottomCenter2.svg";
 
-const GuiTextField = ({
+const XTextfield = ({
   id,
   size,
   value,
-  dir = 'ltr',
   onKeyDown,
   defaultValue,
-  className = '',
-  simpleBorder,
+  className = "",
+  simpleBorder = false,
   borderBottom = false,
   simpleBorderWithBottomRight = false,
   select = false,
-  children,
   border = true,
+  children,
   fullWidth,
   style,
   helperText,
   label,
   name,
-  parent_style,
-  disabled,
-  error,
-  type,
+  disabled = false,
+  error = false,
+  type = "text",
   SelectProps,
   placeholder,
-  autoComplete,
   onBlur,
   onFocus,
   onChange,
   inputProps,
+  parentClassName = "",
   ...props
 }) => {
   const [containerHeight, containerHeightSet] = useState(0);
   const [focused, focusedSet] = useState(false);
   const classes = useGuiTextFieldStyles();
-  const input_ref = useCallback(node => {
+  const input_ref = useCallback((node) => {
     if (!node) return;
     const inputEl = node.node || node;
     const containerEl = inputEl.parentNode;
@@ -55,7 +53,7 @@ const GuiTextField = ({
   else if (focused) borderColor = theme.palette.primary.main;
   else borderColor = theme.palette.primary.main;
   return (
-    <div className={classes.wrapper} style={parent_style}>
+    <div className={clsx(parentClassName, classes.wrapper)}>
       {border && (
         <>
           <TextFieldTopLeft
@@ -64,7 +62,7 @@ const GuiTextField = ({
             })}
             fill={borderColor}
             style={{
-              transform: size == 'small' ? 'scale(0.7) translate(-21.43%, -21.43%)' : undefined,
+              transform: size == "small" ? "scale(0.7) translate(-21.43%, -21.43%)" : undefined,
             }}
           />
           {!simpleBorder && (
@@ -74,7 +72,7 @@ const GuiTextField = ({
               })}
               fill={borderColor}
               style={{
-                transform: size == 'small' ? 'scale(0.7) translate(21.43%, -21.43%)' : undefined,
+                transform: size == "small" ? "scale(0.7) translate(21.43%, -21.43%)" : undefined,
               }}
             />
           )}
@@ -87,7 +85,7 @@ const GuiTextField = ({
               style={{
                 top: `${containerHeight}px`,
                 transform:
-                  size == 'small' ? 'scale(0.7) translate(21.43%, -121.43%)' : 'translateY(-100%)',
+                  size == "small" ? "scale(0.7) translate(21.43%, -121.43%)" : "translateY(-100%)",
               }}
             />
           )}
@@ -100,7 +98,7 @@ const GuiTextField = ({
               style={{
                 top: `${containerHeight}px`,
                 transform:
-                  size == 'small' ? 'scale(0.7) translateY(-121.43%)' : 'translateY(-100%)',
+                  size == "small" ? "scale(0.7) translateY(-121.43%)" : "translateY(-100%)",
               }}
             />
           )}
@@ -113,7 +111,7 @@ const GuiTextField = ({
               style={{
                 top: `${containerHeight}px`,
                 transform:
-                  size == 'small' ? 'scale(0.7) translateY(-121.43%)' : 'translateY(-100%)',
+                  size == "small" ? "scale(0.7) translateY(-121.43%)" : "translateY(-100%)",
               }}
             />
           )}
@@ -122,7 +120,6 @@ const GuiTextField = ({
       <TextField
         {...props}
         value={value}
-        dir={dir}
         id={id}
         disabled={disabled}
         defaultValue={defaultValue}
@@ -133,28 +130,27 @@ const GuiTextField = ({
         helperText={helperText}
         inputRef={input_ref}
         onChange={onChange}
-        autoComplete={autoComplete}
         placeholder={placeholder}
         InputProps={inputProps}
         type={type}
         fullWidth
-        InputLabelProps={{shrink: true, className: classes.label}}
+        InputLabelProps={{ shrink: true, className: classes.label }}
         variant='outlined'
         onKeyDown={onKeyDown}
         classes={classes}
         className={clsx(
           className,
-          {[classes.disabled]: disabled},
-          {[classes.error]: error},
-          {[classes.border_off]: !border}
+          { [classes.disabled]: disabled },
+          { [classes.error]: error },
+          { [classes.border_off]: !border }
         )}
         size={size}
-        SelectProps={{...SelectProps, MenuProps: {classes}}}
-        onFocus={event => {
+        SelectProps={{ ...SelectProps, MenuProps: { classes } }}
+        onFocus={(event) => {
           focusedSet(true);
           if (onFocus) onFocus(event);
         }}
-        onBlur={event => {
+        onBlur={(event) => {
           focusedSet(false);
           if (onBlur) onBlur(event);
         }}
@@ -165,4 +161,4 @@ const GuiTextField = ({
   );
 };
 
-export default GuiTextField;
+export default XTextfield;
