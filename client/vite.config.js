@@ -10,11 +10,11 @@ export default defineConfig({
     url({
       output: "dist/assets",
     }),
-    svgr({ icon: true }),
+    svgr(),
   ],
   base: "/",
   resolve: {
     alias: { "@": "/src" },
   },
-  assetsInclude: [],
+  assetsInclude: ["src/assets/**/*"],
 });
