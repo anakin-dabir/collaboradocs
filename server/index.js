@@ -8,7 +8,7 @@ async function init() {
   const socket = new SocketService();
   socket.io.attach(httpServer);
   app.get("/", (req, res) => res.send("Server running on port 5000"));
-  httpServer.listen(5000, () => console.log("Server running on port", 5000));
+  httpServer.listen(5001, () => console.log("Server running on port", 5000));
 
   socket.initListeners();
 }

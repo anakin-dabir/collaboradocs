@@ -24,13 +24,13 @@ class SocketService {
 
       Socket.on("event:addUser", (userId) => {
         console.log("user connected", Socket.id);
-        addUser(userId, Socket.id);
+        this.addUser(userId, Socket.id);
         io.emit("event:getUsers", this.users);
       });
 
       Socket.on("event:removeUser", (userId) => {
         console.log("user removed", Socket.id);
-        removeUser(userId);
+        this.removeUser(userId);
         io.emit("event:getUsers", this.users);
       });
 
@@ -40,7 +40,7 @@ class SocketService {
 
       Socket.on("disconnect", () => {
         console.log("user disconnected");
-        removeUser(Socket.id);
+        this.removeUser(Socket.id);
         io.emit("event:getUsers", this.users);
       });
     });

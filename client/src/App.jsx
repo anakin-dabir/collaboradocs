@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Stack, useTheme, Box, MenuItem } from "@mui/material";
 import XButton from "./components/XButton";
 import XDateRangePicker from "./components/Date/XDateRangePicker";
@@ -13,7 +13,7 @@ import XRadio from "./components/XRadio";
 import XCheckbox from "./components/XCheckbox";
 import XStack from "./components/XStack";
 import XTextfield from "./components/XTextfield";
-
+import { io } from "socket.io-client";
 const App = () => {
   const [open, openSet] = useState(true);
   const theme = useTheme();
@@ -23,6 +23,12 @@ const App = () => {
   const [selectedDate, selectedDateSet] = useState("");
   const [selectedDate1, selectedDateSet1] = useState(["", ""]);
   const [radio, radioSet] = useState("Male");
+  const [socket, socketSet] = useState(null);
+
+  useEffect(() => {
+    const socket = io("http://localhost:5001");
+    socketSet(socket);
+  }, []);
 
   return (
     <>
