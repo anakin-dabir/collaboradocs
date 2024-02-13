@@ -4,10 +4,6 @@ import XButton from "./components/XButton";
 import XDateRangePicker from "./components/Date/XDateRangePicker";
 import XDatePicker from "./components/Date/XDatePicker";
 import image from "./assets/userIcon.svg?url";
-import menuTopLeft from "./assets/menu_top_left.svg";
-import menuTopRight from "./assets/menu_top_right.svg";
-import menuBottomRight from "./assets/menu_bottom_right.svg";
-import menuBottomLeft from "./assets/menu_bottom_left.svg";
 import XBadge from "./components/XBadge";
 import XRadio from "./components/XRadio";
 import XCheckbox from "./components/XCheckbox";
@@ -34,7 +30,6 @@ const App = () => {
         <XBadge>
           <div className='h-20 w-20 p-4 ml-10'>Fuck you</div>
         </XBadge>
-        <img src={ModuleTopLeft} className='h-10 w-10' />
 
         <XCheckbox label='Click here if you are 18+' />
 
