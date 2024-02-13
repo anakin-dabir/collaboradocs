@@ -5,9 +5,16 @@ import url from "@rollup/plugin-url";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), url(), svgr()],
+  plugins: [
+    react(),
+    url({
+      output: "dist/assets",
+    }),
+    svgr({ icon: true }),
+  ],
   base: "/",
   resolve: {
     alias: { "@": "/src" },
   },
+  assetsInclude: [],
 });
