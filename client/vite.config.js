@@ -26,7 +26,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": "/src",
-      // "@img": resolve(__dirname, "src/arr/"),
+      "@img": resolve(__dirname, "src/assets/"),
       "@rss": resolve(__dirname, "src/rss.xml"),
     },
   },
