@@ -19,18 +19,14 @@ import svgr from "@svgr/rollup";
 
 import { defineConfig } from "vite";
 import { processAssetFileNames, entryFileNames, chunkFileNames, assetDir } from "./config/assets";
-import { resolve } from "path";
-import viteHtmlResolveAlias from "vite-plugin-html-resolve-alias";
 
 export default defineConfig({
   resolve: {
     alias: {
       "@": "/src",
-      "@img": resolve(__dirname, "src/assets/"),
-      "@rss": resolve(__dirname, "src/rss.xml"),
     },
   },
-  plugins: [react(), svgr(), viteHtmlResolveAlias()],
+  plugins: [react(), svgr()],
   build: {
     minify: true,
     assetsDir: assetDir,

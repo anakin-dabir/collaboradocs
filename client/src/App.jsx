@@ -13,7 +13,6 @@ import XRadio from "./components/XRadio";
 import XCheckbox from "./components/XCheckbox";
 import XStack from "./components/XStack";
 import XTextfield from "./components/XTextfield";
-import { io } from "socket.io-client";
 const App = () => {
   const [open, openSet] = useState(true);
   const theme = useTheme();
@@ -25,11 +24,6 @@ const App = () => {
   const [radio, radioSet] = useState("Male");
   const [socket, socketSet] = useState(null);
 
-  useEffect(() => {
-    const socket = io("http://localhost:5001");
-    socketSet(socket);
-  }, []);
-
   return (
     <>
       <div className=' h-screen pt-10 bg-black/90 !shadow-2xl'>
@@ -38,8 +32,10 @@ const App = () => {
           <XDatePicker selectedDate={selectedDate} selectedDateSet={selectedDateSet} />
         </div>
         <XBadge>
-          <div className='h-20 w-20 muiDatePicker p-4 ml-10'>Fuck you</div>
+          <div className='h-20 w-20 p-4 ml-10'>Fuck you</div>
         </XBadge>
+        <img src={ModuleTopLeft} className='h-10 w-10' />
+
         <XCheckbox label='Click here if you are 18+' />
 
         <XRadio
