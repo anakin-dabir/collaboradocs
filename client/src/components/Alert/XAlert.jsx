@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Typography} from '@mui/material';
-import {ReactComponent as Divider} from '/src/assets/divider.svg';
-import XButton from '../XButton';
+import {ReactComponent as Divider} from '@/assets/divider.svg';
+import XButton from '@/components/XButton';
 import XAlertBase from './XAlertBase';
 
 export default function XAlert({

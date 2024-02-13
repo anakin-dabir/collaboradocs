@@ -1,38 +1,38 @@
-import React from 'react';
-import {CircularProgress} from '@mui/material';
-import theme, {useGuiButtonStyles} from '../themes';
-import clsx from 'clsx';
-import {Button} from '@mui/material';
-import {ReactComponent as ButtonTopLeft} from '/src/assets/shapes_btnadd_1.svg';
-import {ReactComponent as ButtonTopLeftLeft} from '/src/assets/shapes_btnadd_2.svg';
-import {ReactComponent as ButtonTopRightRight} from '/src/assets/shapes_btnadd_6.svg';
-import {ReactComponent as ButtonBottomLeftLeft} from '/src/assets/shapes_btnadd_7.svg';
-import {ReactComponent as ButtonBottomRightRight} from '/src/assets/shapes_btnadd_3.svg';
-import {ReactComponent as ButtonBottomLeft} from '/src/assets/shapes_btnadd_8.svg';
-import {ReactComponent as ButtonBottomRight} from '/src/assets/shapes_btnadd_5.svg';
-import {ReactComponent as ButtonTopRight} from '/src/assets/shapes_btnadd_4.svg';
+import React from "react";
+import { CircularProgress } from "@mui/material";
+import theme, { useGuiButtonStyles } from "@/themes";
+import clsx from "clsx";
+import { Button } from "@mui/material";
+import { ReactComponent as ButtonTopLeft } from "@/assets/shapes_btnadd_1.svg";
+import { ReactComponent as ButtonTopLeftLeft } from "@/assets/shapes_btnadd_2.svg";
+import { ReactComponent as ButtonTopRightRight } from "@/assets/shapes_btnadd_6.svg";
+import { ReactComponent as ButtonBottomLeftLeft } from "@/assets/shapes_btnadd_7.svg";
+import { ReactComponent as ButtonBottomRightRight } from "@/assets/shapes_btnadd_3.svg";
+import { ReactComponent as ButtonBottomLeft } from "@/assets/shapes_btnadd_8.svg";
+import { ReactComponent as ButtonBottomRight } from "@/assets/shapes_btnadd_5.svg";
+import { ReactComponent as ButtonTopRight } from "@/assets/shapes_btnadd_4.svg";
 
 const XButton = ({
   children,
   onClick,
-  color = 'default',
+  color = "default",
   className,
   disabled = false,
   fullWidth = false,
-  type = 'button',
-  variant = 'outlined',
+  type = "button",
+  variant = "outlined",
   loading = false,
   tabIndex,
   border = true,
   borderColor,
-  wrapperClassName = '',
+  wrapperClassName = "",
   wrapperStyle = {},
   style,
   ...props
 }) => {
   const classes = useGuiButtonStyles();
-  const possibleColors = ['default', 'primary', 'secondary', 'success', 'error'];
-  color = possibleColors.includes(color) ? color : 'default';
+  const possibleColors = ["default", "primary", "secondary", "success", "error"];
+  color = possibleColors.includes(color) ? color : "default";
   const button_class = {
     default: classes.button_default,
     primary: classes.button_primary,
@@ -51,7 +51,7 @@ const XButton = ({
   };
   return (
     <div
-      style={{width: fullWidth && '100%', ...wrapperStyle}}
+      style={{ width: fullWidth && "100%", ...wrapperStyle }}
       className={clsx(classes.button_wrapper, wrapperClassName)}
     >
       <Button
@@ -66,7 +66,7 @@ const XButton = ({
         className={clsx(
           className,
           classes.button,
-          disabled || loading ? button_class['disabled'] : button_class[color]
+          disabled || loading ? button_class["disabled"] : button_class[color]
         )}
       >
         {border && (
@@ -77,7 +77,7 @@ const XButton = ({
                 borderColor
                   ? borderColor
                   : disabled
-                  ? border_color['disabled']
+                  ? border_color["disabled"]
                   : border_color[color]
               }
             />
@@ -87,7 +87,7 @@ const XButton = ({
                 borderColor
                   ? borderColor
                   : disabled
-                  ? border_color['disabled']
+                  ? border_color["disabled"]
                   : border_color[color]
               }
             />
@@ -97,7 +97,7 @@ const XButton = ({
                 borderColor
                   ? borderColor
                   : disabled
-                  ? border_color['disabled']
+                  ? border_color["disabled"]
                   : border_color[color]
               }
             />
@@ -107,7 +107,7 @@ const XButton = ({
                 borderColor
                   ? borderColor
                   : disabled
-                  ? border_color['disabled']
+                  ? border_color["disabled"]
                   : border_color[color]
               }
             />
@@ -117,7 +117,7 @@ const XButton = ({
                 borderColor
                   ? borderColor
                   : disabled
-                  ? border_color['disabled']
+                  ? border_color["disabled"]
                   : border_color[color]
               }
             />
@@ -127,7 +127,7 @@ const XButton = ({
                 borderColor
                   ? borderColor
                   : disabled
-                  ? border_color['disabled']
+                  ? border_color["disabled"]
                   : border_color[color]
               }
             />
@@ -137,7 +137,7 @@ const XButton = ({
                 borderColor
                   ? borderColor
                   : disabled
-                  ? border_color['disabled']
+                  ? border_color["disabled"]
                   : border_color[color]
               }
             />
@@ -147,7 +147,7 @@ const XButton = ({
                 borderColor
                   ? borderColor
                   : disabled
-                  ? border_color['disabled']
+                  ? border_color["disabled"]
                   : border_color[color]
               }
             />

@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {Typography, Box, Alert, Snackbar, Stack, LinearProgress, Slide} from '@mui/material';
 import clsx from 'clsx';
-import theme, {useGuiSnackbarStyles} from '../themes';
-import {ReactComponent as SuccessIcon} from '/src/assets/successIcon.svg';
-import {ReactComponent as WarningIcon} from '/src/assets/warningIcon.svg';
-import {ReactComponent as ErrorIcon} from '/src/assets/errorIcon.svg';
-import {ReactComponent as InfoIcon} from '/src/assets/infoIcon.svg';
-import {ReactComponent as SnackbarTopCenterIcon} from '/src/assets/snackbarTopCenterIcon.svg';
+import theme, {useGuiSnackbarStyles} from '@/themes';
+import {ReactComponent as SuccessIcon} from '@/assets/successIcon.svg';
+import {ReactComponent as WarningIcon} from '@/assets/warningIcon.svg';
+import {ReactComponent as ErrorIcon} from '@/assets/errorIcon.svg';
+import {ReactComponent as InfoIcon} from '@/assets/infoIcon.svg';
+import {ReactComponent as SnackbarTopCenterIcon} from '@/assets/snackbarTopCenterIcon.svg';
 
 const XToast = ({
   isOpen,

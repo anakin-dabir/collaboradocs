@@ -1,6 +1,6 @@
 import React from 'react';
 import {Switch} from '@mui/material';
-import {useGuiSwitchStyles} from '../themes';
+import {useGuiSwitchStyles} from '@/themes';
 
 const XSwitch = ({disabled = false, onChange, checked, ...props}) => {
   const classes = useGuiSwitchStyles();

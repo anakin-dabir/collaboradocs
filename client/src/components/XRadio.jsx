@@ -1,7 +1,7 @@
 import React from "react";
 import { RadioGroup, Radio, FormControlLabel } from "@mui/material";
-import { ReactComponent as RadioIcon } from "/src/assets/guiRadioIcon.svg";
-import { ReactComponent as RadioIconChecked } from "/src/assets/guiRadioCheckedIcon.svg";
+import { ReactComponent as RadioIcon } from "@/assets/guiRadioIcon.svg";
+import { ReactComponent as RadioIconChecked } from "@/assets/guiRadioCheckedIcon.svg";
 import clsx from "clsx";
 
 export default function XRadio({

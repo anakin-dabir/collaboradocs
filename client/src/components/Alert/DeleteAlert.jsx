@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {Box} from '@mui/material';
-import GuiButton from '../GuiButton';
+import GuiButton from '@/components/GuiButton';
 import GuiDialog from './GuiDialog';
-import GuiTextField from '../TextField';
-import {ReactComponent as Divider} from '/src/assets/img/divider.svg';
+import GuiTextField from '@/components/TextField';
+import {ReactComponent as Divider} from '@/assets/img/divider.svg';
 
 const DeleteDialog = ({
   open,

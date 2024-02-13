@@ -7,4 +7,7 @@ import url from "@rollup/plugin-url";
 export default defineConfig({
   plugins: [react(), url(), svgr()],
   base: "/",
+  resolve: {
+    alias: { "@": "/src" },
+  },
 });

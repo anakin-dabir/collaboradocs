@@ -3,8 +3,8 @@ import { IconButton, InputAdornment } from "@mui/material";
 import { IMaskInput } from "react-imask";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers-pro";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { ReactComponent as CalendarIcon } from "/src/assets/calendarIcon.svg";
-import XTextfield from "../XTextfield";
+import { ReactComponent as CalendarIcon } from "@/assets/calendarIcon.svg";
+import XTextfield from "@/components/XTextfield";
 import clsx from "clsx";
 // import {FormikProps} from 'formik';
 

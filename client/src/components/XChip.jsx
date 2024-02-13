@@ -1,12 +1,12 @@
 import React from 'react';
 import {Box, Typography, IconButton} from '@mui/material';
 import clsx from 'clsx';
-import theme, {useGuiChipStyles} from '../themes';
-import {ReactComponent as ChipTopLeft} from '/src/assets/chipTopLeft.svg';
-import {ReactComponent as ChipTopRight} from '/src/assets/chipTopRight.svg';
-import {ReactComponent as ChipBottomRight} from '/src/assets/chipBottomRight.svg';
-import {ReactComponent as ChipBottomLeft} from '/src/assets/chipBottomLeft.svg';
-import {ReactComponent as CloseIcon} from '/src/assets/crossIcon.svg';
+import theme, {useGuiChipStyles} from '@/themes';
+import {ReactComponent as ChipTopLeft} from '@/assets/chipTopLeft.svg';
+import {ReactComponent as ChipTopRight} from '@/assets/chipTopRight.svg';
+import {ReactComponent as ChipBottomRight} from '@/assets/chipBottomRight.svg';
+import {ReactComponent as ChipBottomLeft} from '@/assets/chipBottomLeft.svg';
+import {ReactComponent as CloseIcon} from '@/assets/crossIcon.svg';
 
 const XChip = ({label = 'Demo Chip', disabled = false, onDelete, className = '', ...rest}) => {
   const classes = useGuiChipStyles();

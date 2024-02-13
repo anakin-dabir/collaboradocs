@@ -1,12 +1,12 @@
 import React, { useState, useCallback } from "react";
 import { TextField } from "@mui/material";
-import theme, { useGuiTextFieldStyles } from "../themes";
+import theme, { useGuiTextFieldStyles } from "@/themes";
 import clsx from "clsx";
-import { ReactComponent as TextFieldTopLeft } from "/src/assets/textFieldTopLeft.svg";
-import { ReactComponent as TextFieldTopRight } from "/src/assets/textFieldTopRight.svg";
-import { ReactComponent as TextFieldBottomRight } from "/src/assets/textFieldBottomRight.svg";
-import { ReactComponent as TextFieldBottomCenter } from "/src/assets/textFieldBottomCenter.svg";
-import { ReactComponent as TextFieldBottomCenter2 } from "/src/assets/textFieldBottomCenter2.svg";
+import { ReactComponent as TextFieldTopLeft } from "@/assets/textFieldTopLeft.svg";
+import { ReactComponent as TextFieldTopRight } from "@/assets/textFieldTopRight.svg";
+import { ReactComponent as TextFieldBottomRight } from "@/assets/textFieldBottomRight.svg";
+import { ReactComponent as TextFieldBottomCenter } from "@/assets/textFieldBottomCenter.svg";
+import { ReactComponent as TextFieldBottomCenter2 } from "@/assets/textFieldBottomCenter2.svg";
 
 const XTextfield = ({
   id,

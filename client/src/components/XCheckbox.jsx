@@ -1,8 +1,8 @@
 import React from "react";
 import { Checkbox, FormControlLabel } from "@mui/material";
-import { ReactComponent as RadioIcon } from "/src/assets/radioIcon.svg";
-import { ReactComponent as RadioCheckedIcon } from "/src/assets/radioCheckedIcon.svg";
-import { ReactComponent as RadioDisabledIcon } from "/src/assets/radioIconDisabled.svg";
+import { ReactComponent as RadioIcon } from "@/assets/radioIcon.svg";
+import { ReactComponent as RadioCheckedIcon } from "@/assets/radioCheckedIcon.svg";
+import { ReactComponent as RadioDisabledIcon } from "@/assets/radioIconDisabled.svg";
 import clsx from "clsx";
 
 const XCheckbox = ({

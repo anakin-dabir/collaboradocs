@@ -1,8 +1,8 @@
 import React from 'react';
 import {Divider} from '@mui/material';
-import {useGuiDividerStyles} from '../themes';
-import {ReactComponent as DividerLeft} from '/src/assets/divider_left.svg';
-import {ReactComponent as DividerRight} from '/src/assets/divider_right.svg';
+import {useGuiDividerStyles} from '@/themes';
+import {ReactComponent as DividerLeft} from '@/assets/divider_left.svg';
+import {ReactComponent as DividerRight} from '@/assets/divider_right.svg';
 
 const XDivider = ({...props}) => {
   const classes = useGuiDividerStyles();
