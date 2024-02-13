@@ -9,6 +9,8 @@ import XRadio from "./components/XRadio";
 import XCheckbox from "./components/XCheckbox";
 import XStack from "./components/XStack";
 import XTextfield from "./components/XTextfield";
+import Divider from "@/assets/divider.png";
+
 const App = () => {
   const [open, openSet] = useState(true);
   const theme = useTheme();
@@ -27,6 +29,7 @@ const App = () => {
           <XDateRangePicker selectedDate={selectedDate1} selectedDateSet={selectedDateSet1} />
           <XDatePicker selectedDate={selectedDate} selectedDateSet={selectedDateSet} />
         </div>
+        <img src={Divider} alt='' />
         <XBadge>
           <div className='h-20 w-20 p-4 ml-10'>Fuck you</div>
         </XBadge>
