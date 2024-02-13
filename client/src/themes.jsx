@@ -502,7 +502,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           color: colors.error_main,
-          textShadow: `0px 0px 6px ${alpha(colors.white, 0.5)}`,
+          // textShadow: `0px 0px 6px ${alpha(colors.white, 0.5)}`,
           marginLeft: "0 !important",
         },
       },
@@ -1237,7 +1237,8 @@ export const useGuiTextFieldStyles = makeStyles(() => ({
     },
     "& input": {
       "&:-webkit-autofill": {
-        WebkitBoxShadow: "0 0 0 1000px #153E3E inset !important;",
+        WebkitBoxShadow: "0 0 0 1000px #19466b inset !important;",
+        WebkitTextFillColor: "#ffffff",
       },
     },
     "& .MuiInputBase-root": {

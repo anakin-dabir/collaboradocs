@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { TextField } from "@mui/material";
-import theme, { useGuiTextFieldStyles } from "@/themes";
+import theme, { useGuiTextFieldStyles } from "../themes";
 import clsx from "clsx";
 import { ReactComponent as TextFieldTopLeft } from "@/assets/textFieldTopLeft.svg";
 import { ReactComponent as TextFieldTopRight } from "@/assets/textFieldTopRight.svg";
