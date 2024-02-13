@@ -16,7 +16,7 @@ const XButton = ({
   children,
   onClick,
   color = "default",
-  className,
+  className = "",
   disabled = false,
   fullWidth = false,
   type = "button",

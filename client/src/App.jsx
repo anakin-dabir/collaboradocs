@@ -42,24 +42,31 @@ const App = () => {
           options={["Male", "Female"]}
           className='flex-row justify-evenly  p-10'
         />
-        <div className='w-72'>
-          <XTextfield
-            select
-            value={radio}
-            onChange={(e) => radioSet(e.target.value)}
-            SelectProps={{
-              renderValue: (selected) => {
-                return selected;
-              },
-            }}
-          >
-            <MenuItem value='FUCK OFF'>
-              <XCheckbox label='Click here if you are 18+' checked={radio === "FUCK OFF"} />
-            </MenuItem>
-            <MenuItem value='FUCK one'>Fuck</MenuItem>
-            <MenuItem value='FUCK two'>Fuck</MenuItem>
-            <MenuItem value='FUCK three'>Fuck</MenuItem>
-          </XTextfield>
+        <div className='w-96'>
+          <XStack className='p-4 gap-4'>
+            <div className=''>Enter your name please</div>
+            <XTextfield
+              value={radio}
+              onChange={(e) => radioSet(e.target.value)}
+              SelectProps={{
+                renderValue: (selected) => {
+                  return selected;
+                },
+              }}
+            />
+            <XTextfield
+              value={radio}
+              onChange={(e) => radioSet(e.target.value)}
+              SelectProps={{
+                renderValue: (selected) => {
+                  return selected;
+                },
+              }}
+            />
+            <XButton loading className='w-full py-2'>
+              Login
+            </XButton>
+          </XStack>
         </div>
       </div>
     </>
