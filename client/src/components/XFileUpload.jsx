@@ -1,57 +1,54 @@
-import React, {useCallback, useMemo} from 'react';
-import {Box, Stack, Typography} from '@mui/material';
-import {useDropzone} from 'react-dropzone';
-import {ReactComponent as GalleryIcon} from '@/assets/gallery.svg';
-import XStack from './XStack';
-import XButton from './XButton';
-import clsx from 'clsx';
+import React, { useCallback, useMemo } from "react";
+import { Box, Stack, Typography } from "@mui/material";
+import { useDropzone } from "react-dropzone";
+import { ReactComponent as GalleryIcon } from "@/assets/gallery.svg";
+import XStack from "./XStack";
+import XButton from "./XButton";
+import clsx from "clsx";
 
 const focusedStyle = {
-  borderColor: '#18FFFF',
+  borderColor: "#18FFFF",
 };
 
 const acceptStyle = {
-  borderColor: '#18FFFF',
+  borderColor: "#18FFFF",
 };
 
 const rejectStyle = {
-  borderColor: '#ff1744',
+  borderColor: "#ff1744",
 };
 
 export default function XFileUpload({
-  // formik,
+  formik,
   name,
-  src = '',
+  src = "",
   fileSet,
   height,
   tabIndex,
-  className = '',
+  className = "",
 }) {
   const baseStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    padding: '1rem',
-    borderColor: '#0E8F9E',
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+    justifyContent: "center",
+    padding: "1rem",
+    borderColor: "#0E8F9E",
     borderWidth: 1,
-    borderStyle: 'dashed',
-    outline: 'none',
-    transition: 'border .24s ease-in-out',
-    height: height || '120px',
+    borderStyle: "dashed",
+    outline: "none",
+    transition: "border .24s ease-in-out",
+    height: height || "120px",
   };
   const onDrop = useCallback(
-    files => {
+    (files) => {
       if (!files.length) return;
       fileSet(files[0]);
-      // formik?.setFieldValue(name, files[0]);
+      formik?.setFieldValue(name, files[0]);
     },
-    [
-      fileSet,
-      // formik
-    ]
+    [fileSet, formik]
   );
-  const {getRootProps, getInputProps, isFocused, isDragAccept, isDragReject, fileRejections} =
+  const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject, fileRejections } =
     useDropzone({
       // accept: {
       //   'image/jpeg': ['.jpeg', '.jpg'],
@@ -69,35 +66,35 @@ export default function XFileUpload({
       ...(isFocused ? focusedStyle : {}),
       ...(isDragAccept ? acceptStyle : {}),
       ...(isDragReject ? rejectStyle : {}),
+      ...(formik.touched[name] && !!formik.errors[name] ? rejectStyle : {}),
     }),
-    [isFocused, isDragAccept, isDragReject]
+    [isFocused, isDragAccept, isDragReject, formik]
   );
-  console.log(src);
   return (
     <>
-      <Box className={clsx('flex flex-col gap-2', className)}>
-        <div {...getRootProps({style})}>
+      <Box className={clsx("flex flex-col gap-2", className)}>
+        <div {...getRootProps({ style })}>
           {src && (
             <XStack
               style={{
                 width: 80,
                 height: 75,
-                overflow: 'hidden',
-                position: 'relative',
-                backgroundColor: '#FFFFFF',
+                overflow: "hidden",
+                position: "relative",
+                backgroundColor: "#FFFFFF",
               }}
             >
               <img
                 src={src}
                 alt={src}
                 style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'contain',
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
                 }}
               />
             </XStack>
@@ -105,16 +102,16 @@ export default function XFileUpload({
           {!src && (
             <Stack gap={1}>
               <input {...getInputProps()} />
-              <Box sx={{display: 'flex', justifyContent: 'center'}}>
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <GalleryIcon />
               </Box>
               <Stack direction='row' alignItems='center' gap={1}>
-                <Typography sx={{opacity: 0.5}}>Drop logo here, or</Typography>
+                <Typography sx={{ opacity: 0.5 }}>Drop logo here, or</Typography>
                 <Box>
                   <XButton
                     tabIndex={tabIndex}
                     border={false}
-                    style={{textTransform: 'lowercase'}}
+                    style={{ textTransform: "lowercase" }}
                     type='button'
                   >
                     click to browse
@@ -124,7 +121,10 @@ export default function XFileUpload({
             </Stack>
           )}
         </div>
-        {fileRejections.length > 0 && <small style={{color: 'red'}}>Invalid image format</small>}
+        {formik.touched[name] && !!formik.errors[name] && (
+          <small style={{ color: "red" }}>{formik.errors[name]}</small>
+        )}
+        {fileRejections.length > 0 && <small style={{ color: "red" }}>Invalid image format</small>}
       </Box>
     </>
   );

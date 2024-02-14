@@ -14,6 +14,8 @@ const usernameValidation = Yup.string()
 
 const agreeToTerms = Yup.bool().oneOf([true], "You must agree to the terms and conditions");
 
+const file = Yup.mixed().required("File is required");
+
 export const LoginValidationSchema = Yup.object({
   email: emailValidation,
   password: passwordValidation,
@@ -29,4 +31,8 @@ export const SignupValidationSchema = Yup.object({
   fullName: fullNameValidation,
   password: passwordValidation,
   agreeToTerms: agreeToTerms,
+});
+
+export const FileValidationSchema = Yup.object({
+  myFile: file,
 });
