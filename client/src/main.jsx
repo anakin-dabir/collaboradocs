@@ -9,6 +9,8 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { BrowserRouter } from "react-router-dom";
 import store, { persistor } from "./store/store.js";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 LicenseInfo.setLicenseKey(
   "42b4128b931a7b8884d7123880a6fe3bTz02NjQ5OCxFPTE3MTU3NzcyNDg1MDEsUz1wcm8sTE09c3Vic2NyaXB0aW9uLEtWPTI="
@@ -22,7 +24,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <ThemeProvider theme={theme}>
             <GlobalCss />
             <CssBaseline />
-            <App />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <App />
+            </LocalizationProvider>
           </ThemeProvider>
         </StyledEngineProvider>
       </PersistGate>

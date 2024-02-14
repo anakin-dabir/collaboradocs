@@ -14,15 +14,16 @@ import useValidation from "./formik/useValidation";
 import { LoginValidationSchema } from "./formik/validationSchema";
 import { useSelector, useDispatch } from "react-redux";
 import { userSet } from "./store/slice/authSlice";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import toObject from "dayjs/plugin/toObject";
 
 const App = () => {
   const [open, openSet] = useState(true);
   const theme = useTheme();
   const [loading, loadingSet] = useState(false);
   const user = useSelector((state) => state.user);
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  useEffect(() => {}, [user]);
   const dispatch = useDispatch();
 
   const initialValues = { email: "", password: "" };
@@ -38,6 +39,12 @@ const App = () => {
     handleSubmit,
     validationSchema: LoginValidationSchema,
   });
+  const [date, dateSet] = useState([
+    dayjs("11/12/2021").format("DD/MMM/YYYY"),
+    dayjs("11/12/2025").format("DD/MMM/YYYY"),
+  ]);
+
+  console.log(dayjs("2021-11-25").format("DD-MM-YYYY"));
 
   return (
     <>

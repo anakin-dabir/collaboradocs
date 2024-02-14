@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { InputAdornment, IconButton } from "@mui/material";
-import { LocalizationProvider } from "@mui/x-date-pickers";
 import { DateRangePicker } from "@mui/x-date-pickers-pro";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import XTextfield from "@/components/XTextfield";
 import { ReactComponent as CalendarIcon } from "@/assets/calendarIcon.svg";
 import { ReactComponent as CrossIcon } from "@/assets/crossIcon.svg";
 import clsx from "clsx";
 // import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 // import {useSelector} from 'react-redux';
+import dayjs from "dayjs";
 
 const XDateRangePicker = ({
   selectedDate = ["12/11/2021", "12/11/2023"],
@@ -22,64 +21,59 @@ const XDateRangePicker = ({
   return (
     <>
       <div className={clsx("w-72", className)}>
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DateRangePicker
-            value={[selectedDate[0], selectedDate[1]] || null}
-            open={calenderOpen}
-            onClose={() => calenderOpenSet(false)}
-            onOpen={() => calenderOpenSet(true)}
-            PopperProps={{ className: "text-nowrap" }}
-            onChange={(value) => {
-              selectedDateSet?.([
-                value[0]?.toLocaleDateString("en-US", {
-                  month: "2-digit",
-                  day: "2-digit",
-                  year: "numeric",
-                }) || "",
-                value[1]?.toLocaleDateString("en-US", {
-                  month: "2-digit",
-                  day: "2-digit",
-                  year: "numeric",
-                }) || "",
-              ]);
-            }}
-            renderInput={() => (
-              <XTextfield
-                placeholder={placeholder}
-                value={
-                  selectedDate[0] && selectedDate[1]
-                    ? [
-                        new Date(selectedDate[0]).toLocaleDateString("en-GB"),
-                        new Date(selectedDate[1]).toLocaleDateString("en-GB"),
-                      ].join("-")
-                    : ""
-                }
-                onKeyDown={(e) => {
-                  if (e.code === "Backspace") selectedDateSet?.(["", ""]);
-                }}
-                type='text'
-                inputProps={{
-                  endAdornment: (
-                    <InputAdornment position='end'>
-                      {selectedDate[0] && selectedDate[1] && (
-                        <IconButton onClick={() => selectedDateSet?.(["", ""])}>
-                          <CrossIcon />
-                        </IconButton>
-                      )}
-                      <IconButton
-                        onClick={() => {
-                          calenderOpenSet?.((prev) => !prev);
-                        }}
-                      >
-                        <CalendarIcon />
+        <DateRangePicker
+          value={
+            [
+              dayjs(selectedDate[0]).format("DD/MMM/YYYY"),
+              dayjs(selectedDate[1]).format("DD/MMM/YYYY"),
+            ] || null
+          }
+          open={calenderOpen}
+          onClose={() => calenderOpenSet(false)}
+          onOpen={() => calenderOpenSet(true)}
+          PopperProps={{ className: "text-nowrap" }}
+          onChange={(value) => {
+            selectedDateSet?.([
+              value[0]?.format("DD/MMM/YYYY") || "",
+              value[1]?.format("DD/MMM/YYYY") || "",
+            ]);
+          }}
+          renderInput={() => (
+            <XTextfield
+              placeholder={placeholder}
+              value={
+                selectedDate[0] && selectedDate[1]
+                  ? [
+                      dayjs(selectedDate[0]).format("DD/MMM/YYYY"),
+                      dayjs(selectedDate[1]).format("DD/MMM/YYYY"),
+                    ].join(" - ")
+                  : ""
+              }
+              onKeyDown={(e) => {
+                if (e.code === "Backspace") selectedDateSet?.(["", ""]);
+              }}
+              type='text'
+              inputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    {selectedDate[0] && selectedDate[1] && (
+                      <IconButton onClick={() => selectedDateSet?.(["", ""])}>
+                        <CrossIcon />
                       </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            )}
-          />
-        </LocalizationProvider>
+                    )}
+                    <IconButton
+                      onClick={() => {
+                        calenderOpenSet?.((prev) => !prev);
+                      }}
+                    >
+                      <CalendarIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          )}
+        />
       </div>
     </>
   );
