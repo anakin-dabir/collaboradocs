@@ -12,19 +12,26 @@ import XTextfield from "./components/XTextfield";
 import Divider from "@/assets/divider.png";
 import useValidation from "./formik/useValidation";
 import { LoginValidationSchema } from "./formik/validationSchema";
+import { useSelector, useDispatch } from "react-redux";
+import { userSet } from "./store/slice/authSlice";
 
 const App = () => {
   const [open, openSet] = useState(true);
   const theme = useTheme();
   const [loading, loadingSet] = useState(false);
+  const user = useSelector((state) => state.user);
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+  const dispatch = useDispatch();
 
   const initialValues = { email: "", password: "" };
   const handleSubmit = (values) => {
     loadingSet(true);
+    dispatch(userSet(values));
     setTimeout(() => {
       loadingSet(false);
     }, 3000);
-    console.log(values);
   };
   const formik = useValidation({
     initialValues,
