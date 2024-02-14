@@ -1,16 +1,13 @@
-import express from "express";
 import http from "http";
-import SocketService from "./services/socket.js";
+import app from "./services/express.js";
+import connectDb from "./services/db.js";
 
 async function init() {
-  const app = express();
   const httpServer = http.createServer(app);
-  const socket = new SocketService();
-  socket.io.attach(httpServer);
   app.get("/", (req, res) => res.send("Server running on port 5000"));
-  httpServer.listen(5001, () => console.log("Server running on port", 5000));
 
-  socket.initListeners();
+  connectDb("mongodb://127.0.0.1:27017/DF-63");
+  httpServer.listen(5000, () => console.log("Server running on port", 5000));
 }
 
 init();
