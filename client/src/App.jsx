@@ -34,6 +34,9 @@ import { useHeadingStyles } from "./themes";
 import XTablePagination from "./components/Table/XTablePagination";
 import AppDrawer from "./components/XDrawer";
 import SDrawer from "./SDrawer";
+import XToast from "./components/XToast";
+import XAlertBase from "./components/Alert/XAlertBase";
+import XAlert from "./components/Alert/XAlert";
 
 const App = () => {
   const [open, openSet] = useState(false);
@@ -59,10 +62,12 @@ const App = () => {
   return (
     <>
       <div className=' h-screen pt-10 bg-black/90 !shadow-2xl'>
-        <SDrawer drawerOpen={open} openSet={openSet} />
+        {/* <SDrawer drawerOpen={open} openSet={openSet} /> */}
         <XButton className='ml-52' onClick={() => openSet((pre) => !pre)}>
           Open Drawer
         </XButton>
+        <XToast isOpen={open} onClose={() => openSet((pre) => !pre)} severity='error' />
+        <XAlert isOpen={open} />
       </div>
     </>
   );
