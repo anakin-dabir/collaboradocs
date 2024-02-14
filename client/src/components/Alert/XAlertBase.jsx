@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Dialog, DialogTitle, Stack, Typography } from "@mui/material";
-import { useGuiDialogStyles, useHeadingStyles } from "../../themes";
+import { useGuiDialogStyles, useHeadingStyles } from "@/themes";
 import clsx from "clsx";
 import { ReactComponent as ModuleTopLeft } from "@/assets/module_top_left.svg";
 import { ReactComponent as ModuleTopRight } from "@/assets/module_top_right.svg";
@@ -8,6 +8,7 @@ import { ReactComponent as ModuleBottomRight } from "@/assets/module_bottom_righ
 import { ReactComponent as ModuleBottomLeft } from "@/assets/module_bottom_left.svg";
 import { ReactComponent as DividerBoth } from "@/assets/divider_both.svg";
 import { ReactComponent as WarningIcon } from "@/assets/warning.svg";
+import XStack from "../XStack";
 
 const XAlertBase = ({
   className,
@@ -44,7 +45,7 @@ const XAlertBase = ({
       sx={sx}
       {...props}
     >
-      <Box className={dialogClasses.root}>
+      <XStack size='large' className={dialogClasses.root}>
         <ModuleTopLeft className={clsx(dialogClasses.border, dialogClasses.top_left_border)} />
         <ModuleBottomLeft
           className={clsx(dialogClasses.border, dialogClasses.bottom_left_border)}
@@ -69,7 +70,7 @@ const XAlertBase = ({
           </DialogTitle>
           {children}
         </Box>
-      </Box>
+      </XStack>
     </Dialog>
   );
 };
