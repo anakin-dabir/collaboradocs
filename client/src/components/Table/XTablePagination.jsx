@@ -1,13 +1,12 @@
-import React, {forwardRef} from 'react';
-import {Box, MenuItem, TablePagination} from '@mui/material';
-import {ITablePagination} from './tablePagination.interface';
-import {ReactComponent as FirstButtonIcon} from '../../img/pagination_firstIcon.svg';
-import {ReactComponent as LastButtonIcon} from '../../img/pagination_lastIcon.svg';
-import {ReactComponent as PrevButtonIcon} from '../../img/pagination_prevIcon.svg';
-import {ReactComponent as NextButtonIcon} from '../../img/pagination_nextIcon.svg';
-import GuiTextField from '../TextField/guiTextField';
+import React, { forwardRef } from "react";
+import { Box, MenuItem, TablePagination } from "@mui/material";
+import { ReactComponent as FirstButtonIcon } from "@/assets/pagination_firstIcon.svg";
+import { ReactComponent as LastButtonIcon } from "@/assets/pagination_lastIcon.svg";
+import { ReactComponent as PrevButtonIcon } from "@/assets/pagination_prevIcon.svg";
+import { ReactComponent as NextButtonIcon } from "@/assets/pagination_nextIcon.svg";
+import XTextfield from "../XTextfield";
 
-export default function GuiTablePagination({
+export default function XTablePagination({
   count,
   rowsPerPage,
   rowsPerPageSet,
@@ -16,20 +15,20 @@ export default function GuiTablePagination({
   paginationOpsSet,
   uiSearchSet,
   rowsPerPageOptions = [5, 10, 20, 50],
-}: ITablePagination) {
-  const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
-    uiSearchSet('');
+}) {
+  const handleChangePage = (event, newPage) => {
+    uiSearchSet("");
     pageNoSet(newPage);
-    paginationOpsSet((prev: any) => ({
+    paginationOpsSet((prev) => ({
       ...prev,
       pageNo: newPage + 1,
     }));
   };
-  const handleChangeRowsPerPage = (value: string) => {
-    uiSearchSet('');
+  const handleChangeRowsPerPage = (value) => {
+    uiSearchSet("");
     rowsPerPageSet(parseInt(value, 10));
     pageNoSet(0);
-    paginationOpsSet((prev: any) => ({
+    paginationOpsSet((prev) => ({
       ...prev,
       pageNo: 1,
       pageSize: parseInt(value, 10),
@@ -46,7 +45,7 @@ export default function GuiTablePagination({
       showFirstButton
       showLastButton
       sx={{
-        '& .Mui-disabled': {
+        "& .Mui-disabled": {
           opacity: 0.3,
         },
       }}
@@ -61,17 +60,16 @@ export default function GuiTablePagination({
       slotProps={{
         select: {
           value: rowsPerPageOptions,
-          /* eslint-disable react/display-name */
           inputComponent: forwardRef((props, ref) => (
-            <Box sx={{width: '70px'}} ref={ref}>
-              <GuiTextField
+            <Box sx={{ width: "70px" }} ref={ref}>
+              <XTextfield
                 size='small'
                 simpleBorderWithBottomRight={true}
                 simpleBorder={true}
                 select={true}
                 value={rowsPerPage}
               >
-                {rowsPerPageOptions.map((option: any) => (
+                {rowsPerPageOptions.map((option) => (
                   <MenuItem
                     key={option}
                     value={option}
@@ -80,7 +78,7 @@ export default function GuiTablePagination({
                     {option}
                   </MenuItem>
                 ))}
-              </GuiTextField>
+              </XTextfield>
             </Box>
           )),
         },

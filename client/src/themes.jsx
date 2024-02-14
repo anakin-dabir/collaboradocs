@@ -1442,7 +1442,7 @@ export const useGuiTableStyles = makeStyles({
         textShadow: "none",
         borderBottom: 0,
         paddingBlock: "0.85rem !important",
-        background: "rgb(7,36,61) !important",
+        // background: "rgb(7,36,61) !important",
       },
     },
     "& .MuiTableBody-root": {
@@ -1760,6 +1760,7 @@ export const useLoadingStyles = makeStyles(() => {
       alignItems: "center",
       height: "100vh",
       width: "100vw",
+      backgroundColor: alpha(colors.secondary_background, 0.5),
       top: 0,
       bottom: 0,
       left: 0,
