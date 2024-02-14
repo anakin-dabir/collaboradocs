@@ -1,11 +1,8 @@
 import React from "react";
-import { Box, Dialog, DialogTitle, Stack, Typography } from "@mui/material";
-import { useGuiDialogStyles, useHeadingStyles } from "@/themes";
+import { Box, Dialog, DialogTitle, IconButton, Stack, Typography } from "@mui/material";
+import { useGuiDialogStyles, useHeadingStyles } from "../../themes";
 import clsx from "clsx";
-import { ReactComponent as ModuleTopLeft } from "@/assets/module_top_left.svg";
-import { ReactComponent as ModuleTopRight } from "@/assets/module_top_right.svg";
-import { ReactComponent as ModuleBottomRight } from "@/assets/module_bottom_right.svg";
-import { ReactComponent as ModuleBottomLeft } from "@/assets/module_bottom_left.svg";
+import { ReactComponent as CloseIcon } from "@/assets/close.svg";
 import { ReactComponent as DividerBoth } from "@/assets/divider_both.svg";
 import { ReactComponent as WarningIcon } from "@/assets/warning.svg";
 import XStack from "../XStack";
@@ -22,7 +19,7 @@ const XAlertBase = ({
   isOpen,
   dropShadow = true,
   closeOnClickAway = true,
-  heading = "Leave Page",
+  heading = "",
   ...props
 }) => {
   const dialogClasses = useGuiDialogStyles();
@@ -46,28 +43,29 @@ const XAlertBase = ({
       {...props}
     >
       <XStack size='large' className={dialogClasses.root}>
-        <ModuleTopLeft className={clsx(dialogClasses.border, dialogClasses.top_left_border)} />
-        <ModuleBottomLeft
-          className={clsx(dialogClasses.border, dialogClasses.bottom_left_border)}
-        />
-        <ModuleBottomRight
-          className={clsx(dialogClasses.border, dialogClasses.bottom_right_border)}
-        />
-        <ModuleTopRight className={clsx(dialogClasses.border, dialogClasses.top_right_border)} />
         <Box className={dialogClasses.content}>
-          <DialogTitle>
-            <Stack direction='row' mb={1.5} mt={2} alignItems='center'>
-              <Box mr={1}>
-                <WarningIcon />
-              </Box>
-              <Box>
+          {heading && (
+            <DialogTitle>
+              <Stack direction='row' mb={1.5} mt={2} alignItems='center'>
+                <Box mr={1}>
+                  <WarningIcon />
+                </Box>
                 <Typography className={headingClasses.heading}>{heading}</Typography>
+                <Box display='flex' ml='auto'>
+                  <IconButton
+                    onClick={() => {
+                      onClose();
+                    }}
+                  >
+                    <CloseIcon />
+                  </IconButton>
+                </Box>
+              </Stack>
+              <Box>
+                <DividerBoth style={{ width: "100%" }} />
               </Box>
-            </Stack>
-            <Box>
-              <DividerBoth style={{ width: "100%" }} />
-            </Box>
-          </DialogTitle>
+            </DialogTitle>
+          )}
           {children}
         </Box>
       </XStack>

@@ -30,7 +30,7 @@ const XTextfield = ({
   error = false,
   type = "text",
   SelectProps,
-  placeholder,
+  placeholder = "",
   onBlur,
   onFocus,
   onChange,
