@@ -32,9 +32,11 @@ import XTableContainer from "./components/Table/XTableContainer";
 import XTable from "./components/Table/XTable";
 import { useHeadingStyles } from "./themes";
 import XTablePagination from "./components/Table/XTablePagination";
+import AppDrawer from "./components/XDrawer";
+import SDrawer from "./SDrawer";
 
 const App = () => {
-  const [open, openSet] = useState(true);
+  const [open, openSet] = useState(false);
   const theme = useTheme();
   const [loading, loadingSet] = useState(false);
   const user = useSelector((state) => state.user);
@@ -54,55 +56,13 @@ const App = () => {
     handleSubmit,
     validationSchema: LoginValidationSchema,
   });
-  const [date, dateSet] = useState([
-    dayjs("11/12/2021").format("DD/MMM/YYYY"),
-    dayjs("11/12/2025").format("DD/MMM/YYYY"),
-  ]);
-  const arr = ["anakin", "new Name", "futureSelf", "Fuck off", "Fuck off", "Fuck off"];
-
-  console.log(dayjs("2021-11-25").format("DD-MM-YYYY"));
-  const classes = useHeadingStyles();
   return (
     <>
       <div className=' h-screen pt-10 bg-black/90 !shadow-2xl'>
-        <XTableContainer
-          style={{
-            overflowX: "initial",
-            overflowY: "scroll",
-            height: "60vh",
-          }}
-        >
-          <XTable>
-            <TableHead>
-              <TableRow>
-                {arr.map((ar, index) => {
-                  return (
-                    <TableCell align='center'>
-                      <Typography className={classes.table_heading}>{ar}</Typography>
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell align='center'>This is me</TableCell>
-                <TableCell align='center'>This is me</TableCell>
-                <TableCell align='center'>This is me</TableCell>
-                <TableCell align='center'>This is me</TableCell>
-                <TableCell align='center'>This is me</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell align='center'>This is me</TableCell>
-                <TableCell align='center'>This is me</TableCell>
-                <TableCell align='center'>This is me</TableCell>
-                <TableCell align='center'>This is me</TableCell>
-                <TableCell align='center'>This is me</TableCell>
-              </TableRow>
-            </TableBody>
-          </XTable>
-        </XTableContainer>
-        <XTablePagination />
+        <SDrawer drawerOpen={open} openSet={openSet} />
+        <XButton className='ml-52' onClick={() => openSet((pre) => !pre)}>
+          Open Drawer
+        </XButton>
       </div>
     </>
   );
