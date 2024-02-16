@@ -19,5 +19,6 @@ app.use(
   })
 );
 app.use(fileUpload());
+app.use("/", express.static("photos"));
 
 export default app;
