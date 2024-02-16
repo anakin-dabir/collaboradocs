@@ -9,3 +9,5 @@ const uploadFile = (file) => {
 };
 
 export default uploadFile;
+
+export const publicPath = path.join(__dirname, "..", "public");

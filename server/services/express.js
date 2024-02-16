@@ -5,6 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import config from "../config/config.js";
 import fileUpload from "express-fileupload";
+import { publicPath } from "./fileUpload.js";
 
 const app = express();
 dotenv.config();
@@ -19,6 +20,6 @@ app.use(
   })
 );
 app.use(fileUpload());
-app.use("/", express.static("photos"));
+app.use("/", express.static(publicPath));
 
 export default app;
