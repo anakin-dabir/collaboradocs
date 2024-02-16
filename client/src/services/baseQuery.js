@@ -10,7 +10,10 @@ const baseQuery = fetchBaseQuery({
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
     }
-    // headers.set("Access-Control-Allow-Origin", config.SERVER);
+    headers.set(
+      "Access-Control-Allow-Origin",
+      process.env.SERVER || config.SERVER || "http://localhost:5000"
+    );
     // headers.set("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS");
     return headers;
   },
