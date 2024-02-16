@@ -43,7 +43,7 @@ const App = () => {
 
   const [fileUpload] = useFileUploadMutation();
   const [file, fileSet] = useState(null);
-
+  const [login] = useLoginMutation();
   const handleSubmit = (values) => {
     console.log(values);
     const formData = new FormData();
@@ -57,8 +57,7 @@ const App = () => {
   });
   return (
     <>
-      <XFileUpload formik={formik} fileSet={fileSet} name='file' />
-      <XButton onClick={formik.handleSubmit}>Click</XButton>
+      <XButton onClick={() => login({ id: 123 })}>Click</XButton>
     </>
   );
 };
