@@ -37,8 +37,9 @@ import SDrawer from "./SDrawer";
 import XToast from "./components/XToast";
 import XAlertBase from "./components/Alert/XAlertBase";
 import XAlert from "./components/Alert/XAlert";
-import dividerPng from "@/assets/divider.png";
+import dividerPng from "@/assets/dividerBottom.png";
 import XFileUpload from "./components/XFileUpload";
+import bg from "@/assets/bg/bg_2.png";
 
 const App = () => {
   const [open, openSet] = useState(false);
@@ -48,6 +49,7 @@ const App = () => {
   const user = useSelector((state) => state.user);
   useEffect(() => {}, [user]);
   const dispatch = useDispatch();
+  const [value, valueSet] = useState(10);
 
   // const initialValues = { email: "", password: "" };
   const handleSubmit = (values) => {
@@ -64,20 +66,59 @@ const App = () => {
     handleSubmit,
     validationSchema: FileValidationSchema,
   });
+  const headingClasses = useHeadingStyles();
   return (
     <>
-      <XStack className='w-96 p-10 gap-3'>
-        <form onSubmit={formik.handleSubmit}>
-          <XTextfield placeholder='Enter Name' />
-          <XFileUpload
-            formik={formik}
-            name='myFile'
-            src={file ? URL.createObjectURL(file) : ""}
-            fileSet={fileSet}
-          />
-          <XButton type='submit'>CLick me</XButton>
-        </form>
-      </XStack>
+      <div
+        className='h-full w-screen bg-black/70 bg-blend-overlay'
+        style={{
+          backgroundImage: `url(${bg})`,
+        }}
+      >
+        <XStack className='w-96 p-10 gap-3 !bg-secondary_background/50 !drop-shadow-none' size='l'>
+          <form onSubmit={formik.handleSubmit}>
+            <Typography>Edit User: anakindabir@gmail.com</Typography>
+            <Box sx={{ width: "30%", position: "absolute", bottom: 0 }}>
+              <img
+                style={{ width: "100%", marginBottom: "10px" }}
+                className={headingClasses.position}
+                src={dividerPng}
+                alt=''
+              />
+            </Box>
+            <div className='w-20'>
+              <XTextfield
+                fullWidth
+                simpleBorder
+                simpleBorderWithBottomRight
+                placeholder='Enter Name'
+                label='Enter Name'
+                value={value}
+                select
+                SelectProps={{
+                  renderValue: (selected) => selected,
+                }}
+              >
+                {[10, 15, 20].map((item, i) => {
+                  return (
+                    <MenuItem value={item} key={i} onClick={() => valueSet(item)}>
+                      {item}
+                    </MenuItem>
+                  );
+                })}
+              </XTextfield>
+            </div>
+
+            <XFileUpload
+              formik={formik}
+              name='myFile'
+              src={file ? URL.createObjectURL(file) : ""}
+              fileSet={fileSet}
+            />
+            <XButton type='submit'>CLick me</XButton>
+          </form>
+        </XStack>
+      </div>
     </>
   );
 };

@@ -21,7 +21,7 @@ const XTextfield = ({
   select = false,
   border = true,
   children,
-  fullWidth,
+  fullWidth = false,
   style,
   helperText,
   label,

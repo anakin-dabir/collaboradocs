@@ -1137,6 +1137,7 @@ export const useSearchBarStyles = makeStyles(() => ({
 export const useGuiTextFieldStyles = makeStyles(() => ({
   wrapper: {
     position: "relative",
+    marginTop: "35px",
     width: "100%",
     padding: 0,
     backgroundRepeat: "no-repeat",
@@ -1259,7 +1260,7 @@ export const useGuiTextFieldStyles = makeStyles(() => ({
       border: 0,
     },
     "& label.MuiInputLabel-shrink": {
-      transform: "translate(10px, -20px) scale(0.75)",
+      transform: "translate(3px, -26px) scale(0.85)",
     },
   },
   paper: {
@@ -1381,8 +1382,8 @@ export const useGuiModuleStyles = makeStyles(() => ({
     backgroundColor: alpha(colors.secondary_background, 0.9),
     boxShadow: "none",
     border: "none",
-    filter: `drop-shadow(0px 0px 6px ${colors.primary_main})`,
-    filter: "drop-shadow(0 0 10px #536DFE)",
+    filter: `drop-shadow(0px 0px 10px ${colors.secondary_light})`,
+    // filter: "drop-shadow(0 0 10px #536DFE)",
     boxShadow: `1px 1px 10px ${colors.primary_main}`,
     clipPath: `
       polygon(
