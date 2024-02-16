@@ -51,9 +51,9 @@ export default function XMenu({
     localSelectedOptionSet(item);
     formik?.setFieldValue(name, item);
     selectedOptionSet?.(item);
-    setTimeout(() => {
-      handleClose();
-    }, 300);
+    // setTimeout(() => {
+    handleClose();
+    // }, 300);
   };
   const handleDefaultOptionRemover = () => {
     localSelectedOptionSet(null);
