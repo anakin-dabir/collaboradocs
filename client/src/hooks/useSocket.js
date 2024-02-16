@@ -3,7 +3,9 @@ import { io } from "socket.io-client";
 
 const useSocket = () => {
   const [socket, socketSet] = useState(
-    io("https://pucon-production.up.railway.app/", { autoConnect: false })
+    io("http://localhost:5000" || "https://pucon-production.up.railway.app/", {
+      autoConnect: false,
+    })
   );
 
   const connect = () => {

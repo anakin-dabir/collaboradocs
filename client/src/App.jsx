@@ -24,6 +24,7 @@ import bg from "@/assets/bg/bg_2.png";
 import XMenu from "./components/XMenu";
 import useSocket from "./hooks/useSocket";
 import XSocket from "./components/XSocket";
+import { useLoginMutation } from "./services/nodeApi";
 
 const App = () => {
   const [open, openSet] = useState(false);
@@ -31,7 +32,11 @@ const App = () => {
   const [storeAnchorEl, storeAnchorElSet] = useState(null);
   const [searchStore, searchStoreSet] = useState("");
   const [selectedStore, selectedStoreSet] = useState("");
+  const [login, { isLoading }] = useLoginMutation();
 
+  useEffect(() => {
+    login({ name: "anakin", email: "anakindabir@gmail.com" });
+  }, []);
   const [file, fileSet] = useState(null);
   const user = useSelector((state) => state.user);
   useEffect(() => {}, [user]);

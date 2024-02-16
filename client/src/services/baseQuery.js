@@ -2,7 +2,7 @@ import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000",
+  baseUrl: "http://localhost:5000" || "https://pucon-production.up.railway.app/",
   credentials: "include",
   prepareHeaders: (headers) => {
     const token = Cookies.get("jwt_token");
