@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
+import config from "../config/config";
 
 const useSocket = () => {
   const [socket, socketSet] = useState(
-    io("http://localhost:5000" || "https://pucon-production.up.railway.app/", {
+    io(process.env.SERVER || config.SERVER || "http://localhost:5000", {
       autoConnect: false,
     })
   );

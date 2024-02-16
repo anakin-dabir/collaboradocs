@@ -61,7 +61,6 @@ const App = () => {
   const headingClasses = useHeadingStyles();
   return (
     <>
-      <XSocket />
       <div
         className='h-full w-screen bg-black/70 bg-blend-overlay'
         style={{
