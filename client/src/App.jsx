@@ -9,6 +9,7 @@ import {
   TableBody,
   TableHead,
   Typography,
+  InputLabel,
 } from "@mui/material";
 import XButton from "./components/XButton";
 import XDateRangePicker from "./components/Date/XDateRangePicker";
@@ -124,6 +125,7 @@ const App = () => {
           </form>
         </XStack>
         <div className='my-10 w-72'>
+          <InputLabel className='text-primary_main'>Select option</InputLabel>
           <XMenu
             options={["anakin", "laura", "messi", "ronaldo"]}
             prefilledOption='anakin'
