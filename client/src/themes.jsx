@@ -1137,7 +1137,6 @@ export const useSearchBarStyles = makeStyles(() => ({
 export const useGuiTextFieldStyles = makeStyles(() => ({
   wrapper: {
     position: "relative",
-    marginTop: "35px",
     width: "100%",
     padding: 0,
     backgroundRepeat: "no-repeat",

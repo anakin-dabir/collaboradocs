@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Grid,
@@ -8,21 +8,21 @@ import {
   Menu,
   MenuItem,
   Typography,
-} from '@mui/material';
-import {useGuiTextFieldStyles, useHeadingStyles} from '@/themes';
-import GuiTextField from './GuiTextField';
-import GuiChip from './Chip';
-import GuiTooltip from './GuiTooltip';
-import GuiBox from './Box';
-import {ReactComponent as ArrowDownIcon} from '@/assets/arrowDownIcon.svg';
-import {ReactComponent as SearchIcon} from '@/assets/searchIcon.svg';
-import {ReactComponent as CrossIcon} from '@/assets/crossIcon.svg';
-import {ReactComponent as CheckedIcon} from '@/assets/checked_icon.svg';
+} from "@mui/material";
+import { useGuiTextFieldStyles, useHeadingStyles } from "@/themes";
+import { ReactComponent as ArrowDownIcon } from "@/assets/arrowDownIcon.svg";
+import { ReactComponent as SearchIcon } from "@/assets/searchIcon.svg";
+import { ReactComponent as CrossIcon } from "@/assets/crossIcon.svg";
+import { ReactComponent as CheckedIcon } from "@/assets/checked_icon.svg";
+import XTextfield from "@/components/XTextfield";
+import XStack from "./XStack";
+import XTooltip from "./XTooltip";
+import XChip from "./XChip";
 
 export default function XMenu({
   options,
   anchorEl,
-  search,
+  search = "",
   searchSet,
   anchorElSet,
   name,
@@ -30,27 +30,24 @@ export default function XMenu({
   selectedOptionSet,
   tabIndex,
   prefilledOption,
-  isSystemConstant = false,
-  isUser = false,
   error = false,
   simpleBorder = false,
-  menuWidth = '22%',
-  textFieldClassName = '',
-  rtl = false,
-  placeholder = '',
-  inputLabel = '',
+  menuWidth = "30%",
+  textFieldClassName = "",
+  placeholder = "",
+  inputLabel = "",
 }) {
   const textFieldClasses = useGuiTextFieldStyles();
   const headingClasses = useHeadingStyles();
   const [localSelectedOption, localSelectedOptionSet] = useState(null);
-  const handleClick = event => {
+  const handleClick = (event) => {
     anchorElSet(event.currentTarget);
   };
   const handleClose = () => {
     anchorElSet(null);
-    searchSet('');
+    searchSet("");
   };
-  const handleListItemClick = item => {
+  const handleListItemClick = (item) => {
     localSelectedOptionSet(item);
     formik?.setFieldValue(name, item._id);
     selectedOptionSet?.(item._id);
@@ -60,18 +57,13 @@ export default function XMenu({
   };
   const handleDefaultOptionRemover = () => {
     localSelectedOptionSet(null);
-    formik?.setFieldValue(name, '');
-    selectedOptionSet?.('');
+    formik?.setFieldValue(name, "");
+    selectedOptionSet?.("");
   };
   useEffect(() => {
     if (!prefilledOption) return;
-    let name = '';
-    if (isSystemConstant) name = options.find(el => el.id === prefilledOption)?.value;
-    else if (isUser) {
-      const option = options.find(el => el._id === prefilledOption);
-      if (option)
-        name = option.lastName ? `${option.firstName} ${option.lastName}` : option.firstName;
-    } else name = options.find(el => el._id === prefilledOption)?.name;
+    let name = "";
+    name = options.find((el) => el._id === prefilledOption)?.name;
     if (name)
       localSelectedOptionSet({
         _id: prefilledOption,
@@ -82,10 +74,9 @@ export default function XMenu({
     <>
       <Box onClick={handleClick} position='relative'>
         {inputLabel && <InputLabel className={headingClasses.menu_label}>{inputLabel}</InputLabel>}
-        <GuiTextField
+        <XTextfield
           autoComplete='off'
           variant='outlined'
-          dir={rtl ? 'rtl' : 'ltr'}
           name={name}
           error={error}
           simpleBorder={simpleBorder}
@@ -94,16 +85,16 @@ export default function XMenu({
             startAdornment: localSelectedOption ? (
               <InputAdornment position='start'>
                 {localSelectedOption.name.length > 15 ? (
-                  <GuiTooltip title={localSelectedOption.name} placement='top'>
+                  <XTooltip title={localSelectedOption.name} placement='top'>
                     <Box>
-                      <GuiChip
-                        label={localSelectedOption.name.slice(0, 15) + '...'}
+                      <XChip
+                        label={localSelectedOption.name.slice(0, 15) + "..."}
                         onDelete={handleDefaultOptionRemover}
                       />
                     </Box>
-                  </GuiTooltip>
+                  </XTooltip>
                 ) : (
-                  <GuiChip label={localSelectedOption.name} onDelete={handleDefaultOptionRemover} />
+                  <XChip label={localSelectedOption.name} onDelete={handleDefaultOptionRemover} />
                 )}
               </InputAdornment>
             ) : (
@@ -119,7 +110,7 @@ export default function XMenu({
                       handleDefaultOptionRemover();
                       handleClose();
                     }}
-                    sx={{padding: 0}}
+                    sx={{ padding: 0 }}
                   >
                     <CrossIcon />
                   </IconButton>
@@ -132,7 +123,7 @@ export default function XMenu({
             readOnly: true,
             inputProps: {
               style: {
-                cursor: 'pointer',
+                cursor: "pointer",
               },
             },
           }}
@@ -158,14 +149,14 @@ export default function XMenu({
     `,
           },
         }}
-        MenuListProps={{sx: {py: 0}}}
+        MenuListProps={{ sx: { py: 0 } }}
       >
-        <GuiBox style={{backgroundColor: 'rgb(7,50,79)'}}>
+        <XStack style={{ backgroundColor: "rgb(7,50,79)" }}>
           <Box>
             <Box p={3}>
-              <GuiTextField
+              <XTextfield
                 value={search}
-                onChange={e => searchSet(e.target.value)}
+                onChange={(e) => searchSet(e.target.value)}
                 inputProps={{
                   endAdornment: (
                     <IconButton>
@@ -175,27 +166,16 @@ export default function XMenu({
                 }}
               />
             </Box>
-            <Box sx={{maxHeight: '280px', overflowY: 'auto'}} pb={3}>
+            <Box sx={{ maxHeight: "280px", overflowY: "auto" }} pb={3}>
               {options
-                .filter(el => {
-                  if (isSystemConstant)
-                    return el.value.toLowerCase().includes(search.toLowerCase());
-                  else if (isUser) return el.email.toLowerCase().includes(search.toLowerCase());
-                  else return el.name.toLowerCase().includes(search.toLowerCase());
+                .filter((el) => {
+                  return el.name.toLowerCase().includes(search.toLowerCase());
                 })
-                .map(el => {
-                  let name = '';
-                  let _id = '';
-                  if (isSystemConstant) {
-                    name = el.value;
-                    _id = el.id;
-                  } else if (isUser) {
-                    name = el.lastName ? `${el.firstName} ${el.lastName}` : el.firstName;
-                    _id = el._id;
-                  } else {
-                    name = el.name;
-                    _id = el._id;
-                  }
+                .map((el) => {
+                  let name = "";
+                  let _id = "";
+                  name = el.name;
+                  _id = el._id;
                   return (
                     <MenuItem
                       key={_id}
@@ -207,24 +187,20 @@ export default function XMenu({
                         })
                       }
                       sx={{
-                        width: '80%',
-                        margin: 'auto',
-                        paddingBlock: '1.2rem',
+                        width: "80%",
+                        margin: "auto",
+                        paddingBlock: "1.2rem",
                       }}
-                      className={_id === localSelectedOption?._id ? textFieldClasses.checked : ''}
+                      className={_id === localSelectedOption?._id ? textFieldClasses.checked : ""}
                     >
                       <Grid container>
                         <Grid item xs={10}>
-                          {isUser ? (
-                            <GuiTooltip placement='left' title={el.email}>
-                              <Box>{name.slice(0, 20)}...</Box>
-                            </GuiTooltip>
-                          ) : name.length > 20 ? (
-                            <GuiTooltip placement='left' title={name}>
+                          {name.length > 20 ? (
+                            <XTooltip placement='left' title={name}>
                               <Box>
                                 <Typography fontSize={15}>{name.slice(0, 20)}...</Typography>
                               </Box>
-                            </GuiTooltip>
+                            </XTooltip>
                           ) : (
                             <Box>
                               <Typography fontSize={15}>{name}</Typography>
@@ -239,7 +215,7 @@ export default function XMenu({
                 })}
             </Box>
           </Box>
-        </GuiBox>
+        </XStack>
       </Menu>
     </>
   );

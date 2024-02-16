@@ -40,11 +40,16 @@ import XAlert from "./components/Alert/XAlert";
 import dividerPng from "@/assets/dividerBottom.png";
 import XFileUpload from "./components/XFileUpload";
 import bg from "@/assets/bg/bg_2.png";
+import XMenu from "./components/XMenu";
 
 const App = () => {
   const [open, openSet] = useState(false);
   const theme = useTheme();
   const [loading, loadingSet] = useState(false);
+  const [storeAnchorEl, storeAnchorElSet] = useState(null);
+  const [searchStore, searchStoreSet] = useState("");
+  const [selectedStore, selectedStoreSet] = useState("");
+
   const [file, fileSet] = useState(null);
   const user = useSelector((state) => state.user);
   useEffect(() => {}, [user]);
@@ -118,6 +123,23 @@ const App = () => {
             <XButton type='submit'>CLick me</XButton>
           </form>
         </XStack>
+        <div className='my-10 w-96'>
+          <XMenu
+            options={[
+              { _id: "Anakin", name: "Anakin" },
+              { _id: "Mariko", name: "Mariko" },
+              { _id: "Laura", name: "Laura" },
+              { _id: "Began", name: "Began" },
+            ]}
+            prefilledOption={"Anakin"}
+            anchorEl={storeAnchorEl}
+            anchorElSet={storeAnchorElSet}
+            name='Store'
+            selectedOptionSet={selectedStoreSet}
+            search={searchStore}
+            searchSet={searchStoreSet}
+          />
+        </div>
       </div>
     </>
   );
