@@ -1,14 +1,14 @@
-import React from 'react';
-import {Box, Typography, IconButton} from '@mui/material';
-import clsx from 'clsx';
-import theme, {useGuiChipStyles} from '@/themes';
-import {ReactComponent as ChipTopLeft} from '@/assets/chipTopLeft.svg';
-import {ReactComponent as ChipTopRight} from '@/assets/chipTopRight.svg';
-import {ReactComponent as ChipBottomRight} from '@/assets/chipBottomRight.svg';
-import {ReactComponent as ChipBottomLeft} from '@/assets/chipBottomLeft.svg';
-import {ReactComponent as CloseIcon} from '@/assets/crossIcon.svg';
+import React from "react";
+import { Box, Typography, IconButton } from "@mui/material";
+import clsx from "clsx";
+import theme, { useGuiChipStyles } from "@/themes";
+import { ReactComponent as ChipTopLeft } from "@/assets/chipTopLeft.svg";
+import { ReactComponent as ChipTopRight } from "@/assets/chipTopRight.svg";
+import { ReactComponent as ChipBottomRight } from "@/assets/chipBottomRight.svg";
+import { ReactComponent as ChipBottomLeft } from "@/assets/chipBottomLeft.svg";
+import { ReactComponent as CloseIcon } from "@/assets/crossIcon.svg";
 
-const XChip = ({label = 'Demo Chip', disabled = false, onDelete, className = '', ...rest}) => {
+const XChip = ({ label = "Demo Chip", disabled = false, onDelete, className = "", ...rest }) => {
   const classes = useGuiChipStyles();
   let borderColor;
   if (disabled) borderColor = theme.palette.grey[700];
@@ -35,10 +35,12 @@ const XChip = ({label = 'Demo Chip', disabled = false, onDelete, className = '',
           [classes.disabled]: disabled,
         })}
       >
-        <Typography sx={{fontSize: 14}}>{label}</Typography>
-        <IconButton disabled={disabled} onClick={onDelete}>
-          <CloseIcon color='primary' />
-        </IconButton>
+        <Typography sx={{ fontSize: 14 }}>{label}</Typography>
+        {onDelete && (
+          <IconButton disabled={disabled} onClick={onDelete}>
+            <CloseIcon color='primary' />
+          </IconButton>
+        )}
       </Box>
     </Box>
   );

@@ -10,6 +10,8 @@ import {
   TableHead,
   Typography,
   InputLabel,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
 import XButton from "./components/XButton";
 import XStack from "./components/XStack";
@@ -20,112 +22,64 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHeadingStyles } from "./themes";
 import dividerPng from "@/assets/dividerBottom.png";
 import XFileUpload from "./components/XFileUpload";
-import bg from "@/assets/bg/bg_2.png";
 import XMenu from "./components/XMenu";
 import useSocket from "./hooks/useSocket";
 import XSocket from "./components/XSocket";
 import { useLoginMutation } from "./services/nodeApi";
+import { TimePicker } from "@mui/x-date-pickers-pro";
+import dayjs from "dayjs";
+import toObject from "dayjs/plugin/toObject";
+import bg from "@/assets/bg/bg_1.png";
 
 const App = () => {
   const [open, openSet] = useState(false);
   const [loading, loadingSet] = useState(false);
-  const [storeAnchorEl, storeAnchorElSet] = useState(null);
-  const [searchStore, searchStoreSet] = useState("");
-  const [selectedStore, selectedStoreSet] = useState("");
-  const [login, { isLoading }] = useLoginMutation();
-
-  useEffect(() => {
-    login({ name: "anakin", email: "anakindabir@gmail.com" });
-  }, []);
-  const [file, fileSet] = useState(null);
-  const user = useSelector((state) => state.user);
-  useEffect(() => {}, [user]);
-  const dispatch = useDispatch();
-  const [value, valueSet] = useState(10);
-
-  // const initialValues = { email: "", password: "" };
-  const handleSubmit = (values) => {
-    console.log({ values });
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("myFile", { name: "anakin" });
-    console.log(formData);
-    fileSet(null);
-  };
-  const initialValues = { myFile: null };
-  const formik = useValidation({
-    initialValues,
-    handleSubmit,
-    validationSchema: FileValidationSchema,
-  });
-  const headingClasses = useHeadingStyles();
+  const [selectedDate, selectedDateSet] = useState("");
   return (
     <>
       <div
-        className='h-full w-screen bg-black/70 bg-blend-overlay'
-        style={{
-          backgroundImage: `url(${bg})`,
-        }}
+        className='h-full w-full bg-black/80 bg-blend-overlay'
+        style={{ backgroundImage: `url(${bg})` }}
       >
-        <XStack className='w-96 p-10 gap-3 !bg-secondary_background/50 !drop-shadow-none' size='l'>
-          <form onSubmit={formik.handleSubmit}>
-            <Typography>Edit User: anakindabir@gmail.com</Typography>
-            <Box sx={{ width: "30%", position: "absolute", bottom: 0 }}>
-              <img
-                style={{ width: "100%", marginBottom: "10px" }}
-                className={headingClasses.position}
-                src={dividerPng}
-                alt=''
-              />
-            </Box>
-            <div className='w-20'>
-              <XTextfield
-                fullWidth
-                simpleBorder
-                simpleBorderWithBottomRight
-                placeholder='Enter Name'
-                label='Enter Name'
-                value={value}
-                select
-                SelectProps={{
-                  renderValue: (selected) => selected,
-                }}
-              >
-                {[10, 15, 20].map((item, i) => {
-                  return (
-                    <MenuItem value={item} key={i} onClick={() => valueSet(item)}>
-                      {item}
-                    </MenuItem>
-                  );
-                })}
-              </XTextfield>
-            </div>
+        <div
+          className='h-[1700px] w-[1700px] fixed transition-transform duration-1000 rounded-full bg-primary_background/10 animation_classs'
+          style={{
+            transform: !open ? "translate(-55%, -48%)" : "translate(65%, -48%)",
+          }}
+        ></div>
 
-            <XFileUpload
-              formik={formik}
-              name='myFile'
-              src={file ? URL.createObjectURL(file) : ""}
-              fileSet={fileSet}
-            />
-            <XButton type='submit'>CLick me</XButton>
-          </form>
-        </XStack>
-        <div className='my-10 w-72 overflow-hidden'>
-          <InputLabel className='text-primary_main'>Select option</InputLabel>
-          <XMenu
-            options={["anakin", "laura", "messi", "ronaldo"]}
-            prefilledOption='anakin'
-            anchorEl={storeAnchorEl}
-            anchorElSet={storeAnchorElSet}
-            name='Store'
-            selectedOptionSet={selectedStoreSet}
-            search={searchStore}
-            searchSet={searchStoreSet}
-          />
-        </div>
+        <XButton onClick={() => openSet((pre) => !pre)}>Click</XButton>
       </div>
     </>
   );
 };
 
 export default App;
+
+//  const element = useRoutes([
+//    {
+//      path: "/",
+//      element: !token ? <Navigate to='/login' /> : <Layout sidebar />,
+//      children: [
+//        { path: "/", element: <Navigate to='/dashboard' /> },
+//        { path: "/dashboard", element: <DashBoard /> },
+//        { path: "/analytics", element: <>Analytics</> },
+//        { path: "/invoice", element: <>Invoice</> },
+//        { path: "/schedule", element: <Schedule /> },
+//        { path: "/calender", element: <>Calender</> },
+//        { path: "/messages", element: <>Messages</> },
+//        { path: "/notification", element: <>Notification</> },
+//        { path: "/settings", element: <Settings /> },
+//      ],
+//    },
+//    {
+//      path: "/",
+//      element: token ? <Navigate to='/dashboard' /> : <Layout />,
+//      children: [
+//        { path: "/", element: <Navigate to='/login' /> },
+//        { path: "/login", element: <Login /> },
+//        { path: "/reset", element: <ResetPassword /> },
+//        { path: "/register", element: <SignUp /> },
+//      ],
+//    },
+//  ]);

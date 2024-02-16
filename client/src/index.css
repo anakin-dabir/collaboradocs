@@ -2,42 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-
-.box-center{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.box-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
-    color: #ffffff;
-    background-color: #00182c;
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
+  color: #ffffff;
+  background-color: #00182c;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
 input:focus,
 select:focus,
 textarea:focus,
 button:focus {
-    outline: none;
+  outline: none;
 }
 
 select {
-    appearance: none;
+  appearance: none;
 }
 
 #root {
-    width: 100vw;
-    height: 100vh;
-    overflow-x: hidden;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
 }

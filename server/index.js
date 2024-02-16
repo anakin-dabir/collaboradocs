@@ -14,14 +14,14 @@ async function init() {
   // socket.io.attach(httpServer);
   app.get("/", (req, res) => res.send("Server running ..."));
   app.use("/auth", auth);
-
+  const datetime = new Date();
+  const eventDatetimeObject = new Date(datetime + 10);
+  console.log(eventDatetimeObject);
   connectDb(process.env.MONGO || config.MONGO || "mongodb://127.0.0.1:27017/DF-63");
   httpServer.listen(process.env.PORT || 80, () =>
     console.log("Server running on port", process.env.PORT)
   );
   // socket.initListeners();
-
-
 }
 
 init();
