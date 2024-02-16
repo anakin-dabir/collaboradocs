@@ -124,7 +124,7 @@ const App = () => {
             <XButton type='submit'>CLick me</XButton>
           </form>
         </XStack>
-        <div className='my-10 w-72'>
+        <div className='my-10 w-72 overflow-hidden'>
           <InputLabel className='text-primary_main'>Select option</InputLabel>
           <XMenu
             options={["anakin", "laura", "messi", "ronaldo"]}
@@ -135,7 +135,6 @@ const App = () => {
             selectedOptionSet={selectedStoreSet}
             search={searchStore}
             searchSet={searchStoreSet}
-            menuWidth='100%'
           />
         </div>
       </div>
