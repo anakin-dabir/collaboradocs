@@ -1,6 +1,6 @@
 const config = {
   CLIENT: "",
-  SERVER: "",
+  SERVER: "https://pucon-production.up.railway.app",
 };
 
 export default config;
