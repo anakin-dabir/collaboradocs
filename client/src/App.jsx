@@ -12,6 +12,7 @@ import {
   InputLabel,
   InputAdornment,
   IconButton,
+  Skeleton,
 } from "@mui/material";
 import XButton from "./components/XButton";
 import XStack from "./components/XStack";
@@ -31,6 +32,8 @@ import dayjs from "dayjs";
 import toObject from "dayjs/plugin/toObject";
 import bg from "@/assets/bg/bg_1.png";
 import AnimatedCursor from "react-animated-cursor";
+import XLoading from "./components/XLoading";
+import XLoader from "./components/XLoader";
 
 const App = () => {
   const [open, openSet] = useState(false);
@@ -38,9 +41,8 @@ const App = () => {
   const [selectedDate, selectedDateSet] = useState("");
   return (
     <>
-      <AnimatedCursor color='24, 255, 255' innerSize={10} />
       <div
-        className='h-full w-full bg-black/80 bg-blend-overlay'
+        className='h-full w-full bg-tertiary_background/80 bg-blend-overlay'
         style={{ backgroundImage: `url(${bg})` }}
       >
         <div

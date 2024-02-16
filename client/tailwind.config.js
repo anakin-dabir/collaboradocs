@@ -11,6 +11,7 @@ export default {
         primary_dark: "#00e5ff",
         primary_background: "#214E58",
         secondary_background: "#052742",
+        tertiary_background: "#00182c",
         secondary_light: "#8c9eff",
         secondary_main: "#536dfe",
         secondary_dark: "#3d5afe",

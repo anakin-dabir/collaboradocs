@@ -1760,7 +1760,7 @@ export const useLoadingStyles = makeStyles(() => {
       alignItems: "center",
       height: "100vh",
       width: "100vw",
-      backgroundColor: alpha(colors.secondary_background, 0.5),
+      backgroundColor: alpha(colors.black, 0.3),
       top: 0,
       bottom: 0,
       left: 0,
