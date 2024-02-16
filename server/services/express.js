@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import config from "../config/config.js";
+import fileUpload from "express-fileupload";
 
 const app = express();
 dotenv.config();
@@ -17,5 +18,6 @@ app.use(
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   })
 );
+app.use(fileUpload());
 
 export default app;

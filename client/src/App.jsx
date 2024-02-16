@@ -26,7 +26,7 @@ import XFileUpload from "./components/XFileUpload";
 import XMenu from "./components/XMenu";
 import useSocket from "./hooks/useSocket";
 import XSocket from "./components/XSocket";
-import { useLoginMutation } from "./services/nodeApi";
+import { useFileUploadMutation, useLoginMutation } from "./services/nodeApi";
 import { TimePicker } from "@mui/x-date-pickers-pro";
 import dayjs from "dayjs";
 import toObject from "dayjs/plugin/toObject";
@@ -39,21 +39,26 @@ const App = () => {
   const [open, openSet] = useState(false);
   const [loading, loadingSet] = useState(false);
   const [selectedDate, selectedDateSet] = useState("");
+  const initialValues = { file: null };
+
+  const [fileUpload] = useFileUploadMutation();
+  const [file, fileSet] = useState(null);
+
+  const handleSubmit = (values) => {
+    console.log(values);
+    const formData = new FormData();
+    formData.append("file", file);
+    fileUpload(formData);
+  };
+  const formik = useValidation({
+    initialValues,
+    validationSchema: FileValidationSchema,
+    handleSubmit,
+  });
   return (
     <>
-      <div
-        className='h-full w-full bg-tertiary_background/80 bg-blend-overlay'
-        style={{ backgroundImage: `url(${bg})` }}
-      >
-        <div
-          className='h-[1700px] w-[1700px] fixed transition-transform duration-1000 rounded-full bg-primary_background/10 animation_classs'
-          style={{
-            transform: !open ? "translate(-55%, -48%)" : "translate(65%, -48%)",
-          }}
-        ></div>
-
-        <XButton onClick={() => openSet((pre) => !pre)}>Click</XButton>
-      </div>
+      <XFileUpload formik={formik} fileSet={fileSet} name='file' />
+      <XButton onClick={formik.handleSubmit}>Click</XButton>
     </>
   );
 };

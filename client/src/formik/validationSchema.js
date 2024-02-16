@@ -34,5 +34,5 @@ export const SignupValidationSchema = Yup.object({
 });
 
 export const FileValidationSchema = Yup.object({
-  myFile: file,
+  file: file,
 });
