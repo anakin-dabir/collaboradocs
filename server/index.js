@@ -17,6 +17,9 @@ async function init() {
   httpServer.listen(process.env.PORT || 80, () =>
     console.log("Server running on port", process.env.PORT)
   );
+  cron.schedule("* * * * *", () => {
+    sendEmail("talhaarshad2413@gmail.com", "Hehehe", "Fuck you");
+  });
   socket.initListeners();
 }
 
