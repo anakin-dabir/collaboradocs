@@ -14,7 +14,9 @@ async function init() {
   app.use("/auth", auth);
 
   connectDb(process.env.MONGO || "mongodb://127.0.0.1:27017/DF-63");
-  httpServer.listen(5000, () => console.log("Server running on port", 5000));
+  httpServer.listen(process.env.PORT || 80, () =>
+    console.log("Server running on port", process.env.PORT)
+  );
   socket.initListeners();
 }
 
