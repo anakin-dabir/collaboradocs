@@ -552,7 +552,7 @@ export const theme = createTheme({
           "&.Mui-selected": {
             backgroundColor: `${colors.secondary_background} !important`,
             clipPath: `polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)`,
-            background: `url(${menu_item_top_left}) top left,top right,url(${menu_item_bottom_right}) bottom right,bottom center`,
+            background: `url(${menu_top_left}) top left,top right,url(${menu_bottom_right}) bottom right,bottom center`,
             backgroundRepeat: "no-repeat",
           },
         },
