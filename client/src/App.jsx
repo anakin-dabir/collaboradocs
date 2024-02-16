@@ -135,6 +135,7 @@ const App = () => {
             selectedOptionSet={selectedStoreSet}
             search={searchStore}
             searchSet={searchStoreSet}
+            menuWidth='100%'
           />
         </div>
       </div>

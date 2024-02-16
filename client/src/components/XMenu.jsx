@@ -32,7 +32,7 @@ export default function XMenu({
   prefilledOption = "",
   error = false,
   simpleBorder = false,
-  menuWidth = "30%",
+  menuWidth = "22%",
   textFieldClassName = "",
   placeholder = "",
   inputLabel = "",
