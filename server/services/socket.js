@@ -23,15 +23,15 @@ class SocketService {
       console.log(`New Socket Connected`, Socket.id);
 
       Socket.on("event:addUser", (userId) => {
-        console.log("user connected", Socket.id);
+        console.log(`user ${userId} connected`, Socket.id);
         this.addUser(userId, Socket.id);
-        io.emit("event:getUsers", this.users);
+        io.emit("event:getUser", this.users);
       });
 
       Socket.on("event:removeUser", (userId) => {
         console.log("user removed", Socket.id);
         this.removeUser(userId);
-        io.emit("event:getUsers", this.users);
+        io.emit("event:getUser", this.users);
       });
 
       // Socket.on("event:message", async ({ message }) => {
@@ -39,9 +39,9 @@ class SocketService {
       // });
 
       Socket.on("disconnect", () => {
-        console.log("user disconnected");
+        console.log("Socket disconnected");
         this.removeUser(Socket.id);
-        io.emit("event:getUsers", this.users);
+        io.emit("event:getUser", this.users);
       });
     });
   }

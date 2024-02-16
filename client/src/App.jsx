@@ -12,40 +12,21 @@ import {
   InputLabel,
 } from "@mui/material";
 import XButton from "./components/XButton";
-import XDateRangePicker from "./components/Date/XDateRangePicker";
-import XDatePicker from "./components/Date/XDatePicker";
-import image from "./assets/userIcon.svg?url";
-import XBadge from "./components/XBadge";
-import XRadio from "./components/XRadio";
-import XCheckbox from "./components/XCheckbox";
 import XStack from "./components/XStack";
 import XTextfield from "./components/XTextfield";
-import Divider from "@/assets/divider.png";
 import useValidation from "./formik/useValidation";
 import { FileValidationSchema, LoginValidationSchema } from "./formik/validationSchema";
 import { useSelector, useDispatch } from "react-redux";
-import { userSet } from "./store/slice/authSlice";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import toObject from "dayjs/plugin/toObject";
-import XLoader from "./components/XLoader";
-import XTableContainer from "./components/Table/XTableContainer";
-import XTable from "./components/Table/XTable";
 import { useHeadingStyles } from "./themes";
-import XTablePagination from "./components/Table/XTablePagination";
-import AppDrawer from "./components/XDrawer";
-import SDrawer from "./SDrawer";
-import XToast from "./components/XToast";
-import XAlertBase from "./components/Alert/XAlertBase";
-import XAlert from "./components/Alert/XAlert";
 import dividerPng from "@/assets/dividerBottom.png";
 import XFileUpload from "./components/XFileUpload";
 import bg from "@/assets/bg/bg_2.png";
 import XMenu from "./components/XMenu";
+import useSocket from "./hooks/useSocket";
+import XSocket from "./components/XSocket";
 
 const App = () => {
   const [open, openSet] = useState(false);
-  const theme = useTheme();
   const [loading, loadingSet] = useState(false);
   const [storeAnchorEl, storeAnchorElSet] = useState(null);
   const [searchStore, searchStoreSet] = useState("");
@@ -75,6 +56,7 @@ const App = () => {
   const headingClasses = useHeadingStyles();
   return (
     <>
+      <XSocket />
       <div
         className='h-full w-screen bg-black/70 bg-blend-overlay'
         style={{

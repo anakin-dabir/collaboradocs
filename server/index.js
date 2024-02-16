@@ -4,14 +4,18 @@ import connectDb from "./services/db.js";
 import auth from "./routes/auth.js";
 import sendEmail from "./services/email.js";
 import cron from "node-cron";
+import SocketService from "./services/socket.js";
 
 async function init() {
+  const socket = new SocketService();
   const httpServer = http.createServer(app);
+  socket.io.attach(httpServer);
   app.get("/", (req, res) => res.send("Server running on port 5000"));
   app.use("/auth", auth);
 
   connectDb("mongodb://127.0.0.1:27017/DF-63");
   httpServer.listen(5000, () => console.log("Server running on port", 5000));
+  socket.initListeners();
 }
 
 init();

@@ -3,10 +3,12 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import nodeApi from "../services/nodeApi";
 import authSlice from "./slice/authSlice";
+import socketSlice from "./slice/socketSlice";
 
 const rootReducer = combineReducers({
   [nodeApi.reducerPath]: nodeApi.reducer,
   user: authSlice,
+  socket: socketSlice,
   //   theme: themeSlice,
 });
 
