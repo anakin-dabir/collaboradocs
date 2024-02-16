@@ -29,7 +29,7 @@ export default function XMenu({
   formik,
   selectedOptionSet,
   tabIndex,
-  prefilledOption,
+  prefilledOption = "",
   error = false,
   simpleBorder = false,
   menuWidth = "30%",
@@ -39,7 +39,7 @@ export default function XMenu({
 }) {
   const textFieldClasses = useGuiTextFieldStyles();
   const headingClasses = useHeadingStyles();
-  const [localSelectedOption, localSelectedOptionSet] = useState(null);
+  const [localSelectedOption, localSelectedOptionSet] = useState("");
   const handleClick = (event) => {
     anchorElSet(event.currentTarget);
   };
@@ -49,8 +49,8 @@ export default function XMenu({
   };
   const handleListItemClick = (item) => {
     localSelectedOptionSet(item);
-    formik?.setFieldValue(name, item._id);
-    selectedOptionSet?.(item._id);
+    formik?.setFieldValue(name, item);
+    selectedOptionSet?.(item);
     setTimeout(() => {
       handleClose();
     }, 300);
@@ -63,12 +63,8 @@ export default function XMenu({
   useEffect(() => {
     if (!prefilledOption) return;
     let name = "";
-    name = options.find((el) => el._id === prefilledOption)?.name;
-    if (name)
-      localSelectedOptionSet({
-        _id: prefilledOption,
-        name,
-      });
+    name = options.find((el) => el === prefilledOption);
+    if (name) localSelectedOptionSet(prefilledOption);
   }, [prefilledOption]);
   return (
     <>
@@ -84,17 +80,17 @@ export default function XMenu({
           inputProps={{
             startAdornment: localSelectedOption ? (
               <InputAdornment position='start'>
-                {localSelectedOption.name.length > 15 ? (
-                  <XTooltip title={localSelectedOption.name} placement='top'>
+                {localSelectedOption.length > 15 ? (
+                  <XTooltip title={localSelectedOption} placement='top'>
                     <Box>
                       <XChip
-                        label={localSelectedOption.name.slice(0, 15) + "..."}
+                        label={localSelectedOption.slice(0, 15) + "..."}
                         onDelete={handleDefaultOptionRemover}
                       />
                     </Box>
                   </XTooltip>
                 ) : (
-                  <XChip label={localSelectedOption.name} onDelete={handleDefaultOptionRemover} />
+                  <XChip label={localSelectedOption} onDelete={handleDefaultOptionRemover} />
                 )}
               </InputAdornment>
             ) : (
@@ -169,46 +165,38 @@ export default function XMenu({
             <Box sx={{ maxHeight: "280px", overflowY: "auto" }} pb={3}>
               {options
                 .filter((el) => {
-                  return el.name.toLowerCase().includes(search.toLowerCase());
+                  return el.toLowerCase().includes(search.toLowerCase());
                 })
-                .map((el) => {
-                  let name = "";
-                  let _id = "";
-                  name = el.name;
-                  _id = el._id;
+                .map((el, _id) => {
+                  console.log(el);
                   return (
                     <MenuItem
                       key={_id}
-                      selected={_id === localSelectedOption?._id}
-                      onClick={() =>
-                        handleListItemClick({
-                          _id,
-                          name,
-                        })
-                      }
+                      selected={el === localSelectedOption}
+                      onClick={() => handleListItemClick(el)}
                       sx={{
                         width: "80%",
                         margin: "auto",
                         paddingBlock: "1.2rem",
                       }}
-                      className={_id === localSelectedOption?._id ? textFieldClasses.checked : ""}
+                      className={el === localSelectedOption ? textFieldClasses.checked : ""}
                     >
                       <Grid container>
                         <Grid item xs={10}>
-                          {name.length > 20 ? (
-                            <XTooltip placement='left' title={name}>
+                          {el.length > 20 ? (
+                            <XTooltip placement='left' title={el}>
                               <Box>
-                                <Typography fontSize={15}>{name.slice(0, 20)}...</Typography>
+                                <Typography fontSize={15}>{el.slice(0, 20)}...</Typography>
                               </Box>
                             </XTooltip>
                           ) : (
                             <Box>
-                              <Typography fontSize={15}>{name}</Typography>
+                              <Typography fontSize={15}>{el}</Typography>
                             </Box>
                           )}
                         </Grid>
                         <Grid item xs={1}></Grid>
-                        <Box>{_id === localSelectedOption?._id && <CheckedIcon />}</Box>
+                        <Box>{el === localSelectedOption && <CheckedIcon />}</Box>
                       </Grid>
                     </MenuItem>
                   );

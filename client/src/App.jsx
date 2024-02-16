@@ -123,15 +123,10 @@ const App = () => {
             <XButton type='submit'>CLick me</XButton>
           </form>
         </XStack>
-        <div className='my-10 w-96'>
+        <div className='my-10 w-72'>
           <XMenu
-            options={[
-              { _id: "Anakin", name: "Anakin" },
-              { _id: "Mariko", name: "Mariko" },
-              { _id: "Laura", name: "Laura" },
-              { _id: "Began", name: "Began" },
-            ]}
-            prefilledOption={"Anakin"}
+            options={["anakin", "laura", "messi", "ronaldo"]}
+            prefilledOption='anakin'
             anchorEl={storeAnchorEl}
             anchorElSet={storeAnchorElSet}
             name='Store'
