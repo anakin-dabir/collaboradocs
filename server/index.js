@@ -7,6 +7,8 @@ import cron from "node-cron";
 import SocketService from "./services/socket.js";
 import config from "./config/config.js";
 import uploadFile from "./services/fileUpload.js";
+import document from "./routes/document.js";
+import project from "./routes/project.js";
 
 async function init() {
   // const socket = new SocketService();
@@ -18,9 +20,9 @@ async function init() {
     uploadFile(req.files.file);
   });
   app.use("/auth", auth);
-  const datetime = new Date();
-  const eventDatetimeObject = new Date(datetime + 10);
-  console.log(eventDatetimeObject);
+  app.use("/document", document);
+  app.use("/project", project);
+
   connectDb(process.env.MONGO || config.MONGO || "mongodb://127.0.0.1:27017/DF-63");
   httpServer.listen(process.env.PORT || 80, () =>
     console.log("Server running on port", process.env.PORT)

@@ -16,12 +16,11 @@ const nodeApi = createApi({
     login: build.mutation({
       query: (creds) => ({
         method: "POST",
-        url: "/auth/login",
+        url: "/auth/createUser",
         body: creds,
       }),
       invalidatesTags: ["Users"],
     }),
-
     fileUpload: build.mutation({
       query: (file) => ({
         method: "POST",
@@ -29,9 +28,31 @@ const nodeApi = createApi({
         body: file,
       }),
     }),
+
+    createProject: build.mutation({
+      query: (obj) => ({
+        method: "POST",
+        url: "/project/create",
+        body: obj,
+      }),
+    }),
+
+    createDocument: build.mutation({
+      query: (obj) => ({
+        method: "POST",
+        url: "/document/create",
+        body: obj,
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useGetUserQuery, useFileUploadMutation } = nodeApi;
+export const {
+  useLoginMutation,
+  useGetUserQuery,
+  useFileUploadMutation,
+  useCreateProjectMutation,
+  useCreateDocumentMutation
+} = nodeApi;
 
 export default nodeApi;

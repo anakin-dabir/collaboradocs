@@ -1259,7 +1259,7 @@ export const useGuiTextFieldStyles = makeStyles(() => ({
       border: 0,
     },
     "& label.MuiInputLabel-shrink": {
-      transform: "translate(3px, -26px) scale(0.85)",
+      transform: "translate(3px, -26px) scale(0.8)",
     },
   },
   paper: {

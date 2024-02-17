@@ -18,7 +18,7 @@ const file = Yup.mixed().required("File is required");
 
 export const LoginValidationSchema = Yup.object({
   email: emailValidation,
-  password: passwordValidation,
+  // password: passwordValidation,
 });
 
 export const ResetPasswordValidationSchema = Yup.object({
