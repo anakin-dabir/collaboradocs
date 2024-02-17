@@ -1,109 +1,37 @@
-import React, {useState, useEffect} from 'react';
-import {Typography, Box, Alert, Snackbar, Stack, LinearProgress, Slide} from '@mui/material';
-import clsx from 'clsx';
-import theme, {useGuiSnackbarStyles} from '@/themes';
-import {ReactComponent as SuccessIcon} from '@/assets/successIcon.svg';
-import {ReactComponent as WarningIcon} from '@/assets/warningIcon.svg';
-import {ReactComponent as ErrorIcon} from '@/assets/errorIcon.svg';
-import {ReactComponent as InfoIcon} from '@/assets/infoIcon.svg';
-import {ReactComponent as SnackbarTopCenterIcon} from '@/assets/snackbarTopCenterIcon.svg';
+import { Toaster, ToastBar } from "react-hot-toast";
+import XStack from "./XStack";
+import { useGenericStyles } from "../themes";
+import { clsx } from "clsx";
+import { ReactComponent as SuccessIcon } from "@/assets/successIcon.svg";
+import { ReactComponent as WarningIcon } from "@/assets/warningIcon.svg";
+import { ReactComponent as ErrorIcon } from "@/assets/errorIcon.svg";
+import { ReactComponent as InfoIcon } from "@/assets/infoIcon.svg";
+import { ReactComponent as SnackbarTopCenterIcon } from "@/assets/snackbarTopCenterIcon.svg";
 
-const XToast = ({
-  isOpen,
-  onClose,
-  heading = 'Notification received',
-  message = 'oy ye ek test message hai reply na krna...',
-  severity = 'success',
-  children,
-  ...props
-}) => {
-  const [progress, progressSet] = useState(100);
-  const snackbarClasses = useGuiSnackbarStyles();
+// In your app
 
-  const colors = {
-    success: 'rgb(51, 136, 50)',
-    error: 'rgb(211, 47, 47)',
-    warning: 'rgb(255, 152, 0)',
-    info: 'rgb(0, 148, 255)',
-  };
-
-  const icons = {
-    success: <SuccessIcon />,
-    error: <ErrorIcon />,
-    warning: <WarningIcon />,
-    info: <InfoIcon />,
-  };
-  useEffect(() => {
-    if (isOpen) {
-      const timer = setInterval(() => {
-        progressSet(prevProgress => {
-          const newProgress = prevProgress - 10;
-          return newProgress <= 0 ? 0 : newProgress;
-        });
-      }, 400);
-      return () => {
-        clearInterval(timer);
-      };
-    } else {
-      progressSet(100);
-    }
-  }, [isOpen]);
+const XToast = () => {
+  const classes = useGenericStyles();
   return (
-    <Box sx={{position: 'relative'}}>
-      <Snackbar
-        className={clsx(snackbarClasses.closeIcon, snackbarClasses.root)}
-        open={isOpen}
-        autoHideDuration={4136}
-        onClose={onClose}
-        anchorOrigin={{vertical: 'top', horizontal: 'center'}}
-        TransitionComponent={SlideTransition}
-      >
-        <Box
-          sx={{
-            border: `2px solid ${theme.palette.primary.main}`,
+    <Toaster position='top-right' toastOptions={{ duration: 1200 }}>
+      {(t) => (
+        <ToastBar toast={t} style={{ backgroundColor: "transparent", maxWidth: "410px" }}>
+          {({ icon, message }) => {
+            console.log({ t });
+            return (
+              <XStack
+                className={clsx(classes.shadowText, "text-white  p-4 gap-1 items-center")}
+                direction='row'
+              >
+                {t.type === "success" ? <SuccessIcon /> : icon}
+                {message}
+              </XStack>
+            );
           }}
-        >
-          <SnackbarTopCenterIcon
-            className={clsx(snackbarClasses.border, snackbarClasses.top_center_border)}
-          />
-          <Box className={snackbarClasses.header}>
-            <Stack direction='row' alignItems='center' spacing={1} sx={{padding: '1rem'}}>
-              <Box>{icons[severity]}</Box>
-              <Box>
-                <Typography sx={{fontSize: '19px'}}>{heading}!</Typography>
-              </Box>
-            </Stack>
-          </Box>
-          <Alert
-            icon={<></>}
-            onClose={onClose}
-            sx={{width: '25vw', background: 'rgba(0, 24, 44, 1)', borderRadius: '0px'}}
-            {...props}
-          >
-            <Box pt={1} pb={4}>
-              <Typography sx={{color: 'rgba(245, 244, 244, 1)'}}>{message}</Typography>
-            </Box>
-          </Alert>
-          {
-            <LinearProgress
-              sx={{
-                bgcolor: 'transparent',
-                '& .MuiLinearProgress-bar': {
-                  bgcolor: `${colors[severity]}`,
-                },
-              }}
-              variant='determinate'
-              value={progress}
-              className={snackbarClasses.progress}
-            />
-          }
-        </Box>
-      </Snackbar>
-    </Box>
+        </ToastBar>
+      )}
+    </Toaster>
   );
 };
-export default XToast;
 
-function SlideTransition(props) {
-  return <Slide {...props} direction='down' appear />;
-}
+export default XToast;
