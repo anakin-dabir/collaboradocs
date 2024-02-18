@@ -8,22 +8,16 @@ import {
 } from "./services/nodeApi";
 import toast from "react-hot-toast";
 import XToast from "./components/XToast";
+import { Stack } from "@mui/material";
 
 const App = () => {
   const [createDocument] = useCreateDocumentMutation();
   const [data, dataSet] = useState(null);
   return (
     <>
-      <XToast />
-      <XEditor convertedContent={data} setConvertedContent={dataSet} />;
-      <XButton
-        onClick={() => {
-          createDocument({ id: "65d06efa282304e8a9c6685d", title: "FUCK OFF", content: data });
-          toast.success("Okayyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
-        }}
-      >
-        Click to login
-      </XButton>
+      <Stack sx={{ height: "100%", width: "100%" }}>
+        <Stack></Stack>
+      </Stack>
     </>
   );
 };
