@@ -13,10 +13,10 @@ const sendEmail = async (email, subject, text) => {
       },
     });
     const a = await transporter.sendMail({
-      from: '"Fred Foo 👻" <anakindabir@example.com>' || process.env.NODEMAILER_EMAIL,
+      from: '"Collaboradocs 👻" <anakindabir@example.com>' || process.env.NODEMAILER_EMAIL,
       to: email,
       subject: subject,
-      text: text,
+      html: text,
     });
     console.log("Email sent successfully", a.messageId);
   } catch (error) {

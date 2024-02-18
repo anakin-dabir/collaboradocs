@@ -6,6 +6,7 @@ const __dirname = path.dirname(__filename);
 
 const uploadFile = (file) => {
   file.mv(path.join(__dirname, "..", "public", file.name));
+  return file.name;
 };
 
 export default uploadFile;

@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema(
     },
     password: String,
     img: String,
+    isVerified: { type: Boolean, default: false },
   },
   {
     timestamps: true,
