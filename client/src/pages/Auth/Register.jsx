@@ -3,16 +3,22 @@ import { SignupValidationSchema } from "../../formik/validationSchema";
 import useValidation from "../../formik/useValidation";
 import XTextfield from "../../components/XTextfield";
 import XButton from "../../components/XButton";
+import { useRegisterMutation } from "../../services/nodeApi";
 
 const Register = () => {
   const initialValues = { email: "", password: "", name: "" };
-  const handleSubmit = (values) => {};
+  const [register, { isLoading }] = useRegisterMutation();
+
+  const handleSubmit = (values) => {
+    register(values);
+  };
 
   const formik = useValidation({
     initialValues,
     handleSubmit,
     validationSchema: SignupValidationSchema,
   });
+
   return (
     <div className='flex flex-col gap-5'>
       <form className='flex flex-col'>
@@ -48,7 +54,7 @@ const Register = () => {
           helperText={formik.touched.password && !!formik.errors.password && formik.errors.password}
         />
       </form>
-      <XButton color='primary' onClick={formik.handleSubmit}>
+      <XButton color='primary' loading={isLoading} onClick={formik.handleSubmit}>
         Register
       </XButton>
     </div>

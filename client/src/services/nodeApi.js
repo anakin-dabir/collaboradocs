@@ -23,6 +23,21 @@ const nodeApi = createApi({
         } catch (error) {}
       },
     }),
+    register: build.mutation({
+      query: (creds) => ({
+        method: "POST",
+        url: "/auth/register",
+        body: creds,
+      }),
+      onQueryStarted: async (args, { dispatch, queryFulfilled }) => {
+        try {
+          const response = await queryFulfilled;
+          toast.success(response.data.msg);
+        } catch (error) {
+          toast.error(error.error.data ? error.error.data.msg : config.ERROR);
+        }
+      },
+    }),
     login: build.mutation({
       query: (creds) => ({
         method: "POST",
@@ -40,15 +55,17 @@ const nodeApi = createApi({
         }
       },
     }),
-    register: build.mutation({
+
+    verifyEmail: build.mutation({
       query: (creds) => ({
         method: "POST",
-        url: "/auth/register",
+        url: "/auth/verify",
         body: creds,
       }),
       onQueryStarted: async (args, { dispatch, queryFulfilled }) => {
         try {
           const response = await queryFulfilled;
+          dispatch(setUser(response.data.user));
           toast.success(response.data.msg);
         } catch (error) {
           toast.error(error.error.data ? error.error.data.msg : config.ERROR);
@@ -121,6 +138,7 @@ export const {
   useUpdateNameMutation,
   useCreateProjectMutation,
   useCreateDocumentMutation,
+  useVerifyEmailMutation,
 } = nodeApi;
 
 export default nodeApi;

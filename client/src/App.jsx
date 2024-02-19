@@ -1,12 +1,14 @@
 import React from "react";
 import XEditor from "./components/XEditor";
-import { Navigate, useRoutes } from "react-router-dom";
+import { Navigate, useLocation, useRoutes } from "react-router-dom";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import Auth from "./pages/Auth/Auth";
+import bg from "@/assets/bg/bg_4.png";
 import Verification from "./pages/Auth/Verification";
 
 const App = () => {
+  const { search } = useLocation();
   const routes = useRoutes([
     { path: "/", element: <Login /> },
     {
@@ -16,12 +18,26 @@ const App = () => {
         { path: "/auth", element: <Navigate to='/auth/login' /> },
         { path: "/auth/login", element: <Login /> },
         { path: "/auth/register", element: <Register /> },
-        { path: "/auth/verify", element: <Verification /> },
       ],
+    },
+    search.includes("?token=") && {
+      path: "/verify-email/:token",
+      element: <Verification />,
     },
     { path: "/test", element: <XEditor /> },
   ]);
-  return <>{routes}</>;
+  return (
+    <>
+      <div className='w-screen h-full'>
+        <div
+          className='fixed bg-cover bg-no-repeat inset-0 bg-blend-luminosity bg-black/60'
+          style={{ backgroundImage: `url(${bg})` }}
+        ></div>
+        <div className='fixed inset-0 bg-black/30 bg-blend-overlay'></div>
+        {routes}
+      </div>
+    </>
+  );
 };
 
 export default App;
