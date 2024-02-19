@@ -20,6 +20,6 @@ auth.post("/register", register);
 auth.post("/updateImage", verifyToken, updateImage);
 auth.post("/createUser", createUser);
 auth.post("/updateName", verifyToken, updateName);
-auth.post("/remove", verifyToken, remove);
+auth.delete("/remove", verifyToken, remove);
 
 export default auth;
