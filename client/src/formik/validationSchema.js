@@ -6,7 +6,7 @@ const passwordValidation = Yup.string()
   .min(8, "Password cannot be less than 8 characters")
   .required("Password is mandatory");
 
-const fullNameValidation = Yup.string().required("Name is mandatory");
+const nameValidation = Yup.string().required("Name is mandatory");
 
 const usernameValidation = Yup.string()
   .min(4, "Username must be at least 4 characters")
@@ -18,7 +18,7 @@ const file = Yup.mixed().required("File is required");
 
 export const LoginValidationSchema = Yup.object({
   email: emailValidation,
-  // password: passwordValidation,
+  password: passwordValidation,
 });
 
 export const ResetPasswordValidationSchema = Yup.object({
@@ -27,10 +27,8 @@ export const ResetPasswordValidationSchema = Yup.object({
 
 export const SignupValidationSchema = Yup.object({
   email: emailValidation,
-  username: usernameValidation,
-  fullName: fullNameValidation,
+  name: nameValidation,
   password: passwordValidation,
-  agreeToTerms: agreeToTerms,
 });
 
 export const FileValidationSchema = Yup.object({

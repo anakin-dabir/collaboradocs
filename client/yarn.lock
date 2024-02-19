@@ -1361,10 +1361,10 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.2.1.tgz#16308cea045f0fc777b6ff20a9f25474dd8293d2"
   integrity sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==
 
-"@fontsource/oxanium@^5.0.18":
+"@fontsource-variable/oxanium@^5.0.18":
   version "5.0.18"
-  resolved "https://registry.yarnpkg.com/@fontsource/oxanium/-/oxanium-5.0.18.tgz#c32cffe8efcf8412b66073f146b483b4e8f9270f"
-  integrity sha512-Dsh0Rhx+44QQvPr/Bo3pFdgamC3flTb4MpwSk9YvoAeXRqCdR9CMI5qqtDvYUB/LE5CHth+aEOYqnxivPfS9Ug==
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/oxanium/-/oxanium-5.0.18.tgz#189e3515e2f94889efc273e2142d1aa9aa94717d"
+  integrity sha512-em975B0oLyOf4uxdxX3Se6Y64vyVnxTsejLvElue5Fbm4vG6e5wv8D5hf/l25UBpC+0rhX7hbLY/yJ5npktZEA==
 
 "@humanwhocodes/config-array@^0.11.13":
   version "0.11.14"

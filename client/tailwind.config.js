@@ -25,6 +25,9 @@ export default {
         warning_main: "#ff9800",
         warning_dark: "#f57c00",
       },
+      dropShadow: {
+        primary: "0px 0px 10px #18FFFF",
+      },
     },
   },
   plugins: [],

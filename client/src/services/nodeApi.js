@@ -3,6 +3,7 @@ import baseQuery from "./baseQuery";
 import { clearUser, setUser } from "../store/slice/authSlice";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
+import config from "../config/config";
 
 const nodeApi = createApi({
   baseQuery,
@@ -28,7 +29,16 @@ const nodeApi = createApi({
         url: "/auth/login",
         body: creds,
       }),
-      invalidatesTags: ["User"],
+      // invalidatesTags: ["User"],
+      onQueryStarted: async (args, { dispatch, queryFulfilled }) => {
+        try {
+          const response = await queryFulfilled;
+          dispatch(setUser(response.data.user));
+          toast.success(response.data.msg);
+        } catch (error) {
+          toast.error(error.error.data ? error.error.data.msg : config.ERROR);
+        }
+      },
     }),
     updateImage: build.mutation({
       query: (file) => ({

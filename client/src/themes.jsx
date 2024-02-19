@@ -15,7 +15,7 @@ import switchTrack from "@/assets/switchTrack.svg";
 import switch_checked_icon from "@/assets/switch_checked_icon.svg";
 import switch_checked_track from "@/assets/switch_checked_track.svg";
 import switch_disabled_track from "@/assets/switch_disabled_track.svg";
-import "@fontsource/oxanium";
+import "@fontsource-variable/oxanium";
 const drawerWidth = 210;
 const appBarHeight = 64;
 
@@ -102,7 +102,7 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Oxanium, Open Sans",
+    fontFamily: "Oxanium Variable, system-ui",
     body_legal: {
       fontSize: 7,
       lineHeight: 1.5,
@@ -1259,7 +1259,7 @@ export const useGuiTextFieldStyles = makeStyles(() => ({
       border: 0,
     },
     "& label.MuiInputLabel-shrink": {
-      transform: "translate(3px, -26px) scale(0.8)",
+      transform: "translate(3px, -29px) scale(0.95)",
     },
   },
   paper: {

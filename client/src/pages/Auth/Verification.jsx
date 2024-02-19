@@ -1,22 +1,8 @@
 import React from "react";
 import XTextfield from "../../components/XTextfield";
-import useValidation from "../../formik/useValidation";
-import { LoginValidationSchema } from "../../formik/validationSchema";
 import XButton from "../../components/XButton";
-import { useLoginMutation } from "../../services/nodeApi";
 
-const Login = () => {
-  const [login, { isLoading }] = useLoginMutation();
-  const initialValues = { email: "", password: "" };
-  const handleSubmit = (values) => {
-    login(values);
-  };
-
-  const formik = useValidation({
-    initialValues,
-    handleSubmit,
-    validationSchema: LoginValidationSchema,
-  });
+const Verification = () => {
   return (
     <div className='flex flex-col gap-5'>
       <form className='flex flex-col'>
@@ -49,4 +35,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Verification;

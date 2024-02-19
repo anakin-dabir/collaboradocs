@@ -1,8 +1,8 @@
-import React from 'react';
-import {Switch} from '@mui/material';
-import {useGuiSwitchStyles} from '@/themes';
+import React from "react";
+import { Switch } from "@mui/material";
+import { useGuiSwitchStyles } from "@/themes";
 
-const XSwitch = ({disabled = false, onChange, checked, ...props}) => {
+const XSwitch = ({ disabled = false, onChange, checked, ...props }) => {
   const classes = useGuiSwitchStyles();
   return (
     <Switch
@@ -10,6 +10,7 @@ const XSwitch = ({disabled = false, onChange, checked, ...props}) => {
       classes={classes}
       onChange={onChange}
       checked={checked}
+      sx={{ height: "auto" }}
       {...props}
     />
   );

@@ -7,6 +7,8 @@ import { ReactComponent as TextFieldTopRight } from "@/assets/textFieldTopRight.
 import { ReactComponent as TextFieldBottomRight } from "@/assets/textFieldBottomRight.svg";
 import { ReactComponent as TextFieldBottomCenter } from "@/assets/textFieldBottomCenter.svg";
 import { ReactComponent as TextFieldBottomCenter2 } from "@/assets/textFieldBottomCenter2.svg";
+import { ReactComponent as Eye } from "@/assets/Eye.svg";
+import { ReactComponent as NotEye } from "@/assets/NotEye.svg";
 
 const XTextfield = ({
   id,
@@ -24,7 +26,7 @@ const XTextfield = ({
   fullWidth = false,
   style,
   helperText,
-  label,
+  label = "",
   name,
   disabled = false,
   error = false,
@@ -41,6 +43,7 @@ const XTextfield = ({
   const [containerHeight, containerHeightSet] = useState(0);
   const [focused, focusedSet] = useState(false);
   const classes = useGuiTextFieldStyles();
+  const [tempType, tempTypeSet] = useState("password");
   const input_ref = useCallback((node) => {
     if (!node) return;
     const inputEl = node.node || node;
@@ -127,12 +130,26 @@ const XTextfield = ({
         select={select}
         name={name}
         label={label}
+        autoComplete='off'
         helperText={helperText}
         inputRef={input_ref}
         onChange={onChange}
         placeholder={placeholder}
-        InputProps={inputProps}
-        type={type}
+        InputProps={
+          (inputProps,
+          {
+            endAdornment:
+              type === "password" ? (
+                <div
+                  className='ml-2 mr-1 cursor-pointer box-center'
+                  onClick={() => tempTypeSet((pre) => (pre === "password" ? "text" : "password"))}
+                >
+                  {tempType === "text" ? <NotEye /> : <Eye />}
+                </div>
+              ) : null,
+          })
+        }
+        type={type === "password" ? tempType : type}
         fullWidth
         InputLabelProps={{ shrink: true, className: classes.label }}
         variant='outlined'
