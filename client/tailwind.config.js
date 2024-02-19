@@ -28,6 +28,17 @@ export default {
       dropShadow: {
         primary: "0px 0px 10px #18FFFF",
       },
+      animation: {
+        ping: `ping 1s linear infinite`,
+      },
+      keyframes: {
+        ping: {
+          "75%, 100%": {
+            transform: "scale(2)",
+            opacity: 0,
+          },
+        },
+      },
     },
   },
   plugins: [],

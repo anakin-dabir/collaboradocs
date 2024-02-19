@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import bg from "@/assets/bg/bg_4.png";
 import XStack from "../../components/XStack";
 import XSwitch from "../../components/XSwitch";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import Verification from "./Verification";
 
 const Auth = () => {
-  const { pathname } = useLocation();
+  const { pathname, state } = useLocation();
   const navigate = useNavigate();
+  useEffect(() => {
+    if (pathname === "/auth/verify" && !state) {
+      navigate("/auth/register");
+    }
+  }, []);
   const [type, typeSet] = useState(pathname === "/auth/login" ? true : false);
   return (
     <div className='w-screen h-screen'>
@@ -15,25 +21,29 @@ const Auth = () => {
         style={{ backgroundImage: `url(${bg})` }}
       ></div>
       <div className='fixed inset-0 bg-black/30 bg-blend-overlay'></div>
-      <XStack
-        size='l'
-        className='relative-center w-[550px] !drop-shadow-none !bg-secondary_background/30 px-14 py-12 gap-5'
-      >
-        <div className='text-3xl font-bold text-primary_main drop-shadow-primary'>
-          {type ? "Login" : "Register"}
-        </div>
+      {pathname === "/auth/verify" ? (
         <Outlet />
-        <div className='flex items-center gap-1'>
-          <XSwitch
-            checked={type}
-            onChange={() => {
-              typeSet((pre) => !pre);
-              navigate(type ? "/auth/register" : "/auth/login");
-            }}
-          />
-          <div className='text-primary_light drop-shadow-primary'>Already registered ??</div>
-        </div>
-      </XStack>
+      ) : (
+        <XStack
+          size='l'
+          className='relative-center w-[550px] !drop-shadow-none !bg-secondary_background/30 px-14 py-12 gap-5'
+        >
+          <div className='text-3xl font-bold text-primary_main drop-shadow-primary'>
+            {type ? "Login" : "Register"}
+          </div>
+          <Outlet />
+          <div className='flex items-center gap-1'>
+            <XSwitch
+              checked={type}
+              onChange={() => {
+                typeSet((pre) => !pre);
+                navigate(type ? "/auth/register" : "/auth/login");
+              }}
+            />
+            <div className='text-primary_light drop-shadow-primary'>Already registered ??</div>
+          </div>
+        </XStack>
+      )}
     </div>
   );
 };

@@ -1,37 +1,27 @@
 import React from "react";
-import XTextfield from "../../components/XTextfield";
 import XButton from "../../components/XButton";
+import XStack from "../../components/XStack";
+import { useLocation } from "react-router-dom";
 
 const Verification = () => {
+  const { state } = useLocation();
   return (
-    <div className='flex flex-col gap-5'>
-      <form className='flex flex-col'>
-        <XTextfield
-          parentClassName='mt-10'
-          fullWidth
-          name='email'
-          label='Email'
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          error={formik.touched.email && !!formik.errors.email}
-          helperText={formik.touched.email && !!formik.errors.email && formik.errors.email}
-        />
-        <XTextfield
-          parentClassName='mt-10'
-          fullWidth
-          name='password'
-          label='Password'
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          type='password'
-          error={formik.touched.password && !!formik.errors.password}
-          helperText={formik.touched.password && !!formik.errors.password && formik.errors.password}
-        />
-      </form>
-      <XButton color='primary' onClick={formik.handleSubmit} loading={isLoading}>
-        Login
-      </XButton>
-    </div>
+    <XStack
+      size='l'
+      className='relative-center w-[550px] h-[546px] !drop-shadow-none !bg-secondary_background/30 px-14 py-12 gap-5'
+    >
+      <div className='text-2xl font-bold text-primary_main drop-shadow-primary'>
+        Registration successfull
+      </div>
+      <div className='text-white drop-shadow-primary'>
+        Email with activation link has been sent to {state?.email}, after activation of account
+        click here to login
+      </div>
+      <span class='relative flex h-10 w-10'>
+        <span class='animate-ping absolute inline-flex h-full w-full rounded-full bg-primary_main/75'></span>
+      </span>
+      <XButton>Login</XButton>
+    </XStack>
   );
 };
 

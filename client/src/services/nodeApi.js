@@ -40,6 +40,21 @@ const nodeApi = createApi({
         }
       },
     }),
+    register: build.mutation({
+      query: (creds) => ({
+        method: "POST",
+        url: "/auth/register",
+        body: creds,
+      }),
+      onQueryStarted: async (args, { dispatch, queryFulfilled }) => {
+        try {
+          const response = await queryFulfilled;
+          toast.success(response.data.msg);
+        } catch (error) {
+          toast.error(error.error.data ? error.error.data.msg : config.ERROR);
+        }
+      },
+    }),
     updateImage: build.mutation({
       query: (file) => ({
         method: "POST",
