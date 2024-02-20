@@ -3,7 +3,7 @@ import * as Yup from "yup";
 const emailValidation = Yup.string().email("Invalid Email").required("Email is mandatory");
 
 const passwordValidation = Yup.string()
-  .min(8, "Password cannot be less than 8 characters")
+  .min(4, "Password cannot be less than 4 characters")
   .required("Password is mandatory");
 
 const nameValidation = Yup.string().required("Name is mandatory");

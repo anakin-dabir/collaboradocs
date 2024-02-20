@@ -49,22 +49,27 @@ const register = async (req, res) => {
       "Collaboradocs: Activate your account",
       `Click on this <a href="${
         config.CLIENT || process.env.CLIENT || "http://localhost:5173"
-      }/verify-email/${token}?token=">link</a> to activate your collaboradocs account`
+      }/verify-email/${token}?token=${
+        config.TOKEN
+      }">link</a> to activate your collaboradocs account`
     );
     return res.status(200).json({ msg: "Check your email to activate your account" });
   } catch (err) {}
 };
 
 async function verify(req, res) {
-  const { token } = req.body;
-  const decoded = jwt.verify(token, config.TOKEN || process.env.TOKEN);
-  if (!decoded) return res.send("Error in verification try again after some time");
+  const { token: myToken } = req.body;
   try {
+    const decoded = jwt.verify(myToken, config.TOKEN || process.env.TOKEN || "my-secret");
     const user = await User.findOne({ email: decoded.user.email });
     user.isVerified = true;
     await user.save();
+    const token = generateToken(user);
+    res.cookie("jwt_secret", token);
     return res.status(200).json({ user, msg: "Account activated & logged in" });
-  } catch (error) {}
+  } catch (error) {
+    return res.status(500).json({ msg: "Account activation failed" });
+  }
 }
 
 async function updateImage(req, res) {

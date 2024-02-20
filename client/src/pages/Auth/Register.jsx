@@ -9,7 +9,7 @@ const Register = () => {
   const initialValues = { email: "", password: "", name: "" };
   const [register, { isLoading }] = useRegisterMutation();
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     register(values);
   };
 

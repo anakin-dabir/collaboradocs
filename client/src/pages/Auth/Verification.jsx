@@ -6,7 +6,6 @@ import XButton from "../../components/XButton";
 
 const Verification = () => {
   const { token } = useParams();
-  console.log(token);
   const [verifyEmail, { isError, isSuccess }] = useVerifyEmailMutation();
   const navigate = useNavigate();
   useEffect(() => {

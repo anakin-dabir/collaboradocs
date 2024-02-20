@@ -29,7 +29,7 @@ const nodeApi = createApi({
         url: "/auth/register",
         body: creds,
       }),
-      onQueryStarted: async (args, { dispatch, queryFulfilled }) => {
+      async onQueryStarted(arg, { queryFulfilled }) {
         try {
           const response = await queryFulfilled;
           toast.success(response.data.msg);
@@ -72,6 +72,7 @@ const nodeApi = createApi({
         }
       },
     }),
+
     updateImage: build.mutation({
       query: (file) => ({
         method: "POST",
@@ -87,13 +88,6 @@ const nodeApi = createApi({
         body: creds,
       }),
       invalidatesTags: ["User"],
-    }),
-    register: build.mutation({
-      query: (creds) => ({
-        method: "POST",
-        url: "/auth/register",
-        body: creds,
-      }),
     }),
     remove: build.mutation({
       query: () => ({

@@ -6,6 +6,7 @@ import Register from "./pages/Auth/Register";
 import Auth from "./pages/Auth/Auth";
 import bg from "@/assets/bg/bg_4.png";
 import Verification from "./pages/Auth/Verification";
+import config from "./config/config";
 
 const App = () => {
   const { search } = useLocation();
@@ -16,11 +17,11 @@ const App = () => {
       element: <Auth />,
       children: [
         { path: "/auth", element: <Navigate to='/auth/login' /> },
-        { path: "/auth/login", element: <Login /> },
         { path: "/auth/register", element: <Register /> },
+        { path: "/auth/login", element: <Login /> },
       ],
     },
-    search.includes("?token=") && {
+    search === `?token=${config.SECRET}` && {
       path: "/verify-email/:token",
       element: <Verification />,
     },
