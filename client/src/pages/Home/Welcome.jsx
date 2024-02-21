@@ -14,13 +14,13 @@ const Welcome = () => {
     setTimeout(() => dispatch(setInitiated()), 5000);
   }, []);
 
-  // if (initiated) return null;
+  if (initiated) return null;
   return (
     <div className='h-screen fixed z-10 w-screen box-center'>
       <XStack
         size='l'
         className='w-[550px] fixed transition-opacity !drop-shadow-none !bg-secondary_background duration-500 px-14 py-12 gap-5'
-        style={{ opacity: transition && `1` }}
+        style={{ opacity: transition && `0` }}
       >
         <div className='box-center flex-col gap-7'>
           <div className='flex flex-col gap-2'>

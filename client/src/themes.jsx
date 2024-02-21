@@ -115,6 +115,9 @@ export const theme = createTheme({
       },
       styleOverrides: {
         root: {
+          fontSize: "0.875rem",
+          color: "black",
+          fontWeight: "bold",
           clipPath: `
       polygon(
         10px 0,
@@ -172,6 +175,27 @@ export const theme = createTheme({
       },
     },
     MuiMenu: {
+      defaultProps: {
+        transformOrigin: { horizontal: "right", vertical: "top" },
+        anchorOrigin: { horizontal: "right", vertical: "bottom" },
+        PaperProps: {
+          elevation: 0,
+          sx: {
+            clipPath: `
+      polygon(
+        12px 0,
+        100% 0,
+        100% calc(100% - 12px),
+        calc(100% - 12px) 100%,
+        0 100%,
+        0 12px
+      )
+    `,
+            mt: 1,
+          },
+        },
+        MenuListProps: { sx: { py: 0 } },
+      },
       styleOverrides: {
         paper: {
           backgroundColor: alpha(colors.black, 0.95),
@@ -568,6 +592,10 @@ export const theme = createTheme({
     MuiMenuItem: {
       styleOverrides: {
         root: {
+          transition: ".2s all linear",
+          "&:hover": {
+            backgroundColor: colors.primary_background,
+          },
           "&.Mui-selected": {
             backgroundColor: `${colors.secondary_background} !important`,
             clipPath: `polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)`,

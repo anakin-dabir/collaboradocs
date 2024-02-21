@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Welcome from "./Welcome";
 import XStack from "../../components/XStack";
 import Xlogo from "../../components/Xlogo";
-import { Avatar } from "@mui/material";
+import { Avatar, Divider, Menu, MenuItem } from "@mui/material";
 import XTooltip from "../../components/XTooltip";
 
 const Home = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <>
       <Welcome />
@@ -16,12 +24,26 @@ const Home = () => {
             {/* <Xlogo /> */}
             <XTooltip data='anakin-dabir@gmail.com' placement='left'>
               <Avatar
-                // src='https://img.freepik.com/premium-photo/cartoon-game-avatar-logo-gaming-brand_902820-465.jpg'
-                className='text-black text-sm bg-primary_main'
+                onClick={handleClick}
+                src='https://img.freepik.com/premium-photo/cartoon-game-avatar-logo-gaming-brand_902820-465.jpg'
+                className=' text-sm cursor-pointer'
               >
                 OP
               </Avatar>
             </XTooltip>
+            <Menu
+              anchorEl={anchorEl}
+              id='account-menu'
+              open={open}
+              onClose={handleClose}
+              onClick={handleClose}
+            >
+              <XStack className='py-4 w-44'>
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>Settings</MenuItem>
+                <MenuItem onClick={handleClose}>Logout</MenuItem>
+              </XStack>
+            </Menu>
           </div>
         </XStack>
         <XStack className='!fixed top-[5.5rem] w-[300px] bottom-3 left-8 !drop-shadow-none !bg-secondary_background/80'></XStack>
