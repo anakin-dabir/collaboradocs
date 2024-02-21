@@ -3,6 +3,14 @@ const config = {
   SERVER: "",
   ERROR: "Error 505: Server error!",
   SECRET: "my-secret",
+  PATHNAMES: {
+    HOME: "/",
+    AUTH: "/auth",
+    LOGIN: "/auth/login",
+    REGISTER: "/auth/register",
+    VERIFYEMAIL: "/verify-email/:token",
+    TEST: "/test",
+  },
 };
 
 export default config;

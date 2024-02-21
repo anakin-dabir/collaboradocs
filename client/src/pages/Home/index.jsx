@@ -1,65 +1,111 @@
 import React, { useState } from "react";
 import Welcome from "./Welcome";
 import XStack from "../../components/XStack";
-import Xlogo from "../../components/Xlogo";
-import { Avatar, Divider, Menu, MenuItem } from "@mui/material";
-import XTooltip from "../../components/XTooltip";
+import XNavbar from "../../components/XNavbar";
+import { Avatar, AvatarGroup } from "@mui/material";
 
 const Home = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   return (
     <>
       <Welcome />
       <div className='h-screen w-full overflow-hidden'>
-        <XStack className='!fixed !drop-shadow-none left-8 right-8 !bg-secondary_background/100 top-2 py-4'>
-          <div className='flex justify-between container mx-auto'>
-            <Xlogo />
-            {/* <Xlogo /> */}
-            <XTooltip data='anakin-dabir@gmail.com' placement='left'>
-              <Avatar
-                onClick={handleClick}
-                src='https://img.freepik.com/premium-photo/cartoon-game-avatar-logo-gaming-brand_902820-465.jpg'
-                className=' text-sm cursor-pointer'
-              >
-                OP
-              </Avatar>
-            </XTooltip>
-            <Menu
-              anchorEl={anchorEl}
-              id='account-menu'
-              open={open}
-              onClose={handleClose}
-              onClick={handleClose}
-            >
-              <XStack className='py-4 w-44'>
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>Settings</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <XNavbar />
+        <div className='fixed flex gap-2 top-[5.3rem] bottom-2 left-8 right-8'>
+          {/* <XStack className='h-full w-[300px] !drop-shadow-none !bg-secondary_background/80'></XStack> */}
+          <XStack className='h-full flex-1 !drop-shadow-none !bg-secondary_background/60 px-2 py-10'>
+            <div className='overflow-y-auto h-full w-full flex-col space-y-4 gap-4 p-4 flex-wrap'>
+              <XStack className='h-24 flex-1 shadow-2xl'></XStack>
+              <XStack className='h-24 flex-1'></XStack>
+              <XStack className='h-24 flex-1'></XStack>
+              <XStack className='h-24 flex-1 '></XStack>
+              <XStack className='h-24 flex-1'></XStack>
+              <XStack className='h-24 flex-1'>
+                <AvatarGroup
+                  max={4}
+                  renderSurplus={(surplus) => `+${surplus}`}
+                  slotProps={{
+                    additionalAvatar: {
+                      className: "shadow-2xl",
+                      sx: {
+                        bgcolor: "primary.main",
+                        zIndex: 100,
+                        marginLeft: "-18px !important",
+                        clipPath: `
+      polygon(
+        10px 0,
+        100% 0,
+        100% calc(100% - 10px),
+        calc(100% - 10px) 100%,
+        0 100%,
+        0 10px
+      )
+    `,
+                      },
+                    },
+                  }}
+                  sx={{
+                    "& > *": {
+                      border: "0px !important",
+                    },
+                    "& > *:not(:first-of-type)": {
+                      marginLeft: "-18px",
+                    },
+                  }}
+                >
+                  <Avatar
+                    variant='rounded'
+                    alt='Remy Sharp'
+                    className='shadow-2xl'
+                    sx={{ zIndex: 1 }}
+                  >
+                    AD
+                  </Avatar>
+                  <Avatar
+                    variant='rounded'
+                    alt='Remy Sharp'
+                    className='shadow-2xl'
+                    sx={{ zIndex: 2 }}
+                  >
+                    AD
+                  </Avatar>
+                  <Avatar
+                    variant='rounded'
+                    alt='Remy Sharp'
+                    className='shadow-2xl'
+                    sx={{ zIndex: 3 }}
+                    src='https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg'
+                  >
+                    AD
+                  </Avatar>
+                  <Avatar
+                    variant='rounded'
+                    alt='Remy Sharp'
+                    className='shadow-2xl'
+                    sx={{ zIndex: 14 }}
+                  >
+                    AD
+                  </Avatar>
+                  <Avatar
+                    variant='rounded'
+                    alt='Remy Sharp'
+                    className='shadow-2xl'
+                    sx={{ zIndex: 5 }}
+                  >
+                    AD
+                  </Avatar>
+                </AvatarGroup>
               </XStack>
-            </Menu>
-          </div>
-        </XStack>
-        <XStack className='!fixed top-[5.5rem] w-[300px] bottom-3 left-8 !drop-shadow-none !bg-secondary_background/80'></XStack>
-        <XStack className='!fixed top-[5.5rem] left-72 bottom-3 right-8 !drop-shadow-none !bg-secondary_background/80 px-2 py-10'>
-          <div className='overflow-y-auto h-full w-full flex gap-4 p-4 flex-wrap'>
-            <XStack className='h-52 w-72'></XStack>
-            <XStack className='h-52 w-72'></XStack>
-            <XStack className='h-52 w-72'></XStack>
-            <XStack className='h-52 w-72'></XStack>
-            <XStack className='h-52 w-72'></XStack>
-            <XStack className='h-52 w-72'></XStack>
-            <XStack className='h-52 w-72'></XStack>
-            <XStack className='h-52 w-72'></XStack>
-            <XStack className='h-52 w-72'></XStack>
-          </div>
-        </XStack>
+              {/* <XStack className='h-52 w-72'></XStack>
+              <XStack className='h-52 w-72'></XStack>
+              <XStack className='h-52 w-72'></XStack>
+              <XStack className='h-52 w-72'></XStack>
+              <XStack className='h-52 w-72'></XStack>
+              <XStack className='h-52 w-72'></XStack>
+              <XStack className='h-52 w-72'></XStack>
+              <XStack className='h-52 w-72'></XStack> */}
+            </div>
+          </XStack>
+        </div>
       </div>
     </>
   );
