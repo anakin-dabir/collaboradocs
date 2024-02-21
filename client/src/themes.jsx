@@ -1644,8 +1644,8 @@ export const useGuiTooltipStyles = makeStyles(() => ({
     backgroundColor: colors.secondary_background,
     boxShadow: "none",
     border: "none",
-    color: theme.palette.error.light || theme.palette.primary.main,
-    // textShadow: `0px 0px 6px ${theme.palette.primary.main}`,
+    color: theme.palette.primary.main,
+    textShadow: `0px 0px 6px ${theme.palette.primary.main}`,
   },
   border_error: {
     position: "absolute",
@@ -1653,7 +1653,7 @@ export const useGuiTooltipStyles = makeStyles(() => ({
   },
   border: {
     position: "absolute",
-    // fill: '#18FFFF',
+    fill: "#18FFFF",
     filter: "drop-shadow(0 0 10px #536DFE)",
   },
   top_left_border: {

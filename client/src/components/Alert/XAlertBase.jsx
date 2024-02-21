@@ -8,7 +8,7 @@ import { ReactComponent as WarningIcon } from "@/assets/warning.svg";
 import XStack from "../XStack";
 
 const XAlertBase = ({
-  className,
+  className = "",
   style,
   fullScreen = false,
   sx,
@@ -42,7 +42,7 @@ const XAlertBase = ({
       sx={sx}
       {...props}
     >
-      <XStack size='large' className={dialogClasses.root}>
+      <XStack size='large' className={clsx(className, dialogClasses.root)}>
         <Box className={dialogClasses.content}>
           {heading && (
             <DialogTitle>
