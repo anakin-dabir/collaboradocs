@@ -109,6 +109,25 @@ export const theme = createTheme({
     },
   },
   components: {
+    MuiAvatar: {
+      defaultProps: {
+        variant: "rounded",
+      },
+      styleOverrides: {
+        root: {
+          clipPath: `
+      polygon(
+        10px 0,
+        100% 0,
+        100% calc(100% - 10px),
+        calc(100% - 10px) 100%,
+        0 100%,
+        0 10px
+      )
+    `,
+        },
+      },
+    },
     MuiTooltip: {
       styleOverrides: {
         popper: {
@@ -1379,10 +1398,9 @@ export const useGuiModuleStyles = makeStyles(() => ({
   root: {
     position: "relative",
     backgroundColor: alpha(colors.secondary_background, 0.9),
-    boxShadow: "none",
+    // boxShadow: "none",
     border: "none",
-    filter: `drop-shadow(0px 0px 10px ${colors.secondary_light})`,
-    // filter: "drop-shadow(0 0 10px #536DFE)",
+    filter: `drop-shadow(0px 0px 10px ${colors.secondary_dark})`,
     boxShadow: `1px 1px 10px ${colors.primary_main}`,
     clipPath: `
       polygon(

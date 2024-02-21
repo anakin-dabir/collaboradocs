@@ -7,9 +7,7 @@ const Xlogo = () => {
     <XTooltip placement='bottom' data='Real-time collaboration, anywhere, anytime'>
       <div className='box-center gap-2 inline-flex cursor-pointer'>
         <Logo style={{ height: "45px", width: "45px" }} />
-        <div className='text-xl font-medium text-primary_main drop-shadow-primary'>
-          Collaboradocs
-        </div>
+        <div className='text-xl font-medium text-primary_main -tracking-widest'>Collaboradocs</div>
       </div>
     </XTooltip>
   );
