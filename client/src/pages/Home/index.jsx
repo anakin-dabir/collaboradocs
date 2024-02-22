@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import Welcome from "./Welcome";
+import Welcome from "../../components/Custom/Welcome";
 import XStack from "../../components/XStack";
 import DocumentTile from "./components/DocumentTile";
+import XNavbar from "../../components/Custom/XNavbar";
 
 const Home = () => {
   const document = {
+    _id: "123",
     title: "Warfare of artcraft documentary",
     desc: "A documentary on the things that happened in the past 1800's for the witchcraft",
     creator: {
@@ -18,6 +20,7 @@ const Home = () => {
   return (
     <>
       <Welcome />
+      <XNavbar />
 
       <XStack className='h-full flex-1 flex flex-row !drop-shadow-none !bg-secondary_background/60 px-2 py-4'>
         <div className='overflow-y-auto relative h-full w-full'>

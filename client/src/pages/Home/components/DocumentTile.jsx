@@ -8,8 +8,10 @@ import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { ReactComponent as Project } from "@/assets/project.svg";
 import shortName from "../../../utils/shortName";
 import checkPlural from "../../../utils/checkPlural";
+import { useNavigate } from "react-router-dom";
 
 const DocumentTile = ({ document }) => {
+  const navigate = useNavigate();
   return (
     <XStack disableBorder className='!bg-secondary_background/90 !drop-shadow-none'>
       <div className='flex flex-col px-5 p-3 gap-2 h-full w-full'>
@@ -28,7 +30,12 @@ const DocumentTile = ({ document }) => {
                           Star
                         </XButton> */}
         </div>
-        <XStack className='cursor-pointer !bg-transparent/20 !drop-shadow-none hover:!bg-secondary_light/10 transition-all'>
+        <XStack
+          className='cursor-pointer !bg-transparent/20 !drop-shadow-none hover:!bg-secondary_light/10 transition-all'
+          onClick={() => {
+            navigate(`/doc/${document.title}`);
+          }}
+        >
           <div className='h-full w-full p-4 flex flex-col gap-2'>
             <div className='text-sm leading-3 font-bold text-primary_light'>{document.title}</div>
             <div className='text-xs  truncate'>{document.desc}</div>

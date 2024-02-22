@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   initiated: false,
+  error: false,
 };
 
 const welcomeSlice = createSlice({
@@ -11,9 +12,12 @@ const welcomeSlice = createSlice({
     setInitiated: (state, action) => {
       state.initiated = true;
     },
+    serRouterError: (state, action) => {
+      state.error = action;
+    },
   },
 });
 
-export const { setInitiated } = welcomeSlice.actions;
+export const { setInitiated, serRouterError } = welcomeSlice.actions;
 
 export default welcomeSlice.reducer;

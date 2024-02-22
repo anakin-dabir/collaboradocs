@@ -1,6 +1,7 @@
 import React from "react";
-import XEditor from "./components/XEditor";
 import { Navigate, useLocation, useRoutes } from "react-router-dom";
+import { useSelector } from "react-redux";
+import XEditor from "./components/XEditor";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import Auth from "./pages/Auth";
@@ -8,13 +9,13 @@ import Verification from "./pages/Auth/Verification";
 import config from "./config/config";
 import Home from "./pages/Home";
 import XNavbar from "./components/Custom/XNavbar";
-import Error from "./pages/Home/Error";
-import { useSelector } from "react-redux";
+import Error from "./components/Custom/Error";
 import relativeTime from "dayjs/plugin/relativeTime.js";
 import dayjs from "dayjs";
 import Background from "./components/Header/Background";
 import Header from "./components/Header/Header";
 import XSidebar from "./components/Custom/XSidebar";
+import Document from "./pages/Document";
 
 const App = () => {
   dayjs.extend(relativeTime);
@@ -37,6 +38,7 @@ const App = () => {
         element: <Verification />,
       },
     { path: config.PATHNAMES.TEST, element: <XEditor /> },
+    { path: config.PATHNAMES.DOCUMENT, element: <Document /> },
     { path: "*", element: <Error /> },
   ]);
 
@@ -44,7 +46,6 @@ const App = () => {
     <>
       <div className='w-screen h-screen'>
         <Background />
-        <XNavbar />
         <Header>
           {isLoggedIn && <XSidebar />}
           {routes}

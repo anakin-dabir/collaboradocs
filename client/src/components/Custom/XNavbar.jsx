@@ -2,19 +2,8 @@ import React from "react";
 import Xlogo from "./XLogo";
 import XAvatar from "./XAvatar";
 import XStack from "../XStack";
-import { useLocation } from "react-router-dom";
-import config from "../../config/config";
 
-const XNavbar = () => {
-  const { pathname } = useLocation();
-  const pathnames = Object.values(config.PATHNAMES);
-  const disableBorder =
-    pathname === config.PATHNAMES.AUTH ||
-    pathname === config.PATHNAMES.LOGIN ||
-    pathname === config.PATHNAMES.REGISTER ||
-    pathname === config.PATHNAMES.VERIFYEMAIL ||
-    !pathnames.includes(pathname);
-
+const XNavbar = ({ disableBorder = false }) => {
   return (
     <XStack
       disableBorder={disableBorder}
