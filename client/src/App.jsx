@@ -4,15 +4,17 @@ import { Navigate, useLocation, useRoutes } from "react-router-dom";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import Auth from "./pages/Auth";
-import bg from "@/assets/bg/bg_4.png";
 import Verification from "./pages/Auth/Verification";
 import config from "./config/config";
 import Home from "./pages/Home";
-import XNavbar from "./components/XNavbar";
+import XNavbar from "./components/Custom/XNavbar";
 import Error from "./pages/Home/Error";
 import { useSelector } from "react-redux";
 import relativeTime from "dayjs/plugin/relativeTime.js";
 import dayjs from "dayjs";
+import Background from "./components/Header/Background";
+import Header from "./components/Header/Header";
+import XSidebar from "./components/Custom/XSidebar";
 
 const App = () => {
   dayjs.extend(relativeTime);
@@ -37,16 +39,16 @@ const App = () => {
     { path: config.PATHNAMES.TEST, element: <XEditor /> },
     { path: "*", element: <Error /> },
   ]);
+
   return (
     <>
-      <XNavbar />
-      <div className='w-screen h-full'>
-        <div
-          className='fixed bg-cover bg-no-repeat inset-0 bg-blend-luminosity bg-black/60 -z-10'
-          style={{ backgroundImage: `url(${bg})` }}
-        ></div>
-        <div className='fixed inset-0 bg-black/30 bg-blend-overlay -z-10'></div>
-        <div className='z-10 h-full w-full'>{routes}</div>
+      <div className='w-screen h-screen'>
+        <Background />
+        <XNavbar />
+        <Header>
+          {isLoggedIn && <XSidebar />}
+          {routes}
+        </Header>
       </div>
     </>
   );

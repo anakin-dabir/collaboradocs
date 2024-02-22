@@ -16,7 +16,7 @@ const Auth = () => {
     return true;
   });
   return (
-    <div className='w-screen h-screen'>
+    <div className='fixed inset-0'>
       <XStack
         size='l'
         className='relative-center w-[550px] !drop-shadow-none !bg-secondary_background/30 px-14 py-12 gap-5'

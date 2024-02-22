@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import XStack from "../../components/XStack";
-import Xlogo from "../../components/Xlogo";
+import Xlogo from "../../components/Custom/XLogo";
 import { useSelector, useDispatch } from "react-redux";
 import { setInitiated } from "../../store/slice/welcomeSlice";
 

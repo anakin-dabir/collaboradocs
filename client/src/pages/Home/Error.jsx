@@ -2,12 +2,11 @@ import React from "react";
 import XStack from "../../components/XStack";
 import { useNavigate } from "react-router-dom";
 import XButton from "../../components/XButton";
-import config from "../../config/config";
 
 const Error = () => {
   const navigate = useNavigate();
   return (
-    <div className='w-screen h-screen'>
+    <div className='fixed inset-0'>
       <XStack
         size='l'
         className='relative-center box-center w-[550px] !drop-shadow-none !bg-secondary_background/30 px-14 py-12 gap-10'

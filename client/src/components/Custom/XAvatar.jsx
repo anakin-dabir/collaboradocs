@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import XTooltip from "./XTooltip";
+import XTooltip from "../XTooltip";
 import { Avatar, Menu, MenuItem } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
-import XStack from "./XStack";
+import XStack from "../XStack";
 import { useLocation, useNavigate } from "react-router-dom";
-import { clearUser } from "../store/slice/authSlice";
-import config from "../config/config";
+import { clearUser } from "../../store/slice/authSlice";
+import config from "../../config/config";
+import shortName from "../../utils/shortName";
 
 const XAvatar = ({ tooltipPlacement = "left", className }) => {
   const navigate = useNavigate();
@@ -35,9 +36,7 @@ const XAvatar = ({ tooltipPlacement = "left", className }) => {
           src={user?.img}
           className={clsx(className, `text-sm cursor-pointer`)}
         >
-          {user
-            ? `${user.name[0].toUpperCase()}${user.name[user.name.length - 1].toUpperCase()}`
-            : "G"}
+          {user ? shortName(user?.name) : "G0"}
         </Avatar>
       </XTooltip>
 

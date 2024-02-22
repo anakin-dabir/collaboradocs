@@ -1,6 +1,6 @@
 import React from "react";
 import { ReactComponent as Logo } from "@/assets/logo.svg";
-import XTooltip from "./XTooltip";
+import XTooltip from "../XTooltip";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Xlogo = ({ clickable = false }) => {
