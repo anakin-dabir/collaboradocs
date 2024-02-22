@@ -6,6 +6,7 @@ import XButton from "../../components/XButton";
 import XTextfield from "../../components/XTextfield";
 import { ReactComponent as Search } from "@/assets/searchIcon.svg";
 import { Avatar, AvatarGroup } from "@mui/material";
+import XAvatar from "../../components/XAvatar";
 
 const Home = () => {
   return (
@@ -14,7 +15,7 @@ const Home = () => {
       <div className='h-screen w-full overflow-hidden'>
         <XNavbar />
         <div className='fixed flex gap-2 top-[5.3rem] bottom-2 left-8 right-8'>
-          <XStack className='h-full w-[400px] !drop-shadow-none !bg-secondary_background/60 py-10 px-4'>
+          {/* <XStack className='h-full w-[400px] !drop-shadow-none !bg-secondary_background/60 py-10 px-4'>
             <div className='flex h-full w-full flex-col gap-4'>
               <div className='flex justify-between items-center'>
                 <div className='text-lg'>Projects</div>
@@ -34,102 +35,64 @@ const Home = () => {
                 }}
               />
             </div>
-          </XStack>
-          <XStack className='h-full flex-1 flex flex-row !drop-shadow-none !bg-secondary_background/60 px-2 py-10'>
-            <div className='overflow-y-auto  h-full w-full flex-col space-y-4 gap-4 p-4 flex-wrap'>
-              <div className='container space-y-4 max-w-screen-lg'>
-                <XStack className='h-24 flex-1 shadow-2xl'></XStack>
-                <XStack className='h-24 flex-1'></XStack>
-                <XStack className='h-24 flex-1'></XStack>
-                <XStack className='h-24 flex-1 '></XStack>
-                <XStack className='h-24 flex-1'></XStack>
-                <XStack className='h-24 flex-1'>
-                  <AvatarGroup
-                    max={4}
-                    renderSurplus={(surplus) => `+${surplus}`}
-                    slotProps={{
-                      additionalAvatar: {
-                        className: "shadow-2xl",
-                        sx: {
-                          bgcolor: "primary.main",
-                          zIndex: 100,
-                          marginLeft: "-18px !important",
-                          clipPath: `
-      polygon(
-        10px 0,
-        100% 0,
-        100% calc(100% - 10px),
-        calc(100% - 10px) 100%,
-        0 100%,
-        0 10px
-      )
-    `,
-                        },
-                      },
-                    }}
-                    sx={{
-                      "& > *": {
-                        border: "0px !important",
-                      },
+          </XStack> */}
+          <XStack className='h-full flex-1 flex flex-row !drop-shadow-none !bg-secondary_background/60 px-2 py-4'>
+            <div className='overflow-y-auto relative h-full w-full flex-col p-4'>
+              <div className='space-y-4 w-1/2'>
+                <XStack className='h-24  !bg-secondary_background/90 !drop-shadow-none hover:!bg-secondary_main/20 !transition-all cursor-pointer'></XStack>
 
-                      "& > *:not(:first-of-type)": {
-                        marginLeft: "-18px",
-                      },
-                    }}
-                  >
-                    <Avatar
-                      variant='rounded'
-                      alt='Remy Sharp'
-                      className='shadow-2xl'
-                      sx={{ zIndex: 1 }}
-                    >
-                      AD
-                    </Avatar>
-                    <Avatar
-                      variant='rounded'
-                      alt='Remy Sharp'
-                      className='shadow-2xl'
-                      sx={{ zIndex: 2 }}
-                    >
-                      AD
-                    </Avatar>
-                    <Avatar
-                      variant='rounded'
-                      alt='Remy Sharp'
-                      className='shadow-2xl'
-                      sx={{ zIndex: 3 }}
-                      src='https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg'
-                    >
-                      AD
-                    </Avatar>
-                    <Avatar
-                      variant='rounded'
-                      alt='Remy Sharp'
-                      className='shadow-2xl'
-                      sx={{ zIndex: 14 }}
-                    >
-                      AD
-                    </Avatar>
-                    <Avatar
-                      variant='rounded'
-                      alt='Remy Sharp'
-                      className='shadow-2xl'
-                      sx={{ zIndex: 5 }}
-                    >
-                      AD
-                    </Avatar>
-                  </AvatarGroup>
-                </XStack>
-                {/* <XStack className='h-52 w-72'></XStack>
-              <XStack className='h-52 w-72'></XStack>
-              <XStack className='h-52 w-72'></XStack>
-              <XStack className='h-52 w-72'></XStack>
-              <XStack className='h-52 w-72'></XStack>
-              <XStack className='h-52 w-72'></XStack>
-              <XStack className='h-52 w-72'></XStack>
-              <XStack className='h-52 w-72'></XStack> */}
+                <XButton fullWidth color='error' disabled className='h-24'>
+                  THis is my house so fuck off from here
+                </XButton>
+                <XButton fullWidth color='error' disabled className='h-24'>
+                  THis is my house so fuck off from here
+                </XButton>
+                <XButton fullWidth color='error' disabled className='h-24'></XButton>
+                <XButton fullWidth color='error' disabled className='h-24'></XButton>
+                <XButton fullWidth color='error' className='h-24'></XButton>
+                <XButton fullWidth color='error' className='h-24'></XButton>
+                <XButton fullWidth color='error' className='h-24'>
+                  THis is my house so fuck off from here
+                  <Avatar>OG</Avatar>
+                  <Avatar>OG</Avatar>
+                  <Avatar>OG</Avatar>
+                  <Avatar>OG</Avatar>
+                </XButton>
+                <XButton fullWidth color='success' className='h-24'>
+                  THis is my house so fuck off from here
+                  <Avatar>OG</Avatar>
+                  <Avatar>OG</Avatar>
+                  <Avatar>OG</Avatar>
+                  <Avatar>OG</Avatar>
+                </XButton>
+                <XButton fullWidth color='success' className='h-24'></XButton>
+                <XButton fullWidth color='success' className='h-24'></XButton>
+                <XButton fullWidth color='primary' className='h-24'></XButton>
+                <XButton fullWidth color='primary' className='h-24'></XButton>
+                <XButton fullWidth color='primary' className='h-24'>
+                  THis is my house so fuck off from here
+                </XButton>
+                <XButton fullWidth color='primary' className='h-24'></XButton>
+                <XButton fullWidth color='secondary' className='h-24'></XButton>
+                <XButton fullWidth color='secondary' className='h-24'></XButton>
+                <XButton fullWidth color='secondary' className='h-24'></XButton>
+                <XButton fullWidth color='secondary' className='h-24'>
+                  THis is my house so fuck off from here
+                </XButton>
+                <XButton fullWidth className='h-24'></XButton>
+                <XButton fullWidth className='h-24'></XButton>
+                <XButton fullWidth className='h-24'></XButton>
+                <XButton fullWidth className='h-24'>
+                  THis is my house so fuck off from here
+                  <Avatar>OG</Avatar>
+                  <Avatar>OG</Avatar>
+                  <Avatar>OG</Avatar>
+                  <Avatar>OG</Avatar>
+                </XButton>
+                <XButton fullWidth className='h-24'></XButton>
+                <XButton>Load More</XButton>
               </div>
-              <XStack className='right-10 flex-1 top-4 !fixed w-[300px] !drop-shadow-none !bg-secondary_background/80'></XStack>
+              {/* <XStack className='h-[300px] w-1/2 top-0 !absolute !drop-shadow-none !bg-secondary_background/80'></XStack> */}
             </div>
           </XStack>
         </div>

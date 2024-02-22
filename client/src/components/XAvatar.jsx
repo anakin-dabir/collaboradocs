@@ -6,6 +6,7 @@ import clsx from "clsx";
 import XStack from "./XStack";
 import { useLocation, useNavigate } from "react-router-dom";
 import { clearUser } from "../store/slice/authSlice";
+import config from "../config/config";
 
 const XAvatar = ({ tooltipPlacement = "left", className }) => {
   const navigate = useNavigate();
@@ -15,9 +16,9 @@ const XAvatar = ({ tooltipPlacement = "left", className }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
-    if (pathname === "/auth/login" || pathname === "/auth/register") return;
+    if (pathname === config.PATHNAMES.LOGIN || pathname === config.PATHNAMES.REGISTER) return;
     if (!user) {
-      navigate("/auth/register");
+      navigate(config.PATHNAMES.LOGIN);
     } else {
       setAnchorEl(event.currentTarget);
     }
