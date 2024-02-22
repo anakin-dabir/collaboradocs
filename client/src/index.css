@@ -165,9 +165,3 @@ select {
     transform: rotate(var(--r-to));
   }
 } */
-
-.rdw-colorpicker-modal {
-  background-color: #00182c !important;
-  border: none;
-  box-shadow: none;
-}
