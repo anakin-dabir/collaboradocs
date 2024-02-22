@@ -15,10 +15,10 @@ const Xlogo = ({ clickable = false }) => {
     <XTooltip placement='bottom' data='Real-time collaboration, anywhere, anytime'>
       <div
         onClick={handleClick}
-        className={`box-center inline-flex ${clickable && "cursor-pointer"}`}
+        className={`box-center gap-1 inline-flex ${clickable && "cursor-pointer"}`}
       >
-        <Logo style={{ height: "45px", width: "45px" }} />
-        <div className='text-xl font-medium text-primary_main -tracking-[0.12em]'>
+        <Logo style={{ height: "40px", width: "40px" }} />
+        <div className='text-xl font-normal text-primary_main -tracking-[0.14em]'>
           Collaboradocs
         </div>
       </div>
