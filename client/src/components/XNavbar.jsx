@@ -22,7 +22,7 @@ const XNavbar = () => {
         disableBorder ? "!bg-transparent" : "!bg-secondary_background/40"
       } left-8 right-8 top-2 py-4`}
     >
-      <div className='flex justify-between container mx-auto'>
+      <div className='flex justify-between container mx-auto max-w-screen-2xl px-4'>
         <Xlogo clickable />
         <XAvatar />
       </div>
