@@ -10,12 +10,17 @@ import config from "./config/config";
 import Home from "./pages/Home";
 import XNavbar from "./components/XNavbar";
 import Error from "./pages/Home/Error";
+import { useSelector } from "react-redux";
+import relativeTime from "dayjs/plugin/relativeTime.js";
+import dayjs from "dayjs";
 
 const App = () => {
+  dayjs.extend(relativeTime);
   const { search } = useLocation();
+  const isLoggedIn = useSelector((state) => state.user.isLogged);
   const routes = useRoutes([
     { path: config.PATHNAMES.HOME, element: <Home /> },
-    {
+    !isLoggedIn && {
       path: config.PATHNAMES.AUTH,
       element: <Auth />,
       children: [
@@ -24,10 +29,11 @@ const App = () => {
         { path: config.PATHNAMES.LOGIN, element: <Login /> },
       ],
     },
-    search === `?token=${config.SECRET}` && {
-      path: config.PATHNAMES.VERIFYEMAIL,
-      element: <Verification />,
-    },
+    !isLoggedIn &&
+      search === `?token=${config.SECRET}` && {
+        path: config.PATHNAMES.VERIFYEMAIL,
+        element: <Verification />,
+      },
     { path: config.PATHNAMES.TEST, element: <XEditor /> },
     { path: "*", element: <Error /> },
   ]);

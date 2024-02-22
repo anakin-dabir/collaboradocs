@@ -45,10 +45,9 @@ const nodeApi = createApi({
         body: creds,
       }),
       // invalidatesTags: ["User"],
-      onQueryStarted: async (args, { dispatch, queryFulfilled }) => {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const response = await queryFulfilled;
-          dispatch(setUser(response.data.user));
           toast.success(response.data.msg);
         } catch (error) {
           toast.error(error.error.data ? error.error.data.msg : config.ERROR);
@@ -65,7 +64,6 @@ const nodeApi = createApi({
       onQueryStarted: async (args, { dispatch, queryFulfilled }) => {
         try {
           const response = await queryFulfilled;
-          dispatch(setUser(response.data.user));
           toast.success(response.data.msg);
         } catch (error) {
           toast.error(error.error.data ? error.error.data.msg : config.ERROR);

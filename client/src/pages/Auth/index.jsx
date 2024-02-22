@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import XStack from "../../components/XStack";
 import XSwitch from "../../components/XSwitch";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import config from "../../config/config";
+import { useSelector } from "react-redux";
 
 const Auth = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const isLogged = useSelector((state) => state.user.isLogged);
+
   const [type, typeSet] = useState(function path() {
-    if (pathname === "/auth/login") return true;
-    else if (pathname === "/auth/register") return false;
+    if (pathname === config.PATHNAMES.LOGIN) return true;
+    else if (pathname === config.PATHNAMES.REGISTER) return false;
     return true;
   });
   return (

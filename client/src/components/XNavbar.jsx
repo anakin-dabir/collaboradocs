@@ -19,7 +19,7 @@ const XNavbar = () => {
     <XStack
       disableBorder={disableBorder}
       className={`!fixed !drop-shadow-none ${
-        disableBorder ? "!bg-transparent" : "!bg-secondary_background/60"
+        disableBorder ? "!bg-transparent" : "!bg-secondary_background/40"
       } left-8 right-8 top-2 py-4`}
     >
       <div className='flex justify-between container mx-auto'>

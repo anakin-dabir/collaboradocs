@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 
 const initialState = {
   isLogged: false,
@@ -13,7 +14,10 @@ const authSlice = createSlice({
       state.isLogged = true;
       state.user = action.payload;
     },
-    clearUser: (state) => initialState,
+    clearUser: (state) => {
+      Cookies.remove("jwt_token");
+      return initialState;
+    },
   },
 });
 

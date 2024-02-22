@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import XTextfield from "../../components/XTextfield";
 import useValidation from "../../formik/useValidation";
 import { LoginValidationSchema } from "../../formik/validationSchema";
 import XButton from "../../components/XButton";
 import { useLoginMutation } from "../../services/nodeApi";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/slice/authSlice";
 
 const Login = () => {
-  const [login, { isLoading }] = useLoginMutation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [login, { isLoading, data }] = useLoginMutation();
   const initialValues = { email: "", password: "" };
   const handleSubmit = (values) => {
     login(values);
   };
-
+  useEffect(() => {
+    if (data) {
+      dispatch(setUser(data.user));
+      navigate("/");
+    }
+  }, [data]);
   const formik = useValidation({
     initialValues,
     handleSubmit,

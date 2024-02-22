@@ -136,18 +136,16 @@ const XTextfield = ({
         onChange={onChange}
         placeholder={placeholder}
         InputProps={
-          (inputProps,
-          {
-            endAdornment:
-              type === "password" ? (
-                <div
-                  className='ml-2 mr-1 cursor-pointer box-center'
-                  onClick={() => tempTypeSet((pre) => (pre === "password" ? "text" : "password"))}
-                >
-                  {tempType === "text" ? <NotEye /> : <Eye />}
-                </div>
-              ) : null,
-          })
+          inputProps || {
+            endAdornment: type === "password" && (
+              <div
+                className='ml-2 mr-1 cursor-pointer box-center'
+                onClick={() => tempTypeSet((pre) => (pre === "password" ? "text" : "password"))}
+              >
+                {tempType === "text" ? <NotEye /> : <Eye />}
+              </div>
+            ),
+          }
         }
         type={type === "password" ? tempType : type}
         fullWidth

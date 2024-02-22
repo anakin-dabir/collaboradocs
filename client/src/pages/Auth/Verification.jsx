@@ -3,17 +3,23 @@ import XStack from "../../components/XStack";
 import { useNavigate, useParams } from "react-router-dom";
 import { useVerifyEmailMutation } from "../../services/nodeApi";
 import XButton from "../../components/XButton";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/slice/authSlice";
 
 const Verification = () => {
   const { token } = useParams();
-  const [verifyEmail, { isError, isSuccess }] = useVerifyEmailMutation();
+  const dispatch = useDispatch();
+  const [verifyEmail, { isError, data }] = useVerifyEmailMutation();
   const navigate = useNavigate();
   useEffect(() => {
     verifyEmail({ token });
   }, []);
   useEffect(() => {
-    isSuccess && navigate("/", { replace: true });
-  }, [isSuccess]);
+    if (data) {
+      dispatch(setUser(data.user));
+      navigate("/");
+    }
+  }, [data]);
   return (
     <XStack
       size='l'

@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import XTooltip from "./XTooltip";
 import { Avatar, Menu, MenuItem } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
 import XStack from "./XStack";
 import { useLocation, useNavigate } from "react-router-dom";
+import { clearUser } from "../store/slice/authSlice";
 
 const XAvatar = ({ tooltipPlacement = "left", className }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -34,23 +36,31 @@ const XAvatar = ({ tooltipPlacement = "left", className }) => {
         >
           {user
             ? `${user.name[0].toUpperCase()}${user.name[user.name.length - 1].toUpperCase()}`
-            : "00"}
+            : "G"}
         </Avatar>
       </XTooltip>
 
-      <Menu
-        anchorEl={anchorEl}
-        id='account-menu'
-        open={open}
-        onClose={handleClose}
-        onClick={handleClose}
-      >
-        <XStack className='py-4 w-44'>
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>Settings</MenuItem>
-          <MenuItem onClick={handleClose}>Logout</MenuItem>
-        </XStack>
-      </Menu>
+      {user && (
+        <Menu
+          anchorEl={anchorEl}
+          id='account-menu'
+          open={open}
+          onClose={handleClose}
+          onClick={handleClose}
+        >
+          <XStack className='py-4 w-44'>
+            <MenuItem onClick={handleClose}>Settings</MenuItem>
+            <MenuItem
+              onClick={() => {
+                dispatch(clearUser());
+                handleClose();
+              }}
+            >
+              Logout
+            </MenuItem>
+          </XStack>
+        </Menu>
+      )}
     </>
   );
 };
