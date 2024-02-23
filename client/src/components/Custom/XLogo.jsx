@@ -18,7 +18,9 @@ const Xlogo = ({ clickable = false }) => {
         className={`box-center gap-1 inline-flex ${clickable && "cursor-pointer"}`}
       >
         <Logo style={{ height: "40px", width: "40px" }} />
-        <div className='text-xl font-bold text-primary_main -tracking-[0.14em]'>Collaboradocs</div>
+        <div className='text-xl font-normal text-primary_main -tracking-[0.14em]'>
+          Collaboradocs
+        </div>
       </div>
     </XTooltip>
   );

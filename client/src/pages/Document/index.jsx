@@ -11,6 +11,7 @@ import { ReactComponent as Star } from "@/assets/custom/star.svg";
 import { ReactComponent as Project } from "@/assets/custom/project.svg";
 import XTooltip from "../../components/XTooltip";
 import XChip from "../../components/XChip";
+import BackButton from "../../components/Custom/BackButton";
 
 const Document = () => {
   return (
@@ -20,26 +21,33 @@ const Document = () => {
         <div className='overflow-y-auto relative h-full w-full flex gap-3'>
           <div className='h-full w-[75%]'>
             <XStack className='min-h-full w-full p-8 !bg-secondary_background/90 !drop-shadow-none flex flex-col gap-5'>
-              <div className='flex items-center gap-2 justify-between'>
-                <div className='flex gap-4'>
-                  <div className='text-xl font-bold text-primary_main'>
-                    Warfare of artcraft documentary
+              <div className='flex flex-col gap-3.5'>
+                <div className='flex items-center gap-2 justify-between'>
+                  <div className='flex gap-4 items-center'>
+                    <div className='flex items-center gap-1'>
+                      <BackButton />
+                      <div className='text-xl font-bold text-primary_main'>
+                        Warfare of artcraft documentary
+                      </div>
+                    </div>
+                    <XButton disabled className='px-3 py-[0.1rem]'>
+                      Public
+                    </XButton>
                   </div>
-                  <XButton disabled className='px-3 py-[0.1rem]'>
-                    Public
-                  </XButton>
+                  <div className='flex gap-2 items-center'>
+                    <Button className='gap-2'>
+                      <div className='capitalize'>125 Changes</div>
+                      <History />
+                    </Button>
+                    <IconButton>
+                      <Settings />
+                    </IconButton>
+                  </div>
                 </div>
-                <div className='flex gap-2 items-center'>
-                  <Button className='gap-2'>
-                    <div className='capitalize'>125 Changes</div>
-                    <History />
-                  </Button>
-                  <IconButton>
-                    <Settings />
-                  </IconButton>
-                </div>
+
+                <XDivider />
               </div>
-              <XDivider />
+
               <div className='text-2xl h-20'>Anakin mariko</div>
             </XStack>
           </div>

@@ -314,7 +314,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           color: colors.white,
-          filter: `drop-shadow(0px 0px 6px ${colors.white})`,
+          filter: `drop-shadow(0px 0px 2px ${colors.white})`,
           "&.Mui-disabled": {
             color: alpha(colors.white, 0.26),
           },

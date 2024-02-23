@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 const DocumentTile = ({ document }) => {
   const navigate = useNavigate();
   return (
-    <XStack disableBorder className='!bg-secondary_background/90 !drop-shadow-none'>
+    <XStack className='!bg-secondary_background/90 !drop-shadow-none'>
       <div className='flex flex-col px-5 p-3 gap-2 h-full w-full'>
         <div className='flex justify-between'>
           <div className='flex items-center gap-3'>
