@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography, IconButton } from "@mui/material";
 import clsx from "clsx";
-import theme, { useGuiChipStyles } from "@/themes";
+import theme, { useGuiChipStyles } from "../themes";
 import { ReactComponent as ChipTopLeft } from "@/assets/chipTopLeft.svg";
 import { ReactComponent as ChipTopRight } from "@/assets/chipTopRight.svg";
 import { ReactComponent as ChipBottomRight } from "@/assets/chipBottomRight.svg";
@@ -15,7 +15,7 @@ const XChip = ({ label = "Demo Chip", disabled = false, onDelete, className = ""
   else borderColor = theme.palette.primary.main;
   return (
     <Box
-      className={clsx(className, classes.root, {
+      className={clsx(classes.root, {
         [classes.rootDisabled]: disabled,
       })}
       {...rest}
@@ -31,7 +31,7 @@ const XChip = ({ label = "Demo Chip", disabled = false, onDelete, className = ""
       />
       <ChipTopRight className={clsx(classes.border, classes.top_right_border)} fill={borderColor} />
       <Box
-        className={clsx(classes.chip_container, {
+        className={clsx(className, classes.chip_container, {
           [classes.disabled]: disabled,
         })}
       >

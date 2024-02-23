@@ -1789,7 +1789,7 @@ export const useGuiChipStyles = makeStyles(() => ({
   },
   chip_container: {
     paddingInline: 10,
-    paddingBlock: 4,
+    paddingBlock: 7,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

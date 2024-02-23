@@ -7,7 +7,7 @@ const XSidebar = () => {
     <XStack className='h-full w-[400px] !drop-shadow-none !bg-secondary_background/60 py-10 px-4'>
       <div className='flex h-full w-full flex-col gap-4'>
         <div className='flex justify-between items-center'>
-          <div className='text-lg font-bold'>My Projects</div>
+          <div className='text-lg font-bold leading-3'>My Projects</div>
           <XButton color='primary' className='!bg-primary_main/20'>
             New
           </XButton>
