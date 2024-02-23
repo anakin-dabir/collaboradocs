@@ -1,6 +1,6 @@
 import React from "react";
 import { CircularProgress } from "@mui/material";
-import theme, { useGuiButtonStyles } from "@/themes";
+import theme, { useGuiButtonStyles } from "../themes";
 import clsx from "clsx";
 import { Button } from "@mui/material";
 import { ReactComponent as ButtonTopLeft } from "@/assets/shapes_btnadd_1.svg";

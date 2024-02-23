@@ -2,10 +2,10 @@ import React from "react";
 import XStack from "../../../components/XStack";
 import { Avatar } from "@mui/material";
 import XButton from "../../../components/XButton";
-import { ReactComponent as Star } from "@/assets/star.svg";
 import dayjs from "dayjs";
-import { ReactComponent as Logo } from "@/assets/logo.svg";
-import { ReactComponent as Project } from "@/assets/project.svg";
+import { ReactComponent as Logo } from "@/assets/custom/logo.svg";
+import { ReactComponent as Star } from "@/assets/custom/star.svg";
+import { ReactComponent as Project } from "@/assets/custom/project.svg";
 import shortName from "../../../utils/shortName";
 import checkPlural from "../../../utils/checkPlural";
 import { useNavigate } from "react-router-dom";
@@ -40,7 +40,7 @@ const DocumentTile = ({ document }) => {
             <div className='text-sm leading-3 font-bold text-primary_light'>{document.title}</div>
             <div className='text-xs  truncate'>{document.desc}</div>
             <div className='flex items-center gap-5 text-primary_main text-xs leading-3'>
-              <div className='flex items-center gap-0.5'>
+              <div className='flex items-center gap-1'>
                 <Project />
                 <div>{document.project.name} Project</div>
               </div>

@@ -1765,7 +1765,8 @@ export const useGuiChipStyles = makeStyles(() => ({
     backgroundColor: theme.palette.grey[900],
   },
   disabled: {
-    backgroundColor: `${alpha(theme.palette.grey[900], 0.7)} !important`,
+    backgroundColor: `${alpha(theme.palette.grey[800], 0.8)} !important`,
+    color: `${theme.palette.grey[200]} !important`,
   },
   border: {
     position: "absolute",

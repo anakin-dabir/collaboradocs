@@ -47,7 +47,7 @@ const App = () => {
       <div className='w-screen h-screen'>
         <Background />
         <Header>
-          {isLoggedIn && <XSidebar />}
+          {!isLoggedIn && <XSidebar />}
           {routes}
         </Header>
       </div>

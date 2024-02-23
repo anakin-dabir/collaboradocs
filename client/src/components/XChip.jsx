@@ -11,7 +11,7 @@ import { ReactComponent as CloseIcon } from "@/assets/crossIcon.svg";
 const XChip = ({ label = "Demo Chip", disabled = false, onDelete, className = "", ...rest }) => {
   const classes = useGuiChipStyles();
   let borderColor;
-  if (disabled) borderColor = theme.palette.grey[700];
+  if (disabled) borderColor = theme.palette.grey[400];
   else borderColor = theme.palette.primary.main;
   return (
     <Box
