@@ -1,21 +1,26 @@
 import Document from "../models/document.js";
+import Project from "../models/project.js";
 
 async function create(req, res) {
-  const { id, title, content } = req.body;
-
+  const { projectId, title, desc, visibility } = req.body;
+  console.log({ projectId, title, desc, visibility });
   try {
     const document = new Document({
       title,
-      content,
+      desc,
       creator: req.user._id,
-      project: id,
+      project: projectId,
+      visibility,
     });
-    const project = await Project.findById(id);
+    document.collaborators.push(req.user._id);
+    const project = await Project.findById(projectId);
     project.documents.push(document._id);
     await project.save();
     await document.save();
     return res.status(200).json({ document, msg: "Created successfully" });
-  } catch (err) {}
+  } catch (err) {
+    return res.status(500).json({ msg: "500: Error in creating doc" });
+  }
 }
 
 async function edit(req, res) {
@@ -32,4 +37,14 @@ async function get(req, res) {
   } catch (err) {}
 }
 
-export { create, edit, get };
+async function getAll(req, res) {
+  try {
+    const document = await Document.find({ visibility: "Public" })
+      .populate("creator", "name img")
+      .populate("project", "name")
+      .populate("collaborators", "name img");
+    return res.status(200).json({ document });
+  } catch (err) {}
+}
+
+export { create, edit, get, getAll };

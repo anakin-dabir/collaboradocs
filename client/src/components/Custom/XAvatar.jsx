@@ -36,7 +36,7 @@ const XAvatar = ({ tooltipPlacement = "left", className }) => {
           src={user?.img}
           className={clsx(className, `text-sm cursor-pointer`)}
         >
-          {user ? shortName(user?.name) : "G0"}
+          {user ? shortName(user?.name) : "G8"}
         </Avatar>
       </XTooltip>
 
@@ -53,6 +53,7 @@ const XAvatar = ({ tooltipPlacement = "left", className }) => {
             <MenuItem
               onClick={() => {
                 dispatch(clearUser());
+                navigate("/");
                 handleClose();
               }}
             >

@@ -8,7 +8,7 @@ const XLoading = ({ absolute = false }) => {
           absolute ? "absolute" : "fixed"
         } opacity-70 pt-14 top-1/2 left-1/2 box-center flex-col -translate-x-1/2 -translate-y-1/2`}
       >
-        <div className='running  scale-150'>
+        <div className='running  scale-125'>
           <div className='outer'>
             <div className='body'>
               <div className='arm front'></div>
@@ -18,7 +18,7 @@ const XLoading = ({ absolute = false }) => {
             </div>
           </div>
         </div>
-        <p className='pt-10 text-primary_light text-lg  font-medium'>
+        <p className='pt-5 text-primary_light text-lg  font-medium'>
           Loading
           <span className='animate-ping'>.</span>
           <span className='animate-pulse'>.</span>

@@ -5,19 +5,20 @@ import nodeApi from "../services/nodeApi";
 import authSlice from "./slice/authSlice";
 import socketSlice from "./slice/socketSlice";
 import welcomeSlice from "./slice/welcomeSlice";
+import documentSlice from "./slice/documentSlice";
 
 const rootReducer = combineReducers({
   [nodeApi.reducerPath]: nodeApi.reducer,
   user: authSlice,
   socket: socketSlice,
   welcome: welcomeSlice,
-  //   theme: themeSlice,
+  document: documentSlice,
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "welcome"],
+  whitelist: ["user", "welcome", "document"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

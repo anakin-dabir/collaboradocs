@@ -22,4 +22,6 @@ auth.post("/createUser", createUser);
 auth.post("/updateName", verifyToken, updateName);
 auth.delete("/remove", verifyToken, remove);
 
+// test
+
 export default auth;

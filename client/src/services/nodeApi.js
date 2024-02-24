@@ -4,11 +4,13 @@ import { clearUser, setUser } from "../store/slice/authSlice";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import config from "../config/config";
+import { setDocument } from "../store/slice/documentSlice";
+import shuffle from "../utils/shuffle";
 
 const nodeApi = createApi({
   baseQuery,
   reducerPath: "nodeApi",
-  tagTypes: ["User"],
+  tagTypes: ["User", "Document"],
   endpoints: (build) => ({
     getUser: build.query({
       query: () => ({
@@ -70,7 +72,6 @@ const nodeApi = createApi({
         }
       },
     }),
-
     updateImage: build.mutation({
       query: (file) => ({
         method: "POST",
@@ -118,6 +119,20 @@ const nodeApi = createApi({
         body: obj,
       }),
     }),
+
+    getAllDocuments: build.query({
+      query: () => ({
+        method: "GET",
+        url: "/document/getAll",
+      }),
+      providesTags: ["Document"],
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const response = await queryFulfilled;
+          dispatch(setDocument(shuffle(response.data.document)));
+        } catch (error) {}
+      },
+    }),
   }),
 });
 
@@ -131,6 +146,7 @@ export const {
   useCreateProjectMutation,
   useCreateDocumentMutation,
   useVerifyEmailMutation,
+  useGetAllDocumentsQuery,
 } = nodeApi;
 
 export default nodeApi;
