@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import XStack from "../../components/XStack";
 import XNavbar from "../../components/Custom/XNavbar";
 import XButton from "../../components/XButton";
@@ -14,16 +14,23 @@ import XTooltip from "../../components/XTooltip";
 import XChip from "../../components/XChip";
 import BackButton from "../../components/Custom/BackButton";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import shortName from "../../utils/shortName";
 
 const DocumentView = () => {
   const isLogged = useSelector((state) => state.user.user);
   const { id } = useParams();
+  const navigate = useNavigate();
+  const documents = useSelector((state) => state.document.document);
+  const document = documents.find((doc) => doc._id === id);
+  useEffect(() => {
+    if (!document) navigate("*");
+  }, []);
+  if (!document) return null;
   return (
     <>
       <XNavbar />
-      {/* <XStack className='h-full flex-1 flex flex-row !drop-shadow-none !bg-secondary_background/60 pr-1 pl-6 py-4'>
+      <XStack className='h-full flex-1 flex flex-row !drop-shadow-none !bg-secondary_background/60 pr-1 pl-6 py-4'>
         <div className='overflow-y-auto relative h-full w-full flex gap-3'>
           <div className='h-full w-[75%]'>
             <XStack className='min-h-full w-full p-8 !bg-secondary_background/90 !drop-shadow-none flex flex-col gap-5'>
@@ -71,7 +78,7 @@ const DocumentView = () => {
                 </div>
 
                 <div className='flex items-center gap-2'>
-                  <Avatar src={document.creator.img}>{shortName(document.creator.name)}</Avatar>
+                  <Avatar src={document.creator?.img}>{shortName(document.creator.name)}</Avatar>
                   <div className='flex flex-col'>
                     <div className='text-sm font-bold text-primary_main'>
                       {document.creator.name}
@@ -105,7 +112,7 @@ const DocumentView = () => {
                   {document.collaborators.map((collaborator, index) => {
                     return (
                       <XTooltip key={index} placement='top' data={collaborator.name}>
-                        <Avatar src={collaborator.img}>{shortName(collaborator.name)}</Avatar>
+                        <Avatar src={collaborator?.img}>{shortName(collaborator.name)}</Avatar>
                       </XTooltip>
                     );
                   })}
@@ -114,7 +121,7 @@ const DocumentView = () => {
             </XStack>
           </div>
         </div>
-      </XStack> */}
+      </XStack>
     </>
   );
 };
