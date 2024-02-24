@@ -27,12 +27,6 @@ const Home = () => {
           <div className='container mx-auto max-w-screen-lg'>
             <div className='space-y-4 w-full'>
               <DocumentTile document={document} />
-              <DocumentTile document={document} />
-              <DocumentTile document={document} />
-              <DocumentTile document={document} />
-              <DocumentTile document={document} />
-              <DocumentTile document={document} />
-              <DocumentTile document={document} />
             </div>
           </div>
         </div>

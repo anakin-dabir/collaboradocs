@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import XStack from "../../components/XStack";
 import XNavbar from "../../components/Custom/XNavbar";
 import XButton from "../../components/XButton";
 import XDivider from "../../components/Custom/XDivider";
 import { ReactComponent as Settings } from "@/assets/custom/settings.svg";
 import { ReactComponent as History } from "@/assets/custom/history.svg";
+import { ReactComponent as Edit } from "@/assets/custom/edit.svg";
 import { Avatar, Button, IconButton } from "@mui/material";
 import getDate from "../../utils/getDate";
 import { ReactComponent as Star } from "@/assets/custom/star.svg";
@@ -12,8 +13,10 @@ import { ReactComponent as Project } from "@/assets/custom/project.svg";
 import XTooltip from "../../components/XTooltip";
 import XChip from "../../components/XChip";
 import BackButton from "../../components/Custom/BackButton";
+import { useSelector } from "react-redux";
 
-const Document = () => {
+const DocumentView = () => {
+  const isLogged = useSelector((state) => state.user.user);
   return (
     <>
       <XNavbar />
@@ -34,21 +37,28 @@ const Document = () => {
                       Public
                     </XButton>
                   </div>
-                  <div className='flex gap-2 items-center'>
-                    <Button className='gap-2'>
-                      <div className='capitalize'>125 Changes</div>
-                      <History />
-                    </Button>
-                    <IconButton>
-                      <Settings />
-                    </IconButton>
-                  </div>
+                  {isLogged && (
+                    <div className='flex gap-2'>
+                      <Button className='gap-2'>
+                        <div className='capitalize'>125 Changes</div>
+                        <History />
+                      </Button>
+                      <XTooltip data='Settings' placement='top'>
+                        <IconButton>
+                          <Settings />
+                        </IconButton>
+                      </XTooltip>
+                      <XTooltip data='Edit' placement='top'>
+                        <IconButton>
+                          <Edit />
+                        </IconButton>
+                      </XTooltip>
+                    </div>
+                  )}
                 </div>
 
                 <XDivider />
               </div>
-
-              <div className='text-2xl h-20'>Anakin mariko</div>
             </XStack>
           </div>
           <div className='flex flex-col flex-1 mr-4 gap-3'>
@@ -113,4 +123,4 @@ const Document = () => {
   );
 };
 
-export default Document;
+export default DocumentView;

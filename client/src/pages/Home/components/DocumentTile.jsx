@@ -33,7 +33,7 @@ const DocumentTile = ({ document }) => {
         <XStack
           className='cursor-pointer !bg-transparent/20 !drop-shadow-none hover:!bg-secondary_light/10 transition-all'
           onClick={() => {
-            navigate(`/doc/${document.title}`);
+            navigate(`/doc/${document._id}`);
           }}
         >
           <div className='h-full w-full p-4 flex flex-col gap-2'>

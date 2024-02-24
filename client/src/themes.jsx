@@ -1290,7 +1290,7 @@ export const useGuiTextFieldStyles = makeStyles(() => ({
     },
     "& .MuiInputBase-root": {
       borderRadius: 0,
-      backgroundColor: alpha(colors.secondary_background, 0.8),
+      backgroundColor: alpha(colors.secondary_background, 1),
       clipPath: `
         polygon(
           12px 0,
@@ -1301,6 +1301,9 @@ export const useGuiTextFieldStyles = makeStyles(() => ({
           0 12px
         )
       `,
+      gap: "8px",
+      alignItems: "center",
+      lineHeight: "0px",
     },
     "& fieldset": {
       border: 0,

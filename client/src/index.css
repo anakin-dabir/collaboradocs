@@ -165,3 +165,6 @@ select {
     transform: rotate(var(--r-to));
   }
 } */
+
+/* .small-scrollbar::-webkit-scrollbar {
+} */
