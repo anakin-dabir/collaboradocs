@@ -1,7 +1,6 @@
 import React from "react";
 import XStack from "../../../components/XStack";
 import { Avatar } from "@mui/material";
-import XButton from "../../../components/XButton";
 import dayjs from "dayjs";
 import { ReactComponent as Logo } from "@/assets/custom/logo.svg";
 import { ReactComponent as Star } from "@/assets/custom/star.svg";

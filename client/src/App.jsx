@@ -13,8 +13,8 @@ import relativeTime from "dayjs/plugin/relativeTime.js";
 import dayjs from "dayjs";
 import Background from "./components/Header/Background";
 import Header from "./components/Header/Header";
-import XSidebar from "./components/Custom/XSidebar";
 import DocumentView from "./pages/DocumentView";
+import Project from "./pages/Project";
 
 const App = () => {
   dayjs.extend(relativeTime);
@@ -37,7 +37,8 @@ const App = () => {
         element: <Verification />,
       },
     { path: config.PATHNAMES.TEST, element: <XEditor /> },
-    { path: config.PATHNAMES.DOCUMENT, element: <DocumentView /> },
+    { path: config.PATHNAMES.DOCUMENTVIEW, element: <DocumentView /> },
+    isLoggedIn && { path: config.PATHNAMES.PROJECT, element: <Project /> },
     { path: "*", element: <Error /> },
   ]);
 
@@ -45,10 +46,7 @@ const App = () => {
     <>
       <div className='w-screen h-screen'>
         <Background />
-        <Header>
-          {isLoggedIn && <XSidebar />}
-          {routes}
-        </Header>
+        <Header>{routes}</Header>
       </div>
     </>
   );

@@ -8,7 +8,7 @@ const BackButton = () => {
   const navigate = useNavigate();
   return (
     <XTooltip data='Back' placement='top'>
-      <IconButton onClick={() => navigate(-1)}>
+      <IconButton onClick={() => navigate("/")}>
         <Back />
       </IconButton>
     </XTooltip>

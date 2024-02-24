@@ -10,7 +10,8 @@ const config = {
     REGISTER: "/auth/register",
     VERIFYEMAIL: "/verify-email/:token",
     TEST: "/test",
-    DOCUMENT: "/doc/:id",
+    DOCUMENTVIEW: "/doc/:id",
+    PROJECT: "/project/:id",
   },
 };
 

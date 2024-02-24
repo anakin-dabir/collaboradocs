@@ -6,11 +6,12 @@ import Cookies from "js-cookie";
 import config from "../config/config";
 import { setDocument } from "../store/slice/documentSlice";
 import shuffle from "../utils/shuffle";
+import { setProject } from "../store/slice/projectSlice";
 
 const nodeApi = createApi({
   baseQuery,
   reducerPath: "nodeApi",
-  tagTypes: ["User", "Document"],
+  tagTypes: ["User", "Document", "Project"],
   endpoints: (build) => ({
     getUser: build.query({
       query: () => ({
@@ -133,6 +134,20 @@ const nodeApi = createApi({
         } catch (error) {}
       },
     }),
+
+    getAllProjects: build.query({
+      query: () => ({
+        method: "GET",
+        url: "/project/getAll",
+      }),
+      providesTags: ["Project"],
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const response = await queryFulfilled;
+          dispatch(setProject(response.data.project));
+        } catch (error) {}
+      },
+    }),
   }),
 });
 
@@ -147,6 +162,7 @@ export const {
   useCreateDocumentMutation,
   useVerifyEmailMutation,
   useGetAllDocumentsQuery,
+  useGetAllProjectsQuery,
 } = nodeApi;
 
 export default nodeApi;

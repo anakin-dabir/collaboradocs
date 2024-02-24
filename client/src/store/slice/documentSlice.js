@@ -14,6 +14,6 @@ const documentSlice = createSlice({
   },
 });
 
-export const { setDocument, clearUser } = documentSlice.actions;
+export const { setDocument } = documentSlice.actions;
 
 export default documentSlice.reducer;

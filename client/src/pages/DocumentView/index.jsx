@@ -103,7 +103,7 @@ const DocumentView = () => {
               <div className='h-full w-full flex flex-col gap-4'>
                 <div className='flex flex-col gap-2'>
                   <div className='flex items-center gap-2'>
-                    <div className='text-lg font-bold text-primary_main'>Contributors </div>
+                    <div className='text-lg font-bold text-primary_main'>Collaborators </div>
                     <XChip label={document.collaborators.length} className='!px-3 !py-1' />
                   </div>
                 </div>

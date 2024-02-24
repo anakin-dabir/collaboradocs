@@ -3,7 +3,6 @@ import Project from "../models/project.js";
 
 async function create(req, res) {
   const { projectId, title, desc, visibility } = req.body;
-  console.log({ projectId, title, desc, visibility });
   try {
     const document = new Document({
       title,
@@ -11,8 +10,8 @@ async function create(req, res) {
       creator: req.user._id,
       project: projectId,
       visibility,
+      collaborators: [req.user._id],
     });
-    document.collaborators.push(req.user._id);
     const project = await Project.findById(projectId);
     project.documents.push(document._id);
     await project.save();

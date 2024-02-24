@@ -6,6 +6,7 @@ async function create(req, res) {
     const project = new Project({
       name,
       creator: req.user._id,
+      members: [req.user._id],
     });
     await project.save();
     return res.status(200).json({ project, msg: "Project created successfully" });
@@ -16,11 +17,11 @@ async function create(req, res) {
 
 async function getAll(req, res) {
   try {
-    const project = await Project.find({})
-      .populate("members")
-      .populate("documents")
-      .populate("creator");
-    if (!project) return res.status(404).json({ msg: "Not found" });
+    const project = await Project.find({ members: { $in: [req.user._id] } })
+      .sort({ createdAt: -1 })
+      .populate("members", "name img")
+      .populate("documents", "_id")
+      .populate("creator", "name img");
     return res.status(200).json({ project, msg: "Success" });
   } catch (err) {}
 }
