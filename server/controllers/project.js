@@ -57,11 +57,14 @@ async function deleteProject(req, res) {
   }
 }
 
-async function update(req, res) {
+async function updateProject(req, res) {
   const { projectId, name, members } = req.body;
   try {
-    const project = await Project.findByIdand;
-  } catch (error) {}
+    const project = await Project.findByIdAndUpdate(projectId, { name, members }, { new: true });
+    return res.status(200).json({ msg: "Project updated successfully" });
+  } catch (error) {
+    res.status(500).json({ msg: "Error: Project update failed" });
+  }
 }
 
-export { create, get, getAll, addMember, deleteProject, update };
+export { create, get, getAll, addMember, deleteProject, updateProject };

@@ -22,6 +22,9 @@ const App = () => {
   const isLoggedIn = useSelector((state) => state.user.isLogged);
   const routes = useRoutes([
     { path: config.PATHNAMES.HOME, element: <Home /> },
+    { path: config.PATHNAMES.TEST, element: <XEditor /> },
+    { path: config.PATHNAMES.DOCUMENTVIEW, element: <DocumentView /> },
+    isLoggedIn && { path: config.PATHNAMES.PROJECT, element: <Project /> },
     !isLoggedIn && {
       path: config.PATHNAMES.AUTH,
       element: <Auth />,
@@ -36,9 +39,6 @@ const App = () => {
         path: config.PATHNAMES.VERIFYEMAIL,
         element: <Verification />,
       },
-    { path: config.PATHNAMES.TEST, element: <XEditor /> },
-    { path: config.PATHNAMES.DOCUMENTVIEW, element: <DocumentView /> },
-    isLoggedIn && { path: config.PATHNAMES.PROJECT, element: <Project /> },
     { path: "*", element: <Error /> },
   ]);
 

@@ -184,7 +184,7 @@ const nodeApi = createApi({
         url: "/project/update",
         body,
       }),
-      invalidatesTags: ["Project", "Document"],
+      invalidatesTags: ["Project"],
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const response = await queryFulfilled;
@@ -225,6 +225,8 @@ export const {
   useGetAllProjectsQuery,
   useGetDocumentByIdQuery,
   useDeleteProjectMutation,
+  useUpdateProjectMutation,
+  useLazyGetAllProjectsQuery,
 } = nodeApi;
 
 export default nodeApi;

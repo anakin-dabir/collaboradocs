@@ -14,13 +14,15 @@ import { useNavigate } from "react-router-dom";
 import shortName from "../../../utils/shortName";
 import { ReactComponent as Delete } from "@/assets/custom/delete.svg";
 import hasUpdates from "../../../utils/hasUpdates";
+import { useLazyGetAllProjectsQuery, useUpdateProjectMutation } from "../../../services/nodeApi";
 
 const Dialog = ({ isOpen, isOpenSet, project, user }) => {
+  const [updateProject, { isLoading }] = useUpdateProjectMutation();
+  const [trigger, { isLoading: isProjectsLoading }] = useLazyGetAllProjectsQuery();
   const initialValues = {
     name: project.name,
     members: project.members,
   };
-  const navigate = useNavigate();
   const formik = useValidation({
     initialValues,
     validationSchema: nameValidationSchema,
@@ -32,8 +34,18 @@ const Dialog = ({ isOpen, isOpenSet, project, user }) => {
   };
   const isUpdated = useMemo(() => hasUpdates(formik.values, initialValues), [formik]);
   async function handleSubmit(values) {
-    console.log(values);
-    console.log(hasUpdates(values, initialValues));
+    if (hasUpdates(values, initialValues)) {
+      try {
+        const res = await updateProject({
+          projectId: project._id,
+          name: values.name,
+          members: values.members,
+        });
+        if (res) {
+          trigger();
+        }
+      } catch (error) {}
+    }
     handleClose();
   }
   return (
@@ -110,7 +122,11 @@ const Dialog = ({ isOpen, isOpenSet, project, user }) => {
             <XButton color='error' onClick={handleClose}>
               Cancel
             </XButton>
-            <XButton disabled={!isUpdated} onClick={formik.handleSubmit}>
+            <XButton
+              loading={isLoading || isProjectsLoading}
+              disabled={!isUpdated}
+              onClick={formik.handleSubmit}
+            >
               Update
             </XButton>
           </div>
