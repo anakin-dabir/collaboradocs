@@ -19,36 +19,30 @@ import { useLazyGetAllProjectsQuery, useUpdateProjectMutation } from "../../../s
 const Dialog = ({ isOpen, isOpenSet, project, user }) => {
   const [updateProject, { isLoading }] = useUpdateProjectMutation();
   const [trigger, { isLoading: isProjectsLoading }] = useLazyGetAllProjectsQuery();
-  const initialValues = {
+  const initials = { name: project.name, members: project.members };
+  const [initialValues, initialValuesSet] = useState({
     name: project.name,
     members: project.members,
-  };
-  const formik = useValidation({
-    initialValues,
-    validationSchema: nameValidationSchema,
-    handleSubmit,
   });
+
+  console.log(initialValues);
   const handleClose = () => {
-    formik.resetForm();
+    initialValuesSet(initials);
     isOpenSet(false);
   };
-  const isUpdated = useMemo(() => hasUpdates(formik.values, initialValues), [formik]);
-  async function handleSubmit(values) {
-    if (hasUpdates(values, initialValues)) {
+
+  const isUpdated = useMemo(() => hasUpdates(initialValues, initials), [initialValues]);
+  async function handleSubmit() {
+    if (hasUpdates(initialValues, initials)) {
       try {
         const res = await updateProject({
           projectId: project._id,
-          name: values.name,
-          members: values.members,
+          name: initialValues.name,
+          members: initialValues.members,
         });
-        if (res) {
-          trigger();
-        }
       } catch (error) {}
     }
-    if (!isProjectsLoading) {
-      handleClose();
-    }
+    isOpenSet(false);
   }
   return (
     <XAlertBase isOpen={isOpen} onClose={handleClose}>
@@ -68,12 +62,12 @@ const Dialog = ({ isOpen, isOpenSet, project, user }) => {
         <div className='flex flex-col gap-3'>
           <XTextfield
             name='name'
-            value={formik.values.name}
-            onChange={formik.handleChange}
+            value={initialValues.name}
+            onChange={(e) => initialValuesSet((pre) => ({ ...pre, name: e.target.value }))}
             label='Project Name'
             parentClassName='mt-8'
-            error={formik.touched.name && !!formik.errors.name}
-            helperText={formik.touched.name && !!formik.errors.name && "Project name is mandatory"}
+            error={!initialValues.name}
+            helperText={!initialValues.name && "Project name is mandatory"}
             placeholder='Enter Project Name'
             sx={{
               "& .MuiInputBase-root": {
@@ -84,8 +78,8 @@ const Dialog = ({ isOpen, isOpenSet, project, user }) => {
           <div className='flex flex-col mt-4 gap-2'>
             <div className='text-primary_main'>Members</div>
             <div className='flex gap-4 flex-wrap'>
-              {formik.values.members.length > 1 ? (
-                formik.values.members.map((member, index, arr) => {
+              {initialValues.members.length > 1 ? (
+                initialValues.members.map((member, index, arr) => {
                   return (
                     member._id !== user._id && (
                       <XTooltip key={index} data={member.name} placement='top'>
@@ -126,8 +120,8 @@ const Dialog = ({ isOpen, isOpenSet, project, user }) => {
             </XButton>
             <XButton
               loading={isLoading || isProjectsLoading}
-              disabled={!isUpdated}
-              onClick={formik.handleSubmit}
+              disabled={!isUpdated || !initialValues.name}
+              onClick={() => handleSubmit()}
             >
               Update
             </XButton>

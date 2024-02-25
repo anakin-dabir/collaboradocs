@@ -15,16 +15,23 @@ import Background from "./components/Header/Background";
 import Header from "./components/Header/Header";
 import DocumentView from "./pages/DocumentView";
 import Project from "./pages/Project";
+import Stash from "./components/Custom/Stash";
 
 const App = () => {
   dayjs.extend(relativeTime);
   const { search } = useLocation();
   const isLoggedIn = useSelector((state) => state.user.isLogged);
   const routes = useRoutes([
-    { path: config.PATHNAMES.HOME, element: <Home /> },
-    { path: config.PATHNAMES.TEST, element: <XEditor /> },
-    { path: config.PATHNAMES.DOCUMENTVIEW, element: <DocumentView /> },
-    isLoggedIn && { path: config.PATHNAMES.PROJECT, element: <Project /> },
+    {
+      path: config.PATHNAMES.HOME,
+      element: <Stash />,
+      children: [
+        { path: config.PATHNAMES.HOME, element: <Home /> },
+        { path: config.PATHNAMES.TEST, element: <XEditor /> },
+        { path: config.PATHNAMES.DOCUMENTVIEW, element: <DocumentView /> },
+        isLoggedIn && { path: config.PATHNAMES.PROJECT, element: <Project /> },
+      ],
+    },
     !isLoggedIn && {
       path: config.PATHNAMES.AUTH,
       element: <Auth />,

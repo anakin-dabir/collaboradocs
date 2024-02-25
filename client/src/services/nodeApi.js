@@ -214,7 +214,7 @@ const nodeApi = createApi({
         method: "GET",
         url: "/request/get",
       }),
-      invalidatesTags: ["Request"],
+      providesTags: ["Request"],
     }),
   }),
 });

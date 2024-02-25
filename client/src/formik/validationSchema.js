@@ -39,10 +39,15 @@ const nameValidationSchema = Yup.object({
   name: nameValidation,
 });
 
+const projectNameValidationSchema = Yup.object({
+  projectName: nameValidation,
+});
+
 export {
   LoginValidationSchema,
   ResetPasswordValidationSchema,
   SignupValidationSchema,
   FileValidationSchema,
   nameValidationSchema,
+  projectNameValidationSchema,
 };

@@ -37,7 +37,6 @@ const Project = () => {
   const [deleteProject, { isLoading: isDeleting }] = useDeleteProjectMutation();
   const documentMap = useSelector((state) => state.project.document);
   const documents = documentMap[id];
-  console.log({ documents });
   const handleDeleteProject = async () => {
     try {
       const res = await deleteProject({ projectId: project._id });
