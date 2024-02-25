@@ -44,7 +44,7 @@ const DocumentTile = ({ document }) => {
           <div className='flex items-center gap-1 text-primary_main text-xs leading-3'>
             <div>
               <span className='font-medium'>Last Updated: </span>
-              {getDate(document.createdAt)}
+              {getDate(document.updatedAt)}
             </div>
           </div>
         </div>

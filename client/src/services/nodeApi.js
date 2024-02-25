@@ -197,7 +197,7 @@ const nodeApi = createApi({
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const response = await queryFulfilled;
-          dispatch(setProjectDocs({ document: response.data.document, projectId: args.projectId }));
+          dispatch(setProjectDocs(response.data.document));
         } catch (error) {}
       },
     }),

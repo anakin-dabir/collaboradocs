@@ -60,7 +60,7 @@ async function getByProjectId(req, res) {
           $or: [{ visibility: "Public" }, { visibility: "Shared" }],
         },
       ],
-    });
+    }).sort({ createdAt: -1 });
     return res.status(200).json({ document, msg: "Success" });
   } catch (error) {}
 }

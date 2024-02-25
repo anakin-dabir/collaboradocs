@@ -6,26 +6,18 @@ import { Avatar, IconButton } from "@mui/material";
 import { ReactComponent as Settings } from "@/assets/custom/settings.svg";
 import XTooltip from "../../components/XTooltip";
 import BackButton from "../../components/Custom/BackButton";
-import getDate from "../../utils/getDate";
-import { ReactComponent as Tick } from "@/assets/custom/tick.svg";
-import { ReactComponent as Cross } from "@/assets/custom/cross.svg";
 import { ReactComponent as Delete } from "@/assets/custom/delete.svg";
-import shortName from "../../utils/shortName";
-import XChip from "../../components/XChip";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import XLoading from "../../components/XLoading";
-import {
-  useAcceptRequestMutation,
-  useDeleteProjectMutation,
-  useGetDocumentByIdQuery,
-  useRejectRequestMutation,
-} from "../../services/nodeApi";
+import { useDeleteProjectMutation, useGetDocumentByIdQuery } from "../../services/nodeApi";
 import XButton from "@/components/XButton";
 import XDivider from "../../components/Custom/XDivider";
 import Dialog from "./components/Dialog";
 import XDeleteAlert from "../../components/Alert/XDeleteAlert";
 import NewDocDialog from "./components/NewDocDialog";
+import UsersSide from "./components/UsersSide";
+import RequestSide from "./components/RequestSide";
 
 const Project = () => {
   const [isOpen, isOpenSet] = useState(false);
@@ -44,12 +36,7 @@ const Project = () => {
     refetch();
   }, [id]);
   const [deleteProject, { isLoading: isDeleting }] = useDeleteProjectMutation();
-  const documentMap = useSelector((state) => state.project.document);
-  const documents = documentMap[id];
-  const requestArr = useSelector((state) => state.request.goingToAdmin);
-  const requests = requestArr.filter((request) => request.project._id === id);
-  const [acceptRequest, { isLoading: isAcceptLoading }] = useAcceptRequestMutation();
-  const [rejectRequest, { isLoading: isRejectLoading }] = useRejectRequestMutation();
+  const documents = useSelector((state) => state.project.document);
 
   const handleDeleteProject = async () => {
     try {
@@ -57,7 +44,7 @@ const Project = () => {
       if (res) navigate("/");
     } catch (error) {}
   };
-
+  console.log(documents);
   const [isCreateDoc, isCreateDocSet] = useState(false);
 
   return (
@@ -126,105 +113,10 @@ const Project = () => {
                 Create new Document
               </XButton>
             )}
-            <XStack className='!bg-secondary_background/90 !drop-shadow-none h-fit p-5'>
-              <div className='h-full w-full flex flex-col gap-5'>
-                <div className='flex flex-col gap-2'>
-                  <div className='flex items-center gap-2'>
-                    <div className='text-lg font-bold text-primary_main'>Requests</div>
-                    <XChip label={requests.length} className='!px-3 !py-1' />
-                  </div>
-                </div>
-                <div className='flex flex-col gap-4'>
-                  {requests.length ? (
-                    requests.map((request, index) => {
-                      return (
-                        <div key={index} className='flex items-center justify-between'>
-                          <div className='flex items-center gap-3'>
-                            <Avatar src={request.from?.img}>{shortName(request.from.name)}</Avatar>
-                            <div className='flex flex-col'>
-                              <div className='text-sm font-bold text-primary_main'>
-                                {request.from.name}
-                              </div>
-                              <div className='text-xs'>Requested to join project</div>
-                            </div>
-                          </div>
-                          <div className='flex items-center gap-1'>
-                            <XTooltip data='Accept' placement='top'>
-                              <IconButton
-                                onClick={() =>
-                                  acceptRequest({
-                                    projectId: id,
-                                    userId: request.from._id,
-                                    reqId: request._id,
-                                  })
-                                }
-                              >
-                                <Tick />
-                              </IconButton>
-                            </XTooltip>
-                            <XTooltip data='Reject' placement='top'>
-                              <IconButton
-                                onClick={() =>
-                                  rejectRequest({
-                                    reqId: request._id,
-                                  })
-                                }
-                              >
-                                <Cross />
-                              </IconButton>
-                            </XTooltip>
-                          </div>
-                        </div>
-                      );
-                    })
-                  ) : (
-                    <div className='text-sm'>No requests yet</div>
-                  )}
-                </div>
-              </div>
-            </XStack>
 
-            <XStack className='!bg-secondary_background/90 mt-6 !drop-shadow-none h-fit p-5'>
-              <div className='h-full w-full flex flex-col gap-8'>
-                <div className='flex flex-col gap-2'>
-                  <div className='text-lg font-bold text-primary_main'>Admin </div>
-                  <div className='flex items-center gap-3'>
-                    <Avatar src={project.creator?.img}>{shortName(project.creator.name)}</Avatar>
-                    <div className='flex flex-col'>
-                      <div className='text-sm font-bold text-primary_main'>
-                        {project.creator.name}
-                      </div>
-                      <div className='text-xs'>
-                        <span className='font-semibold'>Created: </span>
-                        {getDate(project.createdAt)}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <RequestSide id={id} />
 
-                <div className='flex flex-col gap-3'>
-                  <div className='flex flex-col gap-2'>
-                    <div className='flex items-center gap-2'>
-                      <div className='text-lg font-bold text-primary_main'>Members </div>
-                      <XChip label={project.members.length} className='!px-3 !py-1' />
-                    </div>
-                  </div>
-
-                  <div className='flex items-center gap-2 flex-wrap'>
-                    {project.members.map((member, index) => {
-                      return (
-                        <XTooltip placement='top' data={member.name} key={index}>
-                          <Avatar src={member?.img}>{shortName(member.name)}</Avatar>
-                        </XTooltip>
-                      );
-                    })}
-                    <XTooltip placement='top' data='Add New'>
-                      <Avatar className='bg-primary_main text-2xl cursor-pointer'>+</Avatar>
-                    </XTooltip>
-                  </div>
-                </div>
-              </div>
-            </XStack>
+            <UsersSide project={project} />
           </div>
         </div>
       </XStack>

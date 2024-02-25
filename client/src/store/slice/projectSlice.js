@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   project: [],
-  document: {},
+  document: [],
 };
 
 const projectSlice = createSlice({
@@ -13,7 +13,7 @@ const projectSlice = createSlice({
       state.project = action.payload;
     },
     setProjectDocs: (state, action) => {
-      state.document[action.payload.projectId] = action.payload.document;
+      state.document = action.payload;
     },
   },
 });
