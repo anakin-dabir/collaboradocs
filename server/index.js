@@ -22,7 +22,7 @@ async function init() {
   app.use("/auth", auth);
   app.use("/document", document);
   app.use("/project", project);
-  connectDb(process.env.MONGO || config.MONGO || "mongodb://127.0.0.1:27017/DF-63");
+  connectDb(process.env.MONGO || config.MONGO || "mongodb://127.0.0.1:27017/Collaboradocs");
   httpServer.listen(process.env.PORT || 80, () =>
     console.log("Server running on port", process.env.PORT)
   );

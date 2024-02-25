@@ -16,21 +16,33 @@ const agreeToTerms = Yup.bool().oneOf([true], "You must agree to the terms and c
 
 const file = Yup.mixed().required("File is required");
 
-export const LoginValidationSchema = Yup.object({
+const LoginValidationSchema = Yup.object({
   email: emailValidation,
   password: passwordValidation,
 });
 
-export const ResetPasswordValidationSchema = Yup.object({
+const ResetPasswordValidationSchema = Yup.object({
   email: emailValidation,
 });
 
-export const SignupValidationSchema = Yup.object({
+const SignupValidationSchema = Yup.object({
   email: emailValidation,
   name: nameValidation,
   password: passwordValidation,
 });
 
-export const FileValidationSchema = Yup.object({
+const FileValidationSchema = Yup.object({
   file: file,
 });
+
+const nameValidationSchema = Yup.object({
+  name: nameValidation,
+});
+
+export {
+  LoginValidationSchema,
+  ResetPasswordValidationSchema,
+  SignupValidationSchema,
+  FileValidationSchema,
+  nameValidationSchema,
+};

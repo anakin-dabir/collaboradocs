@@ -1,4 +1,5 @@
 import Project from "../models/project.js";
+import Document from "../models/document.js";
 
 async function create(req, res) {
   const { name } = req.body;
@@ -45,4 +46,22 @@ async function addMember(req, res) {
   } catch (err) {}
 }
 
-export { create, get, getAll, addMember };
+async function deleteProject(req, res) {
+  try {
+    const { projectId } = req.body;
+    await Project.findByIdAndDelete(projectId);
+    await Document.deleteMany({ project: projectId });
+    return res.status(200).json({ msg: "Project deleted successfully" });
+  } catch (error) {
+    return res.status(500).json({ msg: "Error in deleting project" });
+  }
+}
+
+async function update(req, res) {
+  const { projectId, name, members } = req.body;
+  try {
+    const project = await Project.findByIdand;
+  } catch (error) {}
+}
+
+export { create, get, getAll, addMember, deleteProject, update };

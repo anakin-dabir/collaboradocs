@@ -26,9 +26,13 @@ const Home = () => {
           <div className='overflow-y-auto relative h-full w-full'>
             <div className='container mx-auto max-w-screen-lg'>
               <div className='space-y-4 w-full'>
-                {documents.map((document, index) => {
-                  return <DocumentTile key={index} document={document} />;
-                })}
+                {documents.length ? (
+                  documents.map((document, index) => {
+                    return <DocumentTile key={index} document={document} />;
+                  })
+                ) : (
+                  <div className='text-center mt-10'>No documents here yet</div>
+                )}
               </div>
             </div>
           </div>

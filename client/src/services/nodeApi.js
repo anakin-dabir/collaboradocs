@@ -108,14 +108,6 @@ const nodeApi = createApi({
       },
     }),
 
-    createProject: build.mutation({
-      query: (obj) => ({
-        method: "POST",
-        url: "/project/create",
-        body: obj,
-      }),
-    }),
-
     createDocument: build.mutation({
       query: (obj) => ({
         method: "POST",
@@ -152,6 +144,57 @@ const nodeApi = createApi({
       },
     }),
 
+    createProject: build.mutation({
+      query: (obj) => ({
+        method: "POST",
+        url: "/project/create",
+        body: obj,
+      }),
+      invalidatesTags: ["Project"],
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const response = await queryFulfilled;
+          toast.success(response.data.msg);
+        } catch (error) {
+          toast.error(error.error.data ? error.error.data.msg : config.ERROR);
+        }
+      },
+    }),
+
+    deleteProject: build.mutation({
+      query: (body) => ({
+        method: "DELETE",
+        url: "/project/delete",
+        body,
+      }),
+      invalidatesTags: ["Project", "Document"],
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const response = await queryFulfilled;
+          toast.success(response.data.msg);
+        } catch (error) {
+          toast.error(error.error.data ? error.error.data.msg : config.ERROR);
+        }
+      },
+    }),
+
+    updateProject: build.mutation({
+      query: (body) => ({
+        method: "POST",
+        url: "/project/update",
+        body,
+      }),
+      invalidatesTags: ["Project", "Document"],
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const response = await queryFulfilled;
+          toast.success(response.data.msg);
+        } catch (error) {
+          toast.error(error.error.data ? error.error.data.msg : config.ERROR);
+        }
+      },
+    }),
+
     getDocumentById: build.query({
       query: (projectId) => ({
         method: "POST",
@@ -181,6 +224,7 @@ export const {
   useGetAllDocumentsQuery,
   useGetAllProjectsQuery,
   useGetDocumentByIdQuery,
+  useDeleteProjectMutation,
 } = nodeApi;
 
 export default nodeApi;
