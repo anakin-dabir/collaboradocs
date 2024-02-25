@@ -7,6 +7,7 @@ import config from "../config/config";
 import { setDocument } from "../store/slice/documentSlice";
 import shuffle from "../utils/shuffle";
 import { setProject, setProjectDocs } from "../store/slice/projectSlice";
+import { setRequestGoingFromAdmin, setRequestGoingToAdmin } from "../store/slice/requestSlice";
 
 const nodeApi = createApi({
   baseQuery,
@@ -49,7 +50,7 @@ const nodeApi = createApi({
         url: "/auth/login",
         body: creds,
       }),
-      invalidatesTags: ["Document", "Project"],
+      invalidatesTags: ["Document", "Project", "Request"],
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const response = await queryFulfilled;
@@ -106,14 +107,6 @@ const nodeApi = createApi({
           toast.error(error.error.data.msg);
         }
       },
-    }),
-
-    createDocument: build.mutation({
-      query: (obj) => ({
-        method: "POST",
-        url: "/document/create",
-        body: obj,
-      }),
     }),
 
     getAllDocuments: build.query({
@@ -209,12 +202,68 @@ const nodeApi = createApi({
       },
     }),
 
-    getRequest: build.query({
+    getRequestGoingFromAdmin: build.query({
       query: () => ({
         method: "GET",
-        url: "/request/get",
+        url: "/request/goingFromAdmin",
       }),
       providesTags: ["Request"],
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const response = await queryFulfilled;
+          dispatch(setRequestGoingFromAdmin(response.data.request));
+        } catch (error) {}
+      },
+    }),
+    getRequestGoingToAdmin: build.query({
+      query: () => ({
+        method: "GET",
+        url: "/request/goingToAdmin",
+      }),
+      providesTags: ["Request"],
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const response = await queryFulfilled;
+          dispatch(setRequestGoingToAdmin(response.data.request));
+        } catch (error) {}
+      },
+    }),
+
+    acceptRequest: build.mutation({
+      query: (body) => ({
+        method: "POST",
+        url: "/request/accept",
+        body,
+      }),
+      invalidatesTags: ["Request", "Project"],
+    }),
+
+    rejectRequest: build.mutation({
+      query: (body) => ({
+        method: "DELETE",
+        url: "/request/reject",
+        body,
+      }),
+      invalidatesTags: ["Request"],
+    }),
+
+    createDocument: build.mutation({
+      query: (obj) => ({
+        method: "POST",
+        url: "/document/create",
+        body: obj,
+      }),
+      invalidatesTags: ["Document"],
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const response = await queryFulfilled;
+          if (response) {
+            toast.success("Document created successfully");
+          }
+        } catch (error) {
+          toast.error(error.error.data ? error.error.data.msg : config.ERROR);
+        }
+      },
     }),
   }),
 });
@@ -234,7 +283,10 @@ export const {
   useGetDocumentByIdQuery,
   useDeleteProjectMutation,
   useUpdateProjectMutation,
-  useLazyGetAllProjectsQuery,
+  useGetRequestGoingFromAdminQuery,
+  useGetRequestGoingToAdminQuery,
+  useAcceptRequestMutation,
+  useRejectRequestMutation,
 } = nodeApi;
 
 export default nodeApi;

@@ -8,24 +8,19 @@ import XDivider from "../../../components/Custom/XDivider";
 import XTextfield from "../../../components/XTextfield";
 import theme from "../../../themes";
 import XButton from "../../../components/XButton";
-import useValidation from "../../../formik/useValidation";
-import { nameValidationSchema } from "../../../formik/validationSchema";
-import { useNavigate } from "react-router-dom";
 import shortName from "../../../utils/shortName";
 import { ReactComponent as Delete } from "@/assets/custom/delete.svg";
 import hasUpdates from "../../../utils/hasUpdates";
-import { useLazyGetAllProjectsQuery, useUpdateProjectMutation } from "../../../services/nodeApi";
+import { useUpdateProjectMutation } from "../../../services/nodeApi";
 
 const Dialog = ({ isOpen, isOpenSet, project, user }) => {
   const [updateProject, { isLoading }] = useUpdateProjectMutation();
-  const [trigger, { isLoading: isProjectsLoading }] = useLazyGetAllProjectsQuery();
   const initials = { name: project.name, members: project.members };
-  const [initialValues, initialValuesSet] = useState({
-    name: project.name,
-    members: project.members,
-  });
+  const [initialValues, initialValuesSet] = useState(initials);
+  useEffect(() => {
+    initialValuesSet(initials);
+  }, [project]);
 
-  console.log(initialValues);
   const handleClose = () => {
     initialValuesSet(initials);
     isOpenSet(false);
@@ -68,7 +63,6 @@ const Dialog = ({ isOpen, isOpenSet, project, user }) => {
             parentClassName='mt-8'
             error={!initialValues.name}
             helperText={!initialValues.name && "Project name is mandatory"}
-            placeholder='Enter Project Name'
             sx={{
               "& .MuiInputBase-root": {
                 backgroundColor: `${alpha(theme.palette.common.black, 0.4)} !important`,
@@ -86,10 +80,10 @@ const Dialog = ({ isOpen, isOpenSet, project, user }) => {
                         <div
                           className='relative group cursor-pointer'
                           onClick={() =>
-                            formik.setFieldValue(
-                              "members",
-                              arr.filter((memberOrg) => memberOrg._id !== member._id)
-                            )
+                            initialValuesSet((pre) => ({
+                              ...pre,
+                              members: arr.filter((memberOrg) => memberOrg._id !== member._id),
+                            }))
                           }
                         >
                           <Avatar src={member?.img}>{shortName(member.name)}</Avatar>
@@ -119,7 +113,7 @@ const Dialog = ({ isOpen, isOpenSet, project, user }) => {
               Cancel
             </XButton>
             <XButton
-              loading={isLoading || isProjectsLoading}
+              loading={isLoading}
               disabled={!isUpdated || !initialValues.name}
               onClick={() => handleSubmit()}
             >

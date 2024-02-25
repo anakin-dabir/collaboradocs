@@ -1,6 +1,11 @@
 import { useFormik } from "formik";
 
-const useValidation = ({ initialValues, handleSubmit, validationSchema }) => {
+const useValidation = ({
+  initialValues,
+  handleSubmit,
+  validationSchema,
+  enableReinitialize = false,
+}) => {
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -8,6 +13,7 @@ const useValidation = ({ initialValues, handleSubmit, validationSchema }) => {
       await handleSubmit(values);
       resetForm();
     },
+    enableReinitialize: enableReinitialize,
   });
 
   return formik;

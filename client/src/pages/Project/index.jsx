@@ -15,11 +15,17 @@ import XChip from "../../components/XChip";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import XLoading from "../../components/XLoading";
-import { useDeleteProjectMutation, useGetDocumentByIdQuery } from "../../services/nodeApi";
+import {
+  useAcceptRequestMutation,
+  useDeleteProjectMutation,
+  useGetDocumentByIdQuery,
+  useRejectRequestMutation,
+} from "../../services/nodeApi";
 import XButton from "@/components/XButton";
 import XDivider from "../../components/Custom/XDivider";
 import Dialog from "./components/Dialog";
 import XDeleteAlert from "../../components/Alert/XDeleteAlert";
+import NewDocDialog from "./components/NewDocDialog";
 
 const Project = () => {
   const [isOpen, isOpenSet] = useState(false);
@@ -33,16 +39,27 @@ const Project = () => {
     if (!project) navigate("*");
   }, []);
   if (!project) return null;
-  const { isLoading } = useGetDocumentByIdQuery({ projectId: project._id });
+  const { isLoading, refetch } = useGetDocumentByIdQuery({ projectId: project._id });
+  useEffect(() => {
+    refetch();
+  }, [id]);
   const [deleteProject, { isLoading: isDeleting }] = useDeleteProjectMutation();
   const documentMap = useSelector((state) => state.project.document);
   const documents = documentMap[id];
+  const requestArr = useSelector((state) => state.request.goingToAdmin);
+  const requests = requestArr.filter((request) => request.project._id === id);
+  const [acceptRequest, { isLoading: isAcceptLoading }] = useAcceptRequestMutation();
+  const [rejectRequest, { isLoading: isRejectLoading }] = useRejectRequestMutation();
+
   const handleDeleteProject = async () => {
     try {
       const res = await deleteProject({ projectId: project._id });
       if (res) navigate("/");
     } catch (error) {}
   };
+
+  const [isCreateDoc, isCreateDocSet] = useState(false);
+
   return (
     <>
       <XDeleteAlert
@@ -54,6 +71,7 @@ const Project = () => {
         isLoading={isDeleting}
         firstStepText='You sure you wanna delete this project !'
       />
+      <NewDocDialog isOpen={isCreateDoc} isOpenSet={isCreateDocSet} id={id} refetch={refetch} />
       <Dialog isOpen={isOpen} isOpenSet={isOpenSet} project={project} user={user} />
       <XNavbar />
       <XStack className='h-full flex-1 flex flex-row !drop-shadow-none !bg-secondary_background/60 pr-1 pl-6 py-4'>
@@ -104,38 +122,64 @@ const Project = () => {
 
           <div className='flex flex-col flex-1 mr-4 pt-3 gap-4'>
             {user._id === project.creator._id && (
-              <XButton color='primary'>Create new Document</XButton>
+              <XButton color='primary' onClick={() => isCreateDocSet(true)}>
+                Create new Document
+              </XButton>
             )}
             <XStack className='!bg-secondary_background/90 !drop-shadow-none h-fit p-5'>
               <div className='h-full w-full flex flex-col gap-5'>
                 <div className='flex flex-col gap-2'>
                   <div className='flex items-center gap-2'>
                     <div className='text-lg font-bold text-primary_main'>Requests</div>
-                    <XChip label={10} className='!px-3 !py-1' />
+                    <XChip label={requests.length} className='!px-3 !py-1' />
                   </div>
                 </div>
                 <div className='flex flex-col gap-4'>
-                  <div className='flex items-center justify-between'>
-                    <div className='flex items-center gap-3'>
-                      <Avatar>GO</Avatar>
-                      <div className='flex flex-col'>
-                        <div className='text-sm font-bold text-primary_main'>ANakin</div>
-                        <div className='text-xs'>Requested to join project</div>
-                      </div>
-                    </div>
-                    <div className='flex items-center gap-1'>
-                      <XTooltip data='Accept' placement='top'>
-                        <IconButton>
-                          <Tick />
-                        </IconButton>
-                      </XTooltip>
-                      <XTooltip data='Reject' placement='top'>
-                        <IconButton>
-                          <Cross />
-                        </IconButton>
-                      </XTooltip>
-                    </div>
-                  </div>
+                  {requests.length ? (
+                    requests.map((request, index) => {
+                      return (
+                        <div key={index} className='flex items-center justify-between'>
+                          <div className='flex items-center gap-3'>
+                            <Avatar src={request.from?.img}>{shortName(request.from.name)}</Avatar>
+                            <div className='flex flex-col'>
+                              <div className='text-sm font-bold text-primary_main'>
+                                {request.from.name}
+                              </div>
+                              <div className='text-xs'>Requested to join project</div>
+                            </div>
+                          </div>
+                          <div className='flex items-center gap-1'>
+                            <XTooltip data='Accept' placement='top'>
+                              <IconButton
+                                onClick={() =>
+                                  acceptRequest({
+                                    projectId: id,
+                                    userId: request.from._id,
+                                    reqId: request._id,
+                                  })
+                                }
+                              >
+                                <Tick />
+                              </IconButton>
+                            </XTooltip>
+                            <XTooltip data='Reject' placement='top'>
+                              <IconButton
+                                onClick={() =>
+                                  rejectRequest({
+                                    reqId: request._id,
+                                  })
+                                }
+                              >
+                                <Cross />
+                              </IconButton>
+                            </XTooltip>
+                          </div>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div className='text-sm'>No requests yet</div>
+                  )}
                 </div>
               </div>
             </XStack>

@@ -60,7 +60,6 @@ const Dialog = ({ isOpen, isOpenSet }) => {
             parentClassName='mt-8'
             error={formik.touched.name && !!formik.errors.name}
             helperText={formik.touched.name && !!formik.errors.name && "Project name is mandatory"}
-            placeholder='Enter Project Name'
             sx={{
               "& .MuiInputBase-root": {
                 backgroundColor: `${alpha(theme.palette.common.black, 0.4)} !important`,

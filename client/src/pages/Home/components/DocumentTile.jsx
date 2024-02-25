@@ -41,7 +41,7 @@ const DocumentTile = ({ document }) => {
             <div className='flex items-center gap-5 text-primary_main text-xs leading-3'>
               <div className='flex items-center gap-1'>
                 <Project />
-                <div>{document.project.name} Project</div>
+                <div>{document.project.name}</div>
               </div>
               <div className='flex items-center gap-1'>
                 <Star />

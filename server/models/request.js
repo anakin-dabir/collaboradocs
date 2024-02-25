@@ -5,7 +5,7 @@ const requestSchema = new mongoose.Schema(
     project: { type: mongoose.Schema.Types.ObjectId, ref: "Project" },
     from: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     to: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    type: { type: String, enum: ["Incoming", "Outgoing"] },
+    type: { type: String, enum: ["GoingToAdmin", "GoingFromAdmin"] },
   },
   {
     timestamps: true,

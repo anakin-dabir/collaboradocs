@@ -90,7 +90,7 @@ const DocumentView = () => {
                 <div className='flex flex-col gap-2'>
                   <div className='flex items-center gap-2'>
                     <Project />
-                    <div className='text-xs leading-3'>{document.project.name} Project</div>
+                    <div className='text-xs leading-3'>{document.project.name}</div>
                   </div>
                   <div className='flex items-center gap-2'>
                     <Star />

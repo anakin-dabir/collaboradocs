@@ -5,6 +5,7 @@ import { ReactComponent as Star } from "@/assets/custom/star.svg";
 import { ReactComponent as Logo } from "@/assets/custom/logo.svg";
 import { ReactComponent as History } from "@/assets/custom/history.svg";
 import { useNavigate } from "react-router-dom";
+import getDate from "../../../utils/getDate";
 
 const DocumentTile = ({ document }) => {
   const navigate = useNavigate();
@@ -42,7 +43,8 @@ const DocumentTile = ({ document }) => {
           </div>
           <div className='flex items-center gap-1 text-primary_main text-xs leading-3'>
             <div>
-              <span className='font-medium'>Last Updated: </span>3 minutes ago
+              <span className='font-medium'>Last Updated: </span>
+              {getDate(document.createdAt)}
             </div>
           </div>
         </div>
