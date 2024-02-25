@@ -44,7 +44,6 @@ const Project = () => {
       if (res) navigate("/");
     } catch (error) {}
   };
-  console.log(documents);
   const [isCreateDoc, isCreateDocSet] = useState(false);
 
   return (

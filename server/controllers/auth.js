@@ -106,4 +106,20 @@ async function get(req, res) {
   } catch (error) {}
 }
 
-export { login, register, createUser, verify, updateImage, remove, updateName, get };
+async function search(req, res) {
+  const { name } = req.body;
+  try {
+    const user = await User.find(
+      {
+        isVerified: true,
+        name: { $regex: name, $options: "i" },
+      },
+      "name email img"
+    );
+    return res.status(200).json({ user, msg: "User founded" });
+  } catch (error) {
+    return res.status(500).json({ msg: "User not found" });
+  }
+}
+
+export { login, register, createUser, verify, updateImage, remove, updateName, get, search };

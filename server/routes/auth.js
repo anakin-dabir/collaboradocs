@@ -8,6 +8,7 @@ import {
   updateImage,
   updateName,
   verify,
+  search,
 } from "../controllers/auth.js";
 import verifyToken from "../middleware/verifyToken.js";
 
@@ -21,6 +22,7 @@ auth.post("/updateImage", verifyToken, updateImage);
 auth.post("/createUser", createUser);
 auth.post("/updateName", verifyToken, updateName);
 auth.delete("/remove", verifyToken, remove);
+auth.post("/search", verifyToken, search);
 
 // test
 

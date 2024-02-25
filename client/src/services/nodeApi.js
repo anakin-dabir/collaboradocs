@@ -85,6 +85,7 @@ const nodeApi = createApi({
       }),
       invalidatesTags: ["User"],
     }),
+
     updateName: build.mutation({
       query: (creds) => ({
         method: "POST",
@@ -93,6 +94,7 @@ const nodeApi = createApi({
       }),
       invalidatesTags: ["User"],
     }),
+
     remove: build.mutation({
       query: () => ({
         method: "DELETE",
@@ -107,6 +109,14 @@ const nodeApi = createApi({
           toast.error(error.error.data.msg);
         }
       },
+    }),
+
+    searchUser: build.mutation({
+      query: (body) => ({
+        method: "POST",
+        url: "/auth/search",
+        body,
+      }),
     }),
 
     getAllDocuments: build.query({
@@ -198,7 +208,9 @@ const nodeApi = createApi({
         try {
           const response = await queryFulfilled;
           dispatch(setProjectDocs(response.data.document));
-        } catch (error) {}
+        } catch (error) {
+          toast.error(error.error.data ? error.error.data.msg : config.ERROR);
+        }
       },
     }),
 
@@ -212,7 +224,9 @@ const nodeApi = createApi({
         try {
           const response = await queryFulfilled;
           dispatch(setRequestGoingFromAdmin(response.data.request));
-        } catch (error) {}
+        } catch (error) {
+          toast.error(error.error.data ? error.error.data.msg : config.ERROR);
+        }
       },
     }),
     getRequestGoingToAdmin: build.query({
@@ -226,6 +240,23 @@ const nodeApi = createApi({
           const response = await queryFulfilled;
           dispatch(setRequestGoingToAdmin(response.data.request));
         } catch (error) {}
+      },
+    }),
+
+    createRequest: build.mutation({
+      query: (body) => ({
+        method: "POST",
+        url: "/request/create",
+        body,
+      }),
+      invalidatesTags: ["Request"],
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          const response = await queryFulfilled;
+          toast.success(response.data.msg);
+        } catch (error) {
+          toast.error(error.error.data ? error.error.data.msg : config.ERROR);
+        }
       },
     }),
 
@@ -287,6 +318,8 @@ export const {
   useGetRequestGoingToAdminQuery,
   useAcceptRequestMutation,
   useRejectRequestMutation,
+  useSearchUserMutation,
+  useCreateRequestMutation,
 } = nodeApi;
 
 export default nodeApi;

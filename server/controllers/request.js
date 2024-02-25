@@ -27,17 +27,19 @@ async function goingFromAdmin(req, res) {
 
 async function create(req, res) {
   const { projectId, userId, type } = req.body;
-
   try {
-    const alreadyRequested = await Request.findOne({ project: projectId, user: userId, type });
-    if (alreadyRequested) return res.status(208).json({ msg: "Already requested" });
-    const request = await Request.create({
-      project: projectId,
-      to: userId,
-      from: req.user._id,
-      type,
-    });
-    return res.status(200).json({ request, msg: "he" });
+    const requests = userId.map((id) => ({
+      insertOne: {
+        document: {
+          project: projectId,
+          to: id,
+          from: req.user._id,
+          type,
+        },
+      },
+    }));
+    await Request.bulkWrite(requests);
+    return res.status(200).json({ msg: `Request has ben sent` });
   } catch (error) {}
 }
 
