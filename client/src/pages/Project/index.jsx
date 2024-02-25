@@ -37,7 +37,7 @@ const Project = () => {
       <XStack className='h-full flex-1 flex flex-row !drop-shadow-none !bg-secondary_background/60 pr-1 pl-6 py-4'>
         <div className='overflow-y-auto h-full w-full flex gap-7 px-20'>
           <div className='h-full w-[70%] gap-4 flex flex-col'>
-            <div className='flex flex-col gap-2 pt-2 h-full'>
+            <div className='flex flex-col gap-2 pt-3 h-full'>
               <div className='flex items-center justify-between'>
                 <div className='flex items-center gap-1'>
                   <BackButton />
