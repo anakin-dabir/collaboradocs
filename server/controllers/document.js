@@ -49,7 +49,18 @@ async function getAll(req, res) {
 async function getByProjectId(req, res) {
   const { projectId } = req.body;
   try {
-    const document = await Document.find({ project: projectId });
+    const document = await Document.find({
+      project: projectId,
+      $or: [
+        {
+          creator: req.user._id,
+          $or: [{ visibility: "Private" }, { visibility: "Public" }, { visibility: "Shared" }],
+        },
+        {
+          $or: [{ visibility: "Public" }, { visibility: "Shared" }],
+        },
+      ],
+    });
     return res.status(200).json({ document, msg: "Success" });
   } catch (error) {}
 }

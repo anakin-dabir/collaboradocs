@@ -11,7 +11,7 @@ import { setProject, setProjectDocs } from "../store/slice/projectSlice";
 const nodeApi = createApi({
   baseQuery,
   reducerPath: "nodeApi",
-  tagTypes: ["User", "Document", "Project"],
+  tagTypes: ["User", "Document", "Project", "Request"],
   endpoints: (build) => ({
     getUser: build.query({
       query: () => ({
@@ -207,6 +207,14 @@ const nodeApi = createApi({
           dispatch(setProjectDocs({ document: response.data.document, projectId: args.projectId }));
         } catch (error) {}
       },
+    }),
+
+    getRequest: build.query({
+      query: () => ({
+        method: "GET",
+        url: "/request/get",
+      }),
+      invalidatesTags: ["Request"],
     }),
   }),
 });

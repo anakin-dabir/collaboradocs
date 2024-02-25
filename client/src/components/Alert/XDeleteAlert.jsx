@@ -66,8 +66,8 @@ const XDeleteAlert = ({
         <div className='flex flex-col px-10 py-8 gap-4'>
           <div className='flex justify-between items-center'>
             <div className='flex gap-2 items-end'>
-              <Delete className='fill-error_light size-5' />
-              <div className='text-xl leading-4 font-bold text-error_main'>Delete</div>
+              <Delete className='fill-error_main size-5' />
+              <div className='text-xl leading-4 font-bold text-primary_main'>Delete</div>
             </div>
             <XTooltip data='Close' placement='top'>
               <IconButton onClick={handleClose}>

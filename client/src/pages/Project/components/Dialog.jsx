@@ -46,7 +46,9 @@ const Dialog = ({ isOpen, isOpenSet, project, user }) => {
         }
       } catch (error) {}
     }
-    handleClose();
+    if (!isProjectsLoading) {
+      handleClose();
+    }
   }
   return (
     <XAlertBase isOpen={isOpen} onClose={handleClose}>

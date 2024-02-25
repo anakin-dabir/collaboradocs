@@ -37,7 +37,7 @@ const Project = () => {
   const [deleteProject, { isLoading: isDeleting }] = useDeleteProjectMutation();
   const documentMap = useSelector((state) => state.project.document);
   const documents = documentMap[id];
-
+  console.log({ documents });
   const handleDeleteProject = async () => {
     try {
       const res = await deleteProject({ projectId: project._id });
@@ -107,7 +107,7 @@ const Project = () => {
             {user._id === project.creator._id && (
               <XButton color='primary'>Create new Document</XButton>
             )}
-            {/* <XStack className='!bg-secondary_background/90 !drop-shadow-none h-fit p-5'>
+            <XStack className='!bg-secondary_background/90 !drop-shadow-none h-fit p-5'>
               <div className='h-full w-full flex flex-col gap-5'>
                 <div className='flex flex-col gap-2'>
                   <div className='flex items-center gap-2'>
@@ -139,7 +139,7 @@ const Project = () => {
                   </div>
                 </div>
               </div>
-            </XStack> */}
+            </XStack>
 
             <XStack className='!bg-secondary_background/90 mt-6 !drop-shadow-none h-fit p-5'>
               <div className='h-full w-full flex flex-col gap-8'>
@@ -159,7 +159,7 @@ const Project = () => {
                   </div>
                 </div>
 
-                <div className='flex flex-col gap-2'>
+                <div className='flex flex-col gap-3'>
                   <div className='flex flex-col gap-2'>
                     <div className='flex items-center gap-2'>
                       <div className='text-lg font-bold text-primary_main'>Members </div>
@@ -175,6 +175,9 @@ const Project = () => {
                         </XTooltip>
                       );
                     })}
+                    <XTooltip placement='top' data='Add New'>
+                      <Avatar className='bg-primary_main text-2xl cursor-pointer'>+</Avatar>
+                    </XTooltip>
                   </div>
                 </div>
               </div>

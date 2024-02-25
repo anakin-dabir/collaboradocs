@@ -9,6 +9,7 @@ import config from "./config/config.js";
 import uploadFile from "./services/fileUpload.js";
 import document from "./routes/document.js";
 import project from "./routes/project.js";
+import request from "./routes/request.js";
 
 async function init() {
   // const socket = new SocketService();
@@ -22,6 +23,7 @@ async function init() {
   app.use("/auth", auth);
   app.use("/document", document);
   app.use("/project", project);
+  app.use("/request", request);
   connectDb(process.env.MONGO || config.MONGO || "mongodb://127.0.0.1:27017/Collaboradocs");
   httpServer.listen(process.env.PORT || 80, () =>
     console.log("Server running on port", process.env.PORT)

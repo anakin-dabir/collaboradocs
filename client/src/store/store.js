@@ -7,6 +7,7 @@ import socketSlice from "./slice/socketSlice";
 import welcomeSlice from "./slice/welcomeSlice";
 import documentSlice from "./slice/documentSlice";
 import projectSlice from "./slice/projectSlice";
+import requestSlice from "./slice/requestSlice";
 
 const rootReducer = combineReducers({
   [nodeApi.reducerPath]: nodeApi.reducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   welcome: welcomeSlice,
   document: documentSlice,
   project: projectSlice,
+  request: requestSlice,
 });
 
 const persistConfig = {
