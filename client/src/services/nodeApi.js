@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 import config from "../config/config";
 import { setDocument } from "../store/slice/documentSlice";
 import shuffle from "../utils/shuffle";
-import { setProject } from "../store/slice/projectSlice";
+import { setProject, setProjectDocs } from "../store/slice/projectSlice";
 
 const nodeApi = createApi({
   baseQuery,
@@ -26,6 +26,7 @@ const nodeApi = createApi({
         } catch (error) {}
       },
     }),
+
     register: build.mutation({
       query: (creds) => ({
         method: "POST",
@@ -41,13 +42,14 @@ const nodeApi = createApi({
         }
       },
     }),
+
     login: build.mutation({
       query: (creds) => ({
         method: "POST",
         url: "/auth/login",
         body: creds,
       }),
-      // invalidatesTags: ["User"],
+      invalidatesTags: ["Document", "Project"],
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const response = await queryFulfilled;
@@ -73,6 +75,7 @@ const nodeApi = createApi({
         }
       },
     }),
+
     updateImage: build.mutation({
       query: (file) => ({
         method: "POST",
@@ -148,6 +151,20 @@ const nodeApi = createApi({
         } catch (error) {}
       },
     }),
+
+    getDocumentById: build.query({
+      query: (projectId) => ({
+        method: "POST",
+        url: `/document/getByProjectId`,
+        body: projectId,
+      }),
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const response = await queryFulfilled;
+          dispatch(setProjectDocs({ document: response.data.document, projectId: args.projectId }));
+        } catch (error) {}
+      },
+    }),
   }),
 });
 
@@ -163,6 +180,7 @@ export const {
   useVerifyEmailMutation,
   useGetAllDocumentsQuery,
   useGetAllProjectsQuery,
+  useGetDocumentByIdQuery,
 } = nodeApi;
 
 export default nodeApi;

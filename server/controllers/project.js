@@ -30,8 +30,7 @@ async function get(req, res) {
   try {
     const project = await Project.find({ creator: req.user._id })
       .populate("creator")
-      .populate("members")
-      .populate("documents");
+      .populate("members");
     if (!project) return res.status(404).json({ msg: "No projects" });
 
     return res.status(200).json({ project, msg: "Success" });

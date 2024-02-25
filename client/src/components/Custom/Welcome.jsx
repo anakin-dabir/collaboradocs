@@ -16,7 +16,7 @@ const Welcome = () => {
 
   if (initiated) return null;
   return (
-    <div className='h-screen fixed z-10 w-screen box-center'>
+    <div className='fixed inset-0 box-center z-50'>
       <XStack
         size='l'
         className='w-[550px] fixed transition-opacity !drop-shadow-none !bg-secondary_background duration-500 px-14 py-12 gap-5'

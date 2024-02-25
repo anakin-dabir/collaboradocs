@@ -46,4 +46,12 @@ async function getAll(req, res) {
   } catch (err) {}
 }
 
-export { create, edit, get, getAll };
+async function getByProjectId(req, res) {
+  const { projectId } = req.body;
+  try {
+    const document = await Document.find({ project: projectId });
+    return res.status(200).json({ document, msg: "Success" });
+  } catch (error) {}
+}
+
+export { create, edit, get, getAll, getByProjectId };
