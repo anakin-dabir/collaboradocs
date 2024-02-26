@@ -93,6 +93,7 @@ const UserAddDialog = ({ isOpen, isOpenSet, project }) => {
             <div className='flex items-center gap-4'>
               <XTextfield
                 name='name'
+                autoFocus
                 value={formik.values.name}
                 onChange={formik.handleChange}
                 error={formik.touched.name && !!formik.errors.name}

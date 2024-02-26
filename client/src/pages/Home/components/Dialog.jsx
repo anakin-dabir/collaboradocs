@@ -54,6 +54,7 @@ const Dialog = ({ isOpen, isOpenSet }) => {
         <div className='flex'>
           <XTextfield
             name='name'
+            autoFocus
             value={formik.values.name}
             onChange={formik.handleChange}
             label='Project Name'

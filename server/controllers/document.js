@@ -40,7 +40,7 @@ async function getAll(req, res) {
   try {
     const document = await Document.find({ visibility: "Public" })
       .populate("creator", "name img")
-      .populate("project", "name")
+      .populate("project", "name members")
       .populate("collaborators", "name img");
     return res.status(200).json({ document });
   } catch (err) {}

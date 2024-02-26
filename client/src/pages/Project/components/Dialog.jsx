@@ -56,6 +56,7 @@ const Dialog = ({ isOpen, isOpenSet, project, user }) => {
         <XDivider />
         <div className='flex flex-col gap-3'>
           <XTextfield
+            autoFocus
             name='name'
             value={initialValues.name}
             onChange={(e) => initialValuesSet((pre) => ({ ...pre, name: e.target.value }))}

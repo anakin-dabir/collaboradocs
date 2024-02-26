@@ -12,6 +12,7 @@ const config = {
     TEST: "/test",
     DOCUMENTVIEW: "/doc/:id",
     PROJECT: "/project/:id",
+    REQUEST: "/request",
   },
 };
 

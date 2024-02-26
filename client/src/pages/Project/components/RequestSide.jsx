@@ -46,7 +46,7 @@ const RequestSide = ({ id }) => {
                         <IconButton
                           onClick={() =>
                             acceptRequest({
-                              projectId: id,
+                              projectId: request.project._id,
                               userId: request.from._id,
                               reqId: request._id,
                             })

@@ -16,6 +16,8 @@ import BackButton from "../../components/Custom/BackButton";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import shortName from "../../utils/shortName";
+import XConfirmAlert from "../../components/Alert/XConfirmAlert";
+import { useCreateRequestMutation } from "../../services/nodeApi";
 
 const DocumentView = () => {
   const isLogged = useSelector((state) => state.user.user);
@@ -27,8 +29,31 @@ const DocumentView = () => {
     if (!document) navigate("*");
   }, []);
   if (!document) return null;
+  const [isOpen, isOpenSet] = useState(false);
+  const [createRequest, { isLoading }] = useCreateRequestMutation();
+
+  const handleClose = () => {
+    isOpenSet(false);
+  };
+
+  async function handleConfirm() {
+    console.log(document.project._id, document.creator._id);
+    createRequest({
+      projectId: document.project._id,
+      userId: [document.creator._id],
+      type: "GoingToAdmin",
+    });
+  }
+
   return (
     <>
+      <XConfirmAlert
+        heading='Request to collaborate'
+        isOpen={isOpen}
+        onClose={handleClose}
+        onConfirm={handleConfirm}
+        loading={isLoading}
+      />
       <XNavbar />
       <XStack className='h-full flex-1 flex flex-row !drop-shadow-none !bg-secondary_background/60 pr-1 pl-6 py-4'>
         <div className='overflow-y-auto relative h-full w-full flex gap-3'>
@@ -116,6 +141,20 @@ const DocumentView = () => {
                       </XTooltip>
                     );
                   })}
+                  {isLogged && (
+                    <XTooltip data='Wanna Collaborate' placement='top'>
+                      <Avatar
+                        onClick={() => isOpenSet(true)}
+                        className={` text-2xl cursor-pointer ${
+                          document.project.members.includes(isLogged._id)
+                            ? "pointer-events-none bg-gray-600"
+                            : "bg-primary_main"
+                        }`}
+                      >
+                        +
+                      </Avatar>
+                    </XTooltip>
+                  )}
                 </div>
               </div>
             </XStack>

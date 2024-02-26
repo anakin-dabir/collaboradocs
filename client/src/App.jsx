@@ -16,6 +16,7 @@ import Header from "./components/Header/Header";
 import DocumentView from "./pages/DocumentView";
 import Project from "./pages/Project";
 import Stash from "./components/Custom/Stash";
+import Request from "./pages/Request";
 
 const App = () => {
   dayjs.extend(relativeTime);
@@ -29,6 +30,7 @@ const App = () => {
         { path: config.PATHNAMES.HOME, element: <Home /> },
         { path: config.PATHNAMES.TEST, element: <XEditor /> },
         { path: config.PATHNAMES.DOCUMENTVIEW, element: <DocumentView /> },
+        { path: config.PATHNAMES.REQUEST, element: <Request /> },
         isLoggedIn && { path: config.PATHNAMES.PROJECT, element: <Project /> },
       ],
     },

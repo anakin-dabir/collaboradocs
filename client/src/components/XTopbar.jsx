@@ -1,12 +1,11 @@
-import React, {useRef, useState, useEffect} from 'react';
-import {Link as RouterLink} from 'react-router-dom';
-import {Box, AppBar, Toolbar, Grid, Typography} from '@mui/material';
-import clsx from 'clsx';
-import {useAppStyles} from '@/themes';
-import XTooltip from './XTooltip';
-import {ReactComponent as AppBarBottomRight} from '@/assets/app_bar_bottom_right.svg';
-import {ReactComponent as AppBarBottomCenter} from '@/assets/app_bar_bottom_center.svg';
-import {ReactComponent as AppBarTopRight} from '@/assets/app_bar_top_right.svg';
+import React, { useRef, useState, useEffect } from "react";
+import { Box, AppBar, Toolbar, Grid, Typography } from "@mui/material";
+import clsx from "clsx";
+import { useAppStyles } from "@/themes";
+import XTooltip from "./XTooltip";
+import { ReactComponent as AppBarBottomRight } from "@/assets/app_bar_bottom_right.svg";
+import { ReactComponent as AppBarBottomCenter } from "@/assets/app_bar_bottom_center.svg";
+import { ReactComponent as AppBarTopRight } from "@/assets/app_bar_top_right.svg";
 
 const XTopbar = () => {
   const classes = useAppStyles();
@@ -41,7 +40,7 @@ const XTopbar = () => {
         <Box flexGrow={1} />
         <Box pr={5}>
           <XTooltip placement='left' data='Anakin Dabir'>
-            <Box p={0.9} className={classes.userAvatar} sx={{cursor: 'default'}}>
+            <Box p={0.9} className={classes.userAvatar} sx={{ cursor: "default" }}>
               <Typography fontSize={14} fontWeight='bold'>
                 {/* {user.firstName?.[0] + user.lastName?.[0]} */}
               </Typography>
@@ -55,7 +54,7 @@ const XTopbar = () => {
         className={clsx(classes.border, classes.bottom_center_border)}
         style={{
           top: `${topBarHeight}px`,
-          transform: 'translateY(-100%)',
+          transform: "translateY(-100%)",
         }}
       />
     </AppBar>

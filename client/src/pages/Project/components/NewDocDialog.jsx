@@ -54,6 +54,7 @@ const NewDocDialog = ({ isOpen, isOpenSet, id, refetch }) => {
         <XDivider />
         <div className='flex flex-col gap-3'>
           <XTextfield
+            autoFocus
             name='title'
             value={formik.values.title}
             onChange={formik.handleChange}

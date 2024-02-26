@@ -85,6 +85,7 @@ const XDeleteAlert = ({
                 </div>
                 <Box>
                   <XTextfield
+                    autoFocus
                     name='name'
                     sx={{
                       "& .MuiInputBase-root": {
