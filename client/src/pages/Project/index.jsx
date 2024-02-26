@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import XNavbar from "../../components/Custom/XNavbar";
 import XStack from "../../components/XStack";
 import DocumentTile from "./components/DocumentTile";
-import { Avatar, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { ReactComponent as Settings } from "@/assets/custom/settings.svg";
 import XTooltip from "../../components/XTooltip";
 import BackButton from "../../components/Custom/BackButton";
@@ -15,9 +15,9 @@ import XButton from "@/components/XButton";
 import XDivider from "../../components/Custom/XDivider";
 import Dialog from "./components/Dialog";
 import XDeleteAlert from "../../components/Alert/XDeleteAlert";
-import NewDocDialog from "./components/NewDocDialog";
 import UsersSide from "./components/UsersSide";
 import RequestSide from "./components/RequestSide";
+import NewDocDialog from "../../components/Custom/NewDocDialog";
 
 const Project = () => {
   const [isOpen, isOpenSet] = useState(false);
@@ -32,9 +32,9 @@ const Project = () => {
   }, []);
   if (!project) return null;
   const { isLoading, refetch } = useGetDocumentByIdQuery({ projectId: project._id });
-  // useEffect(() => {
-  //   refetch();
-  // }, [id]);
+  useEffect(() => {
+    refetch();
+  }, [id]);
   const [deleteProject, { isLoading: isDeleting }] = useDeleteProjectMutation();
   const documents = useSelector((state) => state.project.document);
 
@@ -115,7 +115,7 @@ const Project = () => {
 
             <RequestSide id={id} />
 
-            <UsersSide project={project} />
+            <UsersSide project={project} user={user} />
           </div>
         </div>
       </XStack>

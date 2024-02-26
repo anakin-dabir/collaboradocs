@@ -23,11 +23,17 @@ async function create(req, res) {
 }
 
 async function edit(req, res) {
-  const { title, content } = req.body;
+  const { title, desc, visibility, docId } = req.body;
+  try {
+    await Document.findByIdAndUpdate(docId, { title, desc, visibility });
+    return res.status(200).json({ msg: "Document creds updated sucessfully" });
+  } catch (error) {
+    return res.status(500).json({ msg: "Failed to update document" });
+  }
 }
 
 async function get(req, res) {
-  const { docId } = req.body;
+  const docId = req.params.docId;
   try {
     const document = await Document.findById(docId)
       .populate("creator", "name img")
@@ -48,7 +54,7 @@ async function getAll(req, res) {
 }
 
 async function getByProjectId(req, res) {
-  const { projectId } = req.body;
+  const projectId = req.params.projectId;
   try {
     const document = await Document.find({
       project: projectId,
@@ -66,4 +72,21 @@ async function getByProjectId(req, res) {
   } catch (error) {}
 }
 
-export { create, edit, get, getAll, getByProjectId };
+async function deleteDocument(req, res) {
+  const { docId } = req.body;
+  try {
+    const project = await Project.findOne({ documents: docId });
+    if (project) {
+      project.documents.pull(docId);
+      await project.save();
+      await Document.findByIdAndDelete(docId);
+    } else {
+      await Document.findByIdAndDelete(docId);
+    }
+    return res.status(200).json({ msg: "Document deleted successfully" });
+  } catch (error) {
+    return res.status(500).json({ msg: "Document deletion failed" });
+  }
+}
+
+export { create, edit, get, getAll, getByProjectId, deleteDocument };

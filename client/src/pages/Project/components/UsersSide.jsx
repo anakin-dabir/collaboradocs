@@ -7,7 +7,7 @@ import XChip from "../../../components/XChip";
 import XTooltip from "../../../components/XTooltip";
 import UserAddDialog from "./UserAddDialog";
 
-const UsersSide = ({ project }) => {
+const UsersSide = ({ project, user }) => {
   const [isOpen, isOpenSet] = useState(false);
   return (
     <>
@@ -44,14 +44,16 @@ const UsersSide = ({ project }) => {
                   </XTooltip>
                 );
               })}
-              <XTooltip placement='top' data='Add New'>
-                <Avatar
-                  className='bg-primary_main text-2xl cursor-pointer'
-                  onClick={() => isOpenSet(true)}
-                >
-                  +
-                </Avatar>
-              </XTooltip>
+              {user._id === project.creator._id && (
+                <XTooltip placement='top' data='Add New'>
+                  <Avatar
+                    className='bg-primary_main text-2xl cursor-pointer'
+                    onClick={() => isOpenSet(true)}
+                  >
+                    +
+                  </Avatar>
+                </XTooltip>
+              )}
             </div>
           </div>
         </div>

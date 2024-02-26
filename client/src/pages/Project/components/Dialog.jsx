@@ -30,7 +30,7 @@ const Dialog = ({ isOpen, isOpenSet, project, user }) => {
   async function handleSubmit() {
     if (hasUpdates(initialValues, initials)) {
       try {
-        const res = await updateProject({
+        await updateProject({
           projectId: project._id,
           name: initialValues.name,
           members: initialValues.members,

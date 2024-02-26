@@ -8,6 +8,7 @@ import { setDocument } from "../store/slice/documentSlice";
 import shuffle from "../utils/shuffle";
 import { setProject, setProjectDocs } from "../store/slice/projectSlice";
 import { setRequestGoingFromAdmin, setRequestGoingToAdmin } from "../store/slice/requestSlice";
+import { setDoc } from "../store/slice/docSlice";
 
 const nodeApi = createApi({
   baseQuery,
@@ -199,10 +200,9 @@ const nodeApi = createApi({
     }),
 
     getDocumentById: build.query({
-      query: (projectId) => ({
-        method: "POST",
-        url: `/document/getByProjectId`,
-        body: projectId,
+      query: ({ projectId }) => ({
+        method: "GET",
+        url: `/document/getByProjectId/${projectId}`,
       }),
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
@@ -227,6 +227,7 @@ const nodeApi = createApi({
         }
       },
     }),
+
     getRequestGoingToAdmin: build.query({
       query: () => ({
         method: "GET",
@@ -276,7 +277,7 @@ const nodeApi = createApi({
       invalidatesTags: ["Request"],
     }),
 
-    createDocument: buidocld.mutation({
+    createDocument: build.mutation({
       query: (obj) => ({
         method: "POST",
         url: "/document/create",
@@ -292,6 +293,55 @@ const nodeApi = createApi({
         } catch (error) {
           toast.error(error.error.data ? error.error.data.msg : config.ERROR);
         }
+      },
+    }),
+
+    editDocument: build.mutation({
+      query: (body) => ({
+        method: "POST",
+        url: "/document/edit",
+        body,
+      }),
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          const response = await queryFulfilled;
+          if (response) {
+            toast.success(response.data.msg);
+          }
+        } catch (error) {
+          toast.error(error.error.data ? error.error.data.msg : config.ERROR);
+        }
+      },
+    }),
+
+    deleteDocument: build.mutation({
+      query: (body) => ({
+        method: "DELETE",
+        url: "/document/delete",
+        body,
+      }),
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const response = await queryFulfilled;
+          if (response) {
+            toast.success(response.data.msg);
+          }
+        } catch (error) {
+          toast.error(error.error.data ? error.error.data.msg : config.ERROR);
+        }
+      },
+    }),
+
+    getDocById: build.query({
+      query: ({ docId }) => ({
+        method: "GET",
+        url: `/document/get/${docId}`,
+      }),
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const response = await queryFulfilled;
+          dispatch(setDoc(response.data.document));
+        } catch (error) {}
       },
     }),
   }),
@@ -318,6 +368,9 @@ export const {
   useRejectRequestMutation,
   useSearchUserMutation,
   useCreateRequestMutation,
+  useGetDocByIdQuery,
+  useEditDocumentMutation,
+  useDeleteDocumentMutation,
 } = nodeApi;
 
 export default nodeApi;

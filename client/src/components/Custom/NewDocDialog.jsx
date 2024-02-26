@@ -1,29 +1,47 @@
-import React, { useState } from "react";
-import XAlertBase from "../../../components/Alert/XAlertBase";
+import React, { useMemo, useState } from "react";
+import XAlertBase from "../Alert/XAlertBase";
 import { ReactComponent as Edit } from "@/assets/custom/edit.svg";
 import { ReactComponent as CloseIcon } from "@/assets/close.svg";
 import { IconButton, MenuItem, alpha } from "@mui/material";
-import XTooltip from "../../../components/XTooltip";
-import XDivider from "../../../components/Custom/XDivider";
-import XTextfield from "../../../components/XTextfield";
-import theme from "../../../themes";
-import XButton from "../../../components/XButton";
-import { useCreateDocumentMutation } from "../../../services/nodeApi";
-import useValidation from "../../../formik/useValidation";
-import { docValidationSchema } from "../../../formik/validationSchema";
+import XTooltip from "../XTooltip";
+import XDivider from "./XDivider";
+import XTextfield from "../XTextfield";
+import theme from "../../themes";
+import XButton from "../XButton";
+import { useCreateDocumentMutation, useEditDocumentMutation } from "../../services/nodeApi";
+import useValidation from "../../formik/useValidation";
+import { docValidationSchema } from "../../formik/validationSchema";
+import hasUpdates from "../../utils/hasUpdates";
 
-const NewDocDialog = ({ isOpen, isOpenSet, id, refetch }) => {
+const NewDocDialog = ({ edit = false, document, isOpen, isOpenSet, id, refetch }) => {
   const [createDocument, { isLoading }] = useCreateDocumentMutation();
-  const initialValues = { title: "", desc: "", visibility: "Public" };
+  const [editDocument, { isLoading: isEditLoading }] = useEditDocumentMutation();
+  const initialValues = {
+    title: edit ? document.title : "",
+    desc: edit ? document.desc : "",
+    visibility: edit ? document.visibility : "Public",
+  };
   async function handleSubmit(values) {
-    const res = await createDocument({
-      title: values.title,
-      desc: values.desc,
-      visibility: values.visibility,
-      projectId: id,
-    });
-    if (res) {
-      refetch();
+    if (!edit) {
+      const res = await createDocument({
+        title: values.title,
+        desc: values.desc,
+        visibility: values.visibility,
+        projectId: id,
+      });
+      if (res) {
+        refetch();
+      }
+    } else {
+      const res = await editDocument({
+        title: values.title,
+        desc: values.desc,
+        visibility: values.visibility,
+        docId: document._id,
+      });
+      if (res) {
+        refetch();
+      }
     }
     handleClose();
   }
@@ -37,13 +55,21 @@ const NewDocDialog = ({ isOpen, isOpenSet, id, refetch }) => {
     isOpenSet(false);
     formik.handleReset();
   };
+
+  const isUpdated = useMemo(() => {
+    if (!edit) return;
+    return hasUpdates(initialValues, formik.values);
+  }, [formik]);
+
   return (
     <XAlertBase isOpen={isOpen} onClose={handleClose}>
       <div className='px-10 py-8 flex flex-col gap-4'>
         <div className='flex justify-between items-center'>
           <div className='flex gap-2 items-center'>
             <Edit className='size-7' />
-            <div className='text-xl leading-3 font-bold text-primary_main'>Create Document</div>
+            <div className='text-xl leading-3 font-bold text-primary_main'>
+              {edit ? "Edit" : "Create"} Document
+            </div>
           </div>
           <XTooltip data='Close' placement='top'>
             <IconButton onClick={handleClose}>
@@ -117,8 +143,12 @@ const NewDocDialog = ({ isOpen, isOpenSet, id, refetch }) => {
             <XButton color='error' onClick={handleClose}>
               Cancel
             </XButton>
-            <XButton loading={isLoading} onClick={formik.handleSubmit}>
-              Create
+            <XButton
+              disabled={!isUpdated && edit}
+              loading={isLoading || isEditLoading}
+              onClick={formik.handleSubmit}
+            >
+              {edit ? "Update" : "Create"}
             </XButton>
           </div>
         </div>

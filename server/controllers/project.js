@@ -1,5 +1,6 @@
 import Project from "../models/project.js";
 import Document from "../models/document.js";
+import Request from "../models/request.js";
 
 async function create(req, res) {
   const { name } = req.body;
@@ -51,6 +52,7 @@ async function deleteProject(req, res) {
     const { projectId } = req.body;
     await Project.findByIdAndDelete(projectId);
     await Document.deleteMany({ project: projectId });
+    await Request.deleteMany({ project: projectId });
     return res.status(200).json({ msg: "Project deleted successfully" });
   } catch (error) {
     return res.status(500).json({ msg: "Error in deleting project" });
@@ -60,7 +62,7 @@ async function deleteProject(req, res) {
 async function updateProject(req, res) {
   const { projectId, name, members } = req.body;
   try {
-    const project = await Project.findByIdAndUpdate(projectId, { name, members }, { new: true });
+    await Project.findByIdAndUpdate(projectId, { name, members });
     return res.status(200).json({ msg: "Project updated successfully" });
   } catch (error) {
     res.status(500).json({ msg: "Error: Project update failed" });
