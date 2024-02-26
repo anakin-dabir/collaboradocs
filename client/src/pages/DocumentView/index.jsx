@@ -1,26 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import XStack from "../../components/XStack";
 import XNavbar from "../../components/Custom/XNavbar";
 import XButton from "../../components/XButton";
 import XDivider from "../../components/Custom/XDivider";
-import { ReactComponent as Settings } from "@/assets/custom/settings.svg";
-import { ReactComponent as History } from "@/assets/custom/history.svg";
-import { ReactComponent as Edit } from "@/assets/custom/edit.svg";
-import { Avatar, Button, IconButton } from "@mui/material";
-import getDate from "../../utils/getDate";
-import { ReactComponent as Star } from "@/assets/custom/star.svg";
-import { ReactComponent as Project } from "@/assets/custom/project.svg";
-import XTooltip from "../../components/XTooltip";
-import XChip from "../../components/XChip";
 import BackButton from "../../components/Custom/BackButton";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import shortName from "../../utils/shortName";
-import XConfirmAlert from "../../components/Alert/XConfirmAlert";
-import { useCreateRequestMutation } from "../../services/nodeApi";
+import CollabSide from "./components/CollabSide";
+import DocAboutSide from "../../components/Custom/DocAboutSide";
 
 const DocumentView = () => {
-  const isLogged = useSelector((state) => state.user.user);
   const { id } = useParams();
   const navigate = useNavigate();
   const documents = useSelector((state) => state.document.document);
@@ -29,31 +18,9 @@ const DocumentView = () => {
     if (!document) navigate("*");
   }, []);
   if (!document) return null;
-  const [isOpen, isOpenSet] = useState(false);
-  const [createRequest, { isLoading }] = useCreateRequestMutation();
-
-  const handleClose = () => {
-    isOpenSet(false);
-  };
-
-  async function handleConfirm() {
-    console.log(document.project._id, document.creator._id);
-    createRequest({
-      projectId: document.project._id,
-      userId: [document.creator._id],
-      type: "GoingToAdmin",
-    });
-  }
 
   return (
     <>
-      <XConfirmAlert
-        heading='Request to collaborate'
-        isOpen={isOpen}
-        onClose={handleClose}
-        onConfirm={handleConfirm}
-        loading={isLoading}
-      />
       <XNavbar />
       <XStack className='h-full flex-1 flex flex-row !drop-shadow-none !bg-secondary_background/60 pr-1 pl-6 py-4'>
         <div className='overflow-y-auto relative h-full w-full flex gap-3'>
@@ -70,24 +37,6 @@ const DocumentView = () => {
                       {document.visibility}
                     </XButton>
                   </div>
-                  {isLogged && (
-                    <div className='flex gap-2'>
-                      <Button className='gap-2'>
-                        <div className='capitalize'>125 Changes</div>
-                        <History />
-                      </Button>
-                      <XTooltip data='Settings' placement='top'>
-                        <IconButton>
-                          <Settings />
-                        </IconButton>
-                      </XTooltip>
-                      <XTooltip data='Edit' placement='top'>
-                        <IconButton>
-                          <Edit />
-                        </IconButton>
-                      </XTooltip>
-                    </div>
-                  )}
                 </div>
 
                 <XDivider />
@@ -95,69 +44,8 @@ const DocumentView = () => {
             </XStack>
           </div>
           <div className='flex flex-col flex-1 mr-4 gap-3'>
-            <XStack className='!bg-secondary_background/90 !drop-shadow-none h-fit p-5'>
-              <div className='h-full w-full flex flex-col gap-4'>
-                <div className='flex flex-col gap-2'>
-                  <div className='text-lg font-bold text-primary_main'>About </div>
-                  <div className='text-sm'>{document.desc}</div>
-                </div>
-
-                <div className='flex items-center gap-2'>
-                  <Avatar src={document.creator?.img}>{shortName(document.creator.name)}</Avatar>
-                  <div className='flex flex-col'>
-                    <div className='text-sm font-bold text-primary_main'>
-                      {document.creator.name}
-                    </div>
-                    <div className='text-xs'>{getDate(document.createdAt)}</div>
-                  </div>
-                </div>
-
-                <div className='flex flex-col gap-2'>
-                  <div className='flex items-center gap-2'>
-                    <Project />
-                    <div className='text-xs leading-3'>{document.project.name}</div>
-                  </div>
-                  <div className='flex items-center gap-2'>
-                    <Star />
-                    <div className='text-xs leading-3'>{document.stars} Stars</div>
-                  </div>
-                </div>
-              </div>
-            </XStack>
-            <XStack className='!bg-secondary_background/90 !drop-shadow-none h-fit p-5'>
-              <div className='h-full w-full flex flex-col gap-4'>
-                <div className='flex flex-col gap-2'>
-                  <div className='flex items-center gap-2'>
-                    <div className='text-lg font-bold text-primary_main'>Collaborators </div>
-                    <XChip label={document.collaborators.length} className='!px-3 !py-1' />
-                  </div>
-                </div>
-
-                <div className='flex items-center gap-2 flex-wrap'>
-                  {document.collaborators.map((collaborator, index) => {
-                    return (
-                      <XTooltip key={index} placement='top' data={collaborator.name}>
-                        <Avatar src={collaborator?.img}>{shortName(collaborator.name)}</Avatar>
-                      </XTooltip>
-                    );
-                  })}
-                  {isLogged && (
-                    <XTooltip data='Wanna Collaborate' placement='top'>
-                      <Avatar
-                        onClick={() => isOpenSet(true)}
-                        className={` text-2xl cursor-pointer ${
-                          document.project.members.includes(isLogged._id)
-                            ? "pointer-events-none bg-gray-600"
-                            : "bg-primary_main"
-                        }`}
-                      >
-                        +
-                      </Avatar>
-                    </XTooltip>
-                  )}
-                </div>
-              </div>
-            </XStack>
+            <DocAboutSide document={document} />
+            <CollabSide document={document} />
           </div>
         </div>
       </XStack>

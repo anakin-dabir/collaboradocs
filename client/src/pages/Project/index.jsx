@@ -32,9 +32,9 @@ const Project = () => {
   }, []);
   if (!project) return null;
   const { isLoading, refetch } = useGetDocumentByIdQuery({ projectId: project._id });
-  useEffect(() => {
-    refetch();
-  }, [id]);
+  // useEffect(() => {
+  //   refetch();
+  // }, [id]);
   const [deleteProject, { isLoading: isDeleting }] = useDeleteProjectMutation();
   const documents = useSelector((state) => state.project.document);
 

@@ -13,7 +13,7 @@ const DocumentTile = ({ document }) => {
     <XStack
       className='cursor-pointer !bg-secondary_background/90 !drop-shadow-none hover:!bg-primary_main/10 transition-all'
       onClick={() => {
-        navigate(`/doc/${document._id}`);
+        navigate(`/edit-doc/${document._id}`);
       }}
     >
       <div className='h-full w-full p-4 flex flex-col gap-2'>

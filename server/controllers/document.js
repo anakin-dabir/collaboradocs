@@ -27,11 +27,12 @@ async function edit(req, res) {
 }
 
 async function get(req, res) {
-  const { id } = req.body;
+  const { docId } = req.body;
   try {
-    const document = await Document.find({ creator: req.user._id, project: id })
-      .populate("creator")
-      .populate("project");
+    const document = await Document.findById(docId)
+      .populate("creator", "name img")
+      .populate("project", "name")
+      .populate("collaborators", "name img");
     return res.status(200).json({ document, msg: "Succeed" });
   } catch (err) {}
 }

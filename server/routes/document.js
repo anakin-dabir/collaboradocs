@@ -4,7 +4,7 @@ import { create, get, getAll, getByProjectId } from "../controllers/document.js"
 
 const document = express.Router();
 document.post("/create", verifyToken, create);
-document.get("/get", verifyToken, get);
+document.post("/get", verifyToken, get);
 document.get("/getAll", getAll);
 document.post("/getByProjectId", verifyToken, getByProjectId);
 

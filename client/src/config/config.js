@@ -13,6 +13,7 @@ const config = {
     DOCUMENTVIEW: "/doc/:id",
     PROJECT: "/project/:id",
     REQUEST: "/request",
+    EDITDOCUMENT: "/edit-doc/:id",
   },
 };
 

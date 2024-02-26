@@ -208,9 +208,7 @@ const nodeApi = createApi({
         try {
           const response = await queryFulfilled;
           dispatch(setProjectDocs(response.data.document));
-        } catch (error) {
-          toast.error(error.error.data ? error.error.data.msg : config.ERROR);
-        }
+        } catch (error) {}
       },
     }),
 
@@ -278,7 +276,7 @@ const nodeApi = createApi({
       invalidatesTags: ["Request"],
     }),
 
-    createDocument: build.mutation({
+    createDocument: buidocld.mutation({
       query: (obj) => ({
         method: "POST",
         url: "/document/create",

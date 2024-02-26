@@ -17,6 +17,7 @@ import DocumentView from "./pages/DocumentView";
 import Project from "./pages/Project";
 import Stash from "./components/Custom/Stash";
 import Request from "./pages/Request";
+import Document from "./pages/Document";
 
 const App = () => {
   dayjs.extend(relativeTime);
@@ -31,6 +32,7 @@ const App = () => {
         { path: config.PATHNAMES.TEST, element: <XEditor /> },
         { path: config.PATHNAMES.DOCUMENTVIEW, element: <DocumentView /> },
         { path: config.PATHNAMES.REQUEST, element: <Request /> },
+        { path: config.PATHNAMES.EDITDOCUMENT, element: <Document /> },
         isLoggedIn && { path: config.PATHNAMES.PROJECT, element: <Project /> },
       ],
     },
