@@ -10,6 +10,7 @@ const documentSchema = new mongoose.Schema(
     stars: { type: Number, default: 0 },
     collaborators: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     visibility: { type: String, default: "Public", enum: ["Public", "Private", "Shared"] },
+    changes: Number,
   },
   {
     timestamps: true,
