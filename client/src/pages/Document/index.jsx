@@ -19,6 +19,7 @@ import XDeleteAlert from "../../components/Alert/XDeleteAlert";
 import CollaboratorsSide from "./components/CollaboratorsSide";
 import ActiveMembers from "./components/ActiveMembers";
 import XEditor from "../../components/Custom/XEditor";
+import checkPlural from "../../utils/checkPlural";
 
 const Document = () => {
   const { id } = useParams();
@@ -85,10 +86,14 @@ const Document = () => {
                     </div>
 
                     <div className='flex gap-2'>
-                      <Button className='gap-2'>
-                        <div className='capitalize'>125 Changes</div>
-                        <History />
-                      </Button>
+                      {document.changes > 0 && (
+                        <Button className='gap-2'>
+                          <div className='capitalize'>
+                            {document.changes} {checkPlural(document.changes, "Change")}
+                          </div>
+                          <History />
+                        </Button>
+                      )}
                       {user._id === document.creator._id && (
                         <>
                           <XTooltip data='Delete' placement='top'>

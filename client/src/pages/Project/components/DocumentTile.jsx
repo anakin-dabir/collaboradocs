@@ -34,12 +34,14 @@ const DocumentTile = ({ document }) => {
                 {checkPlural(document.collaborators.length, "Collaborator")}
               </div>
             </div>
-            <div className='flex items-center gap-1'>
-              <History />
-              <div>
-                {document.stars} {checkPlural(document.stars, "Commit")}
+            {document.changes > 0 && (
+              <div className='flex items-center gap-1'>
+                <History />
+                <div>
+                  {document.changes} {checkPlural(document.changes, "Change")}
+                </div>
               </div>
-            </div>
+            )}
           </div>
           <div className='flex items-center gap-1 text-primary_main text-xs leading-3'>
             <div>
