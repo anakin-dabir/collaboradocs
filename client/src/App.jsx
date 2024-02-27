@@ -1,7 +1,6 @@
 import React from "react";
 import { Navigate, useLocation, useRoutes } from "react-router-dom";
 import { useSelector } from "react-redux";
-import XEditor from "./components/XEditor";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import Auth from "./pages/Auth";
@@ -29,7 +28,6 @@ const App = () => {
       element: <Stash />,
       children: [
         { path: config.PATHNAMES.HOME, element: <Home /> },
-        { path: config.PATHNAMES.TEST, element: <XEditor /> },
         { path: config.PATHNAMES.DOCUMENTVIEW, element: <DocumentView /> },
         { path: config.PATHNAMES.REQUEST, element: <Request /> },
         { path: config.PATHNAMES.EDITDOCUMENT, element: <Document /> },

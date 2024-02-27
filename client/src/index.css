@@ -182,26 +182,33 @@ select {
   outline: none;
 }
 
-.ProseMirror > h1 {
+.ProseMirror h1 {
   font-size: 1.25rem;
 }
-.ProseMirror > pre {
-  background-color: black;
+.ProseMirror pre {
+  background-color: rgba(0, 0, 0, 0.47);
+  margin: 20px;
   padding: 10px 20px;
 }
 
-.ProseMirror > blockquote {
+.ProseMirror blockquote {
   border-left: 5px solid #18ffff;
   margin: 20px;
   padding-left: 10px;
   font-style: italic;
 }
 
-.ProseMirror > img {
+.ProseMirror img {
   object-fit: contain;
   object-position: center;
+  margin: 20px;
 }
-.ProseMirror > ul {
+.ProseMirror ul {
   list-style: square;
   margin-left: 21px;
+}
+
+.ProseMirror a {
+  text-decoration: underline;
+  text-decoration-color: #f57c00;
 }

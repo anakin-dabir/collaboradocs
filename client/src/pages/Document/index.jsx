@@ -5,7 +5,7 @@ import XNavbar from "../../components/Custom/XNavbar";
 import XStack from "../../components/XStack";
 import BackButton from "../../components/Custom/BackButton";
 import XDivider from "../../components/Custom/XDivider";
-import { Avatar, Button, IconButton } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import XTooltip from "../../components/XTooltip";
 import XButton from "../../components/XButton";
 import { ReactComponent as Settings } from "@/assets/custom/settings.svg";
@@ -18,7 +18,7 @@ import NewDocDialog from "../../components/Custom/NewDocDialog";
 import XDeleteAlert from "../../components/Alert/XDeleteAlert";
 import CollaboratorsSide from "./components/CollaboratorsSide";
 import ActiveMembers from "./components/ActiveMembers";
-import XEditor from "../../components/XEditor";
+import XEditor from "../../components/Custom/XEditor";
 
 const Document = () => {
   const { id } = useParams();
@@ -110,7 +110,7 @@ const Document = () => {
                   </div>
 
                   <XDivider />
-                  <div className='w-full min-h-96 relative overflow-hidden'>
+                  <div className='w-full min-h-96 relative overflow-hidden px-4'>
                     <XEditor content={document.content} />
                   </div>
                 </div>
