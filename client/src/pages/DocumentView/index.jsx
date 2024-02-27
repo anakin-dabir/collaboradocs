@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import CollabSide from "./components/CollabSide";
 import DocAboutSide from "../../components/Custom/DocAboutSide";
+import XEditor from "../../components/XEditor";
 
 const DocumentView = () => {
   const { id } = useParams();
@@ -38,8 +39,10 @@ const DocumentView = () => {
                     </XButton>
                   </div>
                 </div>
-
                 <XDivider />
+                <div className='w-full min-h-96 relative overflow-hidden'>
+                  <XEditor editable={false} content={document.content} />
+                </div>
               </div>
             </XStack>
           </div>

@@ -11,13 +11,14 @@ import XButton from "../../components/XButton";
 import { ReactComponent as Settings } from "@/assets/custom/settings.svg";
 import { ReactComponent as History } from "@/assets/custom/history.svg";
 import { ReactComponent as Delete } from "@/assets/custom/delete.svg";
-import shortName from "../../utils/shortName";
-import XChip from "../../components/XChip";
 import DocAboutSide from "../../components/Custom/DocAboutSide";
 import { useDeleteDocumentMutation, useGetDocByIdQuery } from "../../services/nodeApi";
 import XLoading from "../../components/XLoading";
 import NewDocDialog from "../../components/Custom/NewDocDialog";
 import XDeleteAlert from "../../components/Alert/XDeleteAlert";
+import CollaboratorsSide from "./components/CollaboratorsSide";
+import ActiveMembers from "./components/ActiveMembers";
+import XEditor from "../../components/XEditor";
 
 const Document = () => {
   const { id } = useParams();
@@ -71,7 +72,7 @@ const Document = () => {
           <div className='overflow-y-auto relative h-full w-full flex gap-3'>
             <div className='h-full w-[75%]'>
               <XStack className='min-h-full w-full p-8 !bg-secondary_background/90 !drop-shadow-none flex flex-col gap-5'>
-                <div className='flex flex-col gap-3.5'>
+                <div className='flex flex-col gap-3.5 h-full w-full'>
                   <div className='flex items-center gap-2 justify-between'>
                     <div className='flex gap-4 items-center'>
                       <div className='flex items-center gap-1'>
@@ -109,31 +110,16 @@ const Document = () => {
                   </div>
 
                   <XDivider />
+                  <div className='w-full min-h-96 relative overflow-hidden'>
+                    <XEditor content={document.content} />
+                  </div>
                 </div>
               </XStack>
             </div>
             <div className='flex flex-col flex-1 mr-4 gap-3'>
               <DocAboutSide document={document} />
-              <XStack className='!bg-secondary_background/90 !drop-shadow-none h-fit p-5'>
-                <div className='h-full w-full flex flex-col gap-4'>
-                  <div className='flex flex-col gap-2'>
-                    <div className='flex items-center gap-2'>
-                      <div className='text-lg font-bold text-primary_main'>Collaborators </div>
-                      <XChip label={document.collaborators.length} className='!px-3 !py-1' />
-                    </div>
-                  </div>
-
-                  <div className='flex items-center gap-2 flex-wrap'>
-                    {document.collaborators.map((collaborator, index) => {
-                      return (
-                        <XTooltip key={index} placement='top' data={collaborator.name}>
-                          <Avatar src={collaborator?.img}>{shortName(collaborator.name)}</Avatar>
-                        </XTooltip>
-                      );
-                    })}
-                  </div>
-                </div>
-              </XStack>
+              <CollaboratorsSide document={document} />
+              <ActiveMembers document={document} />
             </div>
           </div>
         )}

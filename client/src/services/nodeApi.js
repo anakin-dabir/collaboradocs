@@ -294,6 +294,7 @@ const nodeApi = createApi({
           toast.error(error.error.data ? error.error.data.msg : config.ERROR);
         }
       },
+      invalidatesTags: ["Document"],
     }),
 
     editDocument: build.mutation({
@@ -312,6 +313,7 @@ const nodeApi = createApi({
           toast.error(error.error.data ? error.error.data.msg : config.ERROR);
         }
       },
+      invalidatesTags: ["Document"],
     }),
 
     deleteDocument: build.mutation({
@@ -330,6 +332,7 @@ const nodeApi = createApi({
           toast.error(error.error.data ? error.error.data.msg : config.ERROR);
         }
       },
+      invalidatesTags: ["Document"],
     }),
 
     getDocById: build.query({

@@ -172,3 +172,36 @@ select {
     transform: rotate(var(--r-to));
   }
 }
+
+.ProseMirror {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.ProseMirror-focused {
+  border: none;
+  outline: none;
+}
+
+.ProseMirror > h1 {
+  font-size: 1.25rem;
+}
+.ProseMirror > pre {
+  background-color: black;
+  padding: 10px 20px;
+}
+
+.ProseMirror > blockquote {
+  border-left: 5px solid #18ffff;
+  margin: 20px;
+  padding-left: 10px;
+  font-style: italic;
+}
+
+.ProseMirror > img {
+  object-fit: contain;
+  object-position: center;
+}
+.ProseMirror > ul {
+  list-style: square;
+  margin-left: 21px;
+}
