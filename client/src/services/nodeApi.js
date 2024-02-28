@@ -347,6 +347,25 @@ const nodeApi = createApi({
         } catch (error) {}
       },
     }),
+
+    createChange: build.mutation({
+      query: (body) => ({
+        method: "POST",
+        url: "/change/create",
+        body,
+      }),
+      invalidatesTags: ["Document"],
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const res = await queryFulfilled;
+          if (res) {
+            toast.success(res.data.msg);
+          }
+        } catch (error) {
+          toast.error(error.error.data ? error.error.data.msg : config.ERROR);
+        }
+      },
+    }),
   }),
 });
 
@@ -374,6 +393,7 @@ export const {
   useGetDocByIdQuery,
   useEditDocumentMutation,
   useDeleteDocumentMutation,
+  useCreateChangeMutation,
 } = nodeApi;
 
 export default nodeApi;

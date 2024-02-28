@@ -212,3 +212,15 @@ select {
   text-decoration: underline;
   text-decoration-color: #f57c00;
 }
+
+.diffdel {
+  background-color: red;
+}
+
+.diffmod {
+  background-color: #f57c00;
+}
+
+.diffins {
+  background-color: green;
+}

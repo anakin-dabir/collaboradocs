@@ -14,8 +14,10 @@ async function create(req, res) {
       user: userId,
       content,
     });
-    return res.status(200).json({ change, msg: "Successfully updated the document" });
-  } catch (error) {}
+    return res.status(200).json({ change, msg: "Successfully changed the document" });
+  } catch (error) {
+    return res.status(500).json({ msg: "Error in changing the document" });
+  }
 }
 
 async function get(req, res) {

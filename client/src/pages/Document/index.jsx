@@ -12,7 +12,11 @@ import { ReactComponent as Settings } from "@/assets/custom/settings.svg";
 import { ReactComponent as History } from "@/assets/custom/history.svg";
 import { ReactComponent as Delete } from "@/assets/custom/delete.svg";
 import DocAboutSide from "../../components/Custom/DocAboutSide";
-import { useDeleteDocumentMutation, useGetDocByIdQuery } from "../../services/nodeApi";
+import {
+  useCreateChangeMutation,
+  useDeleteDocumentMutation,
+  useGetDocByIdQuery,
+} from "../../services/nodeApi";
 import XLoading from "../../components/XLoading";
 import NewDocDialog from "../../components/Custom/NewDocDialog";
 import XDeleteAlert from "../../components/Alert/XDeleteAlert";
@@ -22,17 +26,21 @@ import XEditor from "../../components/Custom/XEditor";
 import checkPlural from "../../utils/checkPlural";
 
 const Document = () => {
+  const [createChange, { isLoading: isChangeLoading }] = useCreateChangeMutation();
   const { id } = useParams();
   const naviagte = useNavigate();
   const user = useSelector((state) => state.user.user);
   const documents = useSelector((state) => state.project.document);
   const presentDocument = documents.find((doc) => doc._id === id);
+  const [isSame, isSameSet] = useState(true);
+  const [data, dataSet] = useState("");
+
   useEffect(() => {
     if (!presentDocument) naviagte("*");
   }, []);
   if (!presentDocument) return null;
 
-  const { isLoading, refetch } = useGetDocByIdQuery({ docId: id }, { skip: !presentDocument });
+  const { data: queryData, isLoading, refetch } = useGetDocByIdQuery({ docId: id });
   useEffect(() => {
     refetch();
   }, [id]);
@@ -45,6 +53,19 @@ const Document = () => {
     try {
       const res = await deleteDocument({ docId: document._id });
       if (res) naviagte(-1);
+    } catch (error) {}
+  }
+
+  async function handleCreateChange() {
+    try {
+      const res = await createChange({
+        docId: document._id,
+        content: data,
+        userId: user._id,
+      });
+      if (res) {
+        refetch();
+      }
     } catch (error) {}
   }
   return (
@@ -116,12 +137,32 @@ const Document = () => {
 
                   <XDivider />
                   <div className='w-full min-h-96 relative overflow-hidden px-4'>
-                    <XEditor content={document.content} />
+                    {!isLoading && (
+                      <XEditor
+                        content={queryData.document.content}
+                        dataSet={dataSet}
+                        isSameSet={isSameSet}
+                      />
+                    )}
                   </div>
                 </div>
               </XStack>
             </div>
             <div className='flex flex-col flex-1 mr-4 gap-3'>
+              {document.creator._id === user._id ? (
+                <XButton
+                  color='primary'
+                  onClick={handleCreateChange}
+                  disabled={isSame}
+                  loading={isChangeLoading}
+                >
+                  Save Document Changes
+                </XButton>
+              ) : (
+                <XButton color='primary' disabled={isSame}>
+                  Ask admin to change
+                </XButton>
+              )}
               <DocAboutSide document={document} />
               <CollaboratorsSide document={document} />
               <ActiveMembers document={document} />
