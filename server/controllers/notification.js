@@ -2,7 +2,10 @@ import Notification from "../models/notification.js";
 
 async function getAll(req, res) {
   try {
-    const notification = await Notification.find({user: req.user._id}, "msg link createdAt");
+    const notification = await Notification.find(
+      {user: req.user._id},
+      "msg link createdAt read"
+    ).sort({createdAt: -1});
     return res.status(200).json({notification, msg: "Success"});
   } catch (error) {}
 }

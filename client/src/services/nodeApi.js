@@ -484,6 +484,8 @@ export const {
   useGetNotificationQuery,
   useDeleteNotificationMutation,
   useReadNotificationMutation,
+  useLazyGetNotificationQuery,
+  useLazyGetDocumentByIdQuery
 } = nodeApi;
 
 export default nodeApi;

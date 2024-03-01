@@ -9,6 +9,7 @@ import {clearUser} from "../../store/slice/authSlice";
 import config from "../../config/config";
 import shortName from "../../utils/shortName";
 import UserSettingDialog from "./UserSettingDialog";
+import {clearSocket} from "../../store/slice/socketSlice";
 
 const XAvatar = ({tooltipPlacement = "left", className}) => {
   const navigate = useNavigate();
@@ -70,6 +71,7 @@ const XAvatar = ({tooltipPlacement = "left", className}) => {
             <MenuItem
               onClick={() => {
                 dispatch(clearUser());
+                dispatch(clearSocket());
                 navigate("/");
                 handleClose();
               }}

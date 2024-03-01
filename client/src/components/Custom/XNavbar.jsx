@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Xlogo from "./XLogo";
 import XAvatar from "./XAvatar";
 import XStack from "../XStack";
-import {useGetNotificationQuery} from "../../services/nodeApi";
+import {useGetNotificationQuery, useLazyGetNotificationQuery} from "../../services/nodeApi";
 import {useSelector} from "react-redux";
 import {ReactComponent as Notification} from "@/assets/custom/notification.svg";
 import XTooltip from "../XTooltip";
@@ -12,13 +12,20 @@ import XSocket from "../XSocket";
 
 const XNavbar = ({disableBorder = false}) => {
   const isLogged = useSelector(state => state.user.isLogged);
-  const {isLoading, data} = useGetNotificationQuery({}, {skip: !isLogged});
+  const {isLoading} = useGetNotificationQuery({}, {skip: !isLogged});
+  const [fetchNotification] = useLazyGetNotificationQuery();
   const notification = useSelector(state => state.user.notification);
   const notificationLength = notification.length ? notification.filter(not => !not.read) : [];
+  const socket = useSelector(state => state.socket.socket);
+  useEffect(() => {
+    socket.on("event:documentAdded", () => {
+      fetchNotification();
+    });
+  }, [socket]);
   const navigate = useNavigate();
   return (
     <>
-      <XSocket />
+      {isLogged && <XSocket />}
       <XStack
         disableBorder={disableBorder}
         className={`!fixed !drop-shadow-none ${

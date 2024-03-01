@@ -23,7 +23,6 @@ const authSlice = createSlice({
       state.notification = action.payload;
     },
     setReadNotification: (state, action) => {
-      console.log(action);
       return {
         ...state,
         notification: state.notification.map(notification => {

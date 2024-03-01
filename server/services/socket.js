@@ -1,4 +1,5 @@
 import {Server} from "socket.io";
+import Project from "../models/project.js";
 
 class SocketService {
   io;
@@ -31,11 +32,26 @@ class SocketService {
       Socket.on("event:removeUser", userId => {
         console.log("user removed", Socket.id);
         this.removeUser(userId);
+        Socket.on("event:removeUser", userId => {
+          console.log("user removed", Socket.id);
+          this.removeUser(userId);
+          io.emit("event:getUser", this.users);
+        });
         io.emit("event:getUser", this.users);
       });
 
-      Socket.on("event:message", async message => {
-        console.log("New Message Rec.", message);
+      Socket.on("event:addDocument", async data => {
+        try {
+          const project = await Project.findById(data.projectId, "members creator");
+          this.users
+            .filter(user =>
+              project.members.some(
+                member =>
+                  member.toString() === user.userId.toString() && !member.equals(project.creator)
+              )
+            )
+            .forEach(user => io.to(user.socketId).emit("event:documentAdded"));
+        } catch (error) {}
       });
 
       Socket.on("disconnect", () => {
