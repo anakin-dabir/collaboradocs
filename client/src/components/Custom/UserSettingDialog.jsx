@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {ReactComponent as Edit} from '@/assets/custom/edit.svg';
 import {ReactComponent as CloseIcon} from '@/assets/close.svg';
 import {IconButton, alpha} from '@mui/material';
