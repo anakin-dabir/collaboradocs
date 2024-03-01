@@ -1,17 +1,18 @@
 import React from "react";
-import { Color } from "@tiptap/extension-color";
+import {Color} from "@tiptap/extension-color";
 import ListItem from "@tiptap/extension-list-item";
 import Image from "@tiptap/extension-image";
 import TextStyle from "@tiptap/extension-text-style";
-import { EditorContent, useEditor } from "@tiptap/react";
+import {EditorContent, useEditor} from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
 import Underline from "@tiptap/extension-underline";
 import Highlight from "@tiptap/extension-highlight";
 import EditorToolbar from "./EditorToolbar";
-import { isEqual } from "html-differ";
+import {isEqual} from "html-differ";
+import Placeholder from "@tiptap/extension-placeholder";
 
-const XEditor = ({ editable = true, content, dataSet, isSameSet }) => {
+const XEditor = ({editable = true, content, dataSet, isSameSet}) => {
   const editor = useEditor({
     editable: editable,
     extensions: [
@@ -25,8 +26,8 @@ const XEditor = ({ editable = true, content, dataSet, isSameSet }) => {
         openOnClick: true,
         autolink: true,
       }),
-      Color.configure({ types: [TextStyle.name, ListItem.name] }),
-      TextStyle.configure({ types: [ListItem.name] }),
+      Color.configure({types: [TextStyle.name, ListItem.name]}),
+      TextStyle.configure({types: [ListItem.name]}),
       Image,
       StarterKit.configure({
         bulletList: {
@@ -38,6 +39,10 @@ const XEditor = ({ editable = true, content, dataSet, isSameSet }) => {
           keepAttributes: false,
         },
       }),
+      Placeholder.configure({
+        placeholder:
+          "Write something … It’ll be shared with everyone else looking at this example.",
+      }),
     ],
     content: content,
   });
@@ -46,7 +51,7 @@ const XEditor = ({ editable = true, content, dataSet, isSameSet }) => {
     const options = {
       ignoreWhitespaces: true,
     };
-    let isSame = isEqual(content, editor.getHTML(), { options });
+    let isSame = isEqual(content, editor.getHTML(), {options});
     if (isSame || editor?.getText() === "") {
       setTimeout(() => isSameSet(true), 0);
     } else {
@@ -64,7 +69,7 @@ const XEditor = ({ editable = true, content, dataSet, isSameSet }) => {
   return (
     <>
       {editable && <EditorToolbar editor={editor} />}
-      {editable && <div className='mt-11' />}
+      {editable && <div className="mt-11" />}
       <EditorContent editor={editor} />
     </>
   );

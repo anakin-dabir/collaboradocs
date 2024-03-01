@@ -225,3 +225,6 @@ select {
   background-color: #029500;
   text-decoration: none;
 }
+.is-empty {
+  color: #18ffff;
+}
