@@ -8,12 +8,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { clearUser } from "../../store/slice/authSlice";
 import config from "../../config/config";
 import shortName from "../../utils/shortName";
+import UserSettingDialog from "./UserSettingDialog";
 
 const XAvatar = ({ tooltipPlacement = "left", className }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  const [isOpen, isOpenSet] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -30,6 +32,7 @@ const XAvatar = ({ tooltipPlacement = "left", className }) => {
 
   return (
     <>
+      <UserSettingDialog isOpen={isOpen} isOpenSet={isOpenSet} />
       <XTooltip data={user ? user.email : "Login / Register"} placement={tooltipPlacement}>
         <Avatar
           onClick={handleClick}
@@ -49,7 +52,14 @@ const XAvatar = ({ tooltipPlacement = "left", className }) => {
           onClick={handleClose}
         >
           <XStack className='py-4 w-44'>
-            <MenuItem onClick={handleClose}>Settings</MenuItem>
+            <MenuItem
+              onClick={() => {
+                isOpenSet(true);
+                handleClose();
+              }}
+            >
+              Settings
+            </MenuItem>
             <MenuItem
               onClick={() => {
                 dispatch(clearUser());

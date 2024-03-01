@@ -14,7 +14,7 @@ const Stash = () => {
   const isLogged = useSelector((state) => state.user.user);
   const { isLoading } = useGetAllDocumentsQuery();
   const { isLoading: isProjectsLoading } = useGetAllProjectsQuery({}, { skip: !isLogged });
-  const { isLoading: isRequestLoading } = useGetRequestGoingToAdminQuery();
+  const { isLoading: isRequestLoading } = useGetRequestGoingToAdminQuery({}, { skip: !isLogged });
   return isProjectsLoading || isLoading || isRequestLoading ? (
     <>
       <XNavbar />

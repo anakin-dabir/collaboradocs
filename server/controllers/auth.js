@@ -90,10 +90,14 @@ async function remove(req, res) {
 }
 
 async function updateName(req, res) {
-  const { name } = req.body;
+  const { name, img } = req.body;
   try {
-    await User.findOneAndUpdate({ _id: req.user._id }, { name });
-    return res.status(200).json({ msg: "Name updated successfully" });
+    const user = await User.findOneAndUpdate(
+      { _id: req.user._id },
+      { name, img: img },
+      { new: true, projection: { name: 1, img: 1, email: 1 } }
+    );
+    return res.status(200).json({ user, msg: "Name updated successfully" });
   } catch (error) {}
 }
 

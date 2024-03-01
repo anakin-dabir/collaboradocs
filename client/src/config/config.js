@@ -14,6 +14,8 @@ const config = {
     PROJECT: "/project/:id",
     REQUEST: "/request",
     EDITDOCUMENT: "/edit-doc/:id",
+    CHANGE: "/get-changes/:id",
+    NOTIFICATION: "/notifications",
   },
 };
 

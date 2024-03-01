@@ -214,13 +214,14 @@ select {
 }
 
 .diffdel {
-  background-color: red;
+  background-color: #c10028;
 }
 
 .diffmod {
-  background-color: #f57c00;
+  background-color: #a05000;
 }
 
 .diffins {
-  background-color: green;
+  background-color: #029500;
+  text-decoration: none;
 }

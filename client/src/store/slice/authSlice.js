@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 const initialState = {
   isLogged: false,
   user: null,
+  notification: [],
 };
 
 const authSlice = createSlice({
@@ -18,9 +19,12 @@ const authSlice = createSlice({
       Cookies.remove("jwt_token");
       return initialState;
     },
+    setNotification: (state, action) => {
+      state.notification = action.payload;
+    },
   },
 });
 
-export const { setUser, clearUser } = authSlice.actions;
+export const { setUser, clearUser, setNotification } = authSlice.actions;
 
 export default authSlice.reducer;

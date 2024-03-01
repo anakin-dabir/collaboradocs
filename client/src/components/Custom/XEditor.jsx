@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React from "react";
 import { Color } from "@tiptap/extension-color";
 import ListItem from "@tiptap/extension-list-item";
 import Image from "@tiptap/extension-image";
@@ -9,7 +9,7 @@ import Link from "@tiptap/extension-link";
 import Underline from "@tiptap/extension-underline";
 import Highlight from "@tiptap/extension-highlight";
 import EditorToolbar from "./EditorToolbar";
-import HtmlDiffer from "html-differ";
+import { isEqual } from "html-differ";
 
 const XEditor = ({ editable = true, content, dataSet, isSameSet }) => {
   const editor = useEditor({
@@ -46,7 +46,7 @@ const XEditor = ({ editable = true, content, dataSet, isSameSet }) => {
     const options = {
       ignoreWhitespaces: true,
     };
-    let isSame = HtmlDiffer.isEqual(content, editor.getHTML(), { options });
+    let isSame = isEqual(content, editor.getHTML(), { options });
     if (isSame || editor?.getText() === "") {
       setTimeout(() => isSameSet(true), 0);
     } else {

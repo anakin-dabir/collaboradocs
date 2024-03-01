@@ -1,5 +1,7 @@
 import Document from "../models/document.js";
 import Project from "../models/project.js";
+import Change from "../models/changes.js";
+import Notification from "../models/notification.js";
 
 async function create(req, res) {
   const { projectId, title, desc, visibility } = req.body;
@@ -15,6 +17,18 @@ async function create(req, res) {
     const project = await Project.findById(projectId);
     project.documents.push(document._id);
     await project.save();
+    for (const member of project.members) {
+      if (
+        (!member.equals(project.creator) && document.visibility === "Public") ||
+        document.visibility === "Shared"
+      ) {
+        await Notification.create({
+          user: member,
+          msg: `Admin created a new doc ${document.title} in project ${project.name}`,
+          link: `/project/${project._id}`,
+        });
+      }
+    }
     await document.save();
     return res.status(200).json({ document, msg: "Created successfully" });
   } catch (err) {
@@ -56,18 +70,21 @@ async function getAll(req, res) {
 async function getByProjectId(req, res) {
   const projectId = req.params.projectId;
   try {
-    const document = await Document.find({
-      project: projectId,
-      $or: [
-        {
-          creator: req.user._id,
-          $or: [{ visibility: "Private" }, { visibility: "Public" }, { visibility: "Shared" }],
-        },
-        {
-          $or: [{ visibility: "Public" }, { visibility: "Shared" }],
-        },
-      ],
-    }).sort({ createdAt: -1 });
+    const document = await Document.find(
+      {
+        project: projectId,
+        $or: [
+          {
+            creator: req.user._id,
+            $or: [{ visibility: "Private" }, { visibility: "Public" }, { visibility: "Shared" }],
+          },
+          {
+            $or: [{ visibility: "Public" }, { visibility: "Shared" }],
+          },
+        ],
+      },
+      "title desc creator project stars collaborators visibility changes createdAt updatedAt"
+    ).sort({ createdAt: -1 });
     return res.status(200).json({ document, msg: "Success" });
   } catch (error) {}
 }
@@ -83,6 +100,7 @@ async function deleteDocument(req, res) {
     } else {
       await Document.findByIdAndDelete(docId);
     }
+    await Change.deleteMany({ document: docId });
     return res.status(200).json({ msg: "Document deleted successfully" });
   } catch (error) {
     return res.status(500).json({ msg: "Document deletion failed" });

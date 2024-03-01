@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   document: [],
-  commit: [],
+  change: [],
 };
 
 const docSlice = createSlice({
@@ -12,9 +12,12 @@ const docSlice = createSlice({
     setDoc: (state, action) => {
       state.document = action.payload;
     },
+    setChange: (state, action) => {
+      state.change = action.payload;
+    },
   },
 });
 
-export const { setDoc } = docSlice.actions;
+export const { setDoc, setChange } = docSlice.actions;
 
 export default docSlice.reducer;

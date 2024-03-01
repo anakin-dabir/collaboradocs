@@ -17,6 +17,8 @@ import Project from "./pages/Project";
 import Stash from "./components/Custom/Stash";
 import Request from "./pages/Request";
 import Document from "./pages/Document";
+import Changes from "./pages/Changes";
+import Notification from "./pages/Notification";
 
 const App = () => {
   dayjs.extend(relativeTime);
@@ -29,9 +31,11 @@ const App = () => {
       children: [
         { path: config.PATHNAMES.HOME, element: <Home /> },
         { path: config.PATHNAMES.DOCUMENTVIEW, element: <DocumentView /> },
-        { path: config.PATHNAMES.REQUEST, element: <Request /> },
-        { path: config.PATHNAMES.EDITDOCUMENT, element: <Document /> },
+        isLoggedIn && { path: config.PATHNAMES.REQUEST, element: <Request /> },
+        isLoggedIn && { path: config.PATHNAMES.EDITDOCUMENT, element: <Document /> },
+        isLoggedIn && { path: config.PATHNAMES.CHANGE, element: <Changes /> },
         isLoggedIn && { path: config.PATHNAMES.PROJECT, element: <Project /> },
+        isLoggedIn && { path: config.PATHNAMES.NOTIFICATION, element: <Notification /> },
       ],
     },
     !isLoggedIn && {

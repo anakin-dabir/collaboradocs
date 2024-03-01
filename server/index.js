@@ -9,6 +9,7 @@ import document from "./routes/document.js";
 import project from "./routes/project.js";
 import request from "./routes/request.js";
 import changes from "./routes/changes.js";
+import notification from "./routes/notification.js";
 
 async function init() {
   // const socket = new SocketService();
@@ -24,6 +25,7 @@ async function init() {
   app.use("/project", project);
   app.use("/request", request);
   app.use("/change", changes);
+  app.use("/notification", notification);
   connectDb(process.env.MONGO || config.MONGO || "mongodb://127.0.0.1:27017/Collaboradocs");
   httpServer.listen(process.env.PORT || 80, () =>
     console.log("Server running on port", process.env.PORT)

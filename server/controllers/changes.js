@@ -23,8 +23,21 @@ async function create(req, res) {
 async function get(req, res) {
   const docId = req.params.docId;
   try {
-    const change = await Change.find({ document: docId }).sort({ createdAt: -1 });
+    const change = await Change.find({ document: docId })
+      .sort({ createdAt: -1 })
+      .populate("user", "img name");
     return res.status(200).json({ change, msg: "Success" });
   } catch (error) {}
 }
-export { create, get };
+
+async function revert(req, res) {
+  const { docId, content } = req.body;
+  console.log(docId, content);
+  try {
+    await Document.findByIdAndUpdate(docId, { content });
+    return res.status(200).json({ msg: "Doc reverted to this version" });
+  } catch (error) {
+    res.status(500).json({ msg: "Error in changing version" });
+  }
+}
+export { create, get, revert };

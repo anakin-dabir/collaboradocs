@@ -108,7 +108,10 @@ const Document = () => {
 
                     <div className='flex gap-2'>
                       {document.changes > 0 && (
-                        <Button className='gap-2'>
+                        <Button
+                          className='gap-2'
+                          onClick={() => naviagte(`/get-changes/${document._id}`)}
+                        >
                           <div className='capitalize'>
                             {document.changes} {checkPlural(document.changes, "Change")}
                           </div>
@@ -149,20 +152,15 @@ const Document = () => {
               </XStack>
             </div>
             <div className='flex flex-col flex-1 mr-4 gap-3'>
-              {document.creator._id === user._id ? (
-                <XButton
-                  color='primary'
-                  onClick={handleCreateChange}
-                  disabled={isSame}
-                  loading={isChangeLoading}
-                >
-                  Save Document Changes
-                </XButton>
-              ) : (
-                <XButton color='primary' disabled={isSame}>
-                  Ask admin to change
-                </XButton>
-              )}
+              <XButton
+                color='primary'
+                onClick={handleCreateChange}
+                disabled={isSame}
+                loading={isChangeLoading}
+              >
+                Save Document Changes
+              </XButton>
+
               <DocAboutSide document={document} />
               <CollaboratorsSide document={document} />
               <ActiveMembers document={document} />
