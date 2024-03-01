@@ -54,6 +54,21 @@ class SocketService {
         } catch (error) {}
       });
 
+      Socket.on("event:goingToAdmin", async data => {
+        const targetUser = this.users.find(user => data.userId === user.userId);
+        if (targetUser) {
+          io.to(targetUser.socketId).emit("response:goingToAdmin");
+        }
+      });
+
+      Socket.on("event:GoingFromAdmin", async data => {
+        this.users.forEach(user => {
+          if (data.userIdArray.includes(user.userId)) {
+            io.to(user.socketId).emit("response:GoingFromAdmin");
+          }
+        });
+      });
+
       Socket.on("disconnect", () => {
         console.log("Socket disconnected");
         this.removeUser(Socket.id);

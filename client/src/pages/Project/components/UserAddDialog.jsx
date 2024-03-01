@@ -1,31 +1,32 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import XAlertBase from "../../../components/Alert/XAlertBase";
-import { ReactComponent as Edit } from "@/assets/custom/edit.svg";
-import { ReactComponent as CloseIcon } from "@/assets/close.svg";
-import { Avatar, IconButton, MenuItem, alpha } from "@mui/material";
+import {ReactComponent as Edit} from "@/assets/custom/edit.svg";
+import {ReactComponent as CloseIcon} from "@/assets/close.svg";
+import {Avatar, IconButton, MenuItem, alpha} from "@mui/material";
 import XTooltip from "../../../components/XTooltip";
 import XDivider from "../../../components/Custom/XDivider";
 import XTextfield from "../../../components/XTextfield";
 import theme from "../../../themes";
 import XButton from "../../../components/XButton";
 import useValidation from "../../../formik/useValidation";
-import { nameValidationSchema } from "../../../formik/validationSchema";
-import { useCreateRequestMutation, useSearchUserMutation } from "../../../services/nodeApi";
+import {nameValidationSchema} from "../../../formik/validationSchema";
+import {useCreateRequestMutation, useSearchUserMutation} from "../../../services/nodeApi";
 import shortName from "../../../utils/shortName";
-import { useSelector } from "react-redux";
+import {useSelector} from "react-redux";
 
-const UserAddDialog = ({ isOpen, isOpenSet, project }) => {
-  const [searchUser, { isLoading }] = useSearchUserMutation();
-  const [createRequest, { isLoading: isRequestLoading }] = useCreateRequestMutation();
-  const user = useSelector((state) => state.user.user);
+const UserAddDialog = ({isOpen, isOpenSet, project}) => {
+  const [searchUser, {isLoading}] = useSearchUserMutation();
+  const [createRequest, {isLoading: isRequestLoading}] = useCreateRequestMutation();
+  const user = useSelector(state => state.user.user);
   const [userFound, userFoundSet] = useState([user]);
   const [selectedUser, selectedUserSet] = useState([]);
   const [step, stepSet] = useState(1);
+  const socket = useSelector(state => state.socket.socket);
 
-  const handleClick = (userId) => {
-    selectedUserSet((prev) => {
+  const handleClick = userId => {
+    selectedUserSet(prev => {
       if (prev.includes(userId)) {
-        return prev.filter((id) => id !== userId);
+        return prev.filter(id => id !== userId);
       } else {
         return [...prev, userId];
       }
@@ -35,8 +36,8 @@ const UserAddDialog = ({ isOpen, isOpenSet, project }) => {
     try {
       const response = await searchUser(values);
       if (response) {
-        const newFilteredData = response.data.user.filter((foundedUser) => {
-          return !project.members.some((member) => member._id === foundedUser._id);
+        const newFilteredData = response.data.user.filter(foundedUser => {
+          return !project.members.some(member => member._id === foundedUser._id);
         });
         userFoundSet(newFilteredData);
         if (newFilteredData.length > 0) {
@@ -54,11 +55,12 @@ const UserAddDialog = ({ isOpen, isOpenSet, project }) => {
         type: "GoingFromAdmin",
       });
       if (res) {
+        socket.emit("event:GoingFromAdmin", {userIdArray: selectedUser});
         handleClose();
       }
     } catch (error) {}
   }
-  const initialValues = { name: "" };
+  const initialValues = {name: ""};
   const formik = useValidation({
     initialValues,
     validationSchema: nameValidationSchema,
@@ -74,13 +76,13 @@ const UserAddDialog = ({ isOpen, isOpenSet, project }) => {
   };
   return (
     <XAlertBase isOpen={isOpen} onClose={handleClose}>
-      <div className='px-10 py-8 flex flex-col gap-4'>
-        <div className='flex justify-between items-center'>
-          <div className='flex gap-2 items-center'>
-            <Edit className='size-7' />
-            <div className='text-xl leading-3 font-bold text-primary_main'>Add User</div>
+      <div className="px-10 py-8 flex flex-col gap-4">
+        <div className="flex justify-between items-center">
+          <div className="flex gap-2 items-center">
+            <Edit className="size-7" />
+            <div className="text-xl leading-3 font-bold text-primary_main">Add User</div>
           </div>
-          <XTooltip data='Close' placement='top'>
+          <XTooltip data="Close" placement="top">
             <IconButton onClick={handleClose}>
               <CloseIcon />
             </IconButton>
@@ -88,18 +90,18 @@ const UserAddDialog = ({ isOpen, isOpenSet, project }) => {
         </div>
         <XDivider />
         {step === 1 && (
-          <div className='flex flex-col'>
-            <div className='text text-sm'>Search for the user to request</div>
-            <div className='flex items-center gap-4'>
+          <div className="flex flex-col">
+            <div className="text text-sm">Search for the user to request</div>
+            <div className="flex items-center gap-4">
               <XTextfield
-                name='name'
+                name="name"
                 autoFocus
                 value={formik.values.name}
                 onChange={formik.handleChange}
                 error={formik.touched.name && !!formik.errors.name}
                 helperText={formik.touched.name && !!formik.errors.name && "Name is mandatory"}
-                label='Enter Name'
-                parentClassName='mt-8'
+                label="Enter Name"
+                parentClassName="mt-8"
                 sx={{
                   "& .MuiInputBase-root": {
                     backgroundColor: `${alpha(theme.palette.common.black, 0.4)} !important`,
@@ -107,7 +109,7 @@ const UserAddDialog = ({ isOpen, isOpenSet, project }) => {
                 }}
               />
               <XButton
-                color='primary'
+                color="primary"
                 loading={isLoading}
                 className={`${formik.touched.name && !!formik.errors.name ? "mt-2" : "mt-7"}`}
                 onClick={formik.handleSubmit}
@@ -116,13 +118,13 @@ const UserAddDialog = ({ isOpen, isOpenSet, project }) => {
               </XButton>
             </div>
             {userFound.length === 0 ? (
-              <div className='text-sm mt-2 text-error_main'>No user found</div>
+              <div className="text-sm mt-2 text-error_main">No user found</div>
             ) : null}
           </div>
         )}
 
         {step === 2 && (
-          <div className='min-h-40 max-h-52 overflow-y-auto gap-4 flex flex-col px-5 py-3'>
+          <div className="min-h-40 max-h-52 overflow-y-auto gap-4 flex flex-col px-5 py-3">
             {userFound.length ? (
               userFound.map((user, index) => {
                 return (
@@ -137,9 +139,9 @@ const UserAddDialog = ({ isOpen, isOpenSet, project }) => {
                     }}
                   >
                     <Avatar src={user?.img}>{shortName(user.name)}</Avatar>
-                    <div className='flex flex-col'>
-                      <div className='text-sm font-bold text-primary_main'>{user.name}</div>
-                      <div className='text-xs'>{user.email}</div>
+                    <div className="flex flex-col">
+                      <div className="text-sm font-bold text-primary_main">{user.name}</div>
+                      <div className="text-xs">{user.email}</div>
                     </div>
                   </div>
                 );
@@ -151,10 +153,10 @@ const UserAddDialog = ({ isOpen, isOpenSet, project }) => {
         )}
 
         <div className={`flex flex-col gap-5 ${step === 2 ? "mt-3" : "mt-10"}`}>
-          <hr className='border-t border-t-primary_main' />
-          <div className='flex gap-4 justify-end'>
+          <hr className="border-t border-t-primary_main" />
+          <div className="flex gap-4 justify-end">
             <XButton
-              color='error'
+              color="error"
               onClick={() => {
                 step === 2 ? stepSet(1) : handleClose();
               }}

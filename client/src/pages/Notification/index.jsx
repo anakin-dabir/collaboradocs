@@ -52,15 +52,25 @@ const Notification = () => {
                           className="flex flex-row items-center justify-between !drop-shadow-none !bg-secondary_background/90 p-5"
                         >
                           <div
-                            className="flex items-center gap-3 cursor-pointer"
+                            className={`flex items-center w-full gap-3 cursor ${
+                              !notification.read && "cursor-pointer"
+                            } `}
                             onClick={() => {
+                              if (notification.read) {
+                                return;
+                              }
                               navigate(notification.link);
                               readNotification({notificationId: notification._id});
                             }}
                           >
-                            <div className="flex flex-col">
+                            <div className="flex flex-col w-full">
                               <div className="text-base text-primary_main">{notification.msg}</div>
-                              <div className="text-sm">{getDate(notification.createdAt)}</div>
+                              <div className="flex justify-between">
+                                <div className="text-sm">{getDate(notification.createdAt)}</div>
+                                <div className="text-sm text-success_light">
+                                  {notification.read && "Viewed"}
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </XStack>

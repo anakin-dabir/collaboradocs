@@ -52,7 +52,7 @@ async function create(req, res) {
         msg: `${
           type === "GoingToAdmin" ? "Someone is requesting" : "You are being requested"
         } to join the project`,
-        link: `/request`,
+        link: type === "GoingToAdmin" ? `/project/${projectId}` : `/request`,
       }));
       await Request.insertMany(newRequests);
       await Notification.insertMany(newNotifications);

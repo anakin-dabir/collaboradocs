@@ -18,9 +18,19 @@ const XNavbar = ({disableBorder = false}) => {
   const notificationLength = notification.length ? notification.filter(not => !not.read) : [];
   const socket = useSelector(state => state.socket.socket);
   useEffect(() => {
-    socket.on("event:documentAdded", () => {
-      fetchNotification();
-    });
+    const eventHandlers = [
+      "event:documentAdded",
+      "response:goingToAdmin",
+      "response:GoingFromAdmin",
+    ];
+
+    const handleEvents = () => {
+      eventHandlers.forEach(event => socket.on(event, fetchNotification));
+    };
+    handleEvents();
+    return () => {
+      eventHandlers.forEach(event => socket.off(event, fetchNotification));
+    };
   }, [socket]);
   const navigate = useNavigate();
   return (
