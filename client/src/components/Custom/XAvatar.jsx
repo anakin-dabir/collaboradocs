@@ -1,24 +1,24 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import XTooltip from "../XTooltip";
-import { Avatar, Menu, MenuItem } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import {Avatar, Menu, MenuItem} from "@mui/material";
+import {useDispatch, useSelector} from "react-redux";
 import clsx from "clsx";
 import XStack from "../XStack";
-import { useLocation, useNavigate } from "react-router-dom";
-import { clearUser } from "../../store/slice/authSlice";
+import {useLocation, useNavigate} from "react-router-dom";
+import {clearUser} from "../../store/slice/authSlice";
 import config from "../../config/config";
 import shortName from "../../utils/shortName";
 import UserSettingDialog from "./UserSettingDialog";
 
-const XAvatar = ({ tooltipPlacement = "left", className }) => {
+const XAvatar = ({tooltipPlacement = "left", className}) => {
   const navigate = useNavigate();
-  const { pathname } = useLocation();
+  const {pathname} = useLocation();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector(state => state.user.user);
   const [isOpen, isOpenSet] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
+  const handleClick = event => {
     if (pathname === config.PATHNAMES.LOGIN || pathname === config.PATHNAMES.REGISTER) return;
     if (!user) {
       navigate(config.PATHNAMES.LOGIN);
@@ -46,12 +46,12 @@ const XAvatar = ({ tooltipPlacement = "left", className }) => {
       {user && (
         <Menu
           anchorEl={anchorEl}
-          id='account-menu'
+          id="account-menu"
           open={open}
           onClose={handleClose}
           onClick={handleClose}
         >
-          <XStack className='py-4 w-44'>
+          <XStack className="py-4 w-44">
             <MenuItem
               onClick={() => {
                 isOpenSet(true);
@@ -59,6 +59,13 @@ const XAvatar = ({ tooltipPlacement = "left", className }) => {
               }}
             >
               Settings
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                navigate("/request");
+              }}
+            >
+              Requests
             </MenuItem>
             <MenuItem
               onClick={() => {

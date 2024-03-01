@@ -1,28 +1,28 @@
-import Request from '../models/request.js';
-import Project from '../models/project.js';
-import Notification from '../models/notification.js';
+import Request from "../models/request.js";
+import Project from "../models/project.js";
+import Notification from "../models/notification.js";
 
 async function goingToAdmin(req, res) {
   try {
     const request = await Request.find({
-      type: 'GoingToAdmin',
+      type: "GoingToAdmin",
       to: req.user._id,
     })
-      .populate('project', 'name')
-      .populate('from', 'name img');
-    return res.status(200).json({request, msg: 'Success'});
+      .populate("project", "name")
+      .populate("from", "name img");
+    return res.status(200).json({request, msg: "Success"});
   } catch (error) {}
 }
 
 async function goingFromAdmin(req, res) {
   try {
     const request = await Request.find({
-      type: 'GoingFromAdmin',
+      type: "GoingFromAdmin",
       to: req.user._id,
     })
-      .populate('project', 'name')
-      .populate('from', 'name img');
-    return res.status(200).json({request, msg: 'Success'});
+      .populate("project", "name")
+      .populate("from", "name img");
+    return res.status(200).json({request, msg: "Success"});
   } catch (error) {}
 }
 
@@ -48,9 +48,9 @@ async function create(req, res) {
         type,
       }));
       const newNotifications = userIdsToRequest.map(id => ({
-        user: [id],
+        user: id,
         msg: `${
-          type === 'GoingToAdmin' ? 'Someone is requesting' : 'You are being requested'
+          type === "GoingToAdmin" ? "Someone is requesting" : "You are being requested"
         } to join the project`,
         link: `/request`,
       }));
@@ -60,7 +60,7 @@ async function create(req, res) {
     return res.status(200).json({msg: `Request has been sent`});
   } catch (error) {
     console.log(error);
-    res.status(500).json({error: 'Internal server error'});
+    res.status(500).json({error: "Internal server error"});
   }
 }
 
@@ -71,7 +71,7 @@ async function accept(req, res) {
     project.members.push(userId);
     await project.save();
     await Request.deleteOne({_id: reqId});
-    return res.status(200).json({msg: 'Request accepted'});
+    return res.status(200).json({msg: "Request accepted"});
   } catch (error) {}
 }
 
@@ -79,7 +79,7 @@ async function reject(req, res) {
   const {reqId} = req.body;
   try {
     await Request.deleteOne({_id: reqId});
-    return res.status(200).json({msg: 'Success'});
+    return res.status(200).json({msg: "Success"});
   } catch (error) {}
 }
 

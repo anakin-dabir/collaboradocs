@@ -12,9 +12,9 @@ import changes from "./routes/changes.js";
 import notification from "./routes/notification.js";
 
 async function init() {
-  // const socket = new SocketService();
+  const socket = new SocketService();
   const httpServer = http.createServer(app);
-  // socket.io.attach(httpServer);
+  socket.io.attach(httpServer);
   app.get("/", (req, res) => res.send("Server running ..."));
   app.post("/upload", (req, res) => {
     console.log(req.files.file);
@@ -30,7 +30,7 @@ async function init() {
   httpServer.listen(process.env.PORT || 80, () =>
     console.log("Server running on port", process.env.PORT)
   );
-  // socket.initListeners();
+  socket.initListeners();
 }
 
 init();
