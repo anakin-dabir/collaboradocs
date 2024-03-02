@@ -107,4 +107,26 @@ async function deleteDocument(req, res) {
   }
 }
 
-export { create, edit, get, getAll, getByProjectId, deleteDocument };
+async function star(req, res) {
+  const documentId = req.params.documentId;
+  try {
+    const document = await Document.findByIdAndUpdate(documentId, { $inc: { stars: 1 } });
+    return res.status(200).json({ document, msg: "Success" });
+  } catch (error) {
+    return res.status(500).json({ msg: "Unable to star" });
+  }
+}
+
+async function unstar(req, res) {
+  const documentId = req.params.documentId;
+  try {
+    const document = await Document.findByIdAndUpdate(documentId, {
+      $inc: { stars: { $cond: { if: { $gt: ["$stars", 0] }, then: -1, else: 0 } } },
+    });
+    return res.status(200).json({ document, msg: "Success" });
+  } catch (error) {
+    return res.status(500).json({ msg: "Unable to unstar" });
+  }
+}
+
+export { create, edit, get, getAll, getByProjectId, deleteDocument, star, unstar };
