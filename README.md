@@ -79,12 +79,17 @@ Collaboradocs is a web application that offers comprehensive features for storin
 
 ### API Endpoints
 
-| HTTP Verbs | Endpoints            | Action                                 |
-| ---------- | -------------------- | -------------------------------------- |
-| `POST`     | /api/user/signup     | To sign up a new user account          |
-| `POST`       | /api/user/login      | To login an existing user account      |
-| `POST`       | /api/causes          | To create a new cause                  |
-| `GET`        | /api/causes          | To retrieve all causes on the platform |
-| `GET`        | /api/causes/:causeId | To retrieve details of a single cause  |
-| `PATCH`      | /api/causes/:causeId | To edit the details of a single cause  |
-| `DELETE`     | /api/causes/:causeId | To delete a single cause               |
+| HTTP Verbs | Endpoints | Action |
+| ---------- | --------- | ------ |
+
+- Authentication
+  | `POST` | /auth/register | To sign up a new user account |
+  | `POST` | /auth/login | To login an existing user account |
+  | `POST` | /auth/search | To search a user |
+  | `POST` | /auth/updateName | To update user credentials |
+  | `GET` | /api/causes | To retrieve all causes on the platform |
+  | `GET` | /api/causes | To retrieve all causes on the platform |
+  | `GET` | /api/causes/:causeId | To retrieve details of a single cause |
+  | `PATCH` | /api/causes/:causeId | To edit the details of a single cause |
+  | `DELETE` | /api/causes/:causeId | To delete a single cause |
+  | `DELETE` | /auth/delete | To delete a user account |
