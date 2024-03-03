@@ -19,7 +19,7 @@ document.post("/create", verifyToken, create);
 document.post("/edit", verifyToken, edit);
 document.delete("/delete", verifyToken, deleteDocument);
 
-document.get("/star/:documentId", verifyToken, star);
-document.get("/unstar/:documentId", verifyToken, unstar);
+document.post("/star/:documentId", verifyToken, star);
+document.delete("/unstar/:documentId", verifyToken, unstar);
 
 export default document;

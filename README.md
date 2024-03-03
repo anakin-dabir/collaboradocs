@@ -34,7 +34,7 @@ Collaboradocs is a web application that offers comprehensive features for storin
 - User can star documents (it's a "like" feature)
 - Version control to track document revisions, allowing users to revert to previous versions
 - Document permissions for visibility = Public, Private, and Shared
-- Collaborative editing tools with enrich tet editor and presence indicators
+- Collaborative editing tools with enrich text editor and presence indicators
 - Document search functionality
 - Robust security measures to protect sensitive project data with secure user authentication and authorization using JWT authorization
 
@@ -80,14 +80,40 @@ Collaboradocs is a web application that offers comprehensive features for storin
 ### API Endpoints
 
 - Authentication
-
+  | HTTP Verbs | Endpoints | Action |
+  | ---------- | -------------------- | -------------------------------------- |
   | `POST` | /auth/register | To sign up a new user account |
   | `POST` | /auth/login | To login an existing user account |
   | `POST` | /auth/search | To search a user |
   | `POST` | /auth/updateName | To update user credentials |
-  | `GET` | /api/causes | To retrieve all causes on the platform |
-  | `GET` | /api/causes | To retrieve all causes on the platform |
-  | `GET` | /api/causes/:causeId | To retrieve details of a single cause |
-  | `PATCH` | /api/causes/:causeId | To edit the details of a single cause |
-  | `DELETE` | /api/causes/:causeId | To delete a single cause |
   | `DELETE` | /auth/delete | To delete a user account |
+
+- Project
+  | HTTP Verbs | Endpoints | Action |
+  | ---------- | -------------------- | -------------------------------------- |
+  | `GET` | /project/getAll | To retrieve all projects of the user including the ones they are member of |
+  | `GET` | /project/get | To retrieve all projects of current user |
+  | `POST` | /project/create | To create a new project |
+  | `POST` | /project/update | To edit the details of a project |
+  | `DELETE` | /project/delete | To delete an existing project |
+
+- Documents
+  | HTTP Verbs | Endpoints | Action |
+  | ---------- | -------------------- | -------------------------------------- |
+  | `GET` | /document/getAll | To retrieve all documents that are public |
+  | `GET` | /document/get/:docId | To retrieve details of document by it's \_id |
+  | `GET` | /document/getByProjectId/:projectId | To retrieve all documents under the project |
+  | `POST` | /document/create | To create a new document |
+  | `POST` | /document/edit | To edit the details of a document |
+  | `POST` | /document/star/:documentId | To star the document |
+  | `DELETE` | /document/delete | To delete an existing document |
+  | `DELETE` | /document/unstar/:documentId | To unstar the document |
+
+  - Request
+    | HTTP Verbs | Endpoints | Action |
+    | ---------- | -------------------- | -------------------------------------- |
+    | `GET` | /request/goingToAdmin | To retrieve all requests that are going to Admin of the project |
+    | `GET` | /request/goingFromAdmin | To retrieve all requests that Admin of the project is making |
+    | `POST` | /request/create | To create a new request of collaboration |
+    | `POST` | /request/accept | To accept the request to collaborate |
+    | `DELETE` | /request/reject | To reject the request to collaborate |
