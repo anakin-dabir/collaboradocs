@@ -55,7 +55,7 @@ Collaboradocs is a web application that offers comprehensive features for storin
 - Install dependencies in both server and client folders
 
 ```bash
-  yarn
+  cd client && yarn & cd server && yarn
 ```
 
 <li>You need the following environment variables to add on server in .env file:
