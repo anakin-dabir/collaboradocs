@@ -6,7 +6,7 @@
 <img src="https://img.shields.io/badge/react-v18.2-teal" />
 <img src="https://img.shields.io/badge/redux-v5.0.1-purple" />
 <img src="https://img.shields.io/badge/express-v4.18.2-blue" />
-<img src="https://img.shields.io/badge/mongoose-v8.1.2-springgreen" />
+<img src="https://img.shields.io/badge/mongoose-v8.1.2-darkgreen" />
 <img src="https://img.shields.io/badge/socket.io-v4.7.4-white" />
 </p>
 <p align="center">
