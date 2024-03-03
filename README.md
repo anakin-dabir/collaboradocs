@@ -68,8 +68,10 @@ Collaboradocs is a web application that offers comprehensive features for storin
 <code>CLIENT</code> client side url</li>
 <li>
 <code>TOKEN</code> secret token for JWT creation</li>
-< /ol>
+</ol>
 </li>
+
+- Start both client and server side servers separately by
 
 ```bash
   yarn dev
