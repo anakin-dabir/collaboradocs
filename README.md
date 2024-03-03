@@ -5,6 +5,7 @@
 <p align="center">
 <img src="https://img.shields.io/badge/express-v4.18.2-blue" />
 <img src="https://img.shields.io/badge/mongoose-v8.1.2-green" />
+<img src="https://img.shields.io/badge/socket.io-v4.7.4-white" />
 </p>
 
 <hr />
