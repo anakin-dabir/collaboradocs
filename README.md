@@ -5,19 +5,22 @@
 <hr />
 
 ### Introduction
-* * *
+
+- -
 
 Project Support is an open source platform that enable users share causes they're passionate about and actively involved with with the hopes of connecting with other users equally interested in working with them on the given cause.
 
 ### Project Support Features
-* * *
+
+---
 
 - Users can signup and login to their accounts
 - Public (non-authenticated) users can access all causes on the platform
 - Authenticated users can access all causes as well as create a new cause, edit their created cause and also delete what they've created.
 
 ### Installation Guide
-* * *
+
+---
 
 - Clone this repository [here](https://github.com/blackdevelopa/ProjectSupport.git).
 - The develop branch is the most stable branch at any given time, ensure you're working from it.
@@ -26,7 +29,8 @@ Project Support is an open source platform that enable users share causes they'r
 - Create an .env file in your project root folder and add your variables. See .env.sample for assistance.
 
 ### Usage
-* * *
+
+---
 
 - Run npm start:dev to start the application.
 - Connect to the API using Postman on port 7066.
