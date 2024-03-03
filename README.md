@@ -79,7 +79,7 @@ Collaboradocs is a web application that offers comprehensive features for storin
 
 ### API Endpoints
 
-- Authentication
+- _Authentication_
   | HTTP | Endpoints | Action |
   | ---------- | -------------------- | -------------------------------------- |
   | `POST` | /auth/register | To sign up a new user account |
