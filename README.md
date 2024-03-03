@@ -3,7 +3,8 @@
 </p>
 <p align="center">Real-time collaboration, anywhere, anytime</p>
 <p align="center">
-<img src="https://img.shields.io/badge/node->=10.0.1-blue" />
+<img src="https://img.shields.io/badge/express-v4.18.2-blue" />
+<img src="https://img.shields.io/badge/mongoose-v8.1.2-green" />
 </p>
 
 <hr />
