@@ -22,11 +22,18 @@
 
 Collaboradocs is a web application that offers comprehensive features for storing, tracking, sharing and managing project documentation seamlessly, ensuring efficient communication and productivity throughout the project lifecycle.
 
-### Project Support Features
+### Project Features
 
-- Users can signup and login to their accounts
-- Public (non-authenticated) users can access all causes on the platform
-- Authenticated users can access all causes as well as create a new cause, edit their created cause and also delete what they've created.
+- Users can signup into their accounts with email confirmation link and login with password
+- Public (non-authenticated) users & authenticated users can access all the public documents without any interaction
+- Authenticated users can create projects to organize documents and access them
+- Authenticated users can also access the projects they are members of and collaborte into the documents that are public and shared
+- Members of projects can edit documents in react-time and also track changes made by different users
+- Version control to track document revisions, allowing users to revert to previous versions
+- Document permissions for visibility = Public, Private, and Shared
+- Collaborative editing tools with enrich tet editor and presence indicators
+- Document search functionality
+- Robust security measures to protect sensitive project data with secure user authentication and authorization using JWT authorization
 
 ### Installation Guide
 
