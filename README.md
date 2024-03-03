@@ -20,7 +20,7 @@
 
 ### Introduction
 
-Project Support is an open source platform that enable users share causes they're passionate about and actively involved with with the hopes of connecting with other users equally interested in working with them on the given cause.
+Collaboradocs is a web application that offers comprehensive features for storing, tracking, sharing and managing project documentation seamlessly, ensuring efficient communication and productivity throughout the project lifecycle.
 
 ### Project Support Features
 
