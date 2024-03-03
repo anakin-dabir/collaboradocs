@@ -42,9 +42,8 @@ Collaboradocs is a web application that offers comprehensive features for storin
 
 - Clone this repository.
 
-```bash
-  npm install my-project
-  cd my-project
+```http
+  npm install --save
 ```
 
 - Run npm install to install all dependencies
