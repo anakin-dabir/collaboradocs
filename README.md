@@ -59,15 +59,17 @@ Collaboradocs is a web application that offers comprehensive features for storin
 ```
 
 <li>You need the following environment variables to add on server in .env file:
-<br />
-<code>MONGO</code> mongodb url
-<br />
-<code>SERVER</code> server side url
-<br />
-<code>CLIENT</code> client side url
-<br />
-<code>TOKEN</code> secret token for JWT creation
-<br /></li>
+<ol>
+<li>
+<code>MONGO</code> mongodb url</li>
+<li>
+<code>SERVER</code> server side url</li>
+<li>
+<code>CLIENT</code> client side url</li>
+<li>
+<code>TOKEN</code> secret token for JWT creation</li>
+< /ol>
+</li>
 
 ```bash
   yarn dev
