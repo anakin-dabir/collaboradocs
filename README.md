@@ -3,7 +3,7 @@
 </p>
 <p align="center">Real-time collaboration, anywhere, anytime</p>
 <p align="center">
-![NodeJS](https://img.shields.io/badge/node->=10.0.1-blue)
+<img src="https://img.shields.io/badge/node->=10.0.1-blue" />
 </p>
 
 <hr />
