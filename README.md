@@ -38,17 +38,24 @@ Collaboradocs is a web application that offers comprehensive features for storin
 - Document search functionality
 - Robust security measures to protect sensitive project data with secure user authentication and authorization using JWT authorization
 
-### Installation Guide
 
-- Clone this repository.
-
-```http
-  npm install --save
+## Run Locally
+- Clone the project
+```bash
+  git clone https://link-to-project
 ```
-
-- Run npm install to install all dependencies
-- You can either work with the default mLab database or use your locally installed MongoDB. Do configure to your choice in the application entry file.
-- Create an .env file in your project root folder and add your variables. See .env.sample for assistance.
+- Go to the project directory
+```bash
+  cd my-project
+```
+- Install dependencies
+```bash
+  npm install
+```
+- Start the server
+```bash
+  npm run start
+```
 
 ### Usage
 
