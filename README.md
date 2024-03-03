@@ -29,6 +29,9 @@ Collaboradocs is a web application that offers comprehensive features for storin
 - Authenticated users can create projects to organize documents and access them
 - Authenticated users can also access the projects they are members of and collaborte into the documents that are public and shared
 - Members of projects can edit documents in react-time and also track changes made by different users
+- User can create request to collaborate in others documents in real-time
+- Real-time notifications
+- User can star documents (it's like a "like" feature)
 - Version control to track document revisions, allowing users to revert to previous versions
 - Document permissions for visibility = Public, Private, and Shared
 - Collaborative editing tools with enrich tet editor and presence indicators
