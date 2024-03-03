@@ -24,8 +24,6 @@ Collaboradocs is a web application that offers comprehensive features for storin
 
 ### Project Support Features
 
----
-
 - Users can signup and login to their accounts
 - Public (non-authenticated) users can access all causes on the platform
 - Authenticated users can access all causes as well as create a new cause, edit their created cause and also delete what they've created.
