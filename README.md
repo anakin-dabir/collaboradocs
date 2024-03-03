@@ -1,7 +1,7 @@
 <p align="center">
   <img src="https://anakin-dabir.github.io/public/collabs.png" />
-  <p>Real-time collaboration, anywhere, anytime</p>
 </p>
+<p align="center">Real-time collaboration, anywhere, anytime</p>
 
 <hr />
 
