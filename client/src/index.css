@@ -228,3 +228,7 @@ select {
 .is-empty {
   color: #18ffff;
 }
+
+.test {
+  color: aqua;
+}
