@@ -88,4 +88,3 @@ Collaboradocs is a web application that offers comprehensive features for storin
 | GET        | /api/causes/:causeId | To retrieve details of a single cause  |
 | PATCH      | /api/causes/:causeId | To edit the details of a single cause  |
 | DELETE     | /api/causes/:causeId | To delete a single cause               |
-
