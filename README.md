@@ -79,7 +79,7 @@ Collaboradocs is a web application that offers comprehensive features for storin
 
 ### API Endpoints
 
-- _Authentication_
+- **Authentication**
   | HTTP | Endpoints | Action |
   | ---------- | -------------------- | -------------------------------------- |
   | `POST` | /auth/register | To sign up a new user account |
@@ -88,7 +88,7 @@ Collaboradocs is a web application that offers comprehensive features for storin
   | `POST` | /auth/updateName | To update user credentials |
   | `DELETE` | /auth/delete | To delete a user account |
 
-- Project
+- **Project**
   | HTTP | Endpoints | Action |
   | ---------- | -------------------- | -------------------------------------- |
   | `GET` | /project/getAll | To retrieve all projects of the user including the ones they are member of |
@@ -97,7 +97,7 @@ Collaboradocs is a web application that offers comprehensive features for storin
   | `POST` | /project/update | To edit the details of a project |
   | `DELETE` | /project/delete | To delete an existing project |
 
-- Documents
+- **Documents**
   | HTTP | Endpoints | Action |
   | ---------- | -------------------- | -------------------------------------- |
   | `GET` | /document/getAll | To retrieve all documents that are public |
@@ -109,7 +109,7 @@ Collaboradocs is a web application that offers comprehensive features for storin
   | `DELETE` | /document/delete | To delete an existing document |
   | `DELETE` | /document/unstar/:documentId | To unstar the document |
 
-- Request
+- **Request**
   | HTTP | Endpoints | Action |
   | ---------- | -------------------- | -------------------------------------- |
   | `GET` | /request/goingToAdmin | To retrieve all requests that are going to Admin of the project |
