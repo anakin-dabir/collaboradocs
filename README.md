@@ -80,7 +80,7 @@ Collaboradocs is a web application that offers comprehensive features for storin
 ### API Endpoints
 
 - Authentication
-  | HTTP Verbs | Endpoints | Action |
+  | HTTP | Endpoints | Action |
   | ---------- | -------------------- | -------------------------------------- |
   | `POST` | /auth/register | To sign up a new user account |
   | `POST` | /auth/login | To login an existing user account |
@@ -89,7 +89,7 @@ Collaboradocs is a web application that offers comprehensive features for storin
   | `DELETE` | /auth/delete | To delete a user account |
 
 - Project
-  | HTTP Verbs | Endpoints | Action |
+  | HTTP | Endpoints | Action |
   | ---------- | -------------------- | -------------------------------------- |
   | `GET` | /project/getAll | To retrieve all projects of the user including the ones they are member of |
   | `GET` | /project/get | To retrieve all projects of current user |
@@ -98,7 +98,7 @@ Collaboradocs is a web application that offers comprehensive features for storin
   | `DELETE` | /project/delete | To delete an existing project |
 
 - Documents
-  | HTTP Verbs | Endpoints | Action |
+  | HTTP | Endpoints | Action |
   | ---------- | -------------------- | -------------------------------------- |
   | `GET` | /document/getAll | To retrieve all documents that are public |
   | `GET` | /document/get/:docId | To retrieve details of document by it's \_id |
@@ -109,11 +109,11 @@ Collaboradocs is a web application that offers comprehensive features for storin
   | `DELETE` | /document/delete | To delete an existing document |
   | `DELETE` | /document/unstar/:documentId | To unstar the document |
 
-  - Request
-    | HTTP Verbs | Endpoints | Action |
-    | ---------- | -------------------- | -------------------------------------- |
-    | `GET` | /request/goingToAdmin | To retrieve all requests that are going to Admin of the project |
-    | `GET` | /request/goingFromAdmin | To retrieve all requests that Admin of the project is making |
-    | `POST` | /request/create | To create a new request of collaboration |
-    | `POST` | /request/accept | To accept the request to collaborate |
-    | `DELETE` | /request/reject | To reject the request to collaborate |
+- Request
+  | HTTP | Endpoints | Action |
+  | ---------- | -------------------- | -------------------------------------- |
+  | `GET` | /request/goingToAdmin | To retrieve all requests that are going to Admin of the project |
+  | `GET` | /request/goingFromAdmin | To retrieve all requests that Admin of the project is making |
+  | `POST` | /request/create | To create a new request of collaboration |
+  | `POST` | /request/accept | To accept the request to collaborate |
+  | `DELETE` | /request/reject | To reject the request to collaborate |
