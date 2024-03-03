@@ -11,7 +11,7 @@ async function createUser(req, res) {
     const user = new User({ name, email, password, isVerified: true });
     await user.save();
     const token = generateToken(user);
-    res.cookie("jwt_token", token);
+    res.cookie("jwt_token", token, { path: "/" });
     return res.status(200).json({ user, msg: "User created successfully" });
   } catch (err) {
     return res.status(500).json({ msg: "Internal server error" });
@@ -29,7 +29,8 @@ const login = async (req, res) => {
       return res.status(401).json({ msg: "Incorrect password, Try again" });
 
     const token = generateToken(userFound);
-    res.cookie("jwt_token", token);
+    console.log(token);
+    res.cookie("jwt_token", token, { path: "/" });
     return res
       .status(200)
       .json({ user: userFound, msg: `${userFound.email} logged in successfully` });
@@ -97,6 +98,8 @@ async function updateName(req, res) {
       { name, img: img },
       { new: true, projection: { name: 1, img: 1, email: 1 } }
     );
+    const token = generateToken(user);
+    res.cookie("jwt_token", token);
     return res.status(200).json({ user, msg: "Name updated successfully" });
   } catch (error) {}
 }

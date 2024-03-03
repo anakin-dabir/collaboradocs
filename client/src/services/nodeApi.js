@@ -1,27 +1,27 @@
-import {createApi} from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import baseQuery from "./baseQuery";
-import {clearUser, setNotification, setReadNotification, setUser} from "../store/slice/authSlice";
+import { clearUser, setNotification, setReadNotification, setUser } from "../store/slice/authSlice";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import config from "../config/config";
-import {setDocument} from "../store/slice/documentSlice";
+import { setDocument } from "../store/slice/documentSlice";
 import shuffle from "../utils/shuffle";
-import {setProject, setProjectDocs} from "../store/slice/projectSlice";
-import {setRequestGoingFromAdmin, setRequestGoingToAdmin} from "../store/slice/requestSlice";
-import {setChange, setDoc} from "../store/slice/docSlice";
+import { setProject, setProjectDocs } from "../store/slice/projectSlice";
+import { setRequestGoingFromAdmin, setRequestGoingToAdmin } from "../store/slice/requestSlice";
+import { setChange, setDoc } from "../store/slice/docSlice";
 
 const nodeApi = createApi({
   baseQuery,
   reducerPath: "nodeApi",
   tagTypes: ["User", "Document", "Project", "Request", "Notification"],
-  endpoints: build => ({
+  endpoints: (build) => ({
     getUser: build.query({
       query: () => ({
         method: "GET",
         url: "/auth/get",
       }),
       providesTags: ["User"],
-      onQueryStarted: async (args, {dispatch, queryFulfilled}) => {
+      onQueryStarted: async (args, { dispatch, queryFulfilled }) => {
         try {
           const response = await queryFulfilled;
           dispatch(setUser(response.data.user));
@@ -30,12 +30,12 @@ const nodeApi = createApi({
     }),
 
     register: build.mutation({
-      query: creds => ({
+      query: (creds) => ({
         method: "POST",
         url: "/auth/register",
         body: creds,
       }),
-      async onQueryStarted(arg, {queryFulfilled}) {
+      async onQueryStarted(arg, { queryFulfilled }) {
         try {
           const response = await queryFulfilled;
           toast.success(response.data.msg);
@@ -46,15 +46,16 @@ const nodeApi = createApi({
     }),
 
     login: build.mutation({
-      query: creds => ({
+      query: (creds) => ({
         method: "POST",
         url: "/auth/login",
         body: creds,
       }),
       invalidatesTags: ["Document", "Project", "Request", "Notification"],
-      async onQueryStarted(args, {dispatch, queryFulfilled}) {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const response = await queryFulfilled;
+          console.log(response.data.jwt_token);
           toast.success(response.data.msg);
         } catch (error) {
           toast.error(error.error.data ? error.error.data.msg : config.ERROR);
@@ -63,12 +64,12 @@ const nodeApi = createApi({
     }),
 
     verifyEmail: build.mutation({
-      query: creds => ({
+      query: (creds) => ({
         method: "POST",
         url: "/auth/verify",
         body: creds,
       }),
-      onQueryStarted: async (args, {dispatch, queryFulfilled}) => {
+      onQueryStarted: async (args, { dispatch, queryFulfilled }) => {
         try {
           const response = await queryFulfilled;
           toast.success(response.data.msg);
@@ -79,7 +80,7 @@ const nodeApi = createApi({
     }),
 
     updateImage: build.mutation({
-      query: file => ({
+      query: (file) => ({
         method: "POST",
         url: "/auth/updateImage",
         body: file,
@@ -88,13 +89,13 @@ const nodeApi = createApi({
     }),
 
     updateName: build.mutation({
-      query: creds => ({
+      query: (creds) => ({
         method: "POST",
         url: "/auth/updateName",
         body: creds,
       }),
       invalidatesTags: ["Project", "Document"],
-      async onQueryStarted(args, {dispatch, queryFulfilled}) {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const response = await queryFulfilled;
           toast.success(response.data.msg);
@@ -110,7 +111,7 @@ const nodeApi = createApi({
         method: "DELETE",
         url: "/auth/remove",
       }),
-      onQueryStarted: async (args, {dispatch, queryFulfilled}) => {
+      onQueryStarted: async (args, { dispatch, queryFulfilled }) => {
         try {
           await queryFulfilled;
           dispatch(clearUser());
@@ -122,7 +123,7 @@ const nodeApi = createApi({
     }),
 
     searchUser: build.mutation({
-      query: body => ({
+      query: (body) => ({
         method: "POST",
         url: "/auth/search",
         body,
@@ -135,7 +136,7 @@ const nodeApi = createApi({
         url: "/document/getAll",
       }),
       providesTags: ["Document"],
-      async onQueryStarted(args, {dispatch, queryFulfilled}) {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const response = await queryFulfilled;
           dispatch(setDocument(shuffle(response.data.document)));
@@ -149,7 +150,7 @@ const nodeApi = createApi({
         url: "/project/getAll",
       }),
       providesTags: ["Project"],
-      async onQueryStarted(args, {dispatch, queryFulfilled}) {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const response = await queryFulfilled;
           dispatch(setProject(response.data.project));
@@ -158,13 +159,13 @@ const nodeApi = createApi({
     }),
 
     createProject: build.mutation({
-      query: obj => ({
+      query: (obj) => ({
         method: "POST",
         url: "/project/create",
         body: obj,
       }),
       invalidatesTags: ["Project"],
-      async onQueryStarted(args, {dispatch, queryFulfilled}) {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const response = await queryFulfilled;
           toast.success(response.data.msg);
@@ -175,13 +176,13 @@ const nodeApi = createApi({
     }),
 
     deleteProject: build.mutation({
-      query: body => ({
+      query: (body) => ({
         method: "DELETE",
         url: "/project/delete",
         body,
       }),
       invalidatesTags: ["Project", "Document"],
-      async onQueryStarted(args, {dispatch, queryFulfilled}) {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const response = await queryFulfilled;
           toast.success(response.data.msg);
@@ -192,13 +193,13 @@ const nodeApi = createApi({
     }),
 
     updateProject: build.mutation({
-      query: body => ({
+      query: (body) => ({
         method: "POST",
         url: "/project/update",
         body,
       }),
       invalidatesTags: ["Project"],
-      async onQueryStarted(args, {dispatch, queryFulfilled}) {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const response = await queryFulfilled;
           toast.success(response.data.msg);
@@ -209,11 +210,11 @@ const nodeApi = createApi({
     }),
 
     getDocumentById: build.query({
-      query: ({projectId}) => ({
+      query: ({ projectId }) => ({
         method: "GET",
         url: `/document/getByProjectId/${projectId}`,
       }),
-      async onQueryStarted(args, {dispatch, queryFulfilled}) {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const response = await queryFulfilled;
           dispatch(setProjectDocs(response.data.document));
@@ -227,7 +228,7 @@ const nodeApi = createApi({
         url: "/request/goingFromAdmin",
       }),
       providesTags: ["Request"],
-      async onQueryStarted(args, {dispatch, queryFulfilled}) {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const response = await queryFulfilled;
           dispatch(setRequestGoingFromAdmin(response.data.request));
@@ -243,7 +244,7 @@ const nodeApi = createApi({
         url: "/request/goingToAdmin",
       }),
       providesTags: ["Request"],
-      async onQueryStarted(args, {dispatch, queryFulfilled}) {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const response = await queryFulfilled;
           dispatch(setRequestGoingToAdmin(response.data.request));
@@ -252,13 +253,13 @@ const nodeApi = createApi({
     }),
 
     createRequest: build.mutation({
-      query: body => ({
+      query: (body) => ({
         method: "POST",
         url: "/request/create",
         body,
       }),
       invalidatesTags: ["Request"],
-      async onQueryStarted(args, {queryFulfilled}) {
+      async onQueryStarted(args, { queryFulfilled }) {
         try {
           const response = await queryFulfilled;
           toast.success(response.data.msg);
@@ -269,7 +270,7 @@ const nodeApi = createApi({
     }),
 
     acceptRequest: build.mutation({
-      query: body => ({
+      query: (body) => ({
         method: "POST",
         url: "/request/accept",
         body,
@@ -278,7 +279,7 @@ const nodeApi = createApi({
     }),
 
     rejectRequest: build.mutation({
-      query: body => ({
+      query: (body) => ({
         method: "DELETE",
         url: "/request/reject",
         body,
@@ -287,13 +288,13 @@ const nodeApi = createApi({
     }),
 
     createDocument: build.mutation({
-      query: obj => ({
+      query: (obj) => ({
         method: "POST",
         url: "/document/create",
         body: obj,
       }),
       invalidatesTags: ["Document"],
-      async onQueryStarted(args, {dispatch, queryFulfilled}) {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const response = await queryFulfilled;
           if (response) {
@@ -307,12 +308,12 @@ const nodeApi = createApi({
     }),
 
     editDocument: build.mutation({
-      query: body => ({
+      query: (body) => ({
         method: "POST",
         url: "/document/edit",
         body,
       }),
-      async onQueryStarted(args, {queryFulfilled}) {
+      async onQueryStarted(args, { queryFulfilled }) {
         try {
           const response = await queryFulfilled;
           if (response) {
@@ -326,12 +327,12 @@ const nodeApi = createApi({
     }),
 
     deleteDocument: build.mutation({
-      query: body => ({
+      query: (body) => ({
         method: "DELETE",
         url: "/document/delete",
         body,
       }),
-      async onQueryStarted(args, {dispatch, queryFulfilled}) {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const response = await queryFulfilled;
           if (response) {
@@ -345,11 +346,11 @@ const nodeApi = createApi({
     }),
 
     getDocById: build.query({
-      query: ({docId}) => ({
+      query: ({ docId }) => ({
         method: "GET",
         url: `/document/get/${docId}`,
       }),
-      async onQueryStarted(args, {dispatch, queryFulfilled}) {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const response = await queryFulfilled;
           dispatch(setDoc(response.data.document));
@@ -358,13 +359,13 @@ const nodeApi = createApi({
     }),
 
     createChange: build.mutation({
-      query: body => ({
+      query: (body) => ({
         method: "POST",
         url: "/change/create",
         body,
       }),
       invalidatesTags: ["Document"],
-      async onQueryStarted(args, {dispatch, queryFulfilled}) {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const res = await queryFulfilled;
           if (res) {
@@ -377,11 +378,11 @@ const nodeApi = createApi({
     }),
 
     getChange: build.query({
-      query: ({docId}) => ({
+      query: ({ docId }) => ({
         method: "GET",
         url: `/change/get/${docId}`,
       }),
-      async onQueryStarted(args, {dispatch, queryFulfilled}) {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const res = await queryFulfilled;
           dispatch(setChange(res.data.change));
@@ -390,13 +391,13 @@ const nodeApi = createApi({
     }),
 
     revertChange: build.mutation({
-      query: body => ({
+      query: (body) => ({
         method: "POST",
         url: "/change/revert",
         body: body,
       }),
       invalidatesTags: ["Document"],
-      async onQueryStarted(args, {queryFulfilled}) {
+      async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
           if (res) toast.success(res.data.msg);
@@ -412,7 +413,7 @@ const nodeApi = createApi({
         url: `/notification/getAll`,
       }),
       providesTags: ["Notification"],
-      async onQueryStarted(args, {dispatch, queryFulfilled}) {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const response = await queryFulfilled;
           dispatch(setNotification(response.data.notification));
@@ -425,7 +426,7 @@ const nodeApi = createApi({
         method: "DELETE",
         url: "/notification/delete",
       }),
-      async onQueryStarted(args, {dispatch, queryFulfilled}) {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const res = await queryFulfilled;
           if (res) {
@@ -438,12 +439,12 @@ const nodeApi = createApi({
     }),
 
     readNotification: build.mutation({
-      query: body => ({
+      query: (body) => ({
         method: "DELETE",
         url: "/notification/read",
         body,
       }),
-      async onQueryStarted(args, {dispatch, queryFulfilled}) {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         dispatch(setReadNotification(args));
         try {
           const res = await queryFulfilled;
@@ -486,7 +487,7 @@ export const {
   useReadNotificationMutation,
   useLazyGetNotificationQuery,
   useLazyGetDocumentByIdQuery,
-  useLazyGetRequestGoingToAdminQuery
+  useLazyGetRequestGoingToAdminQuery,
 } = nodeApi;
 
 export default nodeApi;
