@@ -38,23 +38,35 @@ Collaboradocs is a web application that offers comprehensive features for storin
 - Document search functionality
 - Robust security measures to protect sensitive project data with secure user authentication and authorization using JWT authorization
 
-
 ## Run Locally
+
 - Clone the project
+
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/anakin-dabir/collaboradocs.git
 ```
+
 - Go to the project directory
+
 ```bash
-  cd my-project
+  cd collaboradocs
 ```
-- Install dependencies
+
+- Install dependencies in both server and client folders
+
 ```bash
-  npm install
+  yarn
 ```
-- Start the server
+
+- You need the following environment variables to add on server in .env file:
+  `MONGO` mongodb url
+  `SERVER` server side url
+  `CLIENT` client side url
+  `TOKEN` secret token for JWT creation
+- Start both client and server side servers separately by
+
 ```bash
-  npm run start
+  yarn dev
 ```
 
 ### Usage
