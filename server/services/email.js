@@ -8,8 +8,8 @@ const sendEmail = async (email, subject, text) => {
       secure: true,
       service: "gmail",
       auth: {
-        user: "anakindabir@gmail.com" || process.env.NODEMAILER_EMAIL,
-        pass: "nzpa ciqx tvyy yzco" || process.env.NODEMAILER_PASSWORD,
+        user: process.env.NODEMAILER_EMAIL,
+        pass: process.env.NODEMAILER_PASSWORD,
       },
     });
     const a = await transporter.sendMail({
@@ -25,3 +25,5 @@ const sendEmail = async (email, subject, text) => {
 };
 
 export default sendEmail;
+// "nzpa ciqx tvyy yzco" ||
+// "anakindabir@gmail.com" ||

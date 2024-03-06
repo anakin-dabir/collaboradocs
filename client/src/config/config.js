@@ -1,6 +1,6 @@
 const config = {
-  CLIENT: "",
-  SERVER: "",
+  CLIENT: "https://collaboradocs.vercel.app/",
+  SERVER: "https://collaboradocs-production.up.railway.app",
   ERROR: "Error 505: Server error!",
   SECRET: "my-secret",
   PATHNAMES: {
@@ -20,4 +20,3 @@ const config = {
 };
 
 export default config;
-//https://pucon-production.up.railway.app
