@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: [process.env.CLIENT, config.CLIENT, "http://localhost:5173"],
+    origin: ["https://collaboradocs.vercel.app"],
     credentials: true,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   })
@@ -23,3 +23,5 @@ app.use(fileUpload());
 app.use("/", express.static(publicPath));
 
 export default app;
+
+// || "http://localhost:5173"
