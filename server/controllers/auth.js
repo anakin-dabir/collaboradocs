@@ -5,13 +5,15 @@ import sendEmail from "../services/email.js";
 import uploadFile from "../services/fileUpload.js";
 import { generateToken } from "../middleware/verifyToken.js";
 
+const cookieOptions = { secure: true, path: "/", httpOnly: true, hostOnly: true, sameSite: false };
+
 async function createUser(req, res) {
   const { name, email, password } = req.body;
   try {
     const user = new User({ name, email, password, isVerified: true });
     await user.save();
     const token = generateToken(user);
-    res.cookie("jwt_token", token, { httpOnly: true });
+    res.cookie("jwt_token", token, cookieOptions);
     return res.status(200).json({ user, msg: "User created successfully" });
   } catch (err) {
     return res.status(500).json({ msg: "Internal server error" });
@@ -30,7 +32,7 @@ const login = async (req, res) => {
 
     const token = generateToken(userFound);
     console.log(token);
-    res.cookie("jwt_token", token, { httpOnly: true });
+    res.cookie("jwt_token", token, cookieOptions);
     return res
       .status(200)
       .json({ user: userFound, msg: `${userFound.email} logged in successfully` });
@@ -66,7 +68,7 @@ async function verify(req, res) {
     user.isVerified = true;
     await user.save();
     const token = generateToken(user);
-    res.cookie("jwt_token", token, { httpOnly: true });
+    res.cookie("jwt_token", token, cookieOptions);
     return res.status(200).json({ user, msg: "Account activated & logged in" });
   } catch (error) {
     return res.status(500).json({ msg: "Account activation failed" });
@@ -99,7 +101,7 @@ async function updateName(req, res) {
       { new: true, projection: { name: 1, img: 1, email: 1 } }
     );
     const token = generateToken(user);
-    res.cookie("jwt_token", token);
+    res.cookie("jwt_token", token, cookieOptions);
     return res.status(200).json({ user, msg: "Name updated successfully" });
   } catch (error) {}
 }
@@ -108,7 +110,7 @@ async function get(req, res) {
   try {
     const user = await User.findById(req.user._id);
     const token = generateToken(user);
-    res.cookie("jwt_token", token);
+    res.cookie("jwt_token", token, cookieOptions);
     return res.status(200).json({ user: req.user, msg: "Success" });
   } catch (error) {}
 }
