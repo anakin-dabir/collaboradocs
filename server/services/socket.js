@@ -82,7 +82,7 @@ class SocketService {
   }
 
   removeUser(socketId) {
-    this.users = this.users.filter(user => user.socketId !== socketId);
+    this.users = this.users.filter((usinitListenerser) => user.socketId !== socketId);
   }
 
   getUser(userId) {

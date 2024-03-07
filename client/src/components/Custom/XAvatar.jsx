@@ -21,10 +21,10 @@ const XAvatar = ({ tooltipPlacement = "left", className }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-  useEffect(() => {
-    const value = Cookies.get("jwt-token");
-    if (!value) dispatch(clearUser());
-  }, []);
+  // useEffect(() => {
+  //   const value = Cookies.get("jwt-token");
+  //   if (!value) dispatch(clearUser());
+  // }, []);
 
   const handleClick = (event) => {
     if (pathname === config.PATHNAMES.LOGIN || pathname === config.PATHNAMES.REGISTER) return;
