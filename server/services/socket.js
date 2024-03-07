@@ -1,4 +1,4 @@
-import {Server} from "socket.io";
+import { Server } from "socket.io";
 import Project from "../models/project.js";
 
 class SocketService {
@@ -20,19 +20,19 @@ class SocketService {
     const io = this.io;
     console.log("Init Socket Listeners...");
 
-    io.on("connect", Socket => {
+    io.on("connect", (Socket) => {
       console.log(`New Socket Connected`, Socket.id);
 
-      Socket.on("event:addUser", userId => {
+      Socket.on("event:addUser", (userId) => {
         console.log(`user ${userId} connected`, Socket.id);
         this.addUser(userId, Socket.id);
         io.emit("event:getUser", this.users);
       });
 
-      Socket.on("event:removeUser", userId => {
+      Socket.on("event:removeUser", (userId) => {
         console.log("user removed", Socket.id);
         this.removeUser(userId);
-        Socket.on("event:removeUser", userId => {
+        Socket.on("event:removeUser", (userId) => {
           console.log("user removed", Socket.id);
           this.removeUser(userId);
           io.emit("event:getUser", this.users);
@@ -40,29 +40,29 @@ class SocketService {
         io.emit("event:getUser", this.users);
       });
 
-      Socket.on("event:addDocument", async data => {
+      Socket.on("event:addDocument", async (data) => {
         try {
           const project = await Project.findById(data.projectId, "members creator");
           this.users
-            .filter(user =>
+            .filter((user) =>
               project.members.some(
-                member =>
+                (member) =>
                   member.toString() === user.userId.toString() && !member.equals(project.creator)
               )
             )
-            .forEach(user => io.to(user.socketId).emit("event:documentAdded"));
+            .forEach((user) => io.to(user.socketId).emit("event:documentAdded"));
         } catch (error) {}
       });
 
-      Socket.on("event:goingToAdmin", async data => {
-        const targetUser = this.users.find(user => data.userId === user.userId);
+      Socket.on("event:goingToAdmin", async (data) => {
+        const targetUser = this.users.find((user) => data.userId === user.userId);
         if (targetUser) {
           io.to(targetUser.socketId).emit("response:goingToAdmin");
         }
       });
 
-      Socket.on("event:GoingFromAdmin", async data => {
-        this.users.forEach(user => {
+      Socket.on("event:GoingFromAdmin", async (data) => {
+        this.users.forEach((user) => {
           if (data.userIdArray.includes(user.userId)) {
             io.to(user.socketId).emit("response:GoingFromAdmin");
           }
@@ -78,15 +78,15 @@ class SocketService {
   }
 
   addUser(userId, socketId) {
-    !this.users.some(user => user.userId === userId) && this.users.push({userId, socketId});
+    !this.users.some((user) => user.userId === userId) && this.users.push({ userId, socketId });
   }
 
   removeUser(socketId) {
-    this.users = this.users.filter((usinitListenerser) => user.socketId !== socketId);
+    this.users = this.users.filter((user) => user.socketId !== socketId);
   }
 
   getUser(userId) {
-    const found = this.users.find(user => user.userId === userId);
+    const found = this.users.find((user) => user.userId === userId);
     return found;
   }
 }
