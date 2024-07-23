@@ -13,7 +13,7 @@ const sendEmail = async (email, subject, text) => {
       },
     });
     const a = await transporter.sendMail({
-      from: '"Collaboradocs 👻" <anakindabir@example.com>' || process.env.NODEMAILER_EMAIL,
+      from: '"Collaboradocs 👻" <xyz@example.com>' || process.env.NODEMAILER_EMAIL,
       to: email,
       subject: subject,
       html: text,
