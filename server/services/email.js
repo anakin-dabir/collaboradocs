@@ -25,5 +25,3 @@ const sendEmail = async (email, subject, text) => {
 };
 
 export default sendEmail;
-// "nzpa ciqx tvyy yzco" ||
-// "anakindabir@gmail.com" ||
