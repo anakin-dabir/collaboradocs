@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["https://collaboradocs.vercel.app"],
+    origin: process.env.CLIENT,
     credentials: true,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   })
