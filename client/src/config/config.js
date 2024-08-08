@@ -1,6 +1,6 @@
 const config = {
-  CLIENT: "http://localhost:5173",
-  SERVER: "http://localhost:5000",
+  CLIENT: "https://collabradocs.ramaly.store",
+  SERVER: "https://collabradocs.ramaly.store/api",
   ERROR: "Error 505: Server error!",
   SECRET: "my-secret",
   PATHNAMES: {

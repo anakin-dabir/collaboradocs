@@ -24,4 +24,4 @@ app.use("/", express.static(publicPath));
 
 export default app;
 
-// || "http://localhost:5173"
+// || "http://localhost"

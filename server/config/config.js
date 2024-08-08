@@ -1,6 +1,6 @@
 const config = {
-  SERVER: "https://collaboradocs-production.up.railway.app",
-  CLIENT: "https://collaboradocs.vercel.app/",
+  SERVER: "https://collabradocs.ramaly.store/api",
+  CLIENT: "https://collabradocs.ramaly.store",
   MONGO: "",
   TOKEN: "my-secret",
 };

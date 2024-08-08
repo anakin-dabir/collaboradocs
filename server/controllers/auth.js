@@ -51,7 +51,7 @@ const register = async (req, res) => {
       email,
       "Collaboradocs: Activate your account",
       `Click on this <a href="${
-        config.CLIENT || process.env.CLIENT || "http://localhost:5173"
+        config.CLIENT || process.env.CLIENT || "http://localhost"
       }/verify-email/${token}?token=${
         config.TOKEN
       }">link</a> to activate your collaboradocs account`
